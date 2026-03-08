@@ -61,6 +61,67 @@ However, we do not use `cxx` to compile the code but rather let `cmake` handle t
 To implement the desired class methods, we use Rust
 [macros](https://doc.rust-lang.org/reference/macros-by-example.html).
 
+## Contributing / Development Setup
+
+This section is for contributors who want to regenerate bindings for a new VTK version.
+If you only want to *use* the existing `vtk-rs-9.1` bindings, skip this section — a system VTK install and `cargo build` is sufficient.
+
+### 1. Initialize the WrapVTK submodule
+
+`WrapVTK` (by [David Gobbi](https://github.com/dgobbi/WrapVTK)) is included as a git submodule.
+It appears as an empty (blue) folder in IDEs until initialized:
+
+```bash
+git submodule update --init --recursive
+```
+
+### 2. Build VTK from source
+
+`libvtk9-dev` (the system package) does **not** install the internal wrapping tool headers (e.g. `vtkParseAttributes.h`) that WrapVTK needs.
+You must build VTK from source.
+
+```bash
+cd ~
+git clone https://github.com/Kitware/VTK.git --branch v9.1.0 --depth 1
+cd VTK && mkdir build && cd build
+cmake .. \
+  -DVTK_WRAP_PYTHON=OFF \
+  -DVTK_WRAP_JAVA=OFF \
+  -DBUILD_TESTING=OFF \
+  -DBUILD_SHARED_LIBS=OFF
+cmake --build . -j$(nproc)
+```
+
+This takes roughly 15-30 minutes depending on your machine.
+
+### 3. Build WrapVTK
+
+```bash
+cd /path/to/vtk-rs/WrapVTK
+mkdir build && cd build
+cmake .. -DVTK_DIR=~/VTK/build
+cmake --build .
+```
+
+Verify that XML files were generated:
+
+```bash
+ls build/xml/
+```
+
+You should see directories like `vtkCommonCore`, `vtkCommonDataModel`, etc.
+
+### 4. Regenerate bindings with vtk-gen
+
+```bash
+cargo run -p vtk-gen -- \
+  --opath vtk-rs-9.1 \
+  --wrap-vtk WrapVTK
+```
+
+This regenerates all files in `vtk-rs-9.1/` from the WrapVTK XML output.
+To target a different VTK version, repeat steps 2-4 with a different git tag (e.g. `v9.3.0`) and a new output path (e.g. `--opath vtk-rs-9.3`).
+
 ## Roadmap
 1. [x] Stabilize Build system
 2. [x] Automate system library detection and generate linker flags
