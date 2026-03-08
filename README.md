@@ -75,43 +75,25 @@ It appears as an empty (blue) folder in IDEs until initialized:
 git submodule update --init --recursive
 ```
 
-### 2. Build VTK from source
+### 2. Run the setup script
 
 `libvtk9-dev` (the system package) does **not** install the internal wrapping tool headers (e.g. `vtkParseAttributes.h`) that WrapVTK needs.
-You must build VTK from source.
+Use the provided `setup_vtk.sh` script to clone VTK from source, build it, build WrapVTK against it, and verify the XML output — all in one step:
 
 ```bash
-cd ~
-git clone https://github.com/Kitware/VTK.git --branch v9.1.0 --depth 1
-cd VTK && mkdir build && cd build
-cmake .. \
-  -DVTK_WRAP_PYTHON=OFF \
-  -DVTK_WRAP_JAVA=OFF \
-  -DBUILD_TESTING=OFF \
-  -DBUILD_SHARED_LIBS=OFF
-cmake --build . -j$(nproc)
+./setup_vtk.sh 9.1.0
 ```
 
-This takes roughly 15-30 minutes depending on your machine.
+The version argument is optional and defaults to `9.1.0`. This takes roughly 15–30 minutes depending on your machine.
 
-### 3. Build WrapVTK
+The script will:
+1. Wipe any existing `~/VTK` clone and `WrapVTK/build` directory
+2. Clone VTK at the exact tag (e.g. `v9.1.0`) into `~/VTK`
+3. Build VTK with static libs and the required modules (`CommonArchive`, `CommonPython`)
+4. Build WrapVTK against the fresh VTK build
+5. Verify that XML files were generated under `WrapVTK/build/xml/`
 
-```bash
-cd /path/to/vtk-rs/WrapVTK
-mkdir build && cd build
-cmake .. -DVTK_DIR=~/VTK/build
-cmake --build .
-```
-
-Verify that XML files were generated:
-
-```bash
-ls build/xml/
-```
-
-You should see directories like `vtkCommonCore`, `vtkCommonDataModel`, etc.
-
-### 4. Regenerate bindings with vtk-gen
+### 3. Regenerate bindings with vtk-gen
 
 ```bash
 cargo run -p vtk-gen -- \
@@ -120,7 +102,7 @@ cargo run -p vtk-gen -- \
 ```
 
 This regenerates all files in `vtk-rs-9.1/` from the WrapVTK XML output.
-To target a different VTK version, repeat steps 2-4 with a different git tag (e.g. `v9.3.0`) and a new output path (e.g. `--opath vtk-rs-9.3`).
+To target a different VTK version, run `./setup_vtk.sh <version>` first, then repeat this step with a matching output path (e.g. `--opath vtk-rs-9.3`).
 
 ## Roadmap
 1. [x] Stabilize Build system
