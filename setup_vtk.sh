@@ -5,7 +5,7 @@
 #   ./setup_vtk.sh [VTK_VERSION]
 #
 # Example:
-#   ./setup_vtk.sh 9.1.0   (default)
+#   ./setup_vtk.sh 9.2.0   (default)
 #   ./setup_vtk.sh 9.3.0
 #
 # What this script does:
@@ -20,7 +20,7 @@ set -euo pipefail
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-VTK_VERSION="${1:-9.1.0}"
+VTK_VERSION="${1:-9.2.0}"
 VTK_TAG="v${VTK_VERSION}"
 VTK_SRC="${HOME}/VTK"
 VTK_BUILD="${VTK_SRC}/build"

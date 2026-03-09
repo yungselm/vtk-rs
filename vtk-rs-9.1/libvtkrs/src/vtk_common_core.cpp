@@ -170,6 +170,8 @@ extern "C" void * vtkAnimationCue_get_ptr (vtkNew < vtkAnimationCue > sself) {re
 extern "C" vtkNew < vtkArchiver > vtkArchiver_new () {return vtkNew < vtkArchiver > () ;}
 extern "C" void vtkArchiver_destructor (vtkNew < vtkArchiver > sself) {sself . Reset () ; return ;}
 extern "C" void * vtkArchiver_get_ptr (vtkNew < vtkArchiver > sself) {return sself . GetPointer () ;}
+extern "C" void vtkArchiver_set_archive_name (vtkNew < vtkArchiver > sself, const char * name) {sself->SetArchiveName(name);}
+extern "C" const char * vtkArchiver_get_archive_name (vtkNew < vtkArchiver > sself) {return sself->GetArchiveName();}
 extern "C" vtkNew < vtkBitArray > vtkBitArray_new () {return vtkNew < vtkBitArray > () ;}
 extern "C" void vtkBitArray_destructor (vtkNew < vtkBitArray > sself) {sself . Reset () ; return ;}
 extern "C" void * vtkBitArray_get_ptr (vtkNew < vtkBitArray > sself) {return sself . GetPointer () ;}

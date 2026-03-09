@@ -117,6 +117,38 @@ fn test_vtkArchiver_create_drop() {
     let new_obj = vtkArchiver(ptr);
     assert!(unsafe { new_obj._get_ptr().is_null() });
 }
+pub trait VtkArchiver {
+    fn set_archive_name(&self, name: &str);
+    fn get_archive_name(&self) -> &str;
+}
+impl VtkArchiver for vtkArchiver {
+    fn set_archive_name(&self, name: &str) {
+        unsafe extern "C" {
+            fn vtkArchiver_set_archive_name(
+                sself: *mut core::ffi::c_void,
+                name: *const core::ffi::c_char,
+            );
+        }
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
+        unsafe { vtkArchiver_set_archive_name(self.0, c_name.as_ptr()) }
+    }
+    fn get_archive_name(&self) -> &str {
+        unsafe extern "C" {
+            fn vtkArchiver_get_archive_name(
+                sself: *mut core::ffi::c_void,
+            ) -> *const core::ffi::c_char;
+        }
+        let ptr = unsafe { vtkArchiver_get_archive_name(self.0) };
+        if ptr.is_null() { return ""; }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
+    }
+}
+#[test]
+fn test_vtkArchiver_set_archive_name() {
+    let obj = vtkArchiver::new();
+    obj.set_archive_name("my_archive");
+    assert_eq!(obj.get_archive_name(), "my_archive");
+}
 /// dynamic, self-adjusting array of bits
 ///
 ///

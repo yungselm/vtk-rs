@@ -167,6 +167,8 @@ extern "C" void * vtkAnimationCue_get_ptr (vtkNew < vtkAnimationCue > sself) ;
 extern "C" vtkNew < vtkArchiver > vtkArchiver_new () ;
 extern "C" void vtkArchiver_destructor (vtkNew < vtkArchiver > sself) ;
 extern "C" void * vtkArchiver_get_ptr (vtkNew < vtkArchiver > sself) ;
+extern "C" void vtkArchiver_set_archive_name (vtkNew < vtkArchiver > sself, const char * name) ;
+extern "C" const char * vtkArchiver_get_archive_name (vtkNew < vtkArchiver > sself) ;
 extern "C" vtkNew < vtkBitArray > vtkBitArray_new () ;
 extern "C" void vtkBitArray_destructor (vtkNew < vtkBitArray > sself) ;
 extern "C" void * vtkBitArray_get_ptr (vtkNew < vtkBitArray > sself) ;

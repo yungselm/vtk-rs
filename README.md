@@ -81,14 +81,14 @@ git submodule update --init --recursive
 Use the provided `setup_vtk.sh` script to clone VTK from source, build it, build WrapVTK against it, and verify the XML output — all in one step:
 
 ```bash
-./setup_vtk.sh 9.1.0
+./setup_vtk.sh 9.2.0
 ```
 
-The version argument is optional and defaults to `9.1.0`. This takes roughly 15–30 minutes depending on your machine.
+The version argument is optional and defaults to `9.2.0`. This takes roughly 15–30 minutes depending on your machine.
 
 The script will:
 1. Wipe any existing `~/VTK` clone and `WrapVTK/build` directory
-2. Clone VTK at the exact tag (e.g. `v9.1.0`) into `~/VTK`
+2. Clone VTK at the exact tag (e.g. `v9.2.0`) into `~/VTK`
 3. Build VTK with static libs and the required modules (`CommonArchive`, `CommonPython`)
 4. Build WrapVTK against the fresh VTK build
 5. Verify that XML files were generated under `WrapVTK/build/xml/`
@@ -97,11 +97,11 @@ The script will:
 
 ```bash
 cargo run -p vtk-gen -- \
-  --opath vtk-rs-9.1 \
+  --opath vtk-rs-9.2 \
   --wrap-vtk WrapVTK
 ```
 
-This regenerates all files in `vtk-rs-9.1/` from the WrapVTK XML output.
+This regenerates all files in `vtk-rs-9.2/` from the WrapVTK XML output.
 To target a different VTK version, run `./setup_vtk.sh <version>` first, then repeat this step with a matching output path (e.g. `--opath vtk-rs-9.3`).
 
 ## Roadmap
