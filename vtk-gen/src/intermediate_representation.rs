@@ -223,8 +223,7 @@ impl IRStruct {
             && !self.is_abstract
             && !self.is_template
             && !self.exposable_methods.is_empty()
-            // This could be lifted in the future when considering objects which can be constructed
-            // not via vtkNew<..>()
+            // Only vtkObjectBase subclasses have the New() / Delete() reference-counting API.
             && self.has_vtk_object_base_ancestor
     }
 }
