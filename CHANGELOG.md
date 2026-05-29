@@ -24,14 +24,18 @@
 ### Fixed
 - **`vtkNew<T>` ABI mismatch in generated C++ wrappers**: `vtkNew<T>` has a non-trivial destructor, so passing or returning it by value in `extern "C"` functions violates the x86-64 SysV ABI and causes the wrapped VTK object to be destroyed on every method call. Constructor, destructor, get-ptr, and all method wrappers now use raw `T*` (`T::New()` / `sself->Delete()` / `return sself`) instead of `vtkNew<T>`.
 - **`std::string` return types** (`IRType::String`): bridging `std::string` as `const char*` is illegal (dangling pointer). These methods are now skipped on both the Rust and C++ sides.
-- **`const char*` vs `const char* const*`**: `StarStarConst` now always bails instead of incorrectly reducing to a single pointer.
-- **Mutable `char**` output parameters**: `StarStar + non-const char` now bails; only `StarStar + const char` (VTK_FILEPATH encoding) is reduced to a single pointer.
+- **`const char*` vs `const char* const*`**: `StarStarConst` and `StarStar` now always bail instead of incorrectly reducing to a single pointer.
+- **Mutable `char**` output parameters**: `StarStar` always bails — VTK_FILEPATH uses `pointer="*"` in the actual XML, never `pointer="**"`. The previous special-case for `Const(SignedChar)**` was unreachable dead code and has been removed.
 - **Mutable `char*` vs `signed char*`**: `Pointer(c_char)` (without `Const`) is now rejected on both Rust and C++ sides — VTK typed-data-array methods use `signed char*`, which is not implicitly convertible from `char*` in C++.
 - **`signed char*` data array methods**: Separated `CppType::PlainChar` (`"char"`) from `CppType::SignedChar` (`"signed char"`) so typed-data-array parameters (`const signed char*`) generate the correct C++ type and are rejected at the Rust FFI boundary (not safely bridgeable without element-count information).
 - **`Path` types by value/reference** (e.g. `const vtkStdString&`, `vtkColor3ub`): rejected in `ir_type_is_supported`; VTK object types are only bridgeable as opaque pointers.
 - **Heap collection types** (`Vec`, `LinkedList`, `Map`): rejected in `ir_type_is_supported` — these types cannot cross the `extern "C"` boundary safely.
 - **Cross-module supertrait bounds**: removed from generated trait definitions. Generating `trait VtkFoo: VtkBar` across module boundaries requires the concrete struct to implement all ancestor traits, which the generator does not yet support.
 - **`vtktoken` linker error**: removed from the hardcoded link list in `write_build_rs`; `libvtktoken` is a VTK 9.2+ library not present in VTK 9.1 system packages.
+- **`c_longlong` Rust type mapping**: was incorrectly emitting `core::ffi::c_uchar` (copy-paste error); now correctly emits `core::ffi::c_longlong`.
+- **Generated `test_vtkXxx_create_drop` was broken**: after the `vtkNew<T>` → `T*` switch, `get_ptr` returns the pointer itself so the post-drop null assertion was wrong and the test accessed freed memory (UB). Simplified to verify creation gives a non-null pointer and `drop` does not panic.
+- **Panic in `get_exposable_methods`**: indexing `self.classes[parent]` would panic if a parent class named in an XML `<inheritance>` entry had no corresponding XML file scanned. Changed to a silent skip via `.filter_map(|n| self.classes.get(&n))`.
+- **`new()` in generated bindings**: `Self(unsafe { &mut *constructor() })` created a spurious `&mut c_void` reference before coercing back to `*mut c_void`. Simplified to `Self(unsafe { constructor() })`.
 
 ## [0.2.0] - 2025-06-03
 
