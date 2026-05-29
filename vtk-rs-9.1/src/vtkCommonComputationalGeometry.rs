@@ -1,3 +1,3254 @@
+pub trait VtkBilinearQuadIntersection {
+    fn get_p_00_data(&mut self) -> *mut core::ffi::c_double;
+    fn get_p_01_data(&mut self) -> *mut core::ffi::c_double;
+    fn get_p_10_data(&mut self) -> *mut core::ffi::c_double;
+    fn get_p_11_data(&mut self) -> *mut core::ffi::c_double;
+    fn compute_cartesian_coordinates(
+        &mut self,
+        u: core::ffi::c_double,
+        v: core::ffi::c_double,
+    ) -> *mut core::ffi::c_void;
+    fn ray_intersection(
+        &mut self,
+        r: vtkVector3d,
+        q: vtkVector3d,
+        uv: *mut core::ffi::c_void,
+    ) -> bool;
+}
+pub trait VtkCardinalSpline {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn compute(&mut self) -> ();
+    fn evaluate(&mut self, t: core::ffi::c_double) -> core::ffi::c_double;
+    fn deep_copy(&mut self, s: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkKochanekSpline {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn compute(&mut self) -> ();
+    fn evaluate(&mut self, t: core::ffi::c_double) -> core::ffi::c_double;
+    fn set_default_bias(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_default_bias(&mut self) -> core::ffi::c_double;
+    fn set_default_tension(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_default_tension(&mut self) -> core::ffi::c_double;
+    fn set_default_continuity(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_default_continuity(&mut self) -> core::ffi::c_double;
+    fn deep_copy(&mut self, s: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkParametricBohemianDome: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_a(&mut self) -> core::ffi::c_double;
+    fn set_a(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_b(&mut self) -> core::ffi::c_double;
+    fn set_b(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_c(&mut self) -> core::ffi::c_double;
+    fn set_c(&mut self, _arg: core::ffi::c_double) -> ();
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricBour: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricBoy: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn set_z_scale(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_z_scale(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricCatalanMinimal: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricConicSpiral: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn set_a(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_a(&mut self) -> core::ffi::c_double;
+    fn set_b(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_b(&mut self) -> core::ffi::c_double;
+    fn set_c(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_c(&mut self) -> core::ffi::c_double;
+    fn set_n(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_n(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricCrossCap: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricDini: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn set_a(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_a(&mut self) -> core::ffi::c_double;
+    fn set_b(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_b(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricEllipsoid: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn set_x_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_x_radius(&mut self) -> core::ffi::c_double;
+    fn set_y_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_y_radius(&mut self) -> core::ffi::c_double;
+    fn set_z_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_z_radius(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricEnneper: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricFigure8Klein: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn set_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_radius(&mut self) -> core::ffi::c_double;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+    fn set_minimum_u(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_minimum_u(&mut self) -> core::ffi::c_double;
+    fn set_maximum_u(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_maximum_u(&mut self) -> core::ffi::c_double;
+    fn set_minimum_v(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_minimum_v(&mut self) -> core::ffi::c_double;
+    fn set_maximum_v(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_maximum_v(&mut self) -> core::ffi::c_double;
+    fn set_minimum_w(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_minimum_w(&mut self) -> core::ffi::c_double;
+    fn set_maximum_w(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_maximum_w(&mut self) -> core::ffi::c_double;
+    fn set_join_u(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_join_u_min_value(&mut self) -> core::ffi::c_int;
+    fn get_join_u_max_value(&mut self) -> core::ffi::c_int;
+    fn get_join_u(&mut self) -> core::ffi::c_int;
+    fn join_u_on(&mut self) -> ();
+    fn join_u_off(&mut self) -> ();
+    fn set_join_v(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_join_v_min_value(&mut self) -> core::ffi::c_int;
+    fn get_join_v_max_value(&mut self) -> core::ffi::c_int;
+    fn get_join_v(&mut self) -> core::ffi::c_int;
+    fn join_v_on(&mut self) -> ();
+    fn join_v_off(&mut self) -> ();
+    fn set_join_w(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_join_w_min_value(&mut self) -> core::ffi::c_int;
+    fn get_join_w_max_value(&mut self) -> core::ffi::c_int;
+    fn get_join_w(&mut self) -> core::ffi::c_int;
+    fn join_w_on(&mut self) -> ();
+    fn join_w_off(&mut self) -> ();
+    fn set_twist_u(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_twist_u_min_value(&mut self) -> core::ffi::c_int;
+    fn get_twist_u_max_value(&mut self) -> core::ffi::c_int;
+    fn get_twist_u(&mut self) -> core::ffi::c_int;
+    fn twist_u_on(&mut self) -> ();
+    fn twist_u_off(&mut self) -> ();
+    fn set_twist_v(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_twist_v_min_value(&mut self) -> core::ffi::c_int;
+    fn get_twist_v_max_value(&mut self) -> core::ffi::c_int;
+    fn get_twist_v(&mut self) -> core::ffi::c_int;
+    fn twist_v_on(&mut self) -> ();
+    fn twist_v_off(&mut self) -> ();
+    fn set_twist_w(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_twist_w_min_value(&mut self) -> core::ffi::c_int;
+    fn get_twist_w_max_value(&mut self) -> core::ffi::c_int;
+    fn get_twist_w(&mut self) -> core::ffi::c_int;
+    fn twist_w_on(&mut self) -> ();
+    fn twist_w_off(&mut self) -> ();
+    fn set_clockwise_ordering(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_clockwise_ordering_min_value(&mut self) -> core::ffi::c_int;
+    fn get_clockwise_ordering_max_value(&mut self) -> core::ffi::c_int;
+    fn get_clockwise_ordering(&mut self) -> core::ffi::c_int;
+    fn clockwise_ordering_on(&mut self) -> ();
+    fn clockwise_ordering_off(&mut self) -> ();
+    fn set_derivatives_available(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_derivatives_available_min_value(&mut self) -> core::ffi::c_int;
+    fn get_derivatives_available_max_value(&mut self) -> core::ffi::c_int;
+    fn get_derivatives_available(&mut self) -> core::ffi::c_int;
+    fn derivatives_available_on(&mut self) -> ();
+    fn derivatives_available_off(&mut self) -> ();
+}
+pub trait VtkParametricHenneberg: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricKlein: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricKuen: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn set_delta_v_0(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_delta_v_0(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricMobius: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn set_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_radius(&mut self) -> core::ffi::c_double;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricPluckerConoid: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_n(&mut self) -> core::ffi::c_int;
+    fn set_n(&mut self, _arg: core::ffi::c_int) -> ();
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricPseudosphere: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricRandomHills: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn set_number_of_hills(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_number_of_hills(&mut self) -> core::ffi::c_int;
+    fn set_hill_x_variance(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_hill_x_variance(&mut self) -> core::ffi::c_double;
+    fn set_hill_y_variance(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_hill_y_variance(&mut self) -> core::ffi::c_double;
+    fn set_hill_amplitude(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_hill_amplitude(&mut self) -> core::ffi::c_double;
+    fn set_random_seed(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_random_seed(&mut self) -> core::ffi::c_int;
+    fn set_allow_random_generation(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_allow_random_generation_min_value(&mut self) -> core::ffi::c_int;
+    fn get_allow_random_generation_max_value(&mut self) -> core::ffi::c_int;
+    fn get_allow_random_generation(&mut self) -> core::ffi::c_int;
+    fn allow_random_generation_on(&mut self) -> ();
+    fn allow_random_generation_off(&mut self) -> ();
+    fn set_x_variance_scale_factor(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_x_variance_scale_factor(&mut self) -> core::ffi::c_double;
+    fn set_y_variance_scale_factor(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_y_variance_scale_factor(&mut self) -> core::ffi::c_double;
+    fn set_amplitude_scale_factor(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_amplitude_scale_factor(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricRoman: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn set_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_radius(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricSpline: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        u: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Du: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        u: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Du: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+    fn set_x_spline(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_y_spline(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_z_spline(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn get_x_spline(&mut self) -> *mut core::ffi::c_void;
+    fn get_y_spline(&mut self) -> *mut core::ffi::c_void;
+    fn get_z_spline(&mut self) -> *mut core::ffi::c_void;
+    fn set_points(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn get_points(&mut self) -> *mut core::ffi::c_void;
+    fn set_number_of_points(&mut self, numPts: core::ffi::c_uchar) -> ();
+    fn set_point(
+        &mut self,
+        index: core::ffi::c_uchar,
+        x: core::ffi::c_double,
+        y: core::ffi::c_double,
+        z: core::ffi::c_double,
+    ) -> ();
+    fn set_closed(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_closed(&mut self) -> core::ffi::c_int;
+    fn closed_on(&mut self) -> ();
+    fn closed_off(&mut self) -> ();
+    fn set_parameterize_by_length(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_parameterize_by_length(&mut self) -> core::ffi::c_int;
+    fn parameterize_by_length_on(&mut self) -> ();
+    fn parameterize_by_length_off(&mut self) -> ();
+    fn set_left_constraint(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_left_constraint_min_value(&mut self) -> core::ffi::c_int;
+    fn get_left_constraint_max_value(&mut self) -> core::ffi::c_int;
+    fn get_left_constraint(&mut self) -> core::ffi::c_int;
+    fn set_right_constraint(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_right_constraint_min_value(&mut self) -> core::ffi::c_int;
+    fn get_right_constraint_max_value(&mut self) -> core::ffi::c_int;
+    fn get_right_constraint(&mut self) -> core::ffi::c_int;
+    fn set_left_value(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_left_value(&mut self) -> core::ffi::c_double;
+    fn set_right_value(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_right_value(&mut self) -> core::ffi::c_double;
+}
+pub trait VtkParametricSuperEllipsoid: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn set_x_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_x_radius(&mut self) -> core::ffi::c_double;
+    fn set_y_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_y_radius(&mut self) -> core::ffi::c_double;
+    fn set_z_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_z_radius(&mut self) -> core::ffi::c_double;
+    fn set_n_1(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_n_1(&mut self) -> core::ffi::c_double;
+    fn set_n_2(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_n_2(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricSuperToroid: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn set_ring_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_ring_radius(&mut self) -> core::ffi::c_double;
+    fn set_cross_section_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_cross_section_radius(&mut self) -> core::ffi::c_double;
+    fn set_x_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_x_radius(&mut self) -> core::ffi::c_double;
+    fn set_y_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_y_radius(&mut self) -> core::ffi::c_double;
+    fn set_z_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_z_radius(&mut self) -> core::ffi::c_double;
+    fn set_n_1(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_n_1(&mut self) -> core::ffi::c_double;
+    fn set_n_2(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_n_2(&mut self) -> core::ffi::c_double;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+pub trait VtkParametricTorus: VtkParametricFunction {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn set_ring_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_ring_radius(&mut self) -> core::ffi::c_double;
+    fn set_cross_section_radius(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_cross_section_radius(&mut self) -> core::ffi::c_double;
+    fn get_dimension(&mut self) -> core::ffi::c_int;
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> ();
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double;
+}
+impl VtkCardinalSpline for vtkCardinalSpline {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cardinal_spline_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cardinal_spline_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cardinal_spline_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cardinal_spline_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cardinal_spline_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cardinal_spline_new_instance(self.0) }
+    }
+    fn compute(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_cardinal_spline_compute(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_cardinal_spline_compute(self.0) }
+    }
+    fn evaluate(&mut self, t: core::ffi::c_double) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_cardinal_spline_evaluate(
+                sself: *mut core::ffi::c_void,
+                t: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_cardinal_spline_evaluate(self.0, t) }
+    }
+    fn deep_copy(&mut self, s: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_cardinal_spline_deep_copy(
+                sself: *mut core::ffi::c_void,
+                s: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_cardinal_spline_deep_copy(self.0, s) }
+    }
+}
+impl VtkKochanekSpline for vtkKochanekSpline {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_kochanek_spline_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_kochanek_spline_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_kochanek_spline_new(self.0) }
+    }
+    fn compute(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_compute(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_kochanek_spline_compute(self.0) }
+    }
+    fn evaluate(&mut self, t: core::ffi::c_double) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_evaluate(
+                sself: *mut core::ffi::c_void,
+                t: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_kochanek_spline_evaluate(self.0, t) }
+    }
+    fn set_default_bias(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_set_default_bias(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_kochanek_spline_set_default_bias(self.0, _arg) }
+    }
+    fn get_default_bias(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_get_default_bias(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_kochanek_spline_get_default_bias(self.0) }
+    }
+    fn set_default_tension(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_set_default_tension(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_kochanek_spline_set_default_tension(self.0, _arg) }
+    }
+    fn get_default_tension(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_get_default_tension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_kochanek_spline_get_default_tension(self.0) }
+    }
+    fn set_default_continuity(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_set_default_continuity(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_kochanek_spline_set_default_continuity(self.0, _arg) }
+    }
+    fn get_default_continuity(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_get_default_continuity(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_kochanek_spline_get_default_continuity(self.0) }
+    }
+    fn deep_copy(&mut self, s: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_kochanek_spline_deep_copy(
+                sself: *mut core::ffi::c_void,
+                s: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_kochanek_spline_deep_copy(self.0, s) }
+    }
+}
+impl VtkParametricBohemianDome for vtkParametricBohemianDome {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_bohemian_dome_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_bohemian_dome_new_instance(self.0) }
+    }
+    fn get_a(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_get_a(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_bohemian_dome_get_a(self.0) }
+    }
+    fn set_a(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_set_a(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_bohemian_dome_set_a(self.0, _arg) }
+    }
+    fn get_b(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_get_b(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_bohemian_dome_get_b(self.0) }
+    }
+    fn set_b(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_set_b(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_bohemian_dome_set_b(self.0, _arg) }
+    }
+    fn get_c(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_get_c(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_bohemian_dome_get_c(self.0) }
+    }
+    fn set_c(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_set_c(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_bohemian_dome_set_c(self.0, _arg) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_bohemian_dome_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_bohemian_dome_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_bohemian_dome_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_bohemian_dome_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_bohemian_dome_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricBour for vtkParametricBour {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_bour_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_bour_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_bour_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_bour_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_bour_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_bour_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_bour_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_bour_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_bour_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_bour_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_bour_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_bour_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricBoy for vtkParametricBoy {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_boy_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_boy_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_boy_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_boy_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_boy_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_boy_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_boy_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_boy_get_dimension(self.0) }
+    }
+    fn set_z_scale(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_boy_set_z_scale(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_boy_set_z_scale(self.0, _arg) }
+    }
+    fn get_z_scale(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_boy_get_z_scale(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_boy_get_z_scale(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_boy_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_boy_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_boy_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_boy_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricCatalanMinimal for vtkParametricCatalanMinimal {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_catalan_minimal_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_catalan_minimal_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_catalan_minimal_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_catalan_minimal_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_catalan_minimal_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_catalan_minimal_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_catalan_minimal_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_catalan_minimal_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_catalan_minimal_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_catalan_minimal_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_catalan_minimal_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_catalan_minimal_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricConicSpiral for vtkParametricConicSpiral {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_conic_spiral_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_conic_spiral_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_conic_spiral_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_conic_spiral_get_dimension(self.0) }
+    }
+    fn set_a(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_set_a(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_conic_spiral_set_a(self.0, _arg) }
+    }
+    fn get_a(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_get_a(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_conic_spiral_get_a(self.0) }
+    }
+    fn set_b(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_set_b(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_conic_spiral_set_b(self.0, _arg) }
+    }
+    fn get_b(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_get_b(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_conic_spiral_get_b(self.0) }
+    }
+    fn set_c(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_set_c(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_conic_spiral_set_c(self.0, _arg) }
+    }
+    fn get_c(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_get_c(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_conic_spiral_get_c(self.0) }
+    }
+    fn set_n(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_set_n(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_conic_spiral_set_n(self.0, _arg) }
+    }
+    fn get_n(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_get_n(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_conic_spiral_get_n(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_conic_spiral_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_conic_spiral_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_conic_spiral_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricCrossCap for vtkParametricCrossCap {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_cross_cap_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_cross_cap_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_cross_cap_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_cross_cap_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_cross_cap_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_cross_cap_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_cross_cap_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_cross_cap_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_cross_cap_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_cross_cap_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_cross_cap_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_cross_cap_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricDini for vtkParametricDini {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_dini_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_dini_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_dini_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_dini_get_dimension(self.0) }
+    }
+    fn set_a(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_set_a(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_dini_set_a(self.0, _arg) }
+    }
+    fn get_a(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_get_a(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_dini_get_a(self.0) }
+    }
+    fn set_b(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_set_b(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_dini_set_b(self.0, _arg) }
+    }
+    fn get_b(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_get_b(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_dini_get_b(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_dini_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_dini_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_dini_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricEllipsoid for vtkParametricEllipsoid {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_ellipsoid_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_ellipsoid_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_ellipsoid_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_ellipsoid_get_dimension(self.0) }
+    }
+    fn set_x_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_set_x_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_ellipsoid_set_x_radius(self.0, _arg) }
+    }
+    fn get_x_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_get_x_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_ellipsoid_get_x_radius(self.0) }
+    }
+    fn set_y_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_set_y_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_ellipsoid_set_y_radius(self.0, _arg) }
+    }
+    fn get_y_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_get_y_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_ellipsoid_get_y_radius(self.0) }
+    }
+    fn set_z_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_set_z_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_ellipsoid_set_z_radius(self.0, _arg) }
+    }
+    fn get_z_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_get_z_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_ellipsoid_get_z_radius(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_ellipsoid_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_ellipsoid_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_ellipsoid_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricEnneper for vtkParametricEnneper {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_enneper_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_enneper_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_enneper_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_enneper_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_enneper_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_enneper_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_enneper_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_enneper_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_enneper_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_enneper_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_enneper_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_enneper_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricFigure8Klein for vtkParametricFigure8Klein {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_figure_8_klein_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_figure_8_klein_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_figure_8_klein_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_figure_8_klein_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_figure_8_klein_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_figure_8_klein_new(self.0) }
+    }
+    fn set_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_figure_8_klein_set_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_figure_8_klein_set_radius(self.0, _arg) }
+    }
+    fn get_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_figure_8_klein_get_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_figure_8_klein_get_radius(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_figure_8_klein_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_figure_8_klein_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_figure_8_klein_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_figure_8_klein_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_figure_8_klein_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_figure_8_klein_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricHenneberg for vtkParametricHenneberg {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_henneberg_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_henneberg_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_henneberg_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_henneberg_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_henneberg_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_henneberg_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_henneberg_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_henneberg_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_henneberg_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_henneberg_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_henneberg_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_henneberg_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricKlein for vtkParametricKlein {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_klein_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_klein_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_klein_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_klein_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_klein_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_klein_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_klein_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_klein_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_klein_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_klein_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_klein_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_klein_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricKuen for vtkParametricKuen {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_kuen_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_kuen_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_kuen_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_kuen_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_kuen_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_kuen_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_kuen_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_kuen_get_dimension(self.0) }
+    }
+    fn set_delta_v_0(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_kuen_set_delta_v_0(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_kuen_set_delta_v_0(self.0, _arg) }
+    }
+    fn get_delta_v_0(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_kuen_get_delta_v_0(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_kuen_get_delta_v_0(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_kuen_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_kuen_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_kuen_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_kuen_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricMobius for vtkParametricMobius {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_mobius_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_mobius_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_mobius_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_mobius_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_mobius_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_mobius_new(self.0) }
+    }
+    fn set_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_mobius_set_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_mobius_set_radius(self.0, _arg) }
+    }
+    fn get_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_mobius_get_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_mobius_get_radius(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_mobius_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_mobius_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_mobius_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_mobius_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_mobius_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_mobius_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricPluckerConoid for vtkParametricPluckerConoid {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_plucker_conoid_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_plucker_conoid_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_plucker_conoid_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_plucker_conoid_new_instance(self.0) }
+    }
+    fn get_n(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_plucker_conoid_get_n(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_plucker_conoid_get_n(self.0) }
+    }
+    fn set_n(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_plucker_conoid_set_n(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_parametric_plucker_conoid_set_n(self.0, _arg) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_plucker_conoid_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_plucker_conoid_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_plucker_conoid_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_plucker_conoid_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_plucker_conoid_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_plucker_conoid_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_plucker_conoid_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_plucker_conoid_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricPseudosphere for vtkParametricPseudosphere {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_pseudosphere_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_pseudosphere_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_pseudosphere_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_pseudosphere_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_pseudosphere_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_pseudosphere_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_pseudosphere_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_pseudosphere_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_pseudosphere_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_pseudosphere_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_pseudosphere_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_pseudosphere_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricRandomHills for vtkParametricRandomHills {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_random_hills_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_random_hills_new_instance(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_random_hills_get_dimension(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_random_hills_new(self.0) }
+    }
+    fn set_number_of_hills(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_number_of_hills(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_number_of_hills(self.0, _arg) }
+    }
+    fn get_number_of_hills(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_number_of_hills(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_random_hills_get_number_of_hills(self.0) }
+    }
+    fn set_hill_x_variance(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_hill_x_variance(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_hill_x_variance(self.0, _arg) }
+    }
+    fn get_hill_x_variance(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_hill_x_variance(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_random_hills_get_hill_x_variance(self.0) }
+    }
+    fn set_hill_y_variance(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_hill_y_variance(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_hill_y_variance(self.0, _arg) }
+    }
+    fn get_hill_y_variance(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_hill_y_variance(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_random_hills_get_hill_y_variance(self.0) }
+    }
+    fn set_hill_amplitude(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_hill_amplitude(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_hill_amplitude(self.0, _arg) }
+    }
+    fn get_hill_amplitude(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_hill_amplitude(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_random_hills_get_hill_amplitude(self.0) }
+    }
+    fn set_random_seed(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_random_seed(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_random_seed(self.0, _arg) }
+    }
+    fn get_random_seed(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_random_seed(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_random_hills_get_random_seed(self.0) }
+    }
+    fn set_allow_random_generation(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_allow_random_generation(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_allow_random_generation(self.0, _arg) }
+    }
+    fn get_allow_random_generation_min_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_allow_random_generation_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_parametric_random_hills_get_allow_random_generation_min_value(self.0)
+        }
+    }
+    fn get_allow_random_generation_max_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_allow_random_generation_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_parametric_random_hills_get_allow_random_generation_max_value(self.0)
+        }
+    }
+    fn get_allow_random_generation(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_allow_random_generation(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_random_hills_get_allow_random_generation(self.0) }
+    }
+    fn allow_random_generation_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_allow_random_generation_on(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_allow_random_generation_on(self.0) }
+    }
+    fn allow_random_generation_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_allow_random_generation_off(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_allow_random_generation_off(self.0) }
+    }
+    fn set_x_variance_scale_factor(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_x_variance_scale_factor(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_x_variance_scale_factor(self.0, _arg) }
+    }
+    fn get_x_variance_scale_factor(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_x_variance_scale_factor(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_random_hills_get_x_variance_scale_factor(self.0) }
+    }
+    fn set_y_variance_scale_factor(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_y_variance_scale_factor(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_y_variance_scale_factor(self.0, _arg) }
+    }
+    fn get_y_variance_scale_factor(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_y_variance_scale_factor(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_random_hills_get_y_variance_scale_factor(self.0) }
+    }
+    fn set_amplitude_scale_factor(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_set_amplitude_scale_factor(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_set_amplitude_scale_factor(self.0, _arg) }
+    }
+    fn get_amplitude_scale_factor(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_get_amplitude_scale_factor(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_random_hills_get_amplitude_scale_factor(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_random_hills_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_random_hills_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_random_hills_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricRoman for vtkParametricRoman {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_roman_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_roman_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_roman_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_roman_new_instance(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_roman_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_roman_get_dimension(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_roman_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_roman_new(self.0) }
+    }
+    fn set_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_roman_set_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_roman_set_radius(self.0, _arg) }
+    }
+    fn get_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_roman_get_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_roman_get_radius(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_roman_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_roman_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_roman_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_roman_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricSpline for vtkParametricSpline {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_spline_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_spline_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_spline_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        u: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Du: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_evaluate(
+                sself: *mut core::ffi::c_void,
+                u: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Du: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_spline_evaluate(self.0, u, Pt, Du) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        u: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Du: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                u: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Du: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_spline_evaluate_scalar(self.0, u, Pt, Du) }
+    }
+    fn set_x_spline(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_x_spline(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_x_spline(self.0, p0) }
+    }
+    fn set_y_spline(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_y_spline(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_y_spline(self.0, p0) }
+    }
+    fn set_z_spline(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_z_spline(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_z_spline(self.0, p0) }
+    }
+    fn get_x_spline(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_x_spline(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_spline_get_x_spline(self.0) }
+    }
+    fn get_y_spline(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_y_spline(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_spline_get_y_spline(self.0) }
+    }
+    fn get_z_spline(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_z_spline(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_spline_get_z_spline(self.0) }
+    }
+    fn set_points(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_points(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_points(self.0, p0) }
+    }
+    fn get_points(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_points(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_spline_get_points(self.0) }
+    }
+    fn set_number_of_points(&mut self, numPts: core::ffi::c_uchar) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_number_of_points(
+                sself: *mut core::ffi::c_void,
+                numPts: core::ffi::c_uchar,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_number_of_points(self.0, numPts) }
+    }
+    fn set_point(
+        &mut self,
+        index: core::ffi::c_uchar,
+        x: core::ffi::c_double,
+        y: core::ffi::c_double,
+        z: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_point(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_uchar,
+                x: core::ffi::c_double,
+                y: core::ffi::c_double,
+                z: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_point(self.0, index, x, y, z) }
+    }
+    fn set_closed(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_closed(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_closed(self.0, _arg) }
+    }
+    fn get_closed(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_closed(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_closed(self.0) }
+    }
+    fn closed_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_closed_on(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_parametric_spline_closed_on(self.0) }
+    }
+    fn closed_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_closed_off(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_parametric_spline_closed_off(self.0) }
+    }
+    fn set_parameterize_by_length(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_parameterize_by_length(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_parameterize_by_length(self.0, _arg) }
+    }
+    fn get_parameterize_by_length(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_parameterize_by_length(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_parameterize_by_length(self.0) }
+    }
+    fn parameterize_by_length_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_parameterize_by_length_on(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_parametric_spline_parameterize_by_length_on(self.0) }
+    }
+    fn parameterize_by_length_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_parameterize_by_length_off(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_parametric_spline_parameterize_by_length_off(self.0) }
+    }
+    fn set_left_constraint(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_left_constraint(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_left_constraint(self.0, _arg) }
+    }
+    fn get_left_constraint_min_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_left_constraint_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_left_constraint_min_value(self.0) }
+    }
+    fn get_left_constraint_max_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_left_constraint_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_left_constraint_max_value(self.0) }
+    }
+    fn get_left_constraint(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_left_constraint(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_left_constraint(self.0) }
+    }
+    fn set_right_constraint(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_right_constraint(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_right_constraint(self.0, _arg) }
+    }
+    fn get_right_constraint_min_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_right_constraint_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_right_constraint_min_value(self.0) }
+    }
+    fn get_right_constraint_max_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_right_constraint_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_right_constraint_max_value(self.0) }
+    }
+    fn get_right_constraint(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_right_constraint(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_spline_get_right_constraint(self.0) }
+    }
+    fn set_left_value(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_left_value(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_left_value(self.0, _arg) }
+    }
+    fn get_left_value(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_left_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_spline_get_left_value(self.0) }
+    }
+    fn set_right_value(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_set_right_value(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_spline_set_right_value(self.0, _arg) }
+    }
+    fn get_right_value(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_spline_get_right_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_spline_get_right_value(self.0) }
+    }
+}
+impl VtkParametricSuperEllipsoid for vtkParametricSuperEllipsoid {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_get_dimension(self.0) }
+    }
+    fn set_x_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_set_x_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_ellipsoid_set_x_radius(self.0, _arg) }
+    }
+    fn get_x_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_get_x_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_get_x_radius(self.0) }
+    }
+    fn set_y_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_set_y_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_ellipsoid_set_y_radius(self.0, _arg) }
+    }
+    fn get_y_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_get_y_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_get_y_radius(self.0) }
+    }
+    fn set_z_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_set_z_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_ellipsoid_set_z_radius(self.0, _arg) }
+    }
+    fn get_z_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_get_z_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_get_z_radius(self.0) }
+    }
+    fn set_n_1(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_set_n_1(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_ellipsoid_set_n_1(self.0, _arg) }
+    }
+    fn get_n_1(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_get_n_1(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_get_n_1(self.0) }
+    }
+    fn set_n_2(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_set_n_2(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_ellipsoid_set_n_2(self.0, _arg) }
+    }
+    fn get_n_2(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_get_n_2(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_get_n_2(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_ellipsoid_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_ellipsoid_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_ellipsoid_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricSuperToroid for vtkParametricSuperToroid {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_super_toroid_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_super_toroid_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_super_toroid_new(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_super_toroid_get_dimension(self.0) }
+    }
+    fn set_ring_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_set_ring_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_toroid_set_ring_radius(self.0, _arg) }
+    }
+    fn get_ring_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_get_ring_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_toroid_get_ring_radius(self.0) }
+    }
+    fn set_cross_section_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_set_cross_section_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_toroid_set_cross_section_radius(self.0, _arg) }
+    }
+    fn get_cross_section_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_get_cross_section_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_toroid_get_cross_section_radius(self.0) }
+    }
+    fn set_x_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_set_x_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_toroid_set_x_radius(self.0, _arg) }
+    }
+    fn get_x_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_get_x_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_toroid_get_x_radius(self.0) }
+    }
+    fn set_y_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_set_y_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_toroid_set_y_radius(self.0, _arg) }
+    }
+    fn get_y_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_get_y_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_toroid_get_y_radius(self.0) }
+    }
+    fn set_z_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_set_z_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_toroid_set_z_radius(self.0, _arg) }
+    }
+    fn get_z_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_get_z_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_toroid_get_z_radius(self.0) }
+    }
+    fn set_n_1(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_set_n_1(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_toroid_set_n_1(self.0, _arg) }
+    }
+    fn get_n_1(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_get_n_1(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_toroid_get_n_1(self.0) }
+    }
+    fn set_n_2(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_set_n_2(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_toroid_set_n_2(self.0, _arg) }
+    }
+    fn get_n_2(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_get_n_2(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_toroid_get_n_2(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_super_toroid_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_super_toroid_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_super_toroid_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
+impl VtkParametricTorus for vtkParametricTorus {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_torus_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_torus_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_parametric_torus_new(self.0) }
+    }
+    fn set_ring_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_set_ring_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_torus_set_ring_radius(self.0, _arg) }
+    }
+    fn get_ring_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_get_ring_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_torus_get_ring_radius(self.0) }
+    }
+    fn set_cross_section_radius(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_set_cross_section_radius(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_torus_set_cross_section_radius(self.0, _arg) }
+    }
+    fn get_cross_section_radius(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_get_cross_section_radius(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_torus_get_cross_section_radius(self.0) }
+    }
+    fn get_dimension(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_get_dimension(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_parametric_torus_get_dimension(self.0) }
+    }
+    fn evaluate(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_evaluate(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_parametric_torus_evaluate(self.0, uvw, Pt, Duvw) }
+    }
+    fn evaluate_scalar(
+        &mut self,
+        uvw: core::ffi::c_double,
+        Pt: core::ffi::c_double,
+        Duvw: core::ffi::c_double,
+    ) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_parametric_torus_evaluate_scalar(
+                sself: *mut core::ffi::c_void,
+                uvw: core::ffi::c_double,
+                Pt: core::ffi::c_double,
+                Duvw: core::ffi::c_double,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_parametric_torus_evaluate_scalar(self.0, uvw, Pt, Duvw) }
+    }
+}
 /// computes an interpolating spline using a
 ///
 /// a Cardinal basis.

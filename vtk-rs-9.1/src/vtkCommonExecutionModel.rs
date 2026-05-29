@@ -1,3 +1,8960 @@
+pub trait VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn has_executive(&mut self) -> core::ffi::c_int;
+    fn get_executive(&mut self) -> *mut core::ffi::c_void;
+    fn set_executive(&mut self, executive: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn compute_pipeline_m_time(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfoVec: *mut core::ffi::c_void,
+        outInfoVec: *mut core::ffi::c_void,
+        requestFromOutputPort: core::ffi::c_int,
+        mtime: core::ffi::c_ulong,
+    ) -> core::ffi::c_int;
+    fn modify_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        when: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn get_input_port_information(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_output_port_information(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_information(&mut self) -> *mut core::ffi::c_void;
+    fn set_information(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn get_number_of_input_ports(&mut self) -> core::ffi::c_int;
+    fn get_number_of_output_ports(&mut self) -> core::ffi::c_int;
+    fn register(&mut self, o: *mut core::ffi::c_void) -> ();
+    fn set_abort_execute(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_abort_execute(&mut self) -> core::ffi::c_int;
+    fn abort_execute_on(&mut self) -> ();
+    fn abort_execute_off(&mut self) -> ();
+    fn get_progress(&mut self) -> core::ffi::c_double;
+    fn set_progress(&mut self, p0: core::ffi::c_double) -> ();
+    fn update_progress(&mut self, amount: core::ffi::c_double) -> ();
+    fn set_progress_shift_scale(
+        &mut self,
+        shift: core::ffi::c_double,
+        scale: core::ffi::c_double,
+    ) -> ();
+    fn get_progress_shift(&mut self) -> core::ffi::c_double;
+    fn get_progress_scale(&mut self) -> core::ffi::c_double;
+    fn set_progress_text(&mut self, ptext: core::ffi::c_char) -> ();
+    fn get_progress_text(&mut self) -> *mut core::ffi::c_char;
+    fn get_error_code(&mut self) -> core::ffi::c_ulong;
+    fn input_is_optional(&mut self) -> *mut core::ffi::c_void;
+    fn input_is_repeatable(&mut self) -> *mut core::ffi::c_void;
+    fn input_required_fields(&mut self) -> *mut core::ffi::c_void;
+    fn input_required_data_type(&mut self) -> *mut core::ffi::c_void;
+    fn input_arrays_to_process(&mut self) -> *mut core::ffi::c_void;
+    fn input_port(&mut self) -> *mut core::ffi::c_void;
+    fn input_connection(&mut self) -> *mut core::ffi::c_void;
+    fn can_produce_sub_extent(&mut self) -> *mut core::ffi::c_void;
+    fn can_handle_piece_request(&mut self) -> *mut core::ffi::c_void;
+    fn set_input_array_to_process(
+        &mut self,
+        idx: core::ffi::c_int,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+        fieldAssociation: core::ffi::c_int,
+        name: core::ffi::c_char,
+    ) -> ();
+    fn set_input_array_to_process(
+        &mut self,
+        idx: core::ffi::c_int,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+        fieldAssociation: core::ffi::c_int,
+        fieldAttributeType: core::ffi::c_int,
+    ) -> ();
+    fn set_input_array_to_process(
+        &mut self,
+        idx: core::ffi::c_int,
+        info: *mut core::ffi::c_void,
+    ) -> ();
+    fn set_input_array_to_process(
+        &mut self,
+        idx: core::ffi::c_int,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+        fieldAssociation: core::ffi::c_char,
+        attributeTypeorName: core::ffi::c_char,
+    ) -> ();
+    fn get_input_array_information(
+        &mut self,
+        idx: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn remove_all_inputs(&mut self) -> ();
+    fn get_output_data_object(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_data_object(
+        &mut self,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn set_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        input: *mut core::ffi::c_void,
+    ) -> ();
+    fn set_input_connection(&mut self, input: *mut core::ffi::c_void) -> ();
+    fn add_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        input: *mut core::ffi::c_void,
+    ) -> ();
+    fn add_input_connection(&mut self, input: *mut core::ffi::c_void) -> ();
+    fn remove_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        input: *mut core::ffi::c_void,
+    ) -> ();
+    fn remove_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        idx: core::ffi::c_int,
+    ) -> ();
+    fn remove_all_input_connections(&mut self, port: core::ffi::c_int) -> ();
+    fn set_input_data_object(
+        &mut self,
+        port: core::ffi::c_int,
+        data: *mut core::ffi::c_void,
+    ) -> ();
+    fn set_input_data_object(&mut self, data: *mut core::ffi::c_void) -> ();
+    fn add_input_data_object(
+        &mut self,
+        port: core::ffi::c_int,
+        data: *mut core::ffi::c_void,
+    ) -> ();
+    fn add_input_data_object(&mut self, data: *mut core::ffi::c_void) -> ();
+    fn get_output_port(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_output_port(&mut self) -> *mut core::ffi::c_void;
+    fn get_number_of_input_connections(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn get_total_number_of_input_connections(&mut self) -> core::ffi::c_int;
+    fn get_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_algorithm(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+        algPort: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_algorithm(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_algorithm(&mut self) -> *mut core::ffi::c_void;
+    fn get_input_executive(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_executive(&mut self) -> *mut core::ffi::c_void;
+    fn get_input_information(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_information(&mut self) -> *mut core::ffi::c_void;
+    fn get_output_information(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn update(&mut self, port: core::ffi::c_int) -> ();
+    fn update(&mut self) -> ();
+    fn update(
+        &mut self,
+        port: core::ffi::c_int,
+        requests: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn update(&mut self, requests: *mut core::ffi::c_void) -> core::ffi::c_int;
+    fn update_piece(
+        &mut self,
+        piece: core::ffi::c_int,
+        numPieces: core::ffi::c_int,
+        ghostLevels: core::ffi::c_int,
+        extents: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn update_extent(&mut self, extents: core::ffi::c_int) -> core::ffi::c_int;
+    fn update_time_step(
+        &mut self,
+        time: core::ffi::c_double,
+        piece: core::ffi::c_int,
+        numPieces: core::ffi::c_int,
+        ghostLevels: core::ffi::c_int,
+        extents: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn update_information(&mut self) -> ();
+    fn update_data_object(&mut self) -> ();
+    fn propagate_update_extent(&mut self) -> ();
+    fn update_whole_extent(&mut self) -> ();
+    fn convert_total_input_to_port_connection(
+        &mut self,
+        ind: core::ffi::c_int,
+        port: core::ffi::c_int,
+        conn: core::ffi::c_int,
+    ) -> ();
+    fn set_release_data_flag(&mut self, p0: core::ffi::c_int) -> ();
+    fn get_release_data_flag(&mut self) -> core::ffi::c_int;
+    fn release_data_flag_on(&mut self) -> ();
+    fn release_data_flag_off(&mut self) -> ();
+    fn update_extent_is_empty(
+        &mut self,
+        pinfo: *mut core::ffi::c_void,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn update_extent_is_empty(
+        &mut self,
+        pinfo: *mut core::ffi::c_void,
+        extentType: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn set_default_executive_prototype(&mut self, proto: *mut core::ffi::c_void) -> ();
+    fn get_update_extent(&mut self) -> *mut core::ffi::c_int;
+    fn get_update_extent(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_int;
+    fn get_update_extent(
+        &mut self,
+        x0: core::ffi::c_int,
+        x1: core::ffi::c_int,
+        y0: core::ffi::c_int,
+        y1: core::ffi::c_int,
+        z0: core::ffi::c_int,
+        z1: core::ffi::c_int,
+    ) -> ();
+    fn get_update_extent(
+        &mut self,
+        port: core::ffi::c_int,
+        x0: core::ffi::c_int,
+        x1: core::ffi::c_int,
+        y0: core::ffi::c_int,
+        y1: core::ffi::c_int,
+        z0: core::ffi::c_int,
+        z1: core::ffi::c_int,
+    ) -> ();
+    fn get_update_extent(&mut self, extent: core::ffi::c_int) -> ();
+    fn get_update_extent(
+        &mut self,
+        port: core::ffi::c_int,
+        extent: core::ffi::c_int,
+    ) -> ();
+    fn get_update_piece(&mut self) -> core::ffi::c_int;
+    fn get_update_piece(&mut self, port: core::ffi::c_int) -> core::ffi::c_int;
+    fn get_update_number_of_pieces(&mut self) -> core::ffi::c_int;
+    fn get_update_number_of_pieces(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn get_update_ghost_level(&mut self) -> core::ffi::c_int;
+    fn get_update_ghost_level(&mut self, port: core::ffi::c_int) -> core::ffi::c_int;
+    fn set_progress_observer(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn get_progress_observer(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkAlgorithmOutput {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_index(&mut self, index: core::ffi::c_int) -> ();
+    fn get_index(&mut self) -> core::ffi::c_int;
+    fn get_producer(&mut self) -> *mut core::ffi::c_void;
+    fn set_producer(&mut self, producer: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkAnnotationLayersAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> ();
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkArrayDataAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> ();
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkCachedStreamingDemandDrivenPipeline: VtkStreamingDemandDrivenPipeline + VtkDemandDrivenPipeline + VtkExecutive {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_cache_size(&mut self, size: core::ffi::c_int) -> ();
+    fn get_cache_size(&mut self) -> core::ffi::c_int;
+}
+pub trait VtkCastToConcrete: VtkDataSetAlgorithm + VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkCompositeDataPipeline: VtkStreamingDemandDrivenPipeline + VtkDemandDrivenPipeline + VtkExecutive {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_composite_output_data(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_composite_input_data(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+        inInfoVec: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void;
+    fn load_requested_blocks(&mut self) -> *mut core::ffi::c_void;
+    fn composite_data_meta_data(&mut self) -> *mut core::ffi::c_void;
+    fn update_composite_indices(&mut self) -> *mut core::ffi::c_void;
+    fn block_amount_of_detail(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkCompositeDataSetAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkDataObjectAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkDataSetAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_poly_data_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_structured_points_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_image_data_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_structured_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_unstructured_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_rectilinear_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkDemandDrivenPipeline: VtkExecutive {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn compute_pipeline_m_time(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfoVec: *mut core::ffi::c_void,
+        outInfoVec: *mut core::ffi::c_void,
+        requestFromOutputPort: core::ffi::c_int,
+        mtime: core::ffi::c_ulong,
+    ) -> core::ffi::c_int;
+    fn get_pipeline_m_time(&mut self) -> core::ffi::c_ulong;
+    fn set_release_data_flag(
+        &mut self,
+        port: core::ffi::c_int,
+        n: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn get_release_data_flag(&mut self, port: core::ffi::c_int) -> core::ffi::c_int;
+    fn update_pipeline_m_time(&mut self) -> core::ffi::c_int;
+    fn update_data_object(&mut self) -> core::ffi::c_int;
+    fn update_data(&mut self, outputPort: core::ffi::c_int) -> core::ffi::c_int;
+    fn request_data_object(&mut self) -> *mut core::ffi::c_void;
+    fn request_information(&mut self) -> *mut core::ffi::c_void;
+    fn request_data(&mut self) -> *mut core::ffi::c_void;
+    fn request_data_not_generated(&mut self) -> *mut core::ffi::c_void;
+    fn release_data(&mut self) -> *mut core::ffi::c_void;
+    fn data_not_generated(&mut self) -> *mut core::ffi::c_void;
+    fn new_data_object(&mut self, type_: core::ffi::c_char) -> *mut core::ffi::c_void;
+}
+pub trait VtkDirectedGraphAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> ();
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkEnsembleSource: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn add_member(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn remove_all_members(&mut self) -> ();
+    fn get_number_of_members(&mut self) -> core::ffi::c_uint;
+    fn set_current_member(&mut self, _arg: core::ffi::c_uint) -> ();
+    fn get_current_member(&mut self) -> core::ffi::c_uint;
+    fn set_meta_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn meta_data(&mut self) -> *mut core::ffi::c_void;
+    fn update_member(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkExecutive {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_algorithm(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn compute_pipeline_m_time(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfoVec: *mut core::ffi::c_void,
+        outInfoVec: *mut core::ffi::c_void,
+        requestFromOutputPort: core::ffi::c_int,
+        mtime: core::ffi::c_ulong,
+    ) -> core::ffi::c_int;
+    fn update_information(&mut self) -> core::ffi::c_int;
+    fn update(&mut self) -> core::ffi::c_int;
+    fn update(&mut self, port: core::ffi::c_int) -> core::ffi::c_int;
+    fn get_number_of_input_ports(&mut self) -> core::ffi::c_int;
+    fn get_number_of_output_ports(&mut self) -> core::ffi::c_int;
+    fn get_number_of_input_connections(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn get_output_information(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_output_information(&mut self) -> *mut core::ffi::c_void;
+    fn get_input_information(
+        &mut self,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_information(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_information(&mut self) -> *mut &mut vtkInformationVector;
+    fn get_input_executive(
+        &mut self,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_output_data(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output_data(
+        &mut self,
+        port: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+        info: *mut core::ffi::c_void,
+    ) -> ();
+    fn set_output_data(
+        &mut self,
+        port: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> ();
+    fn get_input_data(
+        &mut self,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_input_data(
+        &mut self,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+        inInfoVec: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void;
+    fn set_shared_input_information(&mut self, inInfoVec: *mut core::ffi::c_void) -> ();
+    fn set_shared_output_information(
+        &mut self,
+        outInfoVec: *mut core::ffi::c_void,
+    ) -> ();
+    fn register(&mut self, o: *mut core::ffi::c_void) -> ();
+    fn producer(&mut self) -> *mut core::ffi::c_void;
+    fn consumers(&mut self) -> *mut core::ffi::c_void;
+    fn from_output_port(&mut self) -> *mut core::ffi::c_void;
+    fn algorithm_before_forward(&mut self) -> *mut core::ffi::c_void;
+    fn algorithm_after_forward(&mut self) -> *mut core::ffi::c_void;
+    fn algorithm_direction(&mut self) -> *mut core::ffi::c_void;
+    fn forward_direction(&mut self) -> *mut core::ffi::c_void;
+    fn keys_to_copy(&mut self) -> *mut core::ffi::c_void;
+    fn call_algorithm(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        direction: core::ffi::c_int,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkExplicitStructuredGridAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_explicit_structured_grid_input(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkExtentRCBPartitioner {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_number_of_partitions(&mut self, N: core::ffi::c_int) -> ();
+    fn set_global_extent(
+        &mut self,
+        imin: core::ffi::c_int,
+        imax: core::ffi::c_int,
+        jmin: core::ffi::c_int,
+        jmax: core::ffi::c_int,
+        kmin: core::ffi::c_int,
+        kmax: core::ffi::c_int,
+    ) -> ();
+    fn set_global_extent(&mut self, ext: core::ffi::c_int) -> ();
+    fn set_duplicate_nodes(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_duplicate_nodes(&mut self) -> core::ffi::c_int;
+    fn duplicate_nodes_on(&mut self) -> ();
+    fn duplicate_nodes_off(&mut self) -> ();
+    fn set_number_of_ghost_layers(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_number_of_ghost_layers(&mut self) -> core::ffi::c_int;
+    fn get_num_extents(&mut self) -> core::ffi::c_int;
+    fn partition(&mut self) -> ();
+    fn get_partition_extent(
+        &mut self,
+        idx: core::ffi::c_int,
+        ext: core::ffi::c_int,
+    ) -> ();
+}
+pub trait VtkExtentSplitter {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn add_extent_source(
+        &mut self,
+        id: core::ffi::c_int,
+        priority: core::ffi::c_int,
+        x0: core::ffi::c_int,
+        x1: core::ffi::c_int,
+        y0: core::ffi::c_int,
+        y1: core::ffi::c_int,
+        z0: core::ffi::c_int,
+        z1: core::ffi::c_int,
+    ) -> ();
+    fn add_extent_source(
+        &mut self,
+        id: core::ffi::c_int,
+        priority: core::ffi::c_int,
+        extent: core::ffi::c_int,
+    ) -> ();
+    fn remove_extent_source(&mut self, id: core::ffi::c_int) -> ();
+    fn remove_all_extent_sources(&mut self) -> ();
+    fn add_extent(
+        &mut self,
+        x0: core::ffi::c_int,
+        x1: core::ffi::c_int,
+        y0: core::ffi::c_int,
+        y1: core::ffi::c_int,
+        z0: core::ffi::c_int,
+        z1: core::ffi::c_int,
+    ) -> ();
+    fn add_extent(&mut self, extent: core::ffi::c_int) -> ();
+    fn compute_sub_extents(&mut self) -> core::ffi::c_int;
+    fn get_number_of_sub_extents(&mut self) -> core::ffi::c_int;
+    fn get_sub_extent(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_int;
+    fn get_sub_extent(
+        &mut self,
+        index: core::ffi::c_int,
+        extent: core::ffi::c_int,
+    ) -> ();
+    fn get_sub_extent_source(&mut self, index: core::ffi::c_int) -> core::ffi::c_int;
+    fn get_point_mode(&mut self) -> core::ffi::c_int;
+    fn set_point_mode(&mut self, _arg: core::ffi::c_int) -> ();
+    fn point_mode_on(&mut self) -> ();
+    fn point_mode_off(&mut self) -> ();
+}
+pub trait VtkExtentTranslator {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_whole_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> ();
+    fn set_whole_extent(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_whole_extent(&mut self) -> *mut core::ffi::c_int;
+    fn get_whole_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> ();
+    fn get_whole_extent(&mut self, _arg: core::ffi::c_int) -> ();
+    fn set_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> ();
+    fn set_extent(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_extent(&mut self) -> *mut core::ffi::c_int;
+    fn get_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> ();
+    fn get_extent(&mut self, _arg: core::ffi::c_int) -> ();
+    fn set_piece(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_piece(&mut self) -> core::ffi::c_int;
+    fn set_number_of_pieces(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_number_of_pieces(&mut self) -> core::ffi::c_int;
+    fn set_ghost_level(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_ghost_level(&mut self) -> core::ffi::c_int;
+    fn piece_to_extent(&mut self) -> core::ffi::c_int;
+    fn piece_to_extent_by_points(&mut self) -> core::ffi::c_int;
+    fn piece_to_extent_thread_safe(
+        &mut self,
+        piece: core::ffi::c_int,
+        numPieces: core::ffi::c_int,
+        ghostLevel: core::ffi::c_int,
+        wholeExtent: core::ffi::c_int,
+        resultExtent: core::ffi::c_int,
+        splitMode: core::ffi::c_int,
+        byPoints: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn set_split_mode_to_block(&mut self) -> ();
+    fn set_split_mode_to_x_slab(&mut self) -> ();
+    fn set_split_mode_to_y_slab(&mut self) -> ();
+    fn set_split_mode_to_z_slab(&mut self) -> ();
+    fn get_split_mode(&mut self) -> core::ffi::c_int;
+    fn set_split_path(
+        &mut self,
+        len: core::ffi::c_int,
+        splitpath: core::ffi::c_int,
+    ) -> ();
+    fn update_split_mode(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkFilteringInformationKeyManager {
+    fn register(&mut self, key: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkGraphAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> ();
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkHierarchicalBoxDataSetAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkHyperTreeGridAlgorithm: VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn get_hyper_tree_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_hyper_tree_grid_output(
+        &mut self,
+        p0: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn get_poly_data_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_poly_data_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_unstructured_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_unstructured_grid_output(
+        &mut self,
+        p0: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkImageAlgorithm: VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_image_data_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkImageInPlaceFilter: VtkImageAlgorithm + VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkImageProgressIterator {
+    fn next_span(&mut self) -> ();
+    fn is_at_end(&mut self) -> core::ffi::c_int;
+}
+pub trait VtkImageToStructuredGrid: VtkStructuredGridAlgorithm + VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkImageToStructuredPoints: VtkImageAlgorithm + VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_vector_input_data(&mut self, input: *mut core::ffi::c_void) -> ();
+    fn get_vector_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_structured_points_output(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkInformationDataObjectMetaDataKey {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn make_key(
+        &mut self,
+        name: core::ffi::c_char,
+        location: core::ffi::c_char,
+    ) -> *mut core::ffi::c_void;
+    fn copy_default_information(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        fromInfo: *mut core::ffi::c_void,
+        toInfo: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkInformationExecutivePortKey {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn make_key(
+        &mut self,
+        name: core::ffi::c_char,
+        location: core::ffi::c_char,
+    ) -> *mut core::ffi::c_void;
+    fn set(
+        &mut self,
+        info: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: core::ffi::c_int,
+    ) -> ();
+    fn get_executive(&mut self, info: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn get_port(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
+    fn get(
+        &mut self,
+        info: *mut core::ffi::c_void,
+        executive: *mut core::ffi::c_void,
+        port: core::ffi::c_int,
+    ) -> ();
+    fn shallow_copy(
+        &mut self,
+        from: *mut core::ffi::c_void,
+        to: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkInformationExecutivePortVectorKey {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn make_key(
+        &mut self,
+        name: core::ffi::c_char,
+        location: core::ffi::c_char,
+    ) -> *mut core::ffi::c_void;
+    fn append(
+        &mut self,
+        info: *mut core::ffi::c_void,
+        executive: *mut core::ffi::c_void,
+        port: core::ffi::c_int,
+    ) -> ();
+    fn remove(
+        &mut self,
+        info: *mut core::ffi::c_void,
+        executive: *mut core::ffi::c_void,
+        port: core::ffi::c_int,
+    ) -> ();
+    fn set(
+        &mut self,
+        info: *mut core::ffi::c_void,
+        executives: *mut core::ffi::c_void,
+        ports: core::ffi::c_int,
+        length: core::ffi::c_int,
+    ) -> ();
+    fn get_executives(&mut self, info: *mut core::ffi::c_void) -> *mut &mut vtkExecutive;
+    fn get_ports(&mut self, info: *mut core::ffi::c_void) -> *mut core::ffi::c_int;
+    fn get(
+        &mut self,
+        info: *mut core::ffi::c_void,
+        executives: *mut core::ffi::c_void,
+        ports: core::ffi::c_int,
+    ) -> ();
+    fn length(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
+    fn shallow_copy(
+        &mut self,
+        from: *mut core::ffi::c_void,
+        to: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkInformationIntegerRequestKey {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn make_key(
+        &mut self,
+        name: core::ffi::c_char,
+        location: core::ffi::c_char,
+    ) -> *mut core::ffi::c_void;
+    fn need_to_execute(
+        &mut self,
+        pipelineInfo: *mut core::ffi::c_void,
+        dobjInfo: *mut core::ffi::c_void,
+    ) -> bool;
+    fn store_meta_data(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        pipelineInfo: *mut core::ffi::c_void,
+        dobjInfo: *mut core::ffi::c_void,
+    ) -> ();
+    fn copy_default_information(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        fromInfo: *mut core::ffi::c_void,
+        toInfo: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkMoleculeAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_molecule_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkMultiBlockDataSetAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkMultiTimeStepAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkNonOverlappingAMRAlgorithm: VtkUniformGridAMRAlgorithm + VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+}
+pub trait VtkOverlappingAMRAlgorithm: VtkUniformGridAMRAlgorithm + VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+}
+pub trait VtkParallelReader: VtkReaderAlgorithm + VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn add_file_name(&mut self, fname: core::ffi::c_char) -> ();
+    fn clear_file_names(&mut self) -> ();
+    fn get_number_of_file_names(&mut self) -> core::ffi::c_int;
+    fn get_file_name(&mut self, i: core::ffi::c_int) -> *const core::ffi::c_char;
+    fn get_current_file_name(&mut self) -> *const core::ffi::c_char;
+    fn read_meta_data(&mut self, metadata: *mut core::ffi::c_void) -> core::ffi::c_int;
+    fn read_mesh(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_points(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_arrays(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkPartitionedDataSetAlgorithm: VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+}
+pub trait VtkPartitionedDataSetCollectionAlgorithm: VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+}
+pub trait VtkPassInputTypeAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_poly_data_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_structured_points_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_image_data_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_structured_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_unstructured_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_rectilinear_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_graph_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_molecule_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_table_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkPiecewiseFunctionAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkPiecewiseFunctionShiftScale: VtkPiecewiseFunctionAlgorithm + VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_position_shift(&mut self, _arg: core::ffi::c_double) -> ();
+    fn set_position_scale(&mut self, _arg: core::ffi::c_double) -> ();
+    fn set_value_shift(&mut self, _arg: core::ffi::c_double) -> ();
+    fn set_value_scale(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_position_shift(&mut self) -> core::ffi::c_double;
+    fn get_position_scale(&mut self) -> core::ffi::c_double;
+    fn get_value_shift(&mut self) -> core::ffi::c_double;
+    fn get_value_scale(&mut self) -> core::ffi::c_double;
+}
+pub trait VtkPointSetAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_poly_data_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_structured_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_unstructured_grid_output(&mut self) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkPolyDataAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_poly_data_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkProgressObserver {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn update_progress(&mut self, amount: core::ffi::c_double) -> ();
+    fn get_progress(&mut self) -> core::ffi::c_double;
+}
+pub trait VtkReaderAlgorithm: VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn create_output(
+        &mut self,
+        currentOutput: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void;
+    fn read_meta_data(&mut self, metadata: *mut core::ffi::c_void) -> core::ffi::c_int;
+    fn read_time_dependent_meta_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_mesh(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_points(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_arrays(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkReaderExecutive: VtkStreamingDemandDrivenPipeline + VtkDemandDrivenPipeline + VtkExecutive {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkRectilinearGridAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_rectilinear_grid_input(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkSMPProgressObserver: VtkProgressObserver {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn update_progress(&mut self, progress: core::ffi::c_double) -> ();
+    fn get_local_observer(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkScalarTree {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn shallow_copy(&mut self, stree: *mut core::ffi::c_void) -> ();
+    fn set_data_set(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn get_data_set(&mut self) -> *mut core::ffi::c_void;
+    fn set_scalars(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn get_scalars(&mut self) -> *mut core::ffi::c_void;
+    fn build_tree(&mut self) -> ();
+    fn initialize(&mut self) -> ();
+    fn init_traversal(&mut self, scalarValue: core::ffi::c_double) -> ();
+    fn get_next_cell(
+        &mut self,
+        cellId: core::ffi::c_uchar,
+        ptIds: *mut core::ffi::c_void,
+        cellScalars: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void;
+    fn get_scalar_value(&mut self) -> core::ffi::c_double;
+    fn get_number_of_cell_batches(
+        &mut self,
+        scalarValue: core::ffi::c_double,
+    ) -> core::ffi::c_uchar;
+    fn get_cell_batch(
+        &mut self,
+        batchNum: core::ffi::c_uchar,
+        numCells: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar;
+}
+pub trait VtkSelectionAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> ();
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkSimpleImageToImageFilter: VtkImageAlgorithm + VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkSimpleReader: VtkReaderAlgorithm + VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn add_file_name(&mut self, fname: core::ffi::c_char) -> ();
+    fn clear_file_names(&mut self) -> ();
+    fn get_number_of_file_names(&mut self) -> core::ffi::c_int;
+    fn get_file_name(&mut self, i: core::ffi::c_int) -> *const core::ffi::c_char;
+    fn get_current_file_name(&mut self) -> *const core::ffi::c_char;
+    fn read_time_dependent_meta_data(
+        &mut self,
+        timestep: core::ffi::c_int,
+        metadata: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_meta_data(&mut self, metadata: *mut core::ffi::c_void) -> core::ffi::c_int;
+    fn read_mesh(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_points(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_arrays(
+        &mut self,
+        piece: core::ffi::c_int,
+        npieces: core::ffi::c_int,
+        nghosts: core::ffi::c_int,
+        timestep: core::ffi::c_int,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_time_value(&mut self, fname: &str) -> core::ffi::c_double;
+    fn read_meta_data_simple(
+        &mut self,
+        p0: &str,
+        p1: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_mesh_simple(
+        &mut self,
+        fname: &str,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_points_simple(
+        &mut self,
+        fname: &str,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn read_arrays_simple(
+        &mut self,
+        fname: &str,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkSimpleScalarTree: VtkScalarTree {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_branching_factor(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_branching_factor_min_value(&mut self) -> core::ffi::c_int;
+    fn get_branching_factor_max_value(&mut self) -> core::ffi::c_int;
+    fn get_branching_factor(&mut self) -> core::ffi::c_int;
+    fn get_level(&mut self) -> core::ffi::c_int;
+    fn set_max_level(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_max_level_min_value(&mut self) -> core::ffi::c_int;
+    fn get_max_level_max_value(&mut self) -> core::ffi::c_int;
+    fn get_max_level(&mut self) -> core::ffi::c_int;
+    fn build_tree(&mut self) -> ();
+    fn initialize(&mut self) -> ();
+    fn init_traversal(&mut self, scalarValue: core::ffi::c_double) -> ();
+    fn get_next_cell(
+        &mut self,
+        cellId: core::ffi::c_uchar,
+        ptIds: *mut core::ffi::c_void,
+        cellScalars: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void;
+    fn get_number_of_cell_batches(
+        &mut self,
+        scalarValue: core::ffi::c_double,
+    ) -> core::ffi::c_uchar;
+    fn get_cell_batch(
+        &mut self,
+        batchNum: core::ffi::c_uchar,
+        numCells: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar;
+}
+pub trait VtkSpanSpace: VtkScalarTree {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_scalar_range(
+        &mut self,
+        _arg1: core::ffi::c_double,
+        _arg2: core::ffi::c_double,
+    ) -> ();
+    fn set_scalar_range(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_scalar_range(&mut self) -> *mut core::ffi::c_double;
+    fn get_scalar_range(&mut self, data: core::ffi::c_double) -> ();
+    fn set_compute_scalar_range(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_compute_scalar_range(&mut self) -> core::ffi::c_int;
+    fn compute_scalar_range_on(&mut self) -> ();
+    fn compute_scalar_range_off(&mut self) -> ();
+    fn set_resolution(&mut self, _arg: core::ffi::c_uchar) -> ();
+    fn get_resolution_min_value(&mut self) -> core::ffi::c_uchar;
+    fn get_resolution_max_value(&mut self) -> core::ffi::c_uchar;
+    fn get_resolution(&mut self) -> core::ffi::c_uchar;
+    fn set_compute_resolution(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_compute_resolution(&mut self) -> core::ffi::c_int;
+    fn compute_resolution_on(&mut self) -> ();
+    fn compute_resolution_off(&mut self) -> ();
+    fn set_number_of_cells_per_bucket(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_number_of_cells_per_bucket_min_value(&mut self) -> core::ffi::c_int;
+    fn get_number_of_cells_per_bucket_max_value(&mut self) -> core::ffi::c_int;
+    fn get_number_of_cells_per_bucket(&mut self) -> core::ffi::c_int;
+    fn initialize(&mut self) -> ();
+    fn build_tree(&mut self) -> ();
+    fn init_traversal(&mut self, scalarValue: core::ffi::c_double) -> ();
+    fn get_next_cell(
+        &mut self,
+        cellId: core::ffi::c_uchar,
+        ptIds: *mut core::ffi::c_void,
+        cellScalars: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void;
+    fn get_number_of_cell_batches(
+        &mut self,
+        scalarValue: core::ffi::c_double,
+    ) -> core::ffi::c_uchar;
+    fn get_cell_batch(
+        &mut self,
+        batchNum: core::ffi::c_uchar,
+        numCells: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar;
+    fn set_batch_size(&mut self, _arg: core::ffi::c_uchar) -> ();
+    fn get_batch_size_min_value(&mut self) -> core::ffi::c_uchar;
+    fn get_batch_size_max_value(&mut self) -> core::ffi::c_uchar;
+    fn get_batch_size(&mut self) -> core::ffi::c_uchar;
+}
+pub trait VtkSphereTree {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn set_data_set(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn get_data_set(&mut self) -> *mut core::ffi::c_void;
+    fn build(&mut self) -> ();
+    fn build(&mut self, input: *mut core::ffi::c_void) -> ();
+    fn set_build_hierarchy(&mut self, _arg: bool) -> ();
+    fn get_build_hierarchy(&mut self) -> bool;
+    fn build_hierarchy_on(&mut self) -> ();
+    fn build_hierarchy_off(&mut self) -> ();
+    fn select_point(
+        &mut self,
+        point: core::ffi::c_double,
+        numSelected: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar;
+    fn select_line(
+        &mut self,
+        origin: core::ffi::c_double,
+        ray: core::ffi::c_double,
+        numSelected: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar;
+    fn select_plane(
+        &mut self,
+        origin: core::ffi::c_double,
+        normal: core::ffi::c_double,
+        numSelected: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar;
+    fn select_point(
+        &mut self,
+        point: core::ffi::c_double,
+        cellIds: *mut core::ffi::c_void,
+    ) -> ();
+    fn select_line(
+        &mut self,
+        origin: core::ffi::c_double,
+        ray: core::ffi::c_double,
+        cellIds: *mut core::ffi::c_void,
+    ) -> ();
+    fn select_plane(
+        &mut self,
+        origin: core::ffi::c_double,
+        normal: core::ffi::c_double,
+        cellIds: *mut core::ffi::c_void,
+    ) -> ();
+    fn set_resolution(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_resolution_min_value(&mut self) -> core::ffi::c_int;
+    fn get_resolution_max_value(&mut self) -> core::ffi::c_int;
+    fn get_resolution(&mut self) -> core::ffi::c_int;
+    fn set_max_level(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_max_level_min_value(&mut self) -> core::ffi::c_int;
+    fn get_max_level_max_value(&mut self) -> core::ffi::c_int;
+    fn get_max_level(&mut self) -> core::ffi::c_int;
+    fn get_number_of_levels(&mut self) -> core::ffi::c_int;
+    fn get_cell_spheres(&mut self) -> *const core::ffi::c_double;
+    fn get_tree_spheres(
+        &mut self,
+        level: core::ffi::c_int,
+        numSpheres: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_double;
+}
+pub trait VtkStreamingDemandDrivenPipeline: VtkDemandDrivenPipeline + VtkExecutive {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn update(&mut self) -> core::ffi::c_int;
+    fn update_whole_extent(&mut self) -> core::ffi::c_int;
+    fn update(
+        &mut self,
+        port: core::ffi::c_int,
+        requests: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn propagate_update_extent(
+        &mut self,
+        outputPort: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn propagate_time(&mut self, outputPort: core::ffi::c_int) -> core::ffi::c_int;
+    fn update_time_dependent_information(
+        &mut self,
+        outputPort: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn set_whole_extent(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        extent: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn get_whole_extent(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        extent: core::ffi::c_int,
+    ) -> ();
+    fn get_whole_extent(&mut self, p0: *mut core::ffi::c_void) -> *mut core::ffi::c_int;
+    fn set_request_exact_extent(
+        &mut self,
+        port: core::ffi::c_int,
+        flag: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+    fn get_request_exact_extent(&mut self, port: core::ffi::c_int) -> core::ffi::c_int;
+    fn request_update_extent(&mut self) -> *mut core::ffi::c_void;
+    fn request_update_time(&mut self) -> *mut core::ffi::c_void;
+    fn request_time_dependent_information(&mut self) -> *mut core::ffi::c_void;
+    fn continue_executing(&mut self) -> *mut core::ffi::c_void;
+    fn update_extent_initialized(&mut self) -> *mut core::ffi::c_void;
+    fn update_extent(&mut self) -> *mut core::ffi::c_void;
+    fn update_piece_number(&mut self) -> *mut core::ffi::c_void;
+    fn update_number_of_pieces(&mut self) -> *mut core::ffi::c_void;
+    fn update_number_of_ghost_levels(&mut self) -> *mut core::ffi::c_void;
+    fn combined_update_extent(&mut self) -> *mut core::ffi::c_void;
+    fn whole_extent(&mut self) -> *mut core::ffi::c_void;
+    fn unrestricted_update_extent(&mut self) -> *mut core::ffi::c_void;
+    fn exact_extent(&mut self) -> *mut core::ffi::c_void;
+    fn time_steps(&mut self) -> *mut core::ffi::c_void;
+    fn time_range(&mut self) -> *mut core::ffi::c_void;
+    fn update_time_step(&mut self) -> *mut core::ffi::c_void;
+    fn time_dependent_information(&mut self) -> *mut core::ffi::c_void;
+    fn bounds(&mut self) -> *mut core::ffi::c_void;
+    fn get_update_extent(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        extent: core::ffi::c_int,
+    ) -> ();
+    fn get_update_extent(&mut self, p0: *mut core::ffi::c_void) -> *mut core::ffi::c_int;
+    fn get_update_piece(&mut self, p0: *mut core::ffi::c_void) -> core::ffi::c_int;
+    fn get_update_number_of_pieces(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_update_ghost_level(&mut self, p0: *mut core::ffi::c_void) -> core::ffi::c_int;
+}
+pub trait VtkStructuredGridAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_structured_grid_input(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkTableAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> ();
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkThreadedCompositeDataPipeline: VtkCompositeDataPipeline + VtkStreamingDemandDrivenPipeline + VtkDemandDrivenPipeline + VtkExecutive {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkThreadedImageAlgorithm: VtkImageAlgorithm + VtkAlgorithm {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn threaded_request_data(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+        inData: *mut core::ffi::c_void,
+        outData: *mut core::ffi::c_void,
+        extent: core::ffi::c_int,
+        threadId: core::ffi::c_int,
+    ) -> ();
+    fn threaded_execute(
+        &mut self,
+        inData: *mut core::ffi::c_void,
+        outData: *mut core::ffi::c_void,
+        extent: core::ffi::c_int,
+        threadId: core::ffi::c_int,
+    ) -> ();
+    fn get_enable_smp(&mut self) -> bool;
+    fn set_enable_smp(&mut self, _arg: bool) -> ();
+    fn set_global_default_enable_smp(&mut self, enable: bool) -> ();
+    fn get_global_default_enable_smp(&mut self) -> bool;
+    fn set_minimum_piece_size(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+    ) -> ();
+    fn set_minimum_piece_size(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_minimum_piece_size(&mut self) -> *mut core::ffi::c_int;
+    fn get_minimum_piece_size(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+    ) -> ();
+    fn get_minimum_piece_size(&mut self, _arg: core::ffi::c_int) -> ();
+    fn set_desired_bytes_per_piece(&mut self, _arg: core::ffi::c_uchar) -> ();
+    fn get_desired_bytes_per_piece(&mut self) -> core::ffi::c_uchar;
+    fn set_split_mode(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_split_mode_min_value(&mut self) -> core::ffi::c_int;
+    fn get_split_mode_max_value(&mut self) -> core::ffi::c_int;
+    fn set_split_mode_to_slab(&mut self) -> ();
+    fn set_split_mode_to_beam(&mut self) -> ();
+    fn set_split_mode_to_block(&mut self) -> ();
+    fn get_split_mode(&mut self) -> core::ffi::c_int;
+    fn set_number_of_threads(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_number_of_threads_min_value(&mut self) -> core::ffi::c_int;
+    fn get_number_of_threads_max_value(&mut self) -> core::ffi::c_int;
+    fn get_number_of_threads(&mut self) -> core::ffi::c_int;
+    fn split_extent(
+        &mut self,
+        splitExt: core::ffi::c_int,
+        startExt: core::ffi::c_int,
+        num: core::ffi::c_int,
+        total: core::ffi::c_int,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkTreeAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> ();
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkTrivialConsumer: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+}
+pub trait VtkTrivialProducer: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn set_output(&mut self, output: *mut core::ffi::c_void) -> ();
+    fn get_m_time(&mut self) -> core::ffi::c_ulong;
+    fn set_whole_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> ();
+    fn set_whole_extent(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_whole_extent(&mut self) -> *mut core::ffi::c_int;
+    fn get_whole_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> ();
+    fn get_whole_extent(&mut self, _arg: core::ffi::c_int) -> ();
+    fn fill_output_data_information(
+        &mut self,
+        output: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkUndirectedGraphAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> ();
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> ();
+}
+pub trait VtkUniformGridAMRAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+}
+pub trait VtkUniformGridPartitioner: VtkMultiBlockDataSetAlgorithm + VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_number_of_partitions(&mut self) -> core::ffi::c_int;
+    fn set_number_of_partitions(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_number_of_ghost_layers(&mut self) -> core::ffi::c_int;
+    fn set_number_of_ghost_layers(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_duplicate_nodes(&mut self) -> core::ffi::c_int;
+    fn set_duplicate_nodes(&mut self, _arg: core::ffi::c_int) -> ();
+    fn duplicate_nodes_on(&mut self) -> ();
+    fn duplicate_nodes_off(&mut self) -> ();
+}
+pub trait VtkUnstructuredGridAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn get_input(&mut self) -> *mut core::ffi::c_void;
+    fn get_unstructured_grid_input(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+pub trait VtkUnstructuredGridBaseAlgorithm: VtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self) -> *mut core::ffi::c_void;
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void;
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> ();
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int;
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn set_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> ();
+    fn add_input_data(&mut self, p0: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
+}
+impl VtkAlgorithm for vtkAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_new_instance(self.0) }
+    }
+    fn has_executive(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_has_executive(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_has_executive(self.0) }
+    }
+    fn get_executive(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_executive(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_executive(self.0) }
+    }
+    fn set_executive(&mut self, executive: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_executive(
+                sself: *mut core::ffi::c_void,
+                executive: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_executive(self.0, executive) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inInfo: *mut core::ffi::c_void,
+                outInfo: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_process_request(self.0, request, inInfo, outInfo) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inInfo: *mut core::ffi::c_void,
+                outInfo: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_process_request(self.0, request, inInfo, outInfo) }
+    }
+    fn compute_pipeline_m_time(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfoVec: *mut core::ffi::c_void,
+        outInfoVec: *mut core::ffi::c_void,
+        requestFromOutputPort: core::ffi::c_int,
+        mtime: core::ffi::c_ulong,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_compute_pipeline_m_time(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inInfoVec: *mut core::ffi::c_void,
+                outInfoVec: *mut core::ffi::c_void,
+                requestFromOutputPort: core::ffi::c_int,
+                mtime: core::ffi::c_ulong,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_algorithm_compute_pipeline_m_time(
+                self.0,
+                request,
+                inInfoVec,
+                outInfoVec,
+                requestFromOutputPort,
+                mtime,
+            )
+        }
+    }
+    fn modify_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        when: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_modify_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                when: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_modify_request(self.0, request, when) }
+    }
+    fn get_input_port_information(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_port_information(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_port_information(self.0, port) }
+    }
+    fn get_output_port_information(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_output_port_information(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_output_port_information(self.0, port) }
+    }
+    fn get_information(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_information(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_information(self.0) }
+    }
+    fn set_information(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_information(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_information(self.0, p0) }
+    }
+    fn get_number_of_input_ports(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_number_of_input_ports(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_number_of_input_ports(self.0) }
+    }
+    fn get_number_of_output_ports(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_number_of_output_ports(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_number_of_output_ports(self.0) }
+    }
+    fn register(&mut self, o: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_register(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_register(self.0, o) }
+    }
+    fn set_abort_execute(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_abort_execute(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_set_abort_execute(self.0, _arg) }
+    }
+    fn get_abort_execute(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_abort_execute(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_abort_execute(self.0) }
+    }
+    fn abort_execute_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_abort_execute_on(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_abort_execute_on(self.0) }
+    }
+    fn abort_execute_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_abort_execute_off(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_abort_execute_off(self.0) }
+    }
+    fn get_progress(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_progress(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_algorithm_get_progress(self.0) }
+    }
+    fn set_progress(&mut self, p0: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_progress(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_algorithm_set_progress(self.0, p0) }
+    }
+    fn update_progress(&mut self, amount: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_progress(
+                sself: *mut core::ffi::c_void,
+                amount: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_algorithm_update_progress(self.0, amount) }
+    }
+    fn set_progress_shift_scale(
+        &mut self,
+        shift: core::ffi::c_double,
+        scale: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_progress_shift_scale(
+                sself: *mut core::ffi::c_void,
+                shift: core::ffi::c_double,
+                scale: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_algorithm_set_progress_shift_scale(self.0, shift, scale) }
+    }
+    fn get_progress_shift(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_progress_shift(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_algorithm_get_progress_shift(self.0) }
+    }
+    fn get_progress_scale(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_progress_scale(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_algorithm_get_progress_scale(self.0) }
+    }
+    fn set_progress_text(&mut self, ptext: core::ffi::c_char) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_progress_text(
+                sself: *mut core::ffi::c_void,
+                ptext: core::ffi::c_char,
+            );
+        }
+        unsafe { vtk_algorithm_set_progress_text(self.0, ptext) }
+    }
+    fn get_progress_text(&mut self) -> *mut core::ffi::c_char {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_progress_text(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_char;
+        }
+        unsafe { vtk_algorithm_get_progress_text(self.0) }
+    }
+    fn get_error_code(&mut self) -> core::ffi::c_ulong {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_error_code(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_ulong;
+        }
+        unsafe { vtk_algorithm_get_error_code(self.0) }
+    }
+    fn input_is_optional(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_input_is_optional(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_input_is_optional(self.0) }
+    }
+    fn input_is_repeatable(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_input_is_repeatable(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_input_is_repeatable(self.0) }
+    }
+    fn input_required_fields(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_input_required_fields(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_input_required_fields(self.0) }
+    }
+    fn input_required_data_type(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_input_required_data_type(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_input_required_data_type(self.0) }
+    }
+    fn input_arrays_to_process(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_input_arrays_to_process(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_input_arrays_to_process(self.0) }
+    }
+    fn input_port(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_input_port(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_input_port(self.0) }
+    }
+    fn input_connection(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_input_connection(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_input_connection(self.0) }
+    }
+    fn can_produce_sub_extent(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_can_produce_sub_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_can_produce_sub_extent(self.0) }
+    }
+    fn can_handle_piece_request(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_can_handle_piece_request(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_can_handle_piece_request(self.0) }
+    }
+    fn set_input_array_to_process(
+        &mut self,
+        idx: core::ffi::c_int,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+        fieldAssociation: core::ffi::c_int,
+        name: core::ffi::c_char,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_input_array_to_process(
+                sself: *mut core::ffi::c_void,
+                idx: core::ffi::c_int,
+                port: core::ffi::c_int,
+                connection: core::ffi::c_int,
+                fieldAssociation: core::ffi::c_int,
+                name: core::ffi::c_char,
+            );
+        }
+        unsafe {
+            vtk_algorithm_set_input_array_to_process(
+                self.0,
+                idx,
+                port,
+                connection,
+                fieldAssociation,
+                name,
+            )
+        }
+    }
+    fn set_input_array_to_process(
+        &mut self,
+        idx: core::ffi::c_int,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+        fieldAssociation: core::ffi::c_int,
+        fieldAttributeType: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_input_array_to_process(
+                sself: *mut core::ffi::c_void,
+                idx: core::ffi::c_int,
+                port: core::ffi::c_int,
+                connection: core::ffi::c_int,
+                fieldAssociation: core::ffi::c_int,
+                fieldAttributeType: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_algorithm_set_input_array_to_process(
+                self.0,
+                idx,
+                port,
+                connection,
+                fieldAssociation,
+                fieldAttributeType,
+            )
+        }
+    }
+    fn set_input_array_to_process(
+        &mut self,
+        idx: core::ffi::c_int,
+        info: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_input_array_to_process(
+                sself: *mut core::ffi::c_void,
+                idx: core::ffi::c_int,
+                info: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_input_array_to_process(self.0, idx, info) }
+    }
+    fn set_input_array_to_process(
+        &mut self,
+        idx: core::ffi::c_int,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+        fieldAssociation: core::ffi::c_char,
+        attributeTypeorName: core::ffi::c_char,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_input_array_to_process(
+                sself: *mut core::ffi::c_void,
+                idx: core::ffi::c_int,
+                port: core::ffi::c_int,
+                connection: core::ffi::c_int,
+                fieldAssociation: core::ffi::c_char,
+                attributeTypeorName: core::ffi::c_char,
+            );
+        }
+        unsafe {
+            vtk_algorithm_set_input_array_to_process(
+                self.0,
+                idx,
+                port,
+                connection,
+                fieldAssociation,
+                attributeTypeorName,
+            )
+        }
+    }
+    fn get_input_array_information(
+        &mut self,
+        idx: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_array_information(
+                sself: *mut core::ffi::c_void,
+                idx: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_array_information(self.0, idx) }
+    }
+    fn remove_all_inputs(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_remove_all_inputs(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_remove_all_inputs(self.0) }
+    }
+    fn get_output_data_object(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_output_data_object(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_output_data_object(self.0, port) }
+    }
+    fn get_input_data_object(
+        &mut self,
+        port: core::ffi::c_int,
+        connection: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_data_object(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                connection: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_data_object(self.0, port, connection) }
+    }
+    fn set_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        input: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_input_connection(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                input: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_input_connection(self.0, port, input) }
+    }
+    fn set_input_connection(&mut self, input: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_input_connection(
+                sself: *mut core::ffi::c_void,
+                input: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_input_connection(self.0, input) }
+    }
+    fn add_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        input: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_add_input_connection(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                input: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_add_input_connection(self.0, port, input) }
+    }
+    fn add_input_connection(&mut self, input: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_add_input_connection(
+                sself: *mut core::ffi::c_void,
+                input: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_add_input_connection(self.0, input) }
+    }
+    fn remove_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        input: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_remove_input_connection(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                input: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_remove_input_connection(self.0, port, input) }
+    }
+    fn remove_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        idx: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_remove_input_connection(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                idx: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_remove_input_connection(self.0, port, idx) }
+    }
+    fn remove_all_input_connections(&mut self, port: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_remove_all_input_connections(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_remove_all_input_connections(self.0, port) }
+    }
+    fn set_input_data_object(
+        &mut self,
+        port: core::ffi::c_int,
+        data: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_input_data_object(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                data: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_input_data_object(self.0, port, data) }
+    }
+    fn set_input_data_object(&mut self, data: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_input_data_object(
+                sself: *mut core::ffi::c_void,
+                data: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_input_data_object(self.0, data) }
+    }
+    fn add_input_data_object(
+        &mut self,
+        port: core::ffi::c_int,
+        data: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_add_input_data_object(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                data: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_add_input_data_object(self.0, port, data) }
+    }
+    fn add_input_data_object(&mut self, data: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_add_input_data_object(
+                sself: *mut core::ffi::c_void,
+                data: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_add_input_data_object(self.0, data) }
+    }
+    fn get_output_port(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_output_port(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_output_port(self.0, index) }
+    }
+    fn get_output_port(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_output_port(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_output_port(self.0) }
+    }
+    fn get_number_of_input_connections(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_number_of_input_connections(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_number_of_input_connections(self.0, port) }
+    }
+    fn get_total_number_of_input_connections(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_total_number_of_input_connections(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_total_number_of_input_connections(self.0) }
+    }
+    fn get_input_connection(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_connection(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_connection(self.0, port, index) }
+    }
+    fn get_input_algorithm(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+        algPort: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_algorithm(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                index: core::ffi::c_int,
+                algPort: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_algorithm(self.0, port, index, algPort) }
+    }
+    fn get_input_algorithm(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_algorithm(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_algorithm(self.0, port, index) }
+    }
+    fn get_input_algorithm(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_algorithm(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_algorithm(self.0) }
+    }
+    fn get_input_executive(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_executive(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_executive(self.0, port, index) }
+    }
+    fn get_input_executive(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_executive(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_executive(self.0) }
+    }
+    fn get_input_information(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_information(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_information(self.0, port, index) }
+    }
+    fn get_input_information(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_input_information(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_input_information(self.0) }
+    }
+    fn get_output_information(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_output_information(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_output_information(self.0, port) }
+    }
+    fn update(&mut self, port: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_update(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_update(self.0, port) }
+    }
+    fn update(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_update(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_update(self.0) }
+    }
+    fn update(
+        &mut self,
+        port: core::ffi::c_int,
+        requests: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_update(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                requests: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_update(self.0, port, requests) }
+    }
+    fn update(&mut self, requests: *mut core::ffi::c_void) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_update(
+                sself: *mut core::ffi::c_void,
+                requests: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_update(self.0, requests) }
+    }
+    fn update_piece(
+        &mut self,
+        piece: core::ffi::c_int,
+        numPieces: core::ffi::c_int,
+        ghostLevels: core::ffi::c_int,
+        extents: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_piece(
+                sself: *mut core::ffi::c_void,
+                piece: core::ffi::c_int,
+                numPieces: core::ffi::c_int,
+                ghostLevels: core::ffi::c_int,
+                extents: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_algorithm_update_piece(self.0, piece, numPieces, ghostLevels, extents)
+        }
+    }
+    fn update_extent(&mut self, extents: core::ffi::c_int) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_extent(
+                sself: *mut core::ffi::c_void,
+                extents: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_update_extent(self.0, extents) }
+    }
+    fn update_time_step(
+        &mut self,
+        time: core::ffi::c_double,
+        piece: core::ffi::c_int,
+        numPieces: core::ffi::c_int,
+        ghostLevels: core::ffi::c_int,
+        extents: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_time_step(
+                sself: *mut core::ffi::c_void,
+                time: core::ffi::c_double,
+                piece: core::ffi::c_int,
+                numPieces: core::ffi::c_int,
+                ghostLevels: core::ffi::c_int,
+                extents: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_algorithm_update_time_step(
+                self.0,
+                time,
+                piece,
+                numPieces,
+                ghostLevels,
+                extents,
+            )
+        }
+    }
+    fn update_information(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_information(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_update_information(self.0) }
+    }
+    fn update_data_object(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_data_object(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_update_data_object(self.0) }
+    }
+    fn propagate_update_extent(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_propagate_update_extent(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_propagate_update_extent(self.0) }
+    }
+    fn update_whole_extent(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_whole_extent(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_update_whole_extent(self.0) }
+    }
+    fn convert_total_input_to_port_connection(
+        &mut self,
+        ind: core::ffi::c_int,
+        port: core::ffi::c_int,
+        conn: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_convert_total_input_to_port_connection(
+                sself: *mut core::ffi::c_void,
+                ind: core::ffi::c_int,
+                port: core::ffi::c_int,
+                conn: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_algorithm_convert_total_input_to_port_connection(self.0, ind, port, conn)
+        }
+    }
+    fn set_release_data_flag(&mut self, p0: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_release_data_flag(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_set_release_data_flag(self.0, p0) }
+    }
+    fn get_release_data_flag(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_release_data_flag(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_release_data_flag(self.0) }
+    }
+    fn release_data_flag_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_release_data_flag_on(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_release_data_flag_on(self.0) }
+    }
+    fn release_data_flag_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_release_data_flag_off(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_algorithm_release_data_flag_off(self.0) }
+    }
+    fn update_extent_is_empty(
+        &mut self,
+        pinfo: *mut core::ffi::c_void,
+        output: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_extent_is_empty(
+                sself: *mut core::ffi::c_void,
+                pinfo: *mut core::ffi::c_void,
+                output: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_update_extent_is_empty(self.0, pinfo, output) }
+    }
+    fn update_extent_is_empty(
+        &mut self,
+        pinfo: *mut core::ffi::c_void,
+        extentType: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_update_extent_is_empty(
+                sself: *mut core::ffi::c_void,
+                pinfo: *mut core::ffi::c_void,
+                extentType: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_update_extent_is_empty(self.0, pinfo, extentType) }
+    }
+    fn set_default_executive_prototype(&mut self, proto: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_default_executive_prototype(
+                sself: *mut core::ffi::c_void,
+                proto: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_default_executive_prototype(self.0, proto) }
+    }
+    fn get_update_extent(&mut self) -> *mut core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_update_extent(self.0) }
+    }
+    fn get_update_extent(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_extent(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_update_extent(self.0, port) }
+    }
+    fn get_update_extent(
+        &mut self,
+        x0: core::ffi::c_int,
+        x1: core::ffi::c_int,
+        y0: core::ffi::c_int,
+        y1: core::ffi::c_int,
+        z0: core::ffi::c_int,
+        z1: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_extent(
+                sself: *mut core::ffi::c_void,
+                x0: core::ffi::c_int,
+                x1: core::ffi::c_int,
+                y0: core::ffi::c_int,
+                y1: core::ffi::c_int,
+                z0: core::ffi::c_int,
+                z1: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_get_update_extent(self.0, x0, x1, y0, y1, z0, z1) }
+    }
+    fn get_update_extent(
+        &mut self,
+        port: core::ffi::c_int,
+        x0: core::ffi::c_int,
+        x1: core::ffi::c_int,
+        y0: core::ffi::c_int,
+        y1: core::ffi::c_int,
+        z0: core::ffi::c_int,
+        z1: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_extent(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                x0: core::ffi::c_int,
+                x1: core::ffi::c_int,
+                y0: core::ffi::c_int,
+                y1: core::ffi::c_int,
+                z0: core::ffi::c_int,
+                z1: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_get_update_extent(self.0, port, x0, x1, y0, y1, z0, z1) }
+    }
+    fn get_update_extent(&mut self, extent: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_extent(
+                sself: *mut core::ffi::c_void,
+                extent: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_get_update_extent(self.0, extent) }
+    }
+    fn get_update_extent(
+        &mut self,
+        port: core::ffi::c_int,
+        extent: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_extent(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                extent: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_get_update_extent(self.0, port, extent) }
+    }
+    fn get_update_piece(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_piece(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_update_piece(self.0) }
+    }
+    fn get_update_piece(&mut self, port: core::ffi::c_int) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_piece(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_update_piece(self.0, port) }
+    }
+    fn get_update_number_of_pieces(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_number_of_pieces(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_update_number_of_pieces(self.0) }
+    }
+    fn get_update_number_of_pieces(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_number_of_pieces(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_update_number_of_pieces(self.0, port) }
+    }
+    fn get_update_ghost_level(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_ghost_level(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_update_ghost_level(self.0) }
+    }
+    fn get_update_ghost_level(&mut self, port: core::ffi::c_int) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_update_ghost_level(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_get_update_ghost_level(self.0, port) }
+    }
+    fn set_progress_observer(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_set_progress_observer(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_set_progress_observer(self.0, p0) }
+    }
+    fn get_progress_observer(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_get_progress_observer(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_get_progress_observer(self.0) }
+    }
+}
+impl VtkAlgorithmOutput for vtkAlgorithmOutput {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_output_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_output_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_output_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_output_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_output_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_output_new_instance(self.0) }
+    }
+    fn set_index(&mut self, index: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_output_set_index(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_algorithm_output_set_index(self.0, index) }
+    }
+    fn get_index(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_algorithm_output_get_index(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_algorithm_output_get_index(self.0) }
+    }
+    fn get_producer(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_algorithm_output_get_producer(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_algorithm_output_get_producer(self.0) }
+    }
+    fn set_producer(&mut self, producer: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_algorithm_output_set_producer(
+                sself: *mut core::ffi::c_void,
+                producer: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_algorithm_output_set_producer(self.0, producer) }
+    }
+}
+impl VtkAnnotationLayersAlgorithm for vtkAnnotationLayersAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_annotation_layers_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_annotation_layers_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_annotation_layers_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_annotation_layers_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_annotation_layers_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_annotation_layers_algorithm_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_annotation_layers_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_annotation_layers_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_annotation_layers_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_annotation_layers_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_annotation_layers_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_annotation_layers_algorithm_get_output(self.0, index) }
+    }
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_annotation_layers_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_annotation_layers_algorithm_set_input_data(self.0, obj) }
+    }
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_annotation_layers_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_annotation_layers_algorithm_set_input_data(self.0, index, obj) }
+    }
+}
+impl VtkArrayDataAlgorithm for vtkArrayDataAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_array_data_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_array_data_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_array_data_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_array_data_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_array_data_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_array_data_algorithm_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_array_data_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_array_data_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_array_data_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_array_data_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_array_data_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_array_data_algorithm_get_output(self.0, index) }
+    }
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_array_data_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_array_data_algorithm_set_input_data(self.0, obj) }
+    }
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_array_data_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_array_data_algorithm_set_input_data(self.0, index, obj) }
+    }
+}
+impl VtkCachedStreamingDemandDrivenPipeline for vtkCachedStreamingDemandDrivenPipeline {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cached_streaming_demand_driven_pipeline_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cached_streaming_demand_driven_pipeline_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cached_streaming_demand_driven_pipeline_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cached_streaming_demand_driven_pipeline_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cached_streaming_demand_driven_pipeline_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cached_streaming_demand_driven_pipeline_new_instance(self.0) }
+    }
+    fn set_cache_size(&mut self, size: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_cached_streaming_demand_driven_pipeline_set_cache_size(
+                sself: *mut core::ffi::c_void,
+                size: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_cached_streaming_demand_driven_pipeline_set_cache_size(self.0, size)
+        }
+    }
+    fn get_cache_size(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_cached_streaming_demand_driven_pipeline_get_cache_size(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_cached_streaming_demand_driven_pipeline_get_cache_size(self.0) }
+    }
+}
+impl VtkCastToConcrete for vtkCastToConcrete {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cast_to_concrete_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cast_to_concrete_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cast_to_concrete_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cast_to_concrete_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_cast_to_concrete_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_cast_to_concrete_new_instance(self.0) }
+    }
+}
+impl VtkCompositeDataPipeline for vtkCompositeDataPipeline {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_pipeline_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_pipeline_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_pipeline_new_instance(self.0) }
+    }
+    fn get_composite_output_data(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_get_composite_output_data(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_pipeline_get_composite_output_data(self.0, port) }
+    }
+    fn get_composite_input_data(
+        &mut self,
+        port: core::ffi::c_int,
+        index: core::ffi::c_int,
+        inInfoVec: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_get_composite_input_data(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                index: core::ffi::c_int,
+                inInfoVec: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_composite_data_pipeline_get_composite_input_data(
+                self.0,
+                port,
+                index,
+                inInfoVec,
+            )
+        }
+    }
+    fn load_requested_blocks(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_load_requested_blocks(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_pipeline_load_requested_blocks(self.0) }
+    }
+    fn composite_data_meta_data(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_composite_data_meta_data(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_pipeline_composite_data_meta_data(self.0) }
+    }
+    fn update_composite_indices(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_update_composite_indices(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_pipeline_update_composite_indices(self.0) }
+    }
+    fn block_amount_of_detail(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_pipeline_block_amount_of_detail(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_pipeline_block_amount_of_detail(self.0) }
+    }
+}
+impl VtkCompositeDataSetAlgorithm for vtkCompositeDataSetAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_set_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_set_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_set_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_set_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_set_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_set_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_set_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_composite_data_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_composite_data_set_algorithm_get_output(self.0, p0) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_composite_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_composite_data_set_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_composite_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_composite_data_set_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_composite_data_set_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inputVector: *mut core::ffi::c_void,
+                outputVector: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_composite_data_set_algorithm_process_request(
+                self.0,
+                request,
+                inputVector,
+                outputVector,
+            )
+        }
+    }
+}
+impl VtkDataObjectAlgorithm for vtkDataObjectAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_object_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_object_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_object_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_object_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_object_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_object_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_data_object_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_object_algorithm_get_input(self.0) }
+    }
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_object_algorithm_get_input(self.0, port) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_object_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_object_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_object_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_data_object_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_object_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
+impl VtkDataSetAlgorithm for vtkDataSetAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_output(self.0, p0) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_input(self.0) }
+    }
+    fn get_poly_data_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_poly_data_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_poly_data_output(self.0) }
+    }
+    fn get_structured_points_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_structured_points_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_structured_points_output(self.0) }
+    }
+    fn get_image_data_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_image_data_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_image_data_output(self.0) }
+    }
+    fn get_structured_grid_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_structured_grid_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_structured_grid_output(self.0) }
+    }
+    fn get_unstructured_grid_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_unstructured_grid_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_unstructured_grid_output(self.0) }
+    }
+    fn get_rectilinear_grid_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_get_rectilinear_grid_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_data_set_algorithm_get_rectilinear_grid_output(self.0) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_set_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_set_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_set_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_set_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_set_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_set_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_set_algorithm_add_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_data_set_algorithm_add_input_data(self.0, p0, p1) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_data_set_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inputVector: *mut core::ffi::c_void,
+                outputVector: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_data_set_algorithm_process_request(
+                self.0,
+                request,
+                inputVector,
+                outputVector,
+            )
+        }
+    }
+}
+impl VtkDemandDrivenPipeline for vtkDemandDrivenPipeline {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfo: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inInfo: *mut core::ffi::c_void,
+                outInfo: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_demand_driven_pipeline_process_request(self.0, request, inInfo, outInfo)
+        }
+    }
+    fn compute_pipeline_m_time(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inInfoVec: *mut core::ffi::c_void,
+        outInfoVec: *mut core::ffi::c_void,
+        requestFromOutputPort: core::ffi::c_int,
+        mtime: core::ffi::c_ulong,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_compute_pipeline_m_time(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inInfoVec: *mut core::ffi::c_void,
+                outInfoVec: *mut core::ffi::c_void,
+                requestFromOutputPort: core::ffi::c_int,
+                mtime: core::ffi::c_ulong,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_demand_driven_pipeline_compute_pipeline_m_time(
+                self.0,
+                request,
+                inInfoVec,
+                outInfoVec,
+                requestFromOutputPort,
+                mtime,
+            )
+        }
+    }
+    fn get_pipeline_m_time(&mut self) -> core::ffi::c_ulong {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_get_pipeline_m_time(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_ulong;
+        }
+        unsafe { vtk_demand_driven_pipeline_get_pipeline_m_time(self.0) }
+    }
+    fn set_release_data_flag(
+        &mut self,
+        port: core::ffi::c_int,
+        n: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_set_release_data_flag(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                n: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_demand_driven_pipeline_set_release_data_flag(self.0, port, n) }
+    }
+    fn get_release_data_flag(&mut self, port: core::ffi::c_int) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_get_release_data_flag(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_demand_driven_pipeline_get_release_data_flag(self.0, port) }
+    }
+    fn update_pipeline_m_time(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_update_pipeline_m_time(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_demand_driven_pipeline_update_pipeline_m_time(self.0) }
+    }
+    fn update_data_object(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_update_data_object(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_demand_driven_pipeline_update_data_object(self.0) }
+    }
+    fn update_data(&mut self, outputPort: core::ffi::c_int) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_update_data(
+                sself: *mut core::ffi::c_void,
+                outputPort: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_demand_driven_pipeline_update_data(self.0, outputPort) }
+    }
+    fn request_data_object(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_request_data_object(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_request_data_object(self.0) }
+    }
+    fn request_information(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_request_information(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_request_information(self.0) }
+    }
+    fn request_data(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_request_data(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_request_data(self.0) }
+    }
+    fn request_data_not_generated(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_request_data_not_generated(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_request_data_not_generated(self.0) }
+    }
+    fn release_data(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_release_data(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_release_data(self.0) }
+    }
+    fn data_not_generated(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_data_not_generated(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_data_not_generated(self.0) }
+    }
+    fn new_data_object(&mut self, type_: core::ffi::c_char) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_demand_driven_pipeline_new_data_object(
+                sself: *mut core::ffi::c_void,
+                type_: core::ffi::c_char,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_demand_driven_pipeline_new_data_object(self.0, type_) }
+    }
+}
+impl VtkDirectedGraphAlgorithm for vtkDirectedGraphAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_directed_graph_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_directed_graph_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_directed_graph_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_directed_graph_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_directed_graph_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_directed_graph_algorithm_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_directed_graph_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_directed_graph_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_directed_graph_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_directed_graph_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_directed_graph_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_directed_graph_algorithm_get_output(self.0, index) }
+    }
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_directed_graph_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_directed_graph_algorithm_set_input_data(self.0, obj) }
+    }
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_directed_graph_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_directed_graph_algorithm_set_input_data(self.0, index, obj) }
+    }
+}
+impl VtkEnsembleSource for vtkEnsembleSource {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_ensemble_source_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_ensemble_source_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_ensemble_source_new_instance(self.0) }
+    }
+    fn add_member(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_add_member(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_ensemble_source_add_member(self.0, p0) }
+    }
+    fn remove_all_members(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_remove_all_members(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_ensemble_source_remove_all_members(self.0) }
+    }
+    fn get_number_of_members(&mut self) -> core::ffi::c_uint {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_get_number_of_members(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_uint;
+        }
+        unsafe { vtk_ensemble_source_get_number_of_members(self.0) }
+    }
+    fn set_current_member(&mut self, _arg: core::ffi::c_uint) -> () {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_set_current_member(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_uint,
+            );
+        }
+        unsafe { vtk_ensemble_source_set_current_member(self.0, _arg) }
+    }
+    fn get_current_member(&mut self) -> core::ffi::c_uint {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_get_current_member(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_uint;
+        }
+        unsafe { vtk_ensemble_source_get_current_member(self.0) }
+    }
+    fn set_meta_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_set_meta_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_ensemble_source_set_meta_data(self.0, p0) }
+    }
+    fn meta_data(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_meta_data(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_ensemble_source_meta_data(self.0) }
+    }
+    fn update_member(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_ensemble_source_update_member(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_ensemble_source_update_member(self.0) }
+    }
+}
+impl VtkExplicitStructuredGridAlgorithm for vtkExplicitStructuredGridAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_explicit_structured_grid_algorithm_process_request(self.0, p0, p1, p2)
+        }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_get_input(self.0) }
+    }
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_get_input(self.0, port) }
+    }
+    fn get_explicit_structured_grid_input(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_get_explicit_structured_grid_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_explicit_structured_grid_algorithm_get_explicit_structured_grid_input(
+                self.0,
+                port,
+            )
+        }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_explicit_structured_grid_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_explicit_structured_grid_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
+impl VtkExtentRCBPartitioner for vtkExtentRCBPartitioner {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_rcb_partitioner_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_rcb_partitioner_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_rcb_partitioner_new_instance(self.0) }
+    }
+    fn set_number_of_partitions(&mut self, N: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_set_number_of_partitions(
+                sself: *mut core::ffi::c_void,
+                N: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_rcb_partitioner_set_number_of_partitions(self.0, N) }
+    }
+    fn set_global_extent(
+        &mut self,
+        imin: core::ffi::c_int,
+        imax: core::ffi::c_int,
+        jmin: core::ffi::c_int,
+        jmax: core::ffi::c_int,
+        kmin: core::ffi::c_int,
+        kmax: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_set_global_extent(
+                sself: *mut core::ffi::c_void,
+                imin: core::ffi::c_int,
+                imax: core::ffi::c_int,
+                jmin: core::ffi::c_int,
+                jmax: core::ffi::c_int,
+                kmin: core::ffi::c_int,
+                kmax: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_extent_rcb_partitioner_set_global_extent(
+                self.0,
+                imin,
+                imax,
+                jmin,
+                jmax,
+                kmin,
+                kmax,
+            )
+        }
+    }
+    fn set_global_extent(&mut self, ext: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_set_global_extent(
+                sself: *mut core::ffi::c_void,
+                ext: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_rcb_partitioner_set_global_extent(self.0, ext) }
+    }
+    fn set_duplicate_nodes(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_set_duplicate_nodes(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_rcb_partitioner_set_duplicate_nodes(self.0, _arg) }
+    }
+    fn get_duplicate_nodes(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_get_duplicate_nodes(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_rcb_partitioner_get_duplicate_nodes(self.0) }
+    }
+    fn duplicate_nodes_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_duplicate_nodes_on(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_extent_rcb_partitioner_duplicate_nodes_on(self.0) }
+    }
+    fn duplicate_nodes_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_duplicate_nodes_off(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_extent_rcb_partitioner_duplicate_nodes_off(self.0) }
+    }
+    fn set_number_of_ghost_layers(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_set_number_of_ghost_layers(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_rcb_partitioner_set_number_of_ghost_layers(self.0, _arg) }
+    }
+    fn get_number_of_ghost_layers(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_get_number_of_ghost_layers(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_rcb_partitioner_get_number_of_ghost_layers(self.0) }
+    }
+    fn get_num_extents(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_get_num_extents(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_rcb_partitioner_get_num_extents(self.0) }
+    }
+    fn partition(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_partition(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_extent_rcb_partitioner_partition(self.0) }
+    }
+    fn get_partition_extent(
+        &mut self,
+        idx: core::ffi::c_int,
+        ext: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_rcb_partitioner_get_partition_extent(
+                sself: *mut core::ffi::c_void,
+                idx: core::ffi::c_int,
+                ext: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_rcb_partitioner_get_partition_extent(self.0, idx, ext) }
+    }
+}
+impl VtkExtentSplitter for vtkExtentSplitter {
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_splitter_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_splitter_new_instance(self.0) }
+    }
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_splitter_new(self.0) }
+    }
+    fn add_extent_source(
+        &mut self,
+        id: core::ffi::c_int,
+        priority: core::ffi::c_int,
+        x0: core::ffi::c_int,
+        x1: core::ffi::c_int,
+        y0: core::ffi::c_int,
+        y1: core::ffi::c_int,
+        z0: core::ffi::c_int,
+        z1: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_add_extent_source(
+                sself: *mut core::ffi::c_void,
+                id: core::ffi::c_int,
+                priority: core::ffi::c_int,
+                x0: core::ffi::c_int,
+                x1: core::ffi::c_int,
+                y0: core::ffi::c_int,
+                y1: core::ffi::c_int,
+                z0: core::ffi::c_int,
+                z1: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_extent_splitter_add_extent_source(
+                self.0,
+                id,
+                priority,
+                x0,
+                x1,
+                y0,
+                y1,
+                z0,
+                z1,
+            )
+        }
+    }
+    fn add_extent_source(
+        &mut self,
+        id: core::ffi::c_int,
+        priority: core::ffi::c_int,
+        extent: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_add_extent_source(
+                sself: *mut core::ffi::c_void,
+                id: core::ffi::c_int,
+                priority: core::ffi::c_int,
+                extent: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_splitter_add_extent_source(self.0, id, priority, extent) }
+    }
+    fn remove_extent_source(&mut self, id: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_remove_extent_source(
+                sself: *mut core::ffi::c_void,
+                id: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_splitter_remove_extent_source(self.0, id) }
+    }
+    fn remove_all_extent_sources(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_remove_all_extent_sources(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_extent_splitter_remove_all_extent_sources(self.0) }
+    }
+    fn add_extent(
+        &mut self,
+        x0: core::ffi::c_int,
+        x1: core::ffi::c_int,
+        y0: core::ffi::c_int,
+        y1: core::ffi::c_int,
+        z0: core::ffi::c_int,
+        z1: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_add_extent(
+                sself: *mut core::ffi::c_void,
+                x0: core::ffi::c_int,
+                x1: core::ffi::c_int,
+                y0: core::ffi::c_int,
+                y1: core::ffi::c_int,
+                z0: core::ffi::c_int,
+                z1: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_splitter_add_extent(self.0, x0, x1, y0, y1, z0, z1) }
+    }
+    fn add_extent(&mut self, extent: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_add_extent(
+                sself: *mut core::ffi::c_void,
+                extent: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_splitter_add_extent(self.0, extent) }
+    }
+    fn compute_sub_extents(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_compute_sub_extents(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_splitter_compute_sub_extents(self.0) }
+    }
+    fn get_number_of_sub_extents(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_get_number_of_sub_extents(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_splitter_get_number_of_sub_extents(self.0) }
+    }
+    fn get_sub_extent(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_get_sub_extent(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_int;
+        }
+        unsafe { vtk_extent_splitter_get_sub_extent(self.0, index) }
+    }
+    fn get_sub_extent(
+        &mut self,
+        index: core::ffi::c_int,
+        extent: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_get_sub_extent(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                extent: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_splitter_get_sub_extent(self.0, index, extent) }
+    }
+    fn get_sub_extent_source(&mut self, index: core::ffi::c_int) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_get_sub_extent_source(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_splitter_get_sub_extent_source(self.0, index) }
+    }
+    fn get_point_mode(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_get_point_mode(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_splitter_get_point_mode(self.0) }
+    }
+    fn set_point_mode(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_set_point_mode(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_splitter_set_point_mode(self.0, _arg) }
+    }
+    fn point_mode_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_point_mode_on(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_extent_splitter_point_mode_on(self.0) }
+    }
+    fn point_mode_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_splitter_point_mode_off(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_extent_splitter_point_mode_off(self.0) }
+    }
+}
+impl VtkExtentTranslator for vtkExtentTranslator {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_translator_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_translator_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_translator_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_translator_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_translator_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_translator_new_instance(self.0) }
+    }
+    fn set_whole_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_whole_extent(
+                sself: *mut core::ffi::c_void,
+                _arg1: core::ffi::c_int,
+                _arg2: core::ffi::c_int,
+                _arg3: core::ffi::c_int,
+                _arg4: core::ffi::c_int,
+                _arg5: core::ffi::c_int,
+                _arg6: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_extent_translator_set_whole_extent(
+                self.0,
+                _arg1,
+                _arg2,
+                _arg3,
+                _arg4,
+                _arg5,
+                _arg6,
+            )
+        }
+    }
+    fn set_whole_extent(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_whole_extent(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_translator_set_whole_extent(self.0, _arg) }
+    }
+    fn get_whole_extent(&mut self) -> *mut core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_whole_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_int;
+        }
+        unsafe { vtk_extent_translator_get_whole_extent(self.0) }
+    }
+    fn get_whole_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_whole_extent(
+                sself: *mut core::ffi::c_void,
+                _arg1: core::ffi::c_int,
+                _arg2: core::ffi::c_int,
+                _arg3: core::ffi::c_int,
+                _arg4: core::ffi::c_int,
+                _arg5: core::ffi::c_int,
+                _arg6: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_extent_translator_get_whole_extent(
+                self.0,
+                _arg1,
+                _arg2,
+                _arg3,
+                _arg4,
+                _arg5,
+                _arg6,
+            )
+        }
+    }
+    fn get_whole_extent(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_whole_extent(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_translator_get_whole_extent(self.0, _arg) }
+    }
+    fn set_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_extent(
+                sself: *mut core::ffi::c_void,
+                _arg1: core::ffi::c_int,
+                _arg2: core::ffi::c_int,
+                _arg3: core::ffi::c_int,
+                _arg4: core::ffi::c_int,
+                _arg5: core::ffi::c_int,
+                _arg6: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_extent_translator_set_extent(
+                self.0,
+                _arg1,
+                _arg2,
+                _arg3,
+                _arg4,
+                _arg5,
+                _arg6,
+            )
+        }
+    }
+    fn set_extent(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_extent(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_translator_set_extent(self.0, _arg) }
+    }
+    fn get_extent(&mut self) -> *mut core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_int;
+        }
+        unsafe { vtk_extent_translator_get_extent(self.0) }
+    }
+    fn get_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_extent(
+                sself: *mut core::ffi::c_void,
+                _arg1: core::ffi::c_int,
+                _arg2: core::ffi::c_int,
+                _arg3: core::ffi::c_int,
+                _arg4: core::ffi::c_int,
+                _arg5: core::ffi::c_int,
+                _arg6: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_extent_translator_get_extent(
+                self.0,
+                _arg1,
+                _arg2,
+                _arg3,
+                _arg4,
+                _arg5,
+                _arg6,
+            )
+        }
+    }
+    fn get_extent(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_extent(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_translator_get_extent(self.0, _arg) }
+    }
+    fn set_piece(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_piece(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_translator_set_piece(self.0, _arg) }
+    }
+    fn get_piece(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_piece(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_translator_get_piece(self.0) }
+    }
+    fn set_number_of_pieces(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_number_of_pieces(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_translator_set_number_of_pieces(self.0, _arg) }
+    }
+    fn get_number_of_pieces(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_number_of_pieces(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_translator_get_number_of_pieces(self.0) }
+    }
+    fn set_ghost_level(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_ghost_level(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_translator_set_ghost_level(self.0, _arg) }
+    }
+    fn get_ghost_level(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_ghost_level(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_translator_get_ghost_level(self.0) }
+    }
+    fn piece_to_extent(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_piece_to_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_translator_piece_to_extent(self.0) }
+    }
+    fn piece_to_extent_by_points(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_piece_to_extent_by_points(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_translator_piece_to_extent_by_points(self.0) }
+    }
+    fn piece_to_extent_thread_safe(
+        &mut self,
+        piece: core::ffi::c_int,
+        numPieces: core::ffi::c_int,
+        ghostLevel: core::ffi::c_int,
+        wholeExtent: core::ffi::c_int,
+        resultExtent: core::ffi::c_int,
+        splitMode: core::ffi::c_int,
+        byPoints: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_piece_to_extent_thread_safe(
+                sself: *mut core::ffi::c_void,
+                piece: core::ffi::c_int,
+                numPieces: core::ffi::c_int,
+                ghostLevel: core::ffi::c_int,
+                wholeExtent: core::ffi::c_int,
+                resultExtent: core::ffi::c_int,
+                splitMode: core::ffi::c_int,
+                byPoints: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_extent_translator_piece_to_extent_thread_safe(
+                self.0,
+                piece,
+                numPieces,
+                ghostLevel,
+                wholeExtent,
+                resultExtent,
+                splitMode,
+                byPoints,
+            )
+        }
+    }
+    fn set_split_mode_to_block(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_split_mode_to_block(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_extent_translator_set_split_mode_to_block(self.0) }
+    }
+    fn set_split_mode_to_x_slab(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_split_mode_to_x_slab(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_extent_translator_set_split_mode_to_x_slab(self.0) }
+    }
+    fn set_split_mode_to_y_slab(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_split_mode_to_y_slab(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_extent_translator_set_split_mode_to_y_slab(self.0) }
+    }
+    fn set_split_mode_to_z_slab(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_split_mode_to_z_slab(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_extent_translator_set_split_mode_to_z_slab(self.0) }
+    }
+    fn get_split_mode(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_extent_translator_get_split_mode(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_extent_translator_get_split_mode(self.0) }
+    }
+    fn set_split_path(
+        &mut self,
+        len: core::ffi::c_int,
+        splitpath: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_extent_translator_set_split_path(
+                sself: *mut core::ffi::c_void,
+                len: core::ffi::c_int,
+                splitpath: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_extent_translator_set_split_path(self.0, len, splitpath) }
+    }
+    fn update_split_mode(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_extent_translator_update_split_mode(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_extent_translator_update_split_mode(self.0) }
+    }
+}
+impl VtkGraphAlgorithm for vtkGraphAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_graph_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_graph_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_graph_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_graph_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_graph_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_graph_algorithm_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_graph_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_graph_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_graph_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_graph_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_graph_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_graph_algorithm_get_output(self.0, index) }
+    }
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_graph_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_graph_algorithm_set_input_data(self.0, obj) }
+    }
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_graph_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_graph_algorithm_set_input_data(self.0, index, obj) }
+    }
+}
+impl VtkHierarchicalBoxDataSetAlgorithm for vtkHierarchicalBoxDataSetAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_hierarchical_box_data_set_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_hierarchical_box_data_set_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_hierarchical_box_data_set_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_hierarchical_box_data_set_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_hierarchical_box_data_set_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_hierarchical_box_data_set_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_hierarchical_box_data_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_hierarchical_box_data_set_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_hierarchical_box_data_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_hierarchical_box_data_set_algorithm_get_output(self.0, p0) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_hierarchical_box_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_hierarchical_box_data_set_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_hierarchical_box_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_hierarchical_box_data_set_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_hierarchical_box_data_set_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inputVector: *mut core::ffi::c_void,
+                outputVector: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_hierarchical_box_data_set_algorithm_process_request(
+                self.0,
+                request,
+                inputVector,
+                outputVector,
+            )
+        }
+    }
+}
+impl VtkImageToStructuredGrid for vtkImageToStructuredGrid {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_grid_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_image_to_structured_grid_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_grid_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_image_to_structured_grid_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_grid_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_image_to_structured_grid_new_instance(self.0) }
+    }
+}
+impl VtkImageToStructuredPoints for vtkImageToStructuredPoints {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_points_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_image_to_structured_points_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_points_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_image_to_structured_points_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_points_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_image_to_structured_points_new_instance(self.0) }
+    }
+    fn set_vector_input_data(&mut self, input: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_points_set_vector_input_data(
+                sself: *mut core::ffi::c_void,
+                input: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_image_to_structured_points_set_vector_input_data(self.0, input) }
+    }
+    fn get_vector_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_points_get_vector_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_image_to_structured_points_get_vector_input(self.0) }
+    }
+    fn get_structured_points_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_image_to_structured_points_get_structured_points_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_image_to_structured_points_get_structured_points_output(self.0) }
+    }
+}
+impl VtkMoleculeAlgorithm for vtkMoleculeAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_molecule_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_molecule_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_molecule_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_molecule_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_molecule_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_molecule_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_molecule_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_molecule_algorithm_get_input(self.0) }
+    }
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_molecule_algorithm_get_input(self.0, port) }
+    }
+    fn get_molecule_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_get_molecule_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_molecule_algorithm_get_molecule_input(self.0, port) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_molecule_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_molecule_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_molecule_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_molecule_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_molecule_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
+impl VtkMultiBlockDataSetAlgorithm for vtkMultiBlockDataSetAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_multi_block_data_set_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_multi_block_data_set_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_multi_block_data_set_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_multi_block_data_set_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_multi_block_data_set_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_multi_block_data_set_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_multi_block_data_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_multi_block_data_set_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_multi_block_data_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_multi_block_data_set_algorithm_get_output(self.0, p0) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_multi_block_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_multi_block_data_set_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_multi_block_data_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_multi_block_data_set_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_multi_block_data_set_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inputVector: *mut core::ffi::c_void,
+                outputVector: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_multi_block_data_set_algorithm_process_request(
+                self.0,
+                request,
+                inputVector,
+                outputVector,
+            )
+        }
+    }
+}
+impl VtkMultiTimeStepAlgorithm for vtkMultiTimeStepAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_multi_time_step_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_multi_time_step_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_multi_time_step_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_multi_time_step_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_multi_time_step_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_multi_time_step_algorithm_new_instance(self.0) }
+    }
+}
+impl VtkNonOverlappingAMRAlgorithm for vtkNonOverlappingAMRAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_non_overlapping_amr_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_non_overlapping_amr_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_non_overlapping_amr_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_non_overlapping_amr_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_non_overlapping_amr_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_non_overlapping_amr_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_non_overlapping_amr_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_non_overlapping_amr_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_non_overlapping_amr_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_non_overlapping_amr_algorithm_get_output(self.0, p0) }
+    }
+}
+impl VtkOverlappingAMRAlgorithm for vtkOverlappingAMRAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_overlapping_amr_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_overlapping_amr_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_overlapping_amr_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_overlapping_amr_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_overlapping_amr_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_overlapping_amr_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_overlapping_amr_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_overlapping_amr_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_overlapping_amr_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_overlapping_amr_algorithm_get_output(self.0, p0) }
+    }
+}
+impl VtkPassInputTypeAlgorithm for vtkPassInputTypeAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_output(self.0, p0) }
+    }
+    fn get_poly_data_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_poly_data_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_poly_data_output(self.0) }
+    }
+    fn get_structured_points_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_structured_points_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_structured_points_output(self.0) }
+    }
+    fn get_image_data_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_image_data_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_image_data_output(self.0) }
+    }
+    fn get_structured_grid_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_structured_grid_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_structured_grid_output(self.0) }
+    }
+    fn get_unstructured_grid_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_unstructured_grid_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_unstructured_grid_output(self.0) }
+    }
+    fn get_rectilinear_grid_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_rectilinear_grid_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_rectilinear_grid_output(self.0) }
+    }
+    fn get_graph_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_graph_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_graph_output(self.0) }
+    }
+    fn get_molecule_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_molecule_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_molecule_output(self.0) }
+    }
+    fn get_table_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_table_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_table_output(self.0) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_pass_input_type_algorithm_get_input(self.0) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_pass_input_type_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_pass_input_type_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_pass_input_type_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_pass_input_type_algorithm_add_input_data(self.0, p0, p1) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_pass_input_type_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inputVector: *mut core::ffi::c_void,
+                outputVector: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_pass_input_type_algorithm_process_request(
+                self.0,
+                request,
+                inputVector,
+                outputVector,
+            )
+        }
+    }
+}
+impl VtkPiecewiseFunctionAlgorithm for vtkPiecewiseFunctionAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_piecewise_function_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_piecewise_function_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_algorithm_get_input(self.0) }
+    }
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_algorithm_get_input(self.0, port) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_piecewise_function_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_piecewise_function_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_piecewise_function_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_piecewise_function_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
+impl VtkPiecewiseFunctionShiftScale for vtkPiecewiseFunctionShiftScale {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_shift_scale_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_shift_scale_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_piecewise_function_shift_scale_new_instance(self.0) }
+    }
+    fn set_position_shift(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_set_position_shift(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_piecewise_function_shift_scale_set_position_shift(self.0, _arg) }
+    }
+    fn set_position_scale(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_set_position_scale(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_piecewise_function_shift_scale_set_position_scale(self.0, _arg) }
+    }
+    fn set_value_shift(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_set_value_shift(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_piecewise_function_shift_scale_set_value_shift(self.0, _arg) }
+    }
+    fn set_value_scale(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_set_value_scale(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_piecewise_function_shift_scale_set_value_scale(self.0, _arg) }
+    }
+    fn get_position_shift(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_get_position_shift(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_piecewise_function_shift_scale_get_position_shift(self.0) }
+    }
+    fn get_position_scale(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_get_position_scale(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_piecewise_function_shift_scale_get_position_scale(self.0) }
+    }
+    fn get_value_shift(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_get_value_shift(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_piecewise_function_shift_scale_get_value_shift(self.0) }
+    }
+    fn get_value_scale(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_piecewise_function_shift_scale_get_value_scale(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_piecewise_function_shift_scale_get_value_scale(self.0) }
+    }
+}
+impl VtkPointSetAlgorithm for vtkPointSetAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_get_output(self.0, p0) }
+    }
+    fn get_poly_data_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_get_poly_data_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_get_poly_data_output(self.0) }
+    }
+    fn get_structured_grid_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_get_structured_grid_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_get_structured_grid_output(self.0) }
+    }
+    fn get_unstructured_grid_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_get_unstructured_grid_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_get_unstructured_grid_output(self.0) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_point_set_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_point_set_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_point_set_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_point_set_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_point_set_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_point_set_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_point_set_algorithm_add_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_point_set_algorithm_add_input_data(self.0, p0, p1) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_point_set_algorithm_get_input(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_point_set_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inputVector: *mut core::ffi::c_void,
+                outputVector: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_point_set_algorithm_process_request(
+                self.0,
+                request,
+                inputVector,
+                outputVector,
+            )
+        }
+    }
+}
+impl VtkPolyDataAlgorithm for vtkPolyDataAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_poly_data_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_poly_data_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_poly_data_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_poly_data_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_poly_data_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_poly_data_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_poly_data_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_poly_data_algorithm_get_input(self.0) }
+    }
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_poly_data_algorithm_get_input(self.0, port) }
+    }
+    fn get_poly_data_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_get_poly_data_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_poly_data_algorithm_get_poly_data_input(self.0, port) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_poly_data_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_poly_data_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_poly_data_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_poly_data_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_poly_data_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
+impl VtkProgressObserver for vtkProgressObserver {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_progress_observer_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_progress_observer_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_progress_observer_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_progress_observer_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_progress_observer_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_progress_observer_new_instance(self.0) }
+    }
+    fn update_progress(&mut self, amount: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_progress_observer_update_progress(
+                sself: *mut core::ffi::c_void,
+                amount: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_progress_observer_update_progress(self.0, amount) }
+    }
+    fn get_progress(&mut self) -> core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_progress_observer_get_progress(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_double;
+        }
+        unsafe { vtk_progress_observer_get_progress(self.0) }
+    }
+}
+impl VtkReaderExecutive for vtkReaderExecutive {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_reader_executive_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_reader_executive_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_reader_executive_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_reader_executive_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_reader_executive_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_reader_executive_new_instance(self.0) }
+    }
+}
+impl VtkRectilinearGridAlgorithm for vtkRectilinearGridAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_get_input(self.0) }
+    }
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_get_input(self.0, port) }
+    }
+    fn get_rectilinear_grid_input(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_get_rectilinear_grid_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_rectilinear_grid_algorithm_get_rectilinear_grid_input(self.0, port)
+        }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_rectilinear_grid_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_rectilinear_grid_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
+impl VtkSMPProgressObserver for vtkSMPProgressObserver {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_smp_progress_observer_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_smp_progress_observer_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_smp_progress_observer_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_smp_progress_observer_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_smp_progress_observer_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_smp_progress_observer_new_instance(self.0) }
+    }
+    fn update_progress(&mut self, progress: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_smp_progress_observer_update_progress(
+                sself: *mut core::ffi::c_void,
+                progress: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_smp_progress_observer_update_progress(self.0, progress) }
+    }
+    fn get_local_observer(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_smp_progress_observer_get_local_observer(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_smp_progress_observer_get_local_observer(self.0) }
+    }
+}
+impl VtkSelectionAlgorithm for vtkSelectionAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_selection_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_selection_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_selection_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_selection_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_selection_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_selection_algorithm_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_selection_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_selection_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_selection_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_selection_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_selection_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_selection_algorithm_get_output(self.0, index) }
+    }
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_selection_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_selection_algorithm_set_input_data(self.0, obj) }
+    }
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_selection_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_selection_algorithm_set_input_data(self.0, index, obj) }
+    }
+}
+impl VtkSimpleScalarTree for vtkSimpleScalarTree {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_simple_scalar_tree_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_simple_scalar_tree_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_simple_scalar_tree_new_instance(self.0) }
+    }
+    fn set_branching_factor(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_set_branching_factor(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_simple_scalar_tree_set_branching_factor(self.0, _arg) }
+    }
+    fn get_branching_factor_min_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_branching_factor_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_simple_scalar_tree_get_branching_factor_min_value(self.0) }
+    }
+    fn get_branching_factor_max_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_branching_factor_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_simple_scalar_tree_get_branching_factor_max_value(self.0) }
+    }
+    fn get_branching_factor(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_branching_factor(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_simple_scalar_tree_get_branching_factor(self.0) }
+    }
+    fn get_level(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_level(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_simple_scalar_tree_get_level(self.0) }
+    }
+    fn set_max_level(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_set_max_level(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_simple_scalar_tree_set_max_level(self.0, _arg) }
+    }
+    fn get_max_level_min_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_max_level_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_simple_scalar_tree_get_max_level_min_value(self.0) }
+    }
+    fn get_max_level_max_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_max_level_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_simple_scalar_tree_get_max_level_max_value(self.0) }
+    }
+    fn get_max_level(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_max_level(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_simple_scalar_tree_get_max_level(self.0) }
+    }
+    fn build_tree(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_build_tree(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_simple_scalar_tree_build_tree(self.0) }
+    }
+    fn initialize(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_initialize(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_simple_scalar_tree_initialize(self.0) }
+    }
+    fn init_traversal(&mut self, scalarValue: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_init_traversal(
+                sself: *mut core::ffi::c_void,
+                scalarValue: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_simple_scalar_tree_init_traversal(self.0, scalarValue) }
+    }
+    fn get_next_cell(
+        &mut self,
+        cellId: core::ffi::c_uchar,
+        ptIds: *mut core::ffi::c_void,
+        cellScalars: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_next_cell(
+                sself: *mut core::ffi::c_void,
+                cellId: core::ffi::c_uchar,
+                ptIds: *mut core::ffi::c_void,
+                cellScalars: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_simple_scalar_tree_get_next_cell(self.0, cellId, ptIds, cellScalars)
+        }
+    }
+    fn get_number_of_cell_batches(
+        &mut self,
+        scalarValue: core::ffi::c_double,
+    ) -> core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_number_of_cell_batches(
+                sself: *mut core::ffi::c_void,
+                scalarValue: core::ffi::c_double,
+            ) -> core::ffi::c_uchar;
+        }
+        unsafe { vtk_simple_scalar_tree_get_number_of_cell_batches(self.0, scalarValue) }
+    }
+    fn get_cell_batch(
+        &mut self,
+        batchNum: core::ffi::c_uchar,
+        numCells: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_simple_scalar_tree_get_cell_batch(
+                sself: *mut core::ffi::c_void,
+                batchNum: core::ffi::c_uchar,
+                numCells: core::ffi::c_uchar,
+            ) -> *const core::ffi::c_uchar;
+        }
+        unsafe { vtk_simple_scalar_tree_get_cell_batch(self.0, batchNum, numCells) }
+    }
+}
+impl VtkSpanSpace for vtkSpanSpace {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_span_space_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_span_space_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_span_space_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_span_space_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_span_space_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_span_space_new_instance(self.0) }
+    }
+    fn set_scalar_range(
+        &mut self,
+        _arg1: core::ffi::c_double,
+        _arg2: core::ffi::c_double,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_set_scalar_range(
+                sself: *mut core::ffi::c_void,
+                _arg1: core::ffi::c_double,
+                _arg2: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_span_space_set_scalar_range(self.0, _arg1, _arg2) }
+    }
+    fn set_scalar_range(&mut self, _arg: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_set_scalar_range(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_span_space_set_scalar_range(self.0, _arg) }
+    }
+    fn get_scalar_range(&mut self) -> *mut core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_span_space_get_scalar_range(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_double;
+        }
+        unsafe { vtk_span_space_get_scalar_range(self.0) }
+    }
+    fn get_scalar_range(&mut self, data: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_get_scalar_range(
+                sself: *mut core::ffi::c_void,
+                data: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_span_space_get_scalar_range(self.0, data) }
+    }
+    fn set_compute_scalar_range(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_set_compute_scalar_range(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_span_space_set_compute_scalar_range(self.0, _arg) }
+    }
+    fn get_compute_scalar_range(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_span_space_get_compute_scalar_range(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_span_space_get_compute_scalar_range(self.0) }
+    }
+    fn compute_scalar_range_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_compute_scalar_range_on(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_span_space_compute_scalar_range_on(self.0) }
+    }
+    fn compute_scalar_range_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_compute_scalar_range_off(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_span_space_compute_scalar_range_off(self.0) }
+    }
+    fn set_resolution(&mut self, _arg: core::ffi::c_uchar) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_set_resolution(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_uchar,
+            );
+        }
+        unsafe { vtk_span_space_set_resolution(self.0, _arg) }
+    }
+    fn get_resolution_min_value(&mut self) -> core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_span_space_get_resolution_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_uchar;
+        }
+        unsafe { vtk_span_space_get_resolution_min_value(self.0) }
+    }
+    fn get_resolution_max_value(&mut self) -> core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_span_space_get_resolution_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_uchar;
+        }
+        unsafe { vtk_span_space_get_resolution_max_value(self.0) }
+    }
+    fn get_resolution(&mut self) -> core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_span_space_get_resolution(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_uchar;
+        }
+        unsafe { vtk_span_space_get_resolution(self.0) }
+    }
+    fn set_compute_resolution(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_set_compute_resolution(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_span_space_set_compute_resolution(self.0, _arg) }
+    }
+    fn get_compute_resolution(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_span_space_get_compute_resolution(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_span_space_get_compute_resolution(self.0) }
+    }
+    fn compute_resolution_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_compute_resolution_on(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_span_space_compute_resolution_on(self.0) }
+    }
+    fn compute_resolution_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_compute_resolution_off(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_span_space_compute_resolution_off(self.0) }
+    }
+    fn set_number_of_cells_per_bucket(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_set_number_of_cells_per_bucket(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_span_space_set_number_of_cells_per_bucket(self.0, _arg) }
+    }
+    fn get_number_of_cells_per_bucket_min_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_span_space_get_number_of_cells_per_bucket_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_span_space_get_number_of_cells_per_bucket_min_value(self.0) }
+    }
+    fn get_number_of_cells_per_bucket_max_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_span_space_get_number_of_cells_per_bucket_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_span_space_get_number_of_cells_per_bucket_max_value(self.0) }
+    }
+    fn get_number_of_cells_per_bucket(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_span_space_get_number_of_cells_per_bucket(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_span_space_get_number_of_cells_per_bucket(self.0) }
+    }
+    fn initialize(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_initialize(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_span_space_initialize(self.0) }
+    }
+    fn build_tree(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_build_tree(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_span_space_build_tree(self.0) }
+    }
+    fn init_traversal(&mut self, scalarValue: core::ffi::c_double) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_init_traversal(
+                sself: *mut core::ffi::c_void,
+                scalarValue: core::ffi::c_double,
+            );
+        }
+        unsafe { vtk_span_space_init_traversal(self.0, scalarValue) }
+    }
+    fn get_next_cell(
+        &mut self,
+        cellId: core::ffi::c_uchar,
+        ptIds: *mut core::ffi::c_void,
+        cellScalars: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_span_space_get_next_cell(
+                sself: *mut core::ffi::c_void,
+                cellId: core::ffi::c_uchar,
+                ptIds: *mut core::ffi::c_void,
+                cellScalars: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_span_space_get_next_cell(self.0, cellId, ptIds, cellScalars) }
+    }
+    fn get_number_of_cell_batches(
+        &mut self,
+        scalarValue: core::ffi::c_double,
+    ) -> core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_span_space_get_number_of_cell_batches(
+                sself: *mut core::ffi::c_void,
+                scalarValue: core::ffi::c_double,
+            ) -> core::ffi::c_uchar;
+        }
+        unsafe { vtk_span_space_get_number_of_cell_batches(self.0, scalarValue) }
+    }
+    fn get_cell_batch(
+        &mut self,
+        batchNum: core::ffi::c_uchar,
+        numCells: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_span_space_get_cell_batch(
+                sself: *mut core::ffi::c_void,
+                batchNum: core::ffi::c_uchar,
+                numCells: core::ffi::c_uchar,
+            ) -> *const core::ffi::c_uchar;
+        }
+        unsafe { vtk_span_space_get_cell_batch(self.0, batchNum, numCells) }
+    }
+    fn set_batch_size(&mut self, _arg: core::ffi::c_uchar) -> () {
+        unsafe extern "C" {
+            fn vtk_span_space_set_batch_size(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_uchar,
+            );
+        }
+        unsafe { vtk_span_space_set_batch_size(self.0, _arg) }
+    }
+    fn get_batch_size_min_value(&mut self) -> core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_span_space_get_batch_size_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_uchar;
+        }
+        unsafe { vtk_span_space_get_batch_size_min_value(self.0) }
+    }
+    fn get_batch_size_max_value(&mut self) -> core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_span_space_get_batch_size_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_uchar;
+        }
+        unsafe { vtk_span_space_get_batch_size_max_value(self.0) }
+    }
+    fn get_batch_size(&mut self) -> core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_span_space_get_batch_size(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_uchar;
+        }
+        unsafe { vtk_span_space_get_batch_size(self.0) }
+    }
+}
+impl VtkSphereTree for vtkSphereTree {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_sphere_tree_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_sphere_tree_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_sphere_tree_new_instance(self.0) }
+    }
+    fn set_data_set(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_set_data_set(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_sphere_tree_set_data_set(self.0, p0) }
+    }
+    fn get_data_set(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_data_set(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_sphere_tree_get_data_set(self.0) }
+    }
+    fn build(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_build(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_sphere_tree_build(self.0) }
+    }
+    fn build(&mut self, input: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_build(
+                sself: *mut core::ffi::c_void,
+                input: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_sphere_tree_build(self.0, input) }
+    }
+    fn set_build_hierarchy(&mut self, _arg: bool) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_set_build_hierarchy(
+                sself: *mut core::ffi::c_void,
+                _arg: bool,
+            );
+        }
+        unsafe { vtk_sphere_tree_set_build_hierarchy(self.0, _arg) }
+    }
+    fn get_build_hierarchy(&mut self) -> bool {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_build_hierarchy(
+                sself: *mut core::ffi::c_void,
+            ) -> bool;
+        }
+        unsafe { vtk_sphere_tree_get_build_hierarchy(self.0) }
+    }
+    fn build_hierarchy_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_build_hierarchy_on(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_sphere_tree_build_hierarchy_on(self.0) }
+    }
+    fn build_hierarchy_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_build_hierarchy_off(sself: *mut core::ffi::c_void);
+        }
+        unsafe { vtk_sphere_tree_build_hierarchy_off(self.0) }
+    }
+    fn select_point(
+        &mut self,
+        point: core::ffi::c_double,
+        numSelected: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_select_point(
+                sself: *mut core::ffi::c_void,
+                point: core::ffi::c_double,
+                numSelected: core::ffi::c_uchar,
+            ) -> *const core::ffi::c_uchar;
+        }
+        unsafe { vtk_sphere_tree_select_point(self.0, point, numSelected) }
+    }
+    fn select_line(
+        &mut self,
+        origin: core::ffi::c_double,
+        ray: core::ffi::c_double,
+        numSelected: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_select_line(
+                sself: *mut core::ffi::c_void,
+                origin: core::ffi::c_double,
+                ray: core::ffi::c_double,
+                numSelected: core::ffi::c_uchar,
+            ) -> *const core::ffi::c_uchar;
+        }
+        unsafe { vtk_sphere_tree_select_line(self.0, origin, ray, numSelected) }
+    }
+    fn select_plane(
+        &mut self,
+        origin: core::ffi::c_double,
+        normal: core::ffi::c_double,
+        numSelected: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_uchar {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_select_plane(
+                sself: *mut core::ffi::c_void,
+                origin: core::ffi::c_double,
+                normal: core::ffi::c_double,
+                numSelected: core::ffi::c_uchar,
+            ) -> *const core::ffi::c_uchar;
+        }
+        unsafe { vtk_sphere_tree_select_plane(self.0, origin, normal, numSelected) }
+    }
+    fn select_point(
+        &mut self,
+        point: core::ffi::c_double,
+        cellIds: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_select_point(
+                sself: *mut core::ffi::c_void,
+                point: core::ffi::c_double,
+                cellIds: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_sphere_tree_select_point(self.0, point, cellIds) }
+    }
+    fn select_line(
+        &mut self,
+        origin: core::ffi::c_double,
+        ray: core::ffi::c_double,
+        cellIds: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_select_line(
+                sself: *mut core::ffi::c_void,
+                origin: core::ffi::c_double,
+                ray: core::ffi::c_double,
+                cellIds: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_sphere_tree_select_line(self.0, origin, ray, cellIds) }
+    }
+    fn select_plane(
+        &mut self,
+        origin: core::ffi::c_double,
+        normal: core::ffi::c_double,
+        cellIds: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_select_plane(
+                sself: *mut core::ffi::c_void,
+                origin: core::ffi::c_double,
+                normal: core::ffi::c_double,
+                cellIds: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_sphere_tree_select_plane(self.0, origin, normal, cellIds) }
+    }
+    fn set_resolution(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_set_resolution(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_sphere_tree_set_resolution(self.0, _arg) }
+    }
+    fn get_resolution_min_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_resolution_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_sphere_tree_get_resolution_min_value(self.0) }
+    }
+    fn get_resolution_max_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_resolution_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_sphere_tree_get_resolution_max_value(self.0) }
+    }
+    fn get_resolution(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_resolution(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_sphere_tree_get_resolution(self.0) }
+    }
+    fn set_max_level(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_set_max_level(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_sphere_tree_set_max_level(self.0, _arg) }
+    }
+    fn get_max_level_min_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_max_level_min_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_sphere_tree_get_max_level_min_value(self.0) }
+    }
+    fn get_max_level_max_value(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_max_level_max_value(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_sphere_tree_get_max_level_max_value(self.0) }
+    }
+    fn get_max_level(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_max_level(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_sphere_tree_get_max_level(self.0) }
+    }
+    fn get_number_of_levels(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_number_of_levels(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_sphere_tree_get_number_of_levels(self.0) }
+    }
+    fn get_cell_spheres(&mut self) -> *const core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_cell_spheres(
+                sself: *mut core::ffi::c_void,
+            ) -> *const core::ffi::c_double;
+        }
+        unsafe { vtk_sphere_tree_get_cell_spheres(self.0) }
+    }
+    fn get_tree_spheres(
+        &mut self,
+        level: core::ffi::c_int,
+        numSpheres: core::ffi::c_uchar,
+    ) -> *const core::ffi::c_double {
+        unsafe extern "C" {
+            fn vtk_sphere_tree_get_tree_spheres(
+                sself: *mut core::ffi::c_void,
+                level: core::ffi::c_int,
+                numSpheres: core::ffi::c_uchar,
+            ) -> *const core::ffi::c_double;
+        }
+        unsafe { vtk_sphere_tree_get_tree_spheres(self.0, level, numSpheres) }
+    }
+}
+impl VtkStreamingDemandDrivenPipeline for vtkStreamingDemandDrivenPipeline {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_new_instance(self.0) }
+    }
+    fn update(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_update(self.0) }
+    }
+    fn update_whole_extent(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update_whole_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_update_whole_extent(self.0) }
+    }
+    fn update(
+        &mut self,
+        port: core::ffi::c_int,
+        requests: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                requests: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_update(self.0, port, requests) }
+    }
+    fn propagate_update_extent(
+        &mut self,
+        outputPort: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_propagate_update_extent(
+                sself: *mut core::ffi::c_void,
+                outputPort: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_propagate_update_extent(
+                self.0,
+                outputPort,
+            )
+        }
+    }
+    fn propagate_time(&mut self, outputPort: core::ffi::c_int) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_propagate_time(
+                sself: *mut core::ffi::c_void,
+                outputPort: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_propagate_time(self.0, outputPort)
+        }
+    }
+    fn update_time_dependent_information(
+        &mut self,
+        outputPort: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update_time_dependent_information(
+                sself: *mut core::ffi::c_void,
+                outputPort: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_update_time_dependent_information(
+                self.0,
+                outputPort,
+            )
+        }
+    }
+    fn set_whole_extent(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        extent: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_set_whole_extent(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                extent: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_set_whole_extent(self.0, p0, extent)
+        }
+    }
+    fn get_whole_extent(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        extent: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_get_whole_extent(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                extent: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_get_whole_extent(self.0, p0, extent)
+        }
+    }
+    fn get_whole_extent(&mut self, p0: *mut core::ffi::c_void) -> *mut core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_get_whole_extent(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_int;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_get_whole_extent(self.0, p0) }
+    }
+    fn set_request_exact_extent(
+        &mut self,
+        port: core::ffi::c_int,
+        flag: core::ffi::c_int,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_set_request_exact_extent(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+                flag: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_set_request_exact_extent(
+                self.0,
+                port,
+                flag,
+            )
+        }
+    }
+    fn get_request_exact_extent(&mut self, port: core::ffi::c_int) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_get_request_exact_extent(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_get_request_exact_extent(self.0, port)
+        }
+    }
+    fn request_update_extent(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_request_update_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_request_update_extent(self.0) }
+    }
+    fn request_update_time(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_request_update_time(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_request_update_time(self.0) }
+    }
+    fn request_time_dependent_information(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_request_time_dependent_information(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_request_time_dependent_information(
+                self.0,
+            )
+        }
+    }
+    fn continue_executing(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_continue_executing(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_continue_executing(self.0) }
+    }
+    fn update_extent_initialized(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update_extent_initialized(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_update_extent_initialized(self.0) }
+    }
+    fn update_extent(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_update_extent(self.0) }
+    }
+    fn update_piece_number(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update_piece_number(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_update_piece_number(self.0) }
+    }
+    fn update_number_of_pieces(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update_number_of_pieces(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_update_number_of_pieces(self.0) }
+    }
+    fn update_number_of_ghost_levels(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update_number_of_ghost_levels(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_update_number_of_ghost_levels(self.0)
+        }
+    }
+    fn combined_update_extent(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_combined_update_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_combined_update_extent(self.0) }
+    }
+    fn whole_extent(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_whole_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_whole_extent(self.0) }
+    }
+    fn unrestricted_update_extent(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_unrestricted_update_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_unrestricted_update_extent(self.0)
+        }
+    }
+    fn exact_extent(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_exact_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_exact_extent(self.0) }
+    }
+    fn time_steps(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_time_steps(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_time_steps(self.0) }
+    }
+    fn time_range(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_time_range(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_time_range(self.0) }
+    }
+    fn update_time_step(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_update_time_step(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_update_time_step(self.0) }
+    }
+    fn time_dependent_information(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_time_dependent_information(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_time_dependent_information(self.0)
+        }
+    }
+    fn bounds(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_bounds(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_bounds(self.0) }
+    }
+    fn get_update_extent(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        extent: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_get_update_extent(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                extent: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_get_update_extent(self.0, p0, extent)
+        }
+    }
+    fn get_update_extent(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+    ) -> *mut core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_get_update_extent(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_int;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_get_update_extent(self.0, p0) }
+    }
+    fn get_update_piece(&mut self, p0: *mut core::ffi::c_void) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_get_update_piece(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_streaming_demand_driven_pipeline_get_update_piece(self.0, p0) }
+    }
+    fn get_update_number_of_pieces(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_get_update_number_of_pieces(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_get_update_number_of_pieces(self.0, p0)
+        }
+    }
+    fn get_update_ghost_level(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_streaming_demand_driven_pipeline_get_update_ghost_level(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_streaming_demand_driven_pipeline_get_update_ghost_level(self.0, p0)
+        }
+    }
+}
+impl VtkStructuredGridAlgorithm for vtkStructuredGridAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_structured_grid_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_structured_grid_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_structured_grid_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_structured_grid_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_structured_grid_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_structured_grid_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_structured_grid_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_structured_grid_algorithm_get_input(self.0) }
+    }
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_structured_grid_algorithm_get_input(self.0, port) }
+    }
+    fn get_structured_grid_input(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_get_structured_grid_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_structured_grid_algorithm_get_structured_grid_input(self.0, port) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_structured_grid_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_structured_grid_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_structured_grid_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_structured_grid_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_structured_grid_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
+impl VtkTableAlgorithm for vtkTableAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_table_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_table_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_table_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_table_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_table_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_table_algorithm_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_table_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_table_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_table_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_table_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_table_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_table_algorithm_get_output(self.0, index) }
+    }
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_table_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_table_algorithm_set_input_data(self.0, obj) }
+    }
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_table_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_table_algorithm_set_input_data(self.0, index, obj) }
+    }
+}
+impl VtkThreadedCompositeDataPipeline for vtkThreadedCompositeDataPipeline {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_threaded_composite_data_pipeline_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_threaded_composite_data_pipeline_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_threaded_composite_data_pipeline_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_threaded_composite_data_pipeline_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_threaded_composite_data_pipeline_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_threaded_composite_data_pipeline_new_instance(self.0) }
+    }
+}
+impl VtkTreeAlgorithm for vtkTreeAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_tree_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_tree_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_tree_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_tree_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_tree_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_tree_algorithm_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_tree_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_tree_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_tree_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_tree_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_tree_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_tree_algorithm_get_output(self.0, index) }
+    }
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_tree_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_tree_algorithm_set_input_data(self.0, obj) }
+    }
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_tree_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_tree_algorithm_set_input_data(self.0, index, obj) }
+    }
+}
+impl VtkTrivialConsumer for vtkTrivialConsumer {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_trivial_consumer_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_trivial_consumer_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_trivial_consumer_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_trivial_consumer_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_trivial_consumer_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_trivial_consumer_new_instance(self.0) }
+    }
+}
+impl VtkTrivialProducer for vtkTrivialProducer {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_trivial_producer_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_trivial_producer_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_trivial_producer_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_trivial_producer_process_request(self.0, p0, p1, p2) }
+    }
+    fn set_output(&mut self, output: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_set_output(
+                sself: *mut core::ffi::c_void,
+                output: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_trivial_producer_set_output(self.0, output) }
+    }
+    fn get_m_time(&mut self) -> core::ffi::c_ulong {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_get_m_time(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_ulong;
+        }
+        unsafe { vtk_trivial_producer_get_m_time(self.0) }
+    }
+    fn set_whole_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_set_whole_extent(
+                sself: *mut core::ffi::c_void,
+                _arg1: core::ffi::c_int,
+                _arg2: core::ffi::c_int,
+                _arg3: core::ffi::c_int,
+                _arg4: core::ffi::c_int,
+                _arg5: core::ffi::c_int,
+                _arg6: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_trivial_producer_set_whole_extent(
+                self.0,
+                _arg1,
+                _arg2,
+                _arg3,
+                _arg4,
+                _arg5,
+                _arg6,
+            )
+        }
+    }
+    fn set_whole_extent(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_set_whole_extent(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_trivial_producer_set_whole_extent(self.0, _arg) }
+    }
+    fn get_whole_extent(&mut self) -> *mut core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_get_whole_extent(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_int;
+        }
+        unsafe { vtk_trivial_producer_get_whole_extent(self.0) }
+    }
+    fn get_whole_extent(
+        &mut self,
+        _arg1: core::ffi::c_int,
+        _arg2: core::ffi::c_int,
+        _arg3: core::ffi::c_int,
+        _arg4: core::ffi::c_int,
+        _arg5: core::ffi::c_int,
+        _arg6: core::ffi::c_int,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_get_whole_extent(
+                sself: *mut core::ffi::c_void,
+                _arg1: core::ffi::c_int,
+                _arg2: core::ffi::c_int,
+                _arg3: core::ffi::c_int,
+                _arg4: core::ffi::c_int,
+                _arg5: core::ffi::c_int,
+                _arg6: core::ffi::c_int,
+            );
+        }
+        unsafe {
+            vtk_trivial_producer_get_whole_extent(
+                self.0,
+                _arg1,
+                _arg2,
+                _arg3,
+                _arg4,
+                _arg5,
+                _arg6,
+            )
+        }
+    }
+    fn get_whole_extent(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_get_whole_extent(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_trivial_producer_get_whole_extent(self.0, _arg) }
+    }
+    fn fill_output_data_information(
+        &mut self,
+        output: *mut core::ffi::c_void,
+        outInfo: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_trivial_producer_fill_output_data_information(
+                sself: *mut core::ffi::c_void,
+                output: *mut core::ffi::c_void,
+                outInfo: *mut core::ffi::c_void,
+            );
+        }
+        unsafe {
+            vtk_trivial_producer_fill_output_data_information(self.0, output, outInfo)
+        }
+    }
+}
+impl VtkUndirectedGraphAlgorithm for vtkUndirectedGraphAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_undirected_graph_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_undirected_graph_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_undirected_graph_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_undirected_graph_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_undirected_graph_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_undirected_graph_algorithm_new_instance(self.0) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_undirected_graph_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_undirected_graph_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_undirected_graph_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_undirected_graph_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, index: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_undirected_graph_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_undirected_graph_algorithm_get_output(self.0, index) }
+    }
+    fn set_input_data(&mut self, obj: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_undirected_graph_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_undirected_graph_algorithm_set_input_data(self.0, obj) }
+    }
+    fn set_input_data(
+        &mut self,
+        index: core::ffi::c_int,
+        obj: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_undirected_graph_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                index: core::ffi::c_int,
+                obj: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_undirected_graph_algorithm_set_input_data(self.0, index, obj) }
+    }
+}
+impl VtkUniformGridAMRAlgorithm for vtkUniformGridAMRAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_amr_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_uniform_grid_amr_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_amr_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_uniform_grid_amr_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_amr_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_uniform_grid_amr_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_amr_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_uniform_grid_amr_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_amr_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_uniform_grid_amr_algorithm_get_output(self.0, p0) }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_amr_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_uniform_grid_amr_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_amr_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_uniform_grid_amr_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn process_request(
+        &mut self,
+        request: *mut core::ffi::c_void,
+        inputVector: *mut core::ffi::c_void,
+        outputVector: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_amr_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                request: *mut core::ffi::c_void,
+                inputVector: *mut core::ffi::c_void,
+                outputVector: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_uniform_grid_amr_algorithm_process_request(
+                self.0,
+                request,
+                inputVector,
+                outputVector,
+            )
+        }
+    }
+}
+impl VtkUniformGridPartitioner for vtkUniformGridPartitioner {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_uniform_grid_partitioner_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_uniform_grid_partitioner_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_uniform_grid_partitioner_new_instance(self.0) }
+    }
+    fn get_number_of_partitions(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_get_number_of_partitions(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_uniform_grid_partitioner_get_number_of_partitions(self.0) }
+    }
+    fn set_number_of_partitions(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_set_number_of_partitions(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_uniform_grid_partitioner_set_number_of_partitions(self.0, _arg) }
+    }
+    fn get_number_of_ghost_layers(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_get_number_of_ghost_layers(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_uniform_grid_partitioner_get_number_of_ghost_layers(self.0) }
+    }
+    fn set_number_of_ghost_layers(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_set_number_of_ghost_layers(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_uniform_grid_partitioner_set_number_of_ghost_layers(self.0, _arg) }
+    }
+    fn get_duplicate_nodes(&mut self) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_get_duplicate_nodes(
+                sself: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_uniform_grid_partitioner_get_duplicate_nodes(self.0) }
+    }
+    fn set_duplicate_nodes(&mut self, _arg: core::ffi::c_int) -> () {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_set_duplicate_nodes(
+                sself: *mut core::ffi::c_void,
+                _arg: core::ffi::c_int,
+            );
+        }
+        unsafe { vtk_uniform_grid_partitioner_set_duplicate_nodes(self.0, _arg) }
+    }
+    fn duplicate_nodes_on(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_duplicate_nodes_on(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_uniform_grid_partitioner_duplicate_nodes_on(self.0) }
+    }
+    fn duplicate_nodes_off(&mut self) -> () {
+        unsafe extern "C" {
+            fn vtk_uniform_grid_partitioner_duplicate_nodes_off(
+                sself: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_uniform_grid_partitioner_duplicate_nodes_off(self.0) }
+    }
+}
+impl VtkUnstructuredGridAlgorithm for vtkUnstructuredGridAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe { vtk_unstructured_grid_algorithm_process_request(self.0, p0, p1, p2) }
+    }
+    fn get_input(&mut self, port: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_algorithm_get_input(self.0, port) }
+    }
+    fn get_input(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_get_input(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_algorithm_get_input(self.0) }
+    }
+    fn get_unstructured_grid_input(
+        &mut self,
+        port: core::ffi::c_int,
+    ) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_get_unstructured_grid_input(
+                sself: *mut core::ffi::c_void,
+                port: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe {
+            vtk_unstructured_grid_algorithm_get_unstructured_grid_input(self.0, port)
+        }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
+impl VtkUnstructuredGridBaseAlgorithm for vtkUnstructuredGridBaseAlgorithm {
+    fn new(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_new(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_new(self.0) }
+    }
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_safe_down_cast(
+                sself: *mut core::ffi::c_void,
+                o: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_safe_down_cast(self.0, o) }
+    }
+    fn new_instance(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_new_instance(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_new_instance(self.0) }
+    }
+    fn get_output(&mut self) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_get_output(self.0) }
+    }
+    fn get_output(&mut self, p0: core::ffi::c_int) -> *mut core::ffi::c_void {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_get_output(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+            ) -> *mut core::ffi::c_void;
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_get_output(self.0, p0) }
+    }
+    fn set_output(&mut self, d: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_set_output(
+                sself: *mut core::ffi::c_void,
+                d: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_set_output(self.0, d) }
+    }
+    fn process_request(
+        &mut self,
+        p0: *mut core::ffi::c_void,
+        p1: *mut core::ffi::c_void,
+        p2: *mut core::ffi::c_void,
+    ) -> core::ffi::c_int {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_process_request(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+                p1: *mut core::ffi::c_void,
+                p2: *mut core::ffi::c_void,
+            ) -> core::ffi::c_int;
+        }
+        unsafe {
+            vtk_unstructured_grid_base_algorithm_process_request(self.0, p0, p1, p2)
+        }
+    }
+    fn set_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_set_input_data(self.0, p0) }
+    }
+    fn set_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_set_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_set_input_data(self.0, p0, p1) }
+    }
+    fn add_input_data(&mut self, p0: *mut core::ffi::c_void) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_add_input_data(self.0, p0) }
+    }
+    fn add_input_data(
+        &mut self,
+        p0: core::ffi::c_int,
+        p1: *mut core::ffi::c_void,
+    ) -> () {
+        unsafe extern "C" {
+            fn vtk_unstructured_grid_base_algorithm_add_input_data(
+                sself: *mut core::ffi::c_void,
+                p0: core::ffi::c_int,
+                p1: *mut core::ffi::c_void,
+            );
+        }
+        unsafe { vtk_unstructured_grid_base_algorithm_add_input_data(self.0, p0, p1) }
+    }
+}
 /// Superclass for all sources, filters, and sinks in VTK.
 ///
 ///
@@ -364,7 +9321,7 @@ fn test_vtkCastToConcrete_create_drop() {
 /// * REQUEST_INFORMATION: The producers have to provide information about
 /// the contents of the composite dataset in this pass.
 /// Sources that can produce more than one piece (note that a piece is
-/// different than a block; each piece consists of 0 or more blocks) should
+/// different than a block; each piece consistes of 0 or more blocks) should
 /// set CAN_HANDLE_PIECE_REQUEST.
 ///
 /// * REQUEST_UPDATE_EXTENT: This pass is identical to the one implemented
