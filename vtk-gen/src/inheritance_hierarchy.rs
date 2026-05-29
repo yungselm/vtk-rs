@@ -140,7 +140,8 @@ impl ClassHierarchy {
 
         let parent_methods: Vec<_> = all_parents
             .into_iter()
-            .flat_map(|class_name| self.classes[&class_name].methods.public.iter())
+            .filter_map(|class_name| self.classes.get(&class_name))
+            .flat_map(|c| c.methods.public.iter())
             .collect();
 
         let unique_methods: Vec<_> = self.classes[class_name]
