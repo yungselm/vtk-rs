@@ -64,7 +64,7 @@ To implement the desired class methods, we use Rust
 ## Contributing / Development Setup
 
 This section is for contributors who want to regenerate bindings for a new VTK version.
-If you only want to *use* the existing `vtk-rs-9.1` bindings, skip this section — a system VTK install and `cargo build` is sufficient.
+If you only want to *use* the existing `vtk-rs-9.1` bindings, skip this section since a system VTK install and `cargo build` is sufficient.
 
 ### Prerequisites
 
@@ -98,7 +98,7 @@ brew install cmake python libarchive
 ### 1. Run the setup script
 
 `libvtk9-dev` (the system package) does **not** install the internal wrapping tool headers (e.g. `vtkParseAttributes.h`) that WrapVTK needs.
-Use the provided `setup_vtk.sh` script to clone VTK from source, build it, initialise the `WrapVTK` submodule if needed, build WrapVTK against it, and verify the XML output — all in one step:
+Use the provided `setup_vtk.sh` script to clone VTK from source, build it, initialise the `WrapVTK` submodule if needed, build WrapVTK against it, and verify the XML output all in one step:
 
 ```bash
 ./setup_vtk.sh 9.2.0
@@ -121,9 +121,13 @@ cargo run -p vtk-gen -- \
   --opath vtk-rs-9.2 \
   --wrap-vtk WrapVTK
 ```
+or one-line
+```bash
+cargo run -p vtk-gen -- --opath vtk-rs-9.2 --wrap-vtk WrapVTK
+```
 
 This regenerates all files in `vtk-rs-9.2/` from the WrapVTK XML output.
-To target a different VTK version, run `./setup_vtk.sh <version>` first, then repeat this step with a matching output path (e.g. `--opath vtk-rs-9.3`).
+To target a different VTK version, run `./setup_vtk.sh <version>` first, then repeat this step with a matching output path (e.g. `--opath vtk-rs-9.1` as included in the repository).
 
 ## Roadmap
 1. [x] Stabilize Build system

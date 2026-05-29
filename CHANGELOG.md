@@ -1,11 +1,14 @@
 ## [0.3.0] - 2026-05-29
+This change will introduce the new feature of automatically creating the hierarchy. Additionally, tests were added for all the core functionalities of `vtk-gen` (not complete for possible edge cases, focused on straight forward functionality assessment). Most other changes are a result of getting everything to build without errors (e.g. handling rust keywords, handling different cpp pointers, ...).
+
+Detailed summary:
 
 ### Added
 - `vtkFiltersSources` module is now generated and linked, adding `SphereSource` and 20+ other source classes.
 - Re-export all constructable VTK classes at the crate root with the `vtk` prefix stripped (e.g. `vtk_rs::SphereSource`, `vtk_rs::NamedColors`).
 - `pub mod prelude` in the generated `lib.rs` that re-exports all module contents via glob, enabling `use vtk_rs::prelude::*` for ergonomic trait method access without explicit trait imports.
 - `sphere_source` example in `vtk-rs-9.1/examples/`, runnable via `cargo run --example sphere_source -p vtk-rs`.
-- `has_ancestor(class_name, target) -> bool` on `ClassHierarchy` — iterative DFS to walk the full ancestor chain (not just direct parents). Used to correctly detect `vtkObjectBase` ancestry across deep inheritance hierarchies.
+- `has_ancestor(class_name, target) -> bool` on `ClassHierarchy` -> iterative DFS to walk the full ancestor chain (not just direct parents). Used to correctly detect `vtkObjectBase` ancestry across deep inheritance hierarchies.
 - `IRStruct::has_vtk_object_base_ancestor: bool` field, computed via `has_ancestor` rather than checking direct parents only, fixing `is_constructable()` for deeply inherited classes.
 - `IRMethod::vtk_name: String` field (PascalCase VTK method name) and `short_name()` helper for generating clean Rust method names.
 - `c_signed_char` IR type to distinguish VTK's explicitly-typed `signed char` (used in typed data arrays such as `vtkSignedCharArray`) from plain `char` (used for C strings). `CppType::PlainChar` added to the C++ parser for the same reason.
@@ -25,7 +28,7 @@
 - **`vtkNew<T>` ABI mismatch in generated C++ wrappers**: `vtkNew<T>` has a non-trivial destructor, so passing or returning it by value in `extern "C"` functions violates the x86-64 SysV ABI and causes the wrapped VTK object to be destroyed on every method call. Constructor, destructor, get-ptr, and all method wrappers now use raw `T*` (`T::New()` / `sself->Delete()` / `return sself`) instead of `vtkNew<T>`.
 - **`std::string` return types** (`IRType::String`): bridging `std::string` as `const char*` is illegal (dangling pointer). These methods are now skipped on both the Rust and C++ sides.
 - **`const char*` vs `const char* const*`**: `StarStarConst` and `StarStar` now always bail instead of incorrectly reducing to a single pointer.
-- **Mutable `char**` output parameters**: `StarStar` always bails — VTK_FILEPATH uses `pointer="*"` in the actual XML, never `pointer="**"`. The previous special-case for `Const(SignedChar)**` was unreachable dead code and has been removed.
+- **Mutable `char**` output parameters**: `StarStar` always bails -> VTK_FILEPATH uses `pointer="*"` in the actual XML, never `pointer="**"`. The previous special-case for `Const(SignedChar)**` was unreachable dead code and has been removed.
 - **Mutable `char*` vs `signed char*`**: `Pointer(c_char)` (without `Const`) is now rejected on both Rust and C++ sides — VTK typed-data-array methods use `signed char*`, which is not implicitly convertible from `char*` in C++.
 - **`signed char*` data array methods**: Separated `CppType::PlainChar` (`"char"`) from `CppType::SignedChar` (`"signed char"`) so typed-data-array parameters (`const signed char*`) generate the correct C++ type and are rejected at the Rust FFI boundary (not safely bridgeable without element-count information).
 - **`Path` types by value/reference** (e.g. `const vtkStdString&`, `vtkColor3ub`): rejected in `ir_type_is_supported`; VTK object types are only bridgeable as opaque pointers.
