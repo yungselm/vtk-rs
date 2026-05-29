@@ -482,7 +482,7 @@ mod gen_cpp_tests {
         s.method_to_cpp(&m, &mut out).unwrap();
         let src = String::from_utf8(out).unwrap();
         assert!(src.contains("extern \"C\" void vtk_foo_update"));
-        assert!(src.contains("vtkNew<vtkFoo> sself"));
+        assert!(src.contains("vtkFoo* sself"));
         assert!(src.contains("sself->Update()"));
     }
 
