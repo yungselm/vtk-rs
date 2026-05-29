@@ -89,6 +89,9 @@ mkdir -p "${VTK_BUILD}"
 #     VTK <= 9.1 (out-of-sync header/impl: missing EndiannessType, DataFormat
 #     members and std::int32_t). Safe to hard-disable: vtk-gen only reads
 #     vtkCommon* XML.
+#   - libproj (ThirdParty): bundled PROJ library uses std::int64_t without
+#     including <cstdint>; fails on GCC >= 13. Pulled in by IO/GeoJSON and
+#     similar StandAlone modules we don't need.
 cmake -S "${VTK_SRC}" -B "${VTK_BUILD}" \
     -DVTK_WRAP_PYTHON=ON \
     -DVTK_WRAP_JAVA=OFF \
@@ -98,6 +101,7 @@ cmake -S "${VTK_SRC}" -B "${VTK_BUILD}" \
     -DVTK_MODULE_ENABLE_VTK_CommonArchive=DONT_WANT \
     -DVTK_MODULE_ENABLE_VTK_CommonPython=DONT_WANT \
     -DVTK_MODULE_ENABLE_VTK_IOImage=NO \
+    -DVTK_MODULE_ENABLE_VTK_libproj=NO \
     -DVTK_GROUP_ENABLE_Rendering=DONT_WANT \
     -DVTK_GROUP_ENABLE_Qt=DONT_WANT \
     -DVTK_GROUP_ENABLE_Web=DONT_WANT \
