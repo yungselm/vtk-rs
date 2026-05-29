@@ -293,14 +293,8 @@ impl IRStruct {
             return;
         })?;
 
-        let get_ptr = self.get_ptr_binding_name();
-        let func3 = cpp!(extern "C" void* #get_ptr(#ty* sself) {
-            return sself;
-        })?;
-
         writeln!(writer, "{func1}")?;
         writeln!(writer, "{func2}")?;
-        writeln!(writer, "{func3}")?;
         Ok(())
     }
 
@@ -312,12 +306,8 @@ impl IRStruct {
         let destructor = self.destructor_binding_name();
         let func2 = cpp!(extern "C" void #destructor(#ty* sself);)?;
 
-        let get_ptr = self.get_ptr_binding_name();
-        let func3 = cpp!(extern "C" void* #get_ptr(#ty* sself);)?;
-
         writeln!(writer, "{func1}")?;
         writeln!(writer, "{func2}")?;
-        writeln!(writer, "{func3}")?;
         Ok(())
     }
 }

@@ -7,7 +7,7 @@ Detailed summary:
 - `vtkFiltersSources` module is now generated and linked, adding `SphereSource` and 20+ other source classes.
 - Re-export all constructable VTK classes at the crate root with the `vtk` prefix stripped (e.g. `vtk_rs::SphereSource`, `vtk_rs::NamedColors`).
 - `pub mod prelude` in the generated `lib.rs` that re-exports all module contents via glob, enabling `use vtk_rs::prelude::*` for ergonomic trait method access without explicit trait imports.
-- `sphere_source` example in `vtk-rs-9.1/examples/`, runnable via `cargo run --example sphere_source -p vtk-rs`.
+- `sphere_source` example in `examples/` (workspace root), runnable via `cargo run --example sphere_source`.
 - `has_ancestor(class_name, target) -> bool` on `ClassHierarchy` -> iterative DFS to walk the full ancestor chain (not just direct parents). Used to correctly detect `vtkObjectBase` ancestry across deep inheritance hierarchies.
 - `IRStruct::has_vtk_object_base_ancestor: bool` field, computed via `has_ancestor` rather than checking direct parents only, fixing `is_constructable()` for deeply inherited classes.
 - `IRMethod::vtk_name: String` field (PascalCase VTK method name) and `short_name()` helper for generating clean Rust method names.
