@@ -32,7 +32,7 @@ pub fn get_modules(path: impl Into<std::path::PathBuf>) -> Result<Vec<Module>> {
             let files = glob::glob(
                 path.join("*")
                     .to_str()
-                    .context("could not convert path tot string")?,
+                    .context("could not convert path to String")?,
             )?
             .map(|x| {
                 let f = x?.to_path_buf();
