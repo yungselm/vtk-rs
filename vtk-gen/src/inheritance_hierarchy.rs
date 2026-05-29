@@ -88,6 +88,26 @@ impl ClassHierarchy {
             .filter_map(|name| self.classes.get(name))
     }
 
+    /// Returns true if `target` appears anywhere in the full ancestor chain of `class_name`.
+    pub fn has_ancestor(&self, class_name: &str, target: &str) -> bool {
+        let mut stack = vec![class_name.to_string()];
+        let mut visited = std::collections::HashSet::new();
+        while let Some(current) = stack.pop() {
+            if !visited.insert(current.clone()) {
+                continue;
+            }
+            if let Some((_, parents)) = self.tree.get(&current) {
+                for parent in parents {
+                    if parent == target {
+                        return true;
+                    }
+                    stack.push(parent.clone());
+                }
+            }
+        }
+        false
+    }
+
     pub fn has_dependant(&self, class: &Class) -> bool {
         self.dependents
             .get(&class.name.clone())

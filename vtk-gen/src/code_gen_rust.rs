@@ -109,9 +109,15 @@ fn is_string_type(irtype: &crate::IRType) -> bool {
 /// Rust type used in the trait method signature (user-facing).
 fn ir_type_as_param_sig(irtype: &crate::IRType) -> TokenStream {
     if is_string_type(irtype) {
-        quote::quote!(&str)
-    } else {
-        quote::quote!(#irtype)
+        return quote::quote!(&str);
+    }
+    match irtype {
+        // VTK object pointers are always passed as opaque c_void pointers across the C bridge.
+        crate::IRType::Path(_) => quote::quote!(*mut core::ffi::c_void),
+        crate::IRType::Pointer(inner) if matches!(inner.as_ref(), crate::IRType::Path(_)) => {
+            quote::quote!(*mut core::ffi::c_void)
+        }
+        _ => quote::quote!(#irtype),
     }
 }
 

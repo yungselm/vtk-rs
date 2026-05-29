@@ -169,6 +169,8 @@ pub struct IRStruct {
     pub is_abstract: bool,
     pub is_template: bool,
     pub filename: String,
+    /// True when vtkObjectBase appears anywhere in the full ancestor chain (not just direct parents).
+    pub has_vtk_object_base_ancestor: bool,
     constructors: Vec<crate::parse_wrap_vtk_xml::Constructor>,
     destructors: Vec<crate::parse_wrap_vtk_xml::Destructor>,
 }
@@ -196,7 +198,7 @@ impl IRStruct {
             && !self.exposable_methods.is_empty()
             // This could be lifted in the future when considering objects which can be constructed
             // not via vtkNew<..>()
-            && self.parents.iter().any(|c| c == "vtkObjectBase")
+            && self.has_vtk_object_base_ancestor
     }
 }
 
@@ -256,6 +258,8 @@ impl IRModule {
                         is_abstract: class.is_abstract,
                         is_template: class.is_template,
                         filename: filename.clone(),
+                        has_vtk_object_base_ancestor: class_hierarchy
+                            .has_ancestor(&class.name, "vtkObjectBase"),
                         constructors: class.constructors,
                         destructors: class.destructors,
                     },
@@ -300,6 +304,7 @@ impl IRStruct {
             is_abstract: false,
             is_template: false,
             filename: format!("{}.h", name),
+            has_vtk_object_base_ancestor: parents.contains(&"vtkObjectBase"),
             constructors: vec![Constructor {
                 access: Access::Public,
                 signature: String::new(),
