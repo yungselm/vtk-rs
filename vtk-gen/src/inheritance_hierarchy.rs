@@ -138,7 +138,7 @@ impl ClassHierarchy {
 }
 
 #[cfg(test)]
-mod tests {
+mod inheritance_tests {
     use super::*;
     use crate::parse_wrap_vtk_xml::{
         Access, CContext, Class, Constructor, Destructor, File, Inheritance, Method, Methods,
