@@ -1,156 +1,28 @@
 pub trait VtkAbstractTransform {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn transform_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn transform_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn transform_point(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_point(
-        &mut self,
-        point: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_float_point(
-        &mut self,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-        z: core::ffi::c_float,
-    ) -> *mut core::ffi::c_float;
-    fn transform_float_point(
-        &mut self,
-        point: core::ffi::c_float,
-    ) -> *mut core::ffi::c_float;
-    fn transform_double_point(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_double_point(
-        &mut self,
-        point: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_normal_at_point(
-        &mut self,
-        point: core::ffi::c_float,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn transform_normal_at_point(
-        &mut self,
-        point: core::ffi::c_double,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn transform_normal_at_point(
-        &mut self,
-        point: core::ffi::c_double,
-        normal: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_double_normal_at_point(
-        &mut self,
-        point: core::ffi::c_double,
-        normal: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_float_normal_at_point(
-        &mut self,
-        point: core::ffi::c_float,
-        normal: core::ffi::c_float,
-    ) -> *mut core::ffi::c_float;
-    fn transform_vector_at_point(
-        &mut self,
-        point: core::ffi::c_float,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn transform_vector_at_point(
-        &mut self,
-        point: core::ffi::c_double,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn transform_vector_at_point(
-        &mut self,
-        point: core::ffi::c_double,
-        vector: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_double_vector_at_point(
-        &mut self,
-        point: core::ffi::c_double,
-        vector: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_float_vector_at_point(
-        &mut self,
-        point: core::ffi::c_float,
-        vector: core::ffi::c_float,
-    ) -> *mut core::ffi::c_float;
     fn transform_points(
         &mut self,
         inPts: *mut core::ffi::c_void,
         outPts: *mut core::ffi::c_void,
-    ) -> ();
-    fn transform_points_normals_vectors(
-        &mut self,
-        inPts: *mut core::ffi::c_void,
-        outPts: *mut core::ffi::c_void,
-        inNms: *mut core::ffi::c_void,
-        outNms: *mut core::ffi::c_void,
-        inVrs: *mut core::ffi::c_void,
-        outVrs: *mut core::ffi::c_void,
-        nOptionalVectors: core::ffi::c_int,
-        inVrsArr: *mut core::ffi::c_void,
-        outVrsArr: *mut core::ffi::c_void,
     ) -> ();
     fn get_inverse(&mut self) -> *mut core::ffi::c_void;
     fn set_inverse(&mut self, transform: *mut core::ffi::c_void) -> ();
     fn inverse(&mut self) -> ();
     fn deep_copy(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn update(&mut self) -> ();
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-        derivative: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-        derivative: core::ffi::c_double,
-    ) -> ();
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
     fn circuit_check(&mut self, transform: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
     fn un_register(&mut self, O: *mut core::ffi::c_void) -> ();
 }
-pub trait VtkCylindricalTransform: VtkWarpTransform + VtkAbstractTransform {
+pub trait VtkCylindricalTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkGeneralTransform: VtkAbstractTransform {
+pub trait VtkGeneralTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -162,24 +34,12 @@ pub trait VtkGeneralTransform: VtkAbstractTransform {
         y: core::ffi::c_double,
         z: core::ffi::c_double,
     ) -> ();
-    fn translate(&mut self, x: core::ffi::c_double) -> ();
-    fn translate(&mut self, x: core::ffi::c_float) -> ();
     fn rotate_wxyz(
         &mut self,
         angle: core::ffi::c_double,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
-    ) -> ();
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_double,
-    ) -> ();
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_float,
     ) -> ();
     fn rotate_x(&mut self, angle: core::ffi::c_double) -> ();
     fn rotate_y(&mut self, angle: core::ffi::c_double) -> ();
@@ -190,11 +50,7 @@ pub trait VtkGeneralTransform: VtkAbstractTransform {
         y: core::ffi::c_double,
         z: core::ffi::c_double,
     ) -> ();
-    fn scale(&mut self, s: core::ffi::c_double) -> ();
-    fn scale(&mut self, s: core::ffi::c_float) -> ();
     fn concatenate(&mut self, matrix: *mut core::ffi::c_void) -> ();
-    fn concatenate(&mut self, elements: core::ffi::c_double) -> ();
-    fn concatenate(&mut self, transform: *mut core::ffi::c_void) -> ();
     fn pre_multiply(&mut self) -> ();
     fn post_multiply(&mut self) -> ();
     fn get_number_of_concatenated_transforms(&mut self) -> core::ffi::c_int;
@@ -207,68 +63,23 @@ pub trait VtkGeneralTransform: VtkAbstractTransform {
     fn get_inverse_flag(&mut self) -> core::ffi::c_int;
     fn push(&mut self) -> ();
     fn pop(&mut self) -> ();
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-        derivative: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-        derivative: core::ffi::c_double,
-    ) -> ();
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
 }
-pub trait VtkHomogeneousTransform: VtkAbstractTransform {
+pub trait VtkHomogeneousTransform {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_matrix(&mut self, m: *mut core::ffi::c_void) -> ();
-    fn get_matrix(&mut self) -> *mut core::ffi::c_void;
     fn get_homogeneous_inverse(&mut self) -> *mut core::ffi::c_void;
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-        derivative: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-        derivative: core::ffi::c_double,
-    ) -> ();
 }
-pub trait VtkIdentityTransform: VtkLinearTransform + VtkHomogeneousTransform + VtkAbstractTransform {
+pub trait VtkIdentityTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn inverse(&mut self) -> ();
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkLandmarkTransform: VtkLinearTransform + VtkHomogeneousTransform + VtkAbstractTransform {
+pub trait VtkLandmarkTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -281,94 +92,14 @@ pub trait VtkLandmarkTransform: VtkLinearTransform + VtkHomogeneousTransform + V
     fn set_mode_to_similarity(&mut self) -> ();
     fn set_mode_to_affine(&mut self) -> ();
     fn get_mode(&mut self) -> core::ffi::c_int;
-    fn get_mode_as_string(&mut self) -> *const core::ffi::c_char;
+    fn get_mode_as_string(&mut self) -> &str;
     fn inverse(&mut self) -> ();
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkLinearTransform: VtkHomogeneousTransform + VtkAbstractTransform {
+pub trait VtkLinearTransform {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn transform_normal(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn transform_normal(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn transform_normal(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_normal(
-        &mut self,
-        normal: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_float_normal(
-        &mut self,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-        z: core::ffi::c_float,
-    ) -> *mut core::ffi::c_float;
-    fn transform_float_normal(
-        &mut self,
-        normal: core::ffi::c_float,
-    ) -> *mut core::ffi::c_float;
-    fn transform_double_normal(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_double_normal(
-        &mut self,
-        normal: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_vector(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_vector(
-        &mut self,
-        normal: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_vector(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn transform_vector(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn transform_float_vector(
-        &mut self,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-        z: core::ffi::c_float,
-    ) -> *mut core::ffi::c_float;
-    fn transform_float_vector(
-        &mut self,
-        vec: core::ffi::c_float,
-    ) -> *mut core::ffi::c_float;
-    fn transform_double_vector(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
-    fn transform_double_vector(
-        &mut self,
-        vec: core::ffi::c_double,
-    ) -> *mut core::ffi::c_double;
     fn transform_normals(
         &mut self,
         inNms: *mut core::ffi::c_void,
@@ -380,28 +111,8 @@ pub trait VtkLinearTransform: VtkHomogeneousTransform + VtkAbstractTransform {
         outVrs: *mut core::ffi::c_void,
     ) -> ();
     fn get_linear_inverse(&mut self) -> *mut core::ffi::c_void;
-    fn internal_transform_normal(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_normal(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn internal_transform_vector(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_vector(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
 }
-pub trait VtkMatrixToHomogeneousTransform: VtkHomogeneousTransform + VtkAbstractTransform {
+pub trait VtkMatrixToHomogeneousTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -411,7 +122,7 @@ pub trait VtkMatrixToHomogeneousTransform: VtkHomogeneousTransform + VtkAbstract
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkMatrixToLinearTransform: VtkLinearTransform + VtkHomogeneousTransform + VtkAbstractTransform {
+pub trait VtkMatrixToLinearTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -421,7 +132,7 @@ pub trait VtkMatrixToLinearTransform: VtkLinearTransform + VtkHomogeneousTransfo
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkPerspectiveTransform: VtkHomogeneousTransform + VtkAbstractTransform {
+pub trait VtkPerspectiveTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -483,12 +194,6 @@ pub trait VtkPerspectiveTransform: VtkHomogeneousTransform + VtkAbstractTransfor
     ) -> ();
     fn setup_camera(
         &mut self,
-        position: core::ffi::c_double,
-        focalpoint: core::ffi::c_double,
-        viewup: core::ffi::c_double,
-    ) -> ();
-    fn setup_camera(
-        &mut self,
         p0: core::ffi::c_double,
         p1: core::ffi::c_double,
         p2: core::ffi::c_double,
@@ -505,24 +210,12 @@ pub trait VtkPerspectiveTransform: VtkHomogeneousTransform + VtkAbstractTransfor
         y: core::ffi::c_double,
         z: core::ffi::c_double,
     ) -> ();
-    fn translate(&mut self, x: core::ffi::c_double) -> ();
-    fn translate(&mut self, x: core::ffi::c_float) -> ();
     fn rotate_wxyz(
         &mut self,
         angle: core::ffi::c_double,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
-    ) -> ();
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_double,
-    ) -> ();
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_float,
     ) -> ();
     fn rotate_x(&mut self, angle: core::ffi::c_double) -> ();
     fn rotate_y(&mut self, angle: core::ffi::c_double) -> ();
@@ -533,13 +226,8 @@ pub trait VtkPerspectiveTransform: VtkHomogeneousTransform + VtkAbstractTransfor
         y: core::ffi::c_double,
         z: core::ffi::c_double,
     ) -> ();
-    fn scale(&mut self, s: core::ffi::c_double) -> ();
-    fn scale(&mut self, s: core::ffi::c_float) -> ();
     fn set_matrix(&mut self, matrix: *mut core::ffi::c_void) -> ();
-    fn set_matrix(&mut self, elements: core::ffi::c_double) -> ();
     fn concatenate(&mut self, matrix: *mut core::ffi::c_void) -> ();
-    fn concatenate(&mut self, elements: core::ffi::c_double) -> ();
-    fn concatenate(&mut self, transform: *mut core::ffi::c_void) -> ();
     fn pre_multiply(&mut self) -> ();
     fn post_multiply(&mut self) -> ();
     fn get_number_of_concatenated_transforms(&mut self) -> core::ffi::c_int;
@@ -555,13 +243,13 @@ pub trait VtkPerspectiveTransform: VtkHomogeneousTransform + VtkAbstractTransfor
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
 }
-pub trait VtkSphericalTransform: VtkWarpTransform + VtkAbstractTransform {
+pub trait VtkSphericalTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkThinPlateSplineTransform: VtkWarpTransform + VtkAbstractTransform {
+pub trait VtkThinPlateSplineTransform {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -571,7 +259,7 @@ pub trait VtkThinPlateSplineTransform: VtkWarpTransform + VtkAbstractTransform {
     fn get_basis(&mut self) -> core::ffi::c_int;
     fn set_basis_to_r(&mut self) -> ();
     fn set_basis_to_r_2_log_r(&mut self) -> ();
-    fn get_basis_as_string(&mut self) -> *const core::ffi::c_char;
+    fn get_basis_as_string(&mut self) -> &str;
     fn set_basis_function(&mut self, U: *mut core::ffi::c_void) -> ();
     fn set_basis_derivative(&mut self, dUdr: *mut core::ffi::c_void) -> ();
     fn set_source_landmarks(&mut self, source: *mut core::ffi::c_void) -> ();
@@ -585,7 +273,7 @@ pub trait VtkThinPlateSplineTransform: VtkWarpTransform + VtkAbstractTransform {
     fn regularize_bulk_transform_on(&mut self) -> ();
     fn regularize_bulk_transform_off(&mut self) -> ();
 }
-pub trait VtkTransform: VtkLinearTransform + VtkHomogeneousTransform + VtkAbstractTransform {
+pub trait VtkTransform {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -597,24 +285,12 @@ pub trait VtkTransform: VtkLinearTransform + VtkHomogeneousTransform + VtkAbstra
         y: core::ffi::c_double,
         z: core::ffi::c_double,
     ) -> ();
-    fn translate(&mut self, x: core::ffi::c_double) -> ();
-    fn translate(&mut self, x: core::ffi::c_float) -> ();
     fn rotate_wxyz(
         &mut self,
         angle: core::ffi::c_double,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
-    ) -> ();
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_double,
-    ) -> ();
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_float,
     ) -> ();
     fn rotate_x(&mut self, angle: core::ffi::c_double) -> ();
     fn rotate_y(&mut self, angle: core::ffi::c_double) -> ();
@@ -625,13 +301,8 @@ pub trait VtkTransform: VtkLinearTransform + VtkHomogeneousTransform + VtkAbstra
         y: core::ffi::c_double,
         z: core::ffi::c_double,
     ) -> ();
-    fn scale(&mut self, s: core::ffi::c_double) -> ();
-    fn scale(&mut self, s: core::ffi::c_float) -> ();
     fn set_matrix(&mut self, matrix: *mut core::ffi::c_void) -> ();
-    fn set_matrix(&mut self, elements: core::ffi::c_double) -> ();
     fn concatenate(&mut self, matrix: *mut core::ffi::c_void) -> ();
-    fn concatenate(&mut self, elements: core::ffi::c_double) -> ();
-    fn concatenate(&mut self, transform: *mut core::ffi::c_void) -> ();
     fn pre_multiply(&mut self) -> ();
     fn post_multiply(&mut self) -> ();
     fn get_number_of_concatenated_transforms(&mut self) -> core::ffi::c_int;
@@ -639,23 +310,6 @@ pub trait VtkTransform: VtkLinearTransform + VtkHomogeneousTransform + VtkAbstra
         &mut self,
         i: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
-    fn get_orientation(&mut self, orient: core::ffi::c_double) -> ();
-    fn get_orientation(&mut self, orient: core::ffi::c_float) -> ();
-    fn get_orientation(&mut self) -> *mut core::ffi::c_double;
-    fn get_orientation(
-        &mut self,
-        orient: core::ffi::c_double,
-        matrix: *mut core::ffi::c_void,
-    ) -> ();
-    fn get_orientation_wxyz(&mut self, wxyz: core::ffi::c_double) -> ();
-    fn get_orientation_wxyz(&mut self, wxyz: core::ffi::c_float) -> ();
-    fn get_orientation_wxyz(&mut self) -> *mut core::ffi::c_double;
-    fn get_position(&mut self, pos: core::ffi::c_double) -> ();
-    fn get_position(&mut self, pos: core::ffi::c_float) -> ();
-    fn get_position(&mut self) -> *mut core::ffi::c_double;
-    fn get_scale(&mut self, scale: core::ffi::c_double) -> ();
-    fn get_scale(&mut self, scale: core::ffi::c_float) -> ();
-    fn get_scale(&mut self) -> *mut core::ffi::c_double;
     fn get_inverse(&mut self, inverse: *mut core::ffi::c_void) -> ();
     fn get_transpose(&mut self, transpose: *mut core::ffi::c_void) -> ();
     fn set_input(&mut self, input: *mut core::ffi::c_void) -> ();
@@ -665,12 +319,6 @@ pub trait VtkTransform: VtkLinearTransform + VtkHomogeneousTransform + VtkAbstra
     fn pop(&mut self) -> ();
     fn make_transform(&mut self) -> *mut core::ffi::c_void;
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
-    fn multiply_point(&mut self, in_: core::ffi::c_float, out: core::ffi::c_float) -> ();
-    fn multiply_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
 }
 pub trait VtkTransform2D {
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -679,63 +327,13 @@ pub trait VtkTransform2D {
     fn identity(&mut self) -> ();
     fn inverse(&mut self) -> ();
     fn translate(&mut self, x: core::ffi::c_double, y: core::ffi::c_double) -> ();
-    fn translate(&mut self, x: core::ffi::c_double) -> ();
-    fn translate(&mut self, x: core::ffi::c_float) -> ();
     fn rotate(&mut self, angle: core::ffi::c_double) -> ();
     fn scale(&mut self, x: core::ffi::c_double, y: core::ffi::c_double) -> ();
-    fn scale(&mut self, s: core::ffi::c_double) -> ();
-    fn scale(&mut self, s: core::ffi::c_float) -> ();
     fn set_matrix(&mut self, matrix: *mut core::ffi::c_void) -> ();
-    fn set_matrix(&mut self, elements: core::ffi::c_double) -> ();
     fn get_matrix(&mut self) -> *mut core::ffi::c_void;
-    fn get_matrix(&mut self, matrix: *mut core::ffi::c_void) -> ();
-    fn get_position(&mut self, pos: core::ffi::c_double) -> ();
-    fn get_position(&mut self, pos: core::ffi::c_float) -> ();
-    fn get_scale(&mut self, scale: core::ffi::c_double) -> ();
-    fn get_scale(&mut self, pos: core::ffi::c_float) -> ();
     fn get_inverse(&mut self, inverse: *mut core::ffi::c_void) -> ();
     fn get_transpose(&mut self, transpose: *mut core::ffi::c_void) -> ();
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
-    fn transform_points(
-        &mut self,
-        inPts: core::ffi::c_float,
-        outPts: core::ffi::c_float,
-        n: core::ffi::c_int,
-    ) -> ();
-    fn transform_points(
-        &mut self,
-        inPts: core::ffi::c_double,
-        outPts: core::ffi::c_double,
-        n: core::ffi::c_int,
-    ) -> ();
-    fn transform_points(
-        &mut self,
-        inPts: *mut core::ffi::c_void,
-        outPts: *mut core::ffi::c_void,
-    ) -> ();
-    fn inverse_transform_points(
-        &mut self,
-        inPts: core::ffi::c_float,
-        outPts: core::ffi::c_float,
-        n: core::ffi::c_int,
-    ) -> ();
-    fn inverse_transform_points(
-        &mut self,
-        inPts: core::ffi::c_double,
-        outPts: core::ffi::c_double,
-        n: core::ffi::c_int,
-    ) -> ();
-    fn inverse_transform_points(
-        &mut self,
-        inPts: *mut core::ffi::c_void,
-        outPts: *mut core::ffi::c_void,
-    ) -> ();
-    fn multiply_point(&mut self, in_: core::ffi::c_float, out: core::ffi::c_float) -> ();
-    fn multiply_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
 }
 pub trait VtkTransformCollection {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
@@ -743,13 +341,11 @@ pub trait VtkTransformCollection {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn add_item(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn get_next_item(&mut self) -> *mut core::ffi::c_void;
-    fn get_next_transform(&mut self, cookie: ()) -> *mut core::ffi::c_void;
 }
 pub trait VtkTransformConcatenation {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn delete(&mut self) -> ();
     fn concatenate(&mut self, transform: *mut core::ffi::c_void) -> ();
-    fn concatenate(&mut self, elements: core::ffi::c_double) -> ();
     fn set_pre_multiply_flag(&mut self, flag: core::ffi::c_int) -> ();
     fn get_pre_multiply_flag(&mut self) -> core::ffi::c_int;
     fn translate(
@@ -784,14 +380,12 @@ pub trait VtkTransformConcatenation {
 pub trait VtkTransformConcatenationStack {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn delete(&mut self) -> ();
-    fn pop(&mut self, concat: *mut core::ffi::c_void) -> ();
-    fn push(&mut self, concat: *mut core::ffi::c_void) -> ();
     fn deep_copy(&mut self, stack: *mut core::ffi::c_void) -> ();
 }
 pub trait VtkTransformPair {
     fn swap_forward_inverse(&mut self) -> ();
 }
-pub trait VtkWarpTransform: VtkAbstractTransform {
+pub trait VtkWarpTransform {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn inverse(&mut self) -> ();
@@ -800,72 +394,6 @@ pub trait VtkWarpTransform: VtkAbstractTransform {
     fn get_inverse_tolerance(&mut self) -> core::ffi::c_double;
     fn set_inverse_iterations(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_inverse_iterations(&mut self) -> core::ffi::c_int;
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-        derivative: core::ffi::c_float,
-    ) -> ();
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-        derivative: core::ffi::c_double,
-    ) -> ();
-    fn template_transform_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn template_transform_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn template_transform_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-        derivative: core::ffi::c_float,
-    ) -> ();
-    fn template_transform_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-        derivative: core::ffi::c_double,
-    ) -> ();
-    fn template_transform_inverse(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> ();
-    fn template_transform_inverse(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> ();
-    fn template_transform_inverse(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-        derivative: core::ffi::c_float,
-    ) -> ();
-    fn template_transform_inverse(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-        derivative: core::ffi::c_double,
-    ) -> ();
 }
 impl VtkCylindricalTransform for vtkCylindricalTransform {
     fn new(&mut self) -> *mut core::ffi::c_void {
@@ -956,24 +484,6 @@ impl VtkGeneralTransform for vtkGeneralTransform {
         }
         unsafe { vtk_general_transform_translate(self.0, x, y, z) }
     }
-    fn translate(&mut self, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_translate(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_general_transform_translate(self.0, x) }
-    }
-    fn translate(&mut self, x: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_translate(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_general_transform_translate(self.0, x) }
-    }
     fn rotate_wxyz(
         &mut self,
         angle: core::ffi::c_double,
@@ -991,34 +501,6 @@ impl VtkGeneralTransform for vtkGeneralTransform {
             );
         }
         unsafe { vtk_general_transform_rotate_wxyz(self.0, angle, x, y, z) }
-    }
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_rotate_wxyz(
-                sself: *mut core::ffi::c_void,
-                angle: core::ffi::c_double,
-                axis: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_general_transform_rotate_wxyz(self.0, angle, axis) }
-    }
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_rotate_wxyz(
-                sself: *mut core::ffi::c_void,
-                angle: core::ffi::c_double,
-                axis: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_general_transform_rotate_wxyz(self.0, angle, axis) }
     }
     fn rotate_x(&mut self, angle: core::ffi::c_double) -> () {
         unsafe extern "C" {
@@ -1063,24 +545,6 @@ impl VtkGeneralTransform for vtkGeneralTransform {
         }
         unsafe { vtk_general_transform_scale(self.0, x, y, z) }
     }
-    fn scale(&mut self, s: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_scale(
-                sself: *mut core::ffi::c_void,
-                s: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_general_transform_scale(self.0, s) }
-    }
-    fn scale(&mut self, s: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_scale(
-                sself: *mut core::ffi::c_void,
-                s: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_general_transform_scale(self.0, s) }
-    }
     fn concatenate(&mut self, matrix: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_general_transform_concatenate(
@@ -1089,24 +553,6 @@ impl VtkGeneralTransform for vtkGeneralTransform {
             );
         }
         unsafe { vtk_general_transform_concatenate(self.0, matrix) }
-    }
-    fn concatenate(&mut self, elements: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_concatenate(
-                sself: *mut core::ffi::c_void,
-                elements: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_general_transform_concatenate(self.0, elements) }
-    }
-    fn concatenate(&mut self, transform: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_concatenate(
-                sself: *mut core::ffi::c_void,
-                transform: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_general_transform_concatenate(self.0, transform) }
     }
     fn pre_multiply(&mut self) -> () {
         unsafe extern "C" {
@@ -1176,80 +622,6 @@ impl VtkGeneralTransform for vtkGeneralTransform {
             fn vtk_general_transform_pop(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_general_transform_pop(self.0) }
-    }
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_internal_transform_point(
-                sself: *mut core::ffi::c_void,
-                in_: core::ffi::c_float,
-                out: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_general_transform_internal_transform_point(self.0, in_, out) }
-    }
-    fn internal_transform_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_internal_transform_point(
-                sself: *mut core::ffi::c_void,
-                in_: core::ffi::c_double,
-                out: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_general_transform_internal_transform_point(self.0, in_, out) }
-    }
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-        derivative: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_internal_transform_derivative(
-                sself: *mut core::ffi::c_void,
-                in_: core::ffi::c_float,
-                out: core::ffi::c_float,
-                derivative: core::ffi::c_float,
-            );
-        }
-        unsafe {
-            vtk_general_transform_internal_transform_derivative(
-                self.0,
-                in_,
-                out,
-                derivative,
-            )
-        }
-    }
-    fn internal_transform_derivative(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-        derivative: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_general_transform_internal_transform_derivative(
-                sself: *mut core::ffi::c_void,
-                in_: core::ffi::c_double,
-                out: core::ffi::c_double,
-                derivative: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_general_transform_internal_transform_derivative(
-                self.0,
-                in_,
-                out,
-                derivative,
-            )
-        }
     }
     fn make_transform(&mut self) -> *mut core::ffi::c_void {
         unsafe extern "C" {
@@ -1408,13 +780,17 @@ impl VtkLandmarkTransform for vtkLandmarkTransform {
         }
         unsafe { vtk_landmark_transform_get_mode(self.0) }
     }
-    fn get_mode_as_string(&mut self) -> *const core::ffi::c_char {
+    fn get_mode_as_string(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_landmark_transform_get_mode_as_string(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_landmark_transform_get_mode_as_string(self.0) }
+        let ptr = unsafe { vtk_landmark_transform_get_mode_as_string(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
     fn inverse(&mut self) -> () {
         unsafe extern "C" {
@@ -1783,24 +1159,6 @@ impl VtkPerspectiveTransform for vtkPerspectiveTransform {
     }
     fn setup_camera(
         &mut self,
-        position: core::ffi::c_double,
-        focalpoint: core::ffi::c_double,
-        viewup: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_setup_camera(
-                sself: *mut core::ffi::c_void,
-                position: core::ffi::c_double,
-                focalpoint: core::ffi::c_double,
-                viewup: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_perspective_transform_setup_camera(self.0, position, focalpoint, viewup)
-        }
-    }
-    fn setup_camera(
-        &mut self,
         p0: core::ffi::c_double,
         p1: core::ffi::c_double,
         p2: core::ffi::c_double,
@@ -1856,24 +1214,6 @@ impl VtkPerspectiveTransform for vtkPerspectiveTransform {
         }
         unsafe { vtk_perspective_transform_translate(self.0, x, y, z) }
     }
-    fn translate(&mut self, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_translate(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_perspective_transform_translate(self.0, x) }
-    }
-    fn translate(&mut self, x: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_translate(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_perspective_transform_translate(self.0, x) }
-    }
     fn rotate_wxyz(
         &mut self,
         angle: core::ffi::c_double,
@@ -1891,34 +1231,6 @@ impl VtkPerspectiveTransform for vtkPerspectiveTransform {
             );
         }
         unsafe { vtk_perspective_transform_rotate_wxyz(self.0, angle, x, y, z) }
-    }
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_rotate_wxyz(
-                sself: *mut core::ffi::c_void,
-                angle: core::ffi::c_double,
-                axis: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_perspective_transform_rotate_wxyz(self.0, angle, axis) }
-    }
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_rotate_wxyz(
-                sself: *mut core::ffi::c_void,
-                angle: core::ffi::c_double,
-                axis: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_perspective_transform_rotate_wxyz(self.0, angle, axis) }
     }
     fn rotate_x(&mut self, angle: core::ffi::c_double) -> () {
         unsafe extern "C" {
@@ -1963,24 +1275,6 @@ impl VtkPerspectiveTransform for vtkPerspectiveTransform {
         }
         unsafe { vtk_perspective_transform_scale(self.0, x, y, z) }
     }
-    fn scale(&mut self, s: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_scale(
-                sself: *mut core::ffi::c_void,
-                s: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_perspective_transform_scale(self.0, s) }
-    }
-    fn scale(&mut self, s: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_scale(
-                sself: *mut core::ffi::c_void,
-                s: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_perspective_transform_scale(self.0, s) }
-    }
     fn set_matrix(&mut self, matrix: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_perspective_transform_set_matrix(
@@ -1990,15 +1284,6 @@ impl VtkPerspectiveTransform for vtkPerspectiveTransform {
         }
         unsafe { vtk_perspective_transform_set_matrix(self.0, matrix) }
     }
-    fn set_matrix(&mut self, elements: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_set_matrix(
-                sself: *mut core::ffi::c_void,
-                elements: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_perspective_transform_set_matrix(self.0, elements) }
-    }
     fn concatenate(&mut self, matrix: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_perspective_transform_concatenate(
@@ -2007,24 +1292,6 @@ impl VtkPerspectiveTransform for vtkPerspectiveTransform {
             );
         }
         unsafe { vtk_perspective_transform_concatenate(self.0, matrix) }
-    }
-    fn concatenate(&mut self, elements: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_concatenate(
-                sself: *mut core::ffi::c_void,
-                elements: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_perspective_transform_concatenate(self.0, elements) }
-    }
-    fn concatenate(&mut self, transform: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_perspective_transform_concatenate(
-                sself: *mut core::ffi::c_void,
-                transform: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_perspective_transform_concatenate(self.0, transform) }
     }
     fn pre_multiply(&mut self) -> () {
         unsafe extern "C" {
@@ -2225,13 +1492,17 @@ impl VtkThinPlateSplineTransform for vtkThinPlateSplineTransform {
         }
         unsafe { vtk_thin_plate_spline_transform_set_basis_to_r_2_log_r(self.0) }
     }
-    fn get_basis_as_string(&mut self) -> *const core::ffi::c_char {
+    fn get_basis_as_string(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_thin_plate_spline_transform_get_basis_as_string(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_thin_plate_spline_transform_get_basis_as_string(self.0) }
+        let ptr = unsafe { vtk_thin_plate_spline_transform_get_basis_as_string(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
     fn set_basis_function(&mut self, U: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -2391,24 +1662,6 @@ impl VtkTransform for vtkTransform {
         }
         unsafe { vtk_transform_translate(self.0, x, y, z) }
     }
-    fn translate(&mut self, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_translate(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_translate(self.0, x) }
-    }
-    fn translate(&mut self, x: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_translate(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_translate(self.0, x) }
-    }
     fn rotate_wxyz(
         &mut self,
         angle: core::ffi::c_double,
@@ -2426,34 +1679,6 @@ impl VtkTransform for vtkTransform {
             );
         }
         unsafe { vtk_transform_rotate_wxyz(self.0, angle, x, y, z) }
-    }
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_rotate_wxyz(
-                sself: *mut core::ffi::c_void,
-                angle: core::ffi::c_double,
-                axis: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_rotate_wxyz(self.0, angle, axis) }
-    }
-    fn rotate_wxyz(
-        &mut self,
-        angle: core::ffi::c_double,
-        axis: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_rotate_wxyz(
-                sself: *mut core::ffi::c_void,
-                angle: core::ffi::c_double,
-                axis: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_rotate_wxyz(self.0, angle, axis) }
     }
     fn rotate_x(&mut self, angle: core::ffi::c_double) -> () {
         unsafe extern "C" {
@@ -2498,21 +1723,6 @@ impl VtkTransform for vtkTransform {
         }
         unsafe { vtk_transform_scale(self.0, x, y, z) }
     }
-    fn scale(&mut self, s: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_scale(
-                sself: *mut core::ffi::c_void,
-                s: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_scale(self.0, s) }
-    }
-    fn scale(&mut self, s: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_scale(sself: *mut core::ffi::c_void, s: core::ffi::c_float);
-        }
-        unsafe { vtk_transform_scale(self.0, s) }
-    }
     fn set_matrix(&mut self, matrix: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_transform_set_matrix(
@@ -2522,15 +1732,6 @@ impl VtkTransform for vtkTransform {
         }
         unsafe { vtk_transform_set_matrix(self.0, matrix) }
     }
-    fn set_matrix(&mut self, elements: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_set_matrix(
-                sself: *mut core::ffi::c_void,
-                elements: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_set_matrix(self.0, elements) }
-    }
     fn concatenate(&mut self, matrix: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_transform_concatenate(
@@ -2539,24 +1740,6 @@ impl VtkTransform for vtkTransform {
             );
         }
         unsafe { vtk_transform_concatenate(self.0, matrix) }
-    }
-    fn concatenate(&mut self, elements: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_concatenate(
-                sself: *mut core::ffi::c_void,
-                elements: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_concatenate(self.0, elements) }
-    }
-    fn concatenate(&mut self, transform: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_concatenate(
-                sself: *mut core::ffi::c_void,
-                transform: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_transform_concatenate(self.0, transform) }
     }
     fn pre_multiply(&mut self) -> () {
         unsafe extern "C" {
@@ -2589,124 +1772,6 @@ impl VtkTransform for vtkTransform {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_transform_get_concatenated_transform(self.0, i) }
-    }
-    fn get_orientation(&mut self, orient: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_orientation(
-                sself: *mut core::ffi::c_void,
-                orient: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_get_orientation(self.0, orient) }
-    }
-    fn get_orientation(&mut self, orient: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_orientation(
-                sself: *mut core::ffi::c_void,
-                orient: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_get_orientation(self.0, orient) }
-    }
-    fn get_orientation(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_transform_get_orientation(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_transform_get_orientation(self.0) }
-    }
-    fn get_orientation(
-        &mut self,
-        orient: core::ffi::c_double,
-        matrix: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_orientation(
-                sself: *mut core::ffi::c_void,
-                orient: core::ffi::c_double,
-                matrix: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_transform_get_orientation(self.0, orient, matrix) }
-    }
-    fn get_orientation_wxyz(&mut self, wxyz: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_orientation_wxyz(
-                sself: *mut core::ffi::c_void,
-                wxyz: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_get_orientation_wxyz(self.0, wxyz) }
-    }
-    fn get_orientation_wxyz(&mut self, wxyz: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_orientation_wxyz(
-                sself: *mut core::ffi::c_void,
-                wxyz: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_get_orientation_wxyz(self.0, wxyz) }
-    }
-    fn get_orientation_wxyz(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_transform_get_orientation_wxyz(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_transform_get_orientation_wxyz(self.0) }
-    }
-    fn get_position(&mut self, pos: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_position(
-                sself: *mut core::ffi::c_void,
-                pos: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_get_position(self.0, pos) }
-    }
-    fn get_position(&mut self, pos: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_position(
-                sself: *mut core::ffi::c_void,
-                pos: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_get_position(self.0, pos) }
-    }
-    fn get_position(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_transform_get_position(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_transform_get_position(self.0) }
-    }
-    fn get_scale(&mut self, scale: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_scale(
-                sself: *mut core::ffi::c_void,
-                scale: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_get_scale(self.0, scale) }
-    }
-    fn get_scale(&mut self, scale: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_get_scale(
-                sself: *mut core::ffi::c_void,
-                scale: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_get_scale(self.0, scale) }
-    }
-    fn get_scale(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_transform_get_scale(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_transform_get_scale(self.0) }
     }
     fn get_inverse(&mut self, inverse: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -2779,34 +1844,6 @@ impl VtkTransform for vtkTransform {
         }
         unsafe { vtk_transform_get_m_time(self.0) }
     }
-    fn multiply_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_multiply_point(
-                sself: *mut core::ffi::c_void,
-                in_: core::ffi::c_float,
-                out: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_multiply_point(self.0, in_, out) }
-    }
-    fn multiply_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_multiply_point(
-                sself: *mut core::ffi::c_void,
-                in_: core::ffi::c_double,
-                out: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_multiply_point(self.0, in_, out) }
-    }
 }
 impl VtkTransform2D for vtkTransform2D {
     fn new(&mut self) -> *mut core::ffi::c_void {
@@ -2856,24 +1893,6 @@ impl VtkTransform2D for vtkTransform2D {
         }
         unsafe { vtk_transform_2_d_translate(self.0, x, y) }
     }
-    fn translate(&mut self, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_translate(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_2_d_translate(self.0, x) }
-    }
-    fn translate(&mut self, x: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_translate(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_2_d_translate(self.0, x) }
-    }
     fn rotate(&mut self, angle: core::ffi::c_double) -> () {
         unsafe extern "C" {
             fn vtk_transform_2_d_rotate(
@@ -2893,24 +1912,6 @@ impl VtkTransform2D for vtkTransform2D {
         }
         unsafe { vtk_transform_2_d_scale(self.0, x, y) }
     }
-    fn scale(&mut self, s: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_scale(
-                sself: *mut core::ffi::c_void,
-                s: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_2_d_scale(self.0, s) }
-    }
-    fn scale(&mut self, s: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_scale(
-                sself: *mut core::ffi::c_void,
-                s: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_2_d_scale(self.0, s) }
-    }
     fn set_matrix(&mut self, matrix: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_transform_2_d_set_matrix(
@@ -2920,15 +1921,6 @@ impl VtkTransform2D for vtkTransform2D {
         }
         unsafe { vtk_transform_2_d_set_matrix(self.0, matrix) }
     }
-    fn set_matrix(&mut self, elements: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_set_matrix(
-                sself: *mut core::ffi::c_void,
-                elements: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_2_d_set_matrix(self.0, elements) }
-    }
     fn get_matrix(&mut self) -> *mut core::ffi::c_void {
         unsafe extern "C" {
             fn vtk_transform_2_d_get_matrix(
@@ -2936,51 +1928,6 @@ impl VtkTransform2D for vtkTransform2D {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_transform_2_d_get_matrix(self.0) }
-    }
-    fn get_matrix(&mut self, matrix: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_get_matrix(
-                sself: *mut core::ffi::c_void,
-                matrix: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_transform_2_d_get_matrix(self.0, matrix) }
-    }
-    fn get_position(&mut self, pos: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_get_position(
-                sself: *mut core::ffi::c_void,
-                pos: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_2_d_get_position(self.0, pos) }
-    }
-    fn get_position(&mut self, pos: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_get_position(
-                sself: *mut core::ffi::c_void,
-                pos: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_2_d_get_position(self.0, pos) }
-    }
-    fn get_scale(&mut self, scale: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_get_scale(
-                sself: *mut core::ffi::c_void,
-                scale: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_2_d_get_scale(self.0, scale) }
-    }
-    fn get_scale(&mut self, pos: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_get_scale(
-                sself: *mut core::ffi::c_void,
-                pos: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_2_d_get_scale(self.0, pos) }
     }
     fn get_inverse(&mut self, inverse: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -3007,126 +1954,6 @@ impl VtkTransform2D for vtkTransform2D {
             ) -> core::ffi::c_ulong;
         }
         unsafe { vtk_transform_2_d_get_m_time(self.0) }
-    }
-    fn transform_points(
-        &mut self,
-        inPts: core::ffi::c_float,
-        outPts: core::ffi::c_float,
-        n: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_transform_points(
-                sself: *mut core::ffi::c_void,
-                inPts: core::ffi::c_float,
-                outPts: core::ffi::c_float,
-                n: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_transform_2_d_transform_points(self.0, inPts, outPts, n) }
-    }
-    fn transform_points(
-        &mut self,
-        inPts: core::ffi::c_double,
-        outPts: core::ffi::c_double,
-        n: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_transform_points(
-                sself: *mut core::ffi::c_void,
-                inPts: core::ffi::c_double,
-                outPts: core::ffi::c_double,
-                n: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_transform_2_d_transform_points(self.0, inPts, outPts, n) }
-    }
-    fn transform_points(
-        &mut self,
-        inPts: *mut core::ffi::c_void,
-        outPts: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_transform_points(
-                sself: *mut core::ffi::c_void,
-                inPts: *mut core::ffi::c_void,
-                outPts: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_transform_2_d_transform_points(self.0, inPts, outPts) }
-    }
-    fn inverse_transform_points(
-        &mut self,
-        inPts: core::ffi::c_float,
-        outPts: core::ffi::c_float,
-        n: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_inverse_transform_points(
-                sself: *mut core::ffi::c_void,
-                inPts: core::ffi::c_float,
-                outPts: core::ffi::c_float,
-                n: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_transform_2_d_inverse_transform_points(self.0, inPts, outPts, n) }
-    }
-    fn inverse_transform_points(
-        &mut self,
-        inPts: core::ffi::c_double,
-        outPts: core::ffi::c_double,
-        n: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_inverse_transform_points(
-                sself: *mut core::ffi::c_void,
-                inPts: core::ffi::c_double,
-                outPts: core::ffi::c_double,
-                n: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_transform_2_d_inverse_transform_points(self.0, inPts, outPts, n) }
-    }
-    fn inverse_transform_points(
-        &mut self,
-        inPts: *mut core::ffi::c_void,
-        outPts: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_inverse_transform_points(
-                sself: *mut core::ffi::c_void,
-                inPts: *mut core::ffi::c_void,
-                outPts: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_transform_2_d_inverse_transform_points(self.0, inPts, outPts) }
-    }
-    fn multiply_point(
-        &mut self,
-        in_: core::ffi::c_float,
-        out: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_multiply_point(
-                sself: *mut core::ffi::c_void,
-                in_: core::ffi::c_float,
-                out: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_transform_2_d_multiply_point(self.0, in_, out) }
-    }
-    fn multiply_point(
-        &mut self,
-        in_: core::ffi::c_double,
-        out: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_transform_2_d_multiply_point(
-                sself: *mut core::ffi::c_void,
-                in_: core::ffi::c_double,
-                out: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_transform_2_d_multiply_point(self.0, in_, out) }
     }
 }
 impl VtkTransformCollection for vtkTransformCollection {
@@ -3172,15 +1999,6 @@ impl VtkTransformCollection for vtkTransformCollection {
         }
         unsafe { vtk_transform_collection_get_next_item(self.0) }
     }
-    fn get_next_transform(&mut self, cookie: ()) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_transform_collection_get_next_transform(
-                sself: *mut core::ffi::c_void,
-                cookie: (),
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_transform_collection_get_next_transform(self.0, cookie) }
-    }
 }
 /// cylindrical to rectangular coords and back
 ///
@@ -3198,22 +2016,13 @@ impl VtkTransformCollection for vtkTransformCollection {
 #[allow(non_camel_case_types)]
 pub struct vtkCylindricalTransform(*mut core::ffi::c_void);
 impl vtkCylindricalTransform {
-    /// Creates a new [vtkCylindricalTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkCylindricalTransform] via `vtkCylindricalTransform::New()`
     #[doc(alias = "vtkCylindricalTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkCylindricalTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkCylindricalTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkCylindricalTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkCylindricalTransform_get_ptr(self.0) }
+        Self(unsafe { vtkCylindricalTransform_new() })
     }
 }
 impl std::default::Default for vtkCylindricalTransform {
@@ -3233,12 +2042,8 @@ impl Drop for vtkCylindricalTransform {
 #[test]
 fn test_vtkCylindricalTransform_create_drop() {
     let obj = vtkCylindricalTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkCylindricalTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// allows operations on any transforms
 ///
@@ -3254,22 +2059,13 @@ fn test_vtkCylindricalTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkGeneralTransform(*mut core::ffi::c_void);
 impl vtkGeneralTransform {
-    /// Creates a new [vtkGeneralTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkGeneralTransform] via `vtkGeneralTransform::New()`
     #[doc(alias = "vtkGeneralTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkGeneralTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkGeneralTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkGeneralTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkGeneralTransform_get_ptr(self.0) }
+        Self(unsafe { vtkGeneralTransform_new() })
     }
 }
 impl std::default::Default for vtkGeneralTransform {
@@ -3289,12 +2085,8 @@ impl Drop for vtkGeneralTransform {
 #[test]
 fn test_vtkGeneralTransform_create_drop() {
     let obj = vtkGeneralTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkGeneralTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// a transform that doesn't do anything
 ///
@@ -3307,22 +2099,13 @@ fn test_vtkGeneralTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkIdentityTransform(*mut core::ffi::c_void);
 impl vtkIdentityTransform {
-    /// Creates a new [vtkIdentityTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkIdentityTransform] via `vtkIdentityTransform::New()`
     #[doc(alias = "vtkIdentityTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkIdentityTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkIdentityTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkIdentityTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkIdentityTransform_get_ptr(self.0) }
+        Self(unsafe { vtkIdentityTransform_new() })
     }
 }
 impl std::default::Default for vtkIdentityTransform {
@@ -3342,12 +2125,8 @@ impl Drop for vtkIdentityTransform {
 #[test]
 fn test_vtkIdentityTransform_create_drop() {
     let obj = vtkIdentityTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkIdentityTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// a linear transform specified by two corresponding point sets
 ///
@@ -3366,22 +2145,13 @@ fn test_vtkIdentityTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkLandmarkTransform(*mut core::ffi::c_void);
 impl vtkLandmarkTransform {
-    /// Creates a new [vtkLandmarkTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkLandmarkTransform] via `vtkLandmarkTransform::New()`
     #[doc(alias = "vtkLandmarkTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkLandmarkTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkLandmarkTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkLandmarkTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkLandmarkTransform_get_ptr(self.0) }
+        Self(unsafe { vtkLandmarkTransform_new() })
     }
 }
 impl std::default::Default for vtkLandmarkTransform {
@@ -3401,12 +2171,8 @@ impl Drop for vtkLandmarkTransform {
 #[test]
 fn test_vtkLandmarkTransform_create_drop() {
     let obj = vtkLandmarkTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkLandmarkTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// convert a matrix to a transform
 ///
@@ -3421,22 +2187,13 @@ fn test_vtkLandmarkTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkMatrixToHomogeneousTransform(*mut core::ffi::c_void);
 impl vtkMatrixToHomogeneousTransform {
-    /// Creates a new [vtkMatrixToHomogeneousTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkMatrixToHomogeneousTransform] via `vtkMatrixToHomogeneousTransform::New()`
     #[doc(alias = "vtkMatrixToHomogeneousTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkMatrixToHomogeneousTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkMatrixToHomogeneousTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkMatrixToHomogeneousTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkMatrixToHomogeneousTransform_get_ptr(self.0) }
+        Self(unsafe { vtkMatrixToHomogeneousTransform_new() })
     }
 }
 impl std::default::Default for vtkMatrixToHomogeneousTransform {
@@ -3456,12 +2213,8 @@ impl Drop for vtkMatrixToHomogeneousTransform {
 #[test]
 fn test_vtkMatrixToHomogeneousTransform_create_drop() {
     let obj = vtkMatrixToHomogeneousTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkMatrixToHomogeneousTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// convert a matrix to a transform
 ///
@@ -3476,22 +2229,13 @@ fn test_vtkMatrixToHomogeneousTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkMatrixToLinearTransform(*mut core::ffi::c_void);
 impl vtkMatrixToLinearTransform {
-    /// Creates a new [vtkMatrixToLinearTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkMatrixToLinearTransform] via `vtkMatrixToLinearTransform::New()`
     #[doc(alias = "vtkMatrixToLinearTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkMatrixToLinearTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkMatrixToLinearTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkMatrixToLinearTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkMatrixToLinearTransform_get_ptr(self.0) }
+        Self(unsafe { vtkMatrixToLinearTransform_new() })
     }
 }
 impl std::default::Default for vtkMatrixToLinearTransform {
@@ -3511,12 +2255,8 @@ impl Drop for vtkMatrixToLinearTransform {
 #[test]
 fn test_vtkMatrixToLinearTransform_create_drop() {
     let obj = vtkMatrixToLinearTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkMatrixToLinearTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// describes a 4x4 matrix transformation
 ///
@@ -3547,22 +2287,13 @@ fn test_vtkMatrixToLinearTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkPerspectiveTransform(*mut core::ffi::c_void);
 impl vtkPerspectiveTransform {
-    /// Creates a new [vtkPerspectiveTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkPerspectiveTransform] via `vtkPerspectiveTransform::New()`
     #[doc(alias = "vtkPerspectiveTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkPerspectiveTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkPerspectiveTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkPerspectiveTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkPerspectiveTransform_get_ptr(self.0) }
+        Self(unsafe { vtkPerspectiveTransform_new() })
     }
 }
 impl std::default::Default for vtkPerspectiveTransform {
@@ -3582,12 +2313,8 @@ impl Drop for vtkPerspectiveTransform {
 #[test]
 fn test_vtkPerspectiveTransform_create_drop() {
     let obj = vtkPerspectiveTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkPerspectiveTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// spherical to rectangular coords and back
 ///
@@ -3606,22 +2333,13 @@ fn test_vtkPerspectiveTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkSphericalTransform(*mut core::ffi::c_void);
 impl vtkSphericalTransform {
-    /// Creates a new [vtkSphericalTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkSphericalTransform] via `vtkSphericalTransform::New()`
     #[doc(alias = "vtkSphericalTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkSphericalTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkSphericalTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkSphericalTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkSphericalTransform_get_ptr(self.0) }
+        Self(unsafe { vtkSphericalTransform_new() })
     }
 }
 impl std::default::Default for vtkSphericalTransform {
@@ -3641,12 +2359,8 @@ impl Drop for vtkSphericalTransform {
 #[test]
 fn test_vtkSphericalTransform_create_drop() {
     let obj = vtkSphericalTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkSphericalTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// a nonlinear warp transformation
 ///
@@ -3673,22 +2387,13 @@ fn test_vtkSphericalTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkThinPlateSplineTransform(*mut core::ffi::c_void);
 impl vtkThinPlateSplineTransform {
-    /// Creates a new [vtkThinPlateSplineTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkThinPlateSplineTransform] via `vtkThinPlateSplineTransform::New()`
     #[doc(alias = "vtkThinPlateSplineTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkThinPlateSplineTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkThinPlateSplineTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkThinPlateSplineTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkThinPlateSplineTransform_get_ptr(self.0) }
+        Self(unsafe { vtkThinPlateSplineTransform_new() })
     }
 }
 impl std::default::Default for vtkThinPlateSplineTransform {
@@ -3708,12 +2413,8 @@ impl Drop for vtkThinPlateSplineTransform {
 #[test]
 fn test_vtkThinPlateSplineTransform_create_drop() {
     let obj = vtkThinPlateSplineTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkThinPlateSplineTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// describes linear transformations via a 4x4 matrix
 ///
@@ -3745,22 +2446,13 @@ fn test_vtkThinPlateSplineTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkTransform(*mut core::ffi::c_void);
 impl vtkTransform {
-    /// Creates a new [vtkTransform] wrapped inside `vtkNew`
+    /// Creates a new [vtkTransform] via `vtkTransform::New()`
     #[doc(alias = "vtkTransform")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTransform_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTransform_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTransform_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTransform_get_ptr(self.0) }
+        Self(unsafe { vtkTransform_new() })
     }
 }
 impl std::default::Default for vtkTransform {
@@ -3780,12 +2472,8 @@ impl Drop for vtkTransform {
 #[test]
 fn test_vtkTransform_create_drop() {
     let obj = vtkTransform::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTransform(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// describes linear transformations via a 3x3 matrix
 ///
@@ -3806,22 +2494,13 @@ fn test_vtkTransform_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkTransform2D(*mut core::ffi::c_void);
 impl vtkTransform2D {
-    /// Creates a new [vtkTransform2D] wrapped inside `vtkNew`
+    /// Creates a new [vtkTransform2D] via `vtkTransform2D::New()`
     #[doc(alias = "vtkTransform2D")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTransform2D_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTransform2D_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTransform2D_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTransform2D_get_ptr(self.0) }
+        Self(unsafe { vtkTransform2D_new() })
     }
 }
 impl std::default::Default for vtkTransform2D {
@@ -3841,12 +2520,8 @@ impl Drop for vtkTransform2D {
 #[test]
 fn test_vtkTransform2D_create_drop() {
     let obj = vtkTransform2D::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTransform2D(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// maintain a list of transforms
 ///
@@ -3860,22 +2535,13 @@ fn test_vtkTransform2D_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkTransformCollection(*mut core::ffi::c_void);
 impl vtkTransformCollection {
-    /// Creates a new [vtkTransformCollection] wrapped inside `vtkNew`
+    /// Creates a new [vtkTransformCollection] via `vtkTransformCollection::New()`
     #[doc(alias = "vtkTransformCollection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTransformCollection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTransformCollection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTransformCollection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTransformCollection_get_ptr(self.0) }
+        Self(unsafe { vtkTransformCollection_new() })
     }
 }
 impl std::default::Default for vtkTransformCollection {
@@ -3895,10 +2561,6 @@ impl Drop for vtkTransformCollection {
 #[test]
 fn test_vtkTransformCollection_create_drop() {
     let obj = vtkTransformCollection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTransformCollection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }

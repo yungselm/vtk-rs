@@ -1,20 +1,4 @@
-pub trait VtkBilinearQuadIntersection {
-    fn get_p_00_data(&mut self) -> *mut core::ffi::c_double;
-    fn get_p_01_data(&mut self) -> *mut core::ffi::c_double;
-    fn get_p_10_data(&mut self) -> *mut core::ffi::c_double;
-    fn get_p_11_data(&mut self) -> *mut core::ffi::c_double;
-    fn compute_cartesian_coordinates(
-        &mut self,
-        u: core::ffi::c_double,
-        v: core::ffi::c_double,
-    ) -> *mut core::ffi::c_void;
-    fn ray_intersection(
-        &mut self,
-        r: vtkVector3d,
-        q: vtkVector3d,
-        uv: *mut core::ffi::c_void,
-    ) -> bool;
-}
+pub trait VtkBilinearQuadIntersection {}
 pub trait VtkCardinalSpline {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
@@ -37,7 +21,7 @@ pub trait VtkKochanekSpline {
     fn get_default_continuity(&mut self) -> core::ffi::c_double;
     fn deep_copy(&mut self, s: *mut core::ffi::c_void) -> ();
 }
-pub trait VtkParametricBohemianDome: VtkParametricFunction {
+pub trait VtkParametricBohemianDome {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_a(&mut self) -> core::ffi::c_double;
@@ -48,76 +32,28 @@ pub trait VtkParametricBohemianDome: VtkParametricFunction {
     fn set_c(&mut self, _arg: core::ffi::c_double) -> ();
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricBour: VtkParametricFunction {
+pub trait VtkParametricBour {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricBoy: VtkParametricFunction {
+pub trait VtkParametricBoy {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
     fn set_z_scale(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_z_scale(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricCatalanMinimal: VtkParametricFunction {
+pub trait VtkParametricCatalanMinimal {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricConicSpiral: VtkParametricFunction {
+pub trait VtkParametricConicSpiral {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -130,38 +66,14 @@ pub trait VtkParametricConicSpiral: VtkParametricFunction {
     fn get_c(&mut self) -> core::ffi::c_double;
     fn set_n(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_n(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricCrossCap: VtkParametricFunction {
+pub trait VtkParametricCrossCap {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricDini: VtkParametricFunction {
+pub trait VtkParametricDini {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -170,20 +82,8 @@ pub trait VtkParametricDini: VtkParametricFunction {
     fn get_a(&mut self) -> core::ffi::c_double;
     fn set_b(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_b(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricEllipsoid: VtkParametricFunction {
+pub trait VtkParametricEllipsoid {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -194,73 +94,25 @@ pub trait VtkParametricEllipsoid: VtkParametricFunction {
     fn get_y_radius(&mut self) -> core::ffi::c_double;
     fn set_z_radius(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_z_radius(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricEnneper: VtkParametricFunction {
+pub trait VtkParametricEnneper {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricFigure8Klein: VtkParametricFunction {
+pub trait VtkParametricFigure8Klein {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn set_radius(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_radius(&mut self) -> core::ffi::c_double;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
 pub trait VtkParametricFunction {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
     fn set_minimum_u(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_minimum_u(&mut self) -> core::ffi::c_double;
     fn set_maximum_u(&mut self, _arg: core::ffi::c_double) -> ();
@@ -322,121 +174,49 @@ pub trait VtkParametricFunction {
     fn derivatives_available_on(&mut self) -> ();
     fn derivatives_available_off(&mut self) -> ();
 }
-pub trait VtkParametricHenneberg: VtkParametricFunction {
+pub trait VtkParametricHenneberg {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricKlein: VtkParametricFunction {
+pub trait VtkParametricKlein {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricKuen: VtkParametricFunction {
+pub trait VtkParametricKuen {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
     fn set_delta_v_0(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_delta_v_0(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricMobius: VtkParametricFunction {
+pub trait VtkParametricMobius {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn set_radius(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_radius(&mut self) -> core::ffi::c_double;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricPluckerConoid: VtkParametricFunction {
+pub trait VtkParametricPluckerConoid {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_n(&mut self) -> core::ffi::c_int;
     fn set_n(&mut self, _arg: core::ffi::c_int) -> ();
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricPseudosphere: VtkParametricFunction {
+pub trait VtkParametricPseudosphere {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricRandomHills: VtkParametricFunction {
+pub trait VtkParametricRandomHills {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
@@ -463,56 +243,20 @@ pub trait VtkParametricRandomHills: VtkParametricFunction {
     fn get_y_variance_scale_factor(&mut self) -> core::ffi::c_double;
     fn set_amplitude_scale_factor(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_amplitude_scale_factor(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricRoman: VtkParametricFunction {
+pub trait VtkParametricRoman {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn set_radius(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_radius(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricSpline: VtkParametricFunction {
+pub trait VtkParametricSpline {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        u: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Du: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        u: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Du: core::ffi::c_double,
-    ) -> core::ffi::c_double;
     fn set_x_spline(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn set_y_spline(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn set_z_spline(&mut self, p0: *mut core::ffi::c_void) -> ();
@@ -521,10 +265,10 @@ pub trait VtkParametricSpline: VtkParametricFunction {
     fn get_z_spline(&mut self) -> *mut core::ffi::c_void;
     fn set_points(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn get_points(&mut self) -> *mut core::ffi::c_void;
-    fn set_number_of_points(&mut self, numPts: core::ffi::c_uchar) -> ();
+    fn set_number_of_points(&mut self, numPts: core::ffi::c_longlong) -> ();
     fn set_point(
         &mut self,
-        index: core::ffi::c_uchar,
+        index: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
@@ -550,7 +294,7 @@ pub trait VtkParametricSpline: VtkParametricFunction {
     fn set_right_value(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_right_value(&mut self) -> core::ffi::c_double;
 }
-pub trait VtkParametricSuperEllipsoid: VtkParametricFunction {
+pub trait VtkParametricSuperEllipsoid {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -565,20 +309,8 @@ pub trait VtkParametricSuperEllipsoid: VtkParametricFunction {
     fn get_n_1(&mut self) -> core::ffi::c_double;
     fn set_n_2(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_n_2(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricSuperToroid: VtkParametricFunction {
+pub trait VtkParametricSuperToroid {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -597,20 +329,8 @@ pub trait VtkParametricSuperToroid: VtkParametricFunction {
     fn get_n_1(&mut self) -> core::ffi::c_double;
     fn set_n_2(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_n_2(&mut self) -> core::ffi::c_double;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
-pub trait VtkParametricTorus: VtkParametricFunction {
+pub trait VtkParametricTorus {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -619,18 +339,6 @@ pub trait VtkParametricTorus: VtkParametricFunction {
     fn set_cross_section_radius(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_cross_section_radius(&mut self) -> core::ffi::c_double;
     fn get_dimension(&mut self) -> core::ffi::c_int;
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> ();
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double;
 }
 impl VtkCardinalSpline for vtkCardinalSpline {
     fn new(&mut self) -> *mut core::ffi::c_void {
@@ -870,38 +578,6 @@ impl VtkParametricBohemianDome for vtkParametricBohemianDome {
         }
         unsafe { vtk_parametric_bohemian_dome_get_dimension(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_bohemian_dome_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_bohemian_dome_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_bohemian_dome_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_bohemian_dome_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricBour for vtkParametricBour {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -936,38 +612,6 @@ impl VtkParametricBour for vtkParametricBour {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_parametric_bour_get_dimension(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_bour_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_bour_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_bour_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_bour_evaluate_scalar(self.0, uvw, Pt, Duvw) }
     }
 }
 impl VtkParametricBoy for vtkParametricBoy {
@@ -1021,38 +665,6 @@ impl VtkParametricBoy for vtkParametricBoy {
         }
         unsafe { vtk_parametric_boy_get_z_scale(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_boy_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_boy_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_boy_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_boy_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricCatalanMinimal for vtkParametricCatalanMinimal {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -1087,38 +699,6 @@ impl VtkParametricCatalanMinimal for vtkParametricCatalanMinimal {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_parametric_catalan_minimal_get_dimension(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_catalan_minimal_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_catalan_minimal_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_catalan_minimal_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_catalan_minimal_evaluate_scalar(self.0, uvw, Pt, Duvw) }
     }
 }
 impl VtkParametricConicSpiral for vtkParametricConicSpiral {
@@ -1223,38 +803,6 @@ impl VtkParametricConicSpiral for vtkParametricConicSpiral {
         }
         unsafe { vtk_parametric_conic_spiral_get_n(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_conic_spiral_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_conic_spiral_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_conic_spiral_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_conic_spiral_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricCrossCap for vtkParametricCrossCap {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -1289,38 +837,6 @@ impl VtkParametricCrossCap for vtkParametricCrossCap {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_parametric_cross_cap_get_dimension(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_cross_cap_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_cross_cap_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_cross_cap_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_cross_cap_evaluate_scalar(self.0, uvw, Pt, Duvw) }
     }
 }
 impl VtkParametricDini for vtkParametricDini {
@@ -1390,38 +906,6 @@ impl VtkParametricDini for vtkParametricDini {
             ) -> core::ffi::c_double;
         }
         unsafe { vtk_parametric_dini_get_b(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_dini_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_dini_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_dini_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_dini_evaluate_scalar(self.0, uvw, Pt, Duvw) }
     }
 }
 impl VtkParametricEllipsoid for vtkParametricEllipsoid {
@@ -1509,38 +993,6 @@ impl VtkParametricEllipsoid for vtkParametricEllipsoid {
         }
         unsafe { vtk_parametric_ellipsoid_get_z_radius(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_ellipsoid_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_ellipsoid_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_ellipsoid_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_ellipsoid_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricEnneper for vtkParametricEnneper {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -1575,38 +1027,6 @@ impl VtkParametricEnneper for vtkParametricEnneper {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_parametric_enneper_get_dimension(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_enneper_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_enneper_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_enneper_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_enneper_evaluate_scalar(self.0, uvw, Pt, Duvw) }
     }
 }
 impl VtkParametricFigure8Klein for vtkParametricFigure8Klein {
@@ -1660,38 +1080,6 @@ impl VtkParametricFigure8Klein for vtkParametricFigure8Klein {
         }
         unsafe { vtk_parametric_figure_8_klein_get_dimension(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_figure_8_klein_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_figure_8_klein_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_figure_8_klein_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_figure_8_klein_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricHenneberg for vtkParametricHenneberg {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -1727,38 +1115,6 @@ impl VtkParametricHenneberg for vtkParametricHenneberg {
         }
         unsafe { vtk_parametric_henneberg_get_dimension(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_henneberg_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_henneberg_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_henneberg_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_henneberg_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricKlein for vtkParametricKlein {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -1793,38 +1149,6 @@ impl VtkParametricKlein for vtkParametricKlein {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_parametric_klein_get_dimension(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_klein_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_klein_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_klein_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_klein_evaluate_scalar(self.0, uvw, Pt, Duvw) }
     }
 }
 impl VtkParametricKuen for vtkParametricKuen {
@@ -1878,38 +1202,6 @@ impl VtkParametricKuen for vtkParametricKuen {
         }
         unsafe { vtk_parametric_kuen_get_delta_v_0(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_kuen_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_kuen_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_kuen_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_kuen_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricMobius for vtkParametricMobius {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -1961,38 +1253,6 @@ impl VtkParametricMobius for vtkParametricMobius {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_parametric_mobius_get_dimension(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_mobius_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_mobius_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_mobius_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_mobius_evaluate_scalar(self.0, uvw, Pt, Duvw) }
     }
 }
 impl VtkParametricPluckerConoid for vtkParametricPluckerConoid {
@@ -2046,38 +1306,6 @@ impl VtkParametricPluckerConoid for vtkParametricPluckerConoid {
         }
         unsafe { vtk_parametric_plucker_conoid_get_dimension(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_plucker_conoid_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_plucker_conoid_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_plucker_conoid_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_plucker_conoid_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricPseudosphere for vtkParametricPseudosphere {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -2112,38 +1340,6 @@ impl VtkParametricPseudosphere for vtkParametricPseudosphere {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_parametric_pseudosphere_get_dimension(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_pseudosphere_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_pseudosphere_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_pseudosphere_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_pseudosphere_evaluate_scalar(self.0, uvw, Pt, Duvw) }
     }
 }
 impl VtkParametricRandomHills for vtkParametricRandomHills {
@@ -2369,38 +1565,6 @@ impl VtkParametricRandomHills for vtkParametricRandomHills {
         }
         unsafe { vtk_parametric_random_hills_get_amplitude_scale_factor(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_random_hills_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_random_hills_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_random_hills_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_random_hills_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricRoman for vtkParametricRoman {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -2453,38 +1617,6 @@ impl VtkParametricRoman for vtkParametricRoman {
         }
         unsafe { vtk_parametric_roman_get_radius(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_roman_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_roman_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_roman_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_roman_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricSpline for vtkParametricSpline {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -2519,38 +1651,6 @@ impl VtkParametricSpline for vtkParametricSpline {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_parametric_spline_get_dimension(self.0) }
-    }
-    fn evaluate(
-        &mut self,
-        u: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Du: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_spline_evaluate(
-                sself: *mut core::ffi::c_void,
-                u: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Du: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_spline_evaluate(self.0, u, Pt, Du) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        u: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Du: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_spline_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                u: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Du: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_spline_evaluate_scalar(self.0, u, Pt, Du) }
     }
     fn set_x_spline(&mut self, p0: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -2620,18 +1720,18 @@ impl VtkParametricSpline for vtkParametricSpline {
         }
         unsafe { vtk_parametric_spline_get_points(self.0) }
     }
-    fn set_number_of_points(&mut self, numPts: core::ffi::c_uchar) -> () {
+    fn set_number_of_points(&mut self, numPts: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_parametric_spline_set_number_of_points(
                 sself: *mut core::ffi::c_void,
-                numPts: core::ffi::c_uchar,
+                numPts: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_parametric_spline_set_number_of_points(self.0, numPts) }
     }
     fn set_point(
         &mut self,
-        index: core::ffi::c_uchar,
+        index: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
@@ -2639,7 +1739,7 @@ impl VtkParametricSpline for vtkParametricSpline {
         unsafe extern "C" {
             fn vtk_parametric_spline_set_point(
                 sself: *mut core::ffi::c_void,
-                index: core::ffi::c_uchar,
+                index: core::ffi::c_longlong,
                 x: core::ffi::c_double,
                 y: core::ffi::c_double,
                 z: core::ffi::c_double,
@@ -2929,38 +2029,6 @@ impl VtkParametricSuperEllipsoid for vtkParametricSuperEllipsoid {
         }
         unsafe { vtk_parametric_super_ellipsoid_get_n_2(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_super_ellipsoid_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_super_ellipsoid_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_super_ellipsoid_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_super_ellipsoid_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricSuperToroid for vtkParametricSuperToroid {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -3115,38 +2183,6 @@ impl VtkParametricSuperToroid for vtkParametricSuperToroid {
         }
         unsafe { vtk_parametric_super_toroid_get_n_2(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_super_toroid_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_super_toroid_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_super_toroid_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_super_toroid_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 impl VtkParametricTorus for vtkParametricTorus {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -3216,38 +2252,6 @@ impl VtkParametricTorus for vtkParametricTorus {
         }
         unsafe { vtk_parametric_torus_get_dimension(self.0) }
     }
-    fn evaluate(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_parametric_torus_evaluate(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_parametric_torus_evaluate(self.0, uvw, Pt, Duvw) }
-    }
-    fn evaluate_scalar(
-        &mut self,
-        uvw: core::ffi::c_double,
-        Pt: core::ffi::c_double,
-        Duvw: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_parametric_torus_evaluate_scalar(
-                sself: *mut core::ffi::c_void,
-                uvw: core::ffi::c_double,
-                Pt: core::ffi::c_double,
-                Duvw: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_parametric_torus_evaluate_scalar(self.0, uvw, Pt, Duvw) }
-    }
 }
 /// computes an interpolating spline using a
 ///
@@ -3262,22 +2266,13 @@ impl VtkParametricTorus for vtkParametricTorus {
 #[allow(non_camel_case_types)]
 pub struct vtkCardinalSpline(*mut core::ffi::c_void);
 impl vtkCardinalSpline {
-    /// Creates a new [vtkCardinalSpline] wrapped inside `vtkNew`
+    /// Creates a new [vtkCardinalSpline] via `vtkCardinalSpline::New()`
     #[doc(alias = "vtkCardinalSpline")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkCardinalSpline_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkCardinalSpline_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkCardinalSpline_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkCardinalSpline_get_ptr(self.0) }
+        Self(unsafe { vtkCardinalSpline_new() })
     }
 }
 impl std::default::Default for vtkCardinalSpline {
@@ -3297,12 +2292,8 @@ impl Drop for vtkCardinalSpline {
 #[test]
 fn test_vtkCardinalSpline_create_drop() {
     let obj = vtkCardinalSpline::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkCardinalSpline(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// computes an interpolating spline using a Kochanek basis.
 ///
@@ -3334,22 +2325,13 @@ fn test_vtkCardinalSpline_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkKochanekSpline(*mut core::ffi::c_void);
 impl vtkKochanekSpline {
-    /// Creates a new [vtkKochanekSpline] wrapped inside `vtkNew`
+    /// Creates a new [vtkKochanekSpline] via `vtkKochanekSpline::New()`
     #[doc(alias = "vtkKochanekSpline")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkKochanekSpline_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkKochanekSpline_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkKochanekSpline_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkKochanekSpline_get_ptr(self.0) }
+        Self(unsafe { vtkKochanekSpline_new() })
     }
 }
 impl std::default::Default for vtkKochanekSpline {
@@ -3369,12 +2351,8 @@ impl Drop for vtkKochanekSpline {
 #[test]
 fn test_vtkKochanekSpline_create_drop() {
     let obj = vtkKochanekSpline::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkKochanekSpline(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a Bohemian dome.
 ///
@@ -3390,22 +2368,13 @@ fn test_vtkKochanekSpline_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricBohemianDome(*mut core::ffi::c_void);
 impl vtkParametricBohemianDome {
-    /// Creates a new [vtkParametricBohemianDome] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricBohemianDome] via `vtkParametricBohemianDome::New()`
     #[doc(alias = "vtkParametricBohemianDome")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricBohemianDome_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricBohemianDome_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricBohemianDome_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricBohemianDome_get_ptr(self.0) }
+        Self(unsafe { vtkParametricBohemianDome_new() })
     }
 }
 impl std::default::Default for vtkParametricBohemianDome {
@@ -3425,12 +2394,8 @@ impl Drop for vtkParametricBohemianDome {
 #[test]
 fn test_vtkParametricBohemianDome_create_drop() {
     let obj = vtkParametricBohemianDome::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricBohemianDome(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Bour's minimal surface.
 ///
@@ -3443,22 +2408,13 @@ fn test_vtkParametricBohemianDome_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricBour(*mut core::ffi::c_void);
 impl vtkParametricBour {
-    /// Creates a new [vtkParametricBour] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricBour] via `vtkParametricBour::New()`
     #[doc(alias = "vtkParametricBour")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricBour_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricBour_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricBour_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricBour_get_ptr(self.0) }
+        Self(unsafe { vtkParametricBour_new() })
     }
 }
 impl std::default::Default for vtkParametricBour {
@@ -3478,12 +2434,8 @@ impl Drop for vtkParametricBour {
 #[test]
 fn test_vtkParametricBour_create_drop() {
     let obj = vtkParametricBour::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricBour(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Boy's surface.
 ///
@@ -3502,22 +2454,13 @@ fn test_vtkParametricBour_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricBoy(*mut core::ffi::c_void);
 impl vtkParametricBoy {
-    /// Creates a new [vtkParametricBoy] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricBoy] via `vtkParametricBoy::New()`
     #[doc(alias = "vtkParametricBoy")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricBoy_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricBoy_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricBoy_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricBoy_get_ptr(self.0) }
+        Self(unsafe { vtkParametricBoy_new() })
     }
 }
 impl std::default::Default for vtkParametricBoy {
@@ -3537,12 +2480,8 @@ impl Drop for vtkParametricBoy {
 #[test]
 fn test_vtkParametricBoy_create_drop() {
     let obj = vtkParametricBoy::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricBoy(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Catalan's minimal surface.
 ///
@@ -3556,22 +2495,13 @@ fn test_vtkParametricBoy_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricCatalanMinimal(*mut core::ffi::c_void);
 impl vtkParametricCatalanMinimal {
-    /// Creates a new [vtkParametricCatalanMinimal] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricCatalanMinimal] via `vtkParametricCatalanMinimal::New()`
     #[doc(alias = "vtkParametricCatalanMinimal")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricCatalanMinimal_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricCatalanMinimal_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricCatalanMinimal_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricCatalanMinimal_get_ptr(self.0) }
+        Self(unsafe { vtkParametricCatalanMinimal_new() })
     }
 }
 impl std::default::Default for vtkParametricCatalanMinimal {
@@ -3591,12 +2521,8 @@ impl Drop for vtkParametricCatalanMinimal {
 #[test]
 fn test_vtkParametricCatalanMinimal_create_drop() {
     let obj = vtkParametricCatalanMinimal::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricCatalanMinimal(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate conic spiral surfaces that resemble sea-shells.
 ///
@@ -3614,22 +2540,13 @@ fn test_vtkParametricCatalanMinimal_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricConicSpiral(*mut core::ffi::c_void);
 impl vtkParametricConicSpiral {
-    /// Creates a new [vtkParametricConicSpiral] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricConicSpiral] via `vtkParametricConicSpiral::New()`
     #[doc(alias = "vtkParametricConicSpiral")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricConicSpiral_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricConicSpiral_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricConicSpiral_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricConicSpiral_get_ptr(self.0) }
+        Self(unsafe { vtkParametricConicSpiral_new() })
     }
 }
 impl std::default::Default for vtkParametricConicSpiral {
@@ -3649,12 +2566,8 @@ impl Drop for vtkParametricConicSpiral {
 #[test]
 fn test_vtkParametricConicSpiral_create_drop() {
     let obj = vtkParametricConicSpiral::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricConicSpiral(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a cross-cap.
 ///
@@ -3673,22 +2586,13 @@ fn test_vtkParametricConicSpiral_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricCrossCap(*mut core::ffi::c_void);
 impl vtkParametricCrossCap {
-    /// Creates a new [vtkParametricCrossCap] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricCrossCap] via `vtkParametricCrossCap::New()`
     #[doc(alias = "vtkParametricCrossCap")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricCrossCap_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricCrossCap_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricCrossCap_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricCrossCap_get_ptr(self.0) }
+        Self(unsafe { vtkParametricCrossCap_new() })
     }
 }
 impl std::default::Default for vtkParametricCrossCap {
@@ -3708,12 +2612,8 @@ impl Drop for vtkParametricCrossCap {
 #[test]
 fn test_vtkParametricCrossCap_create_drop() {
     let obj = vtkParametricCrossCap::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricCrossCap(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Dini's surface.
 ///
@@ -3731,22 +2631,13 @@ fn test_vtkParametricCrossCap_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricDini(*mut core::ffi::c_void);
 impl vtkParametricDini {
-    /// Creates a new [vtkParametricDini] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricDini] via `vtkParametricDini::New()`
     #[doc(alias = "vtkParametricDini")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricDini_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricDini_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricDini_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricDini_get_ptr(self.0) }
+        Self(unsafe { vtkParametricDini_new() })
     }
 }
 impl std::default::Default for vtkParametricDini {
@@ -3766,12 +2657,8 @@ impl Drop for vtkParametricDini {
 #[test]
 fn test_vtkParametricDini_create_drop() {
     let obj = vtkParametricDini::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricDini(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate an ellipsoid.
 ///
@@ -3793,22 +2680,13 @@ fn test_vtkParametricDini_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricEllipsoid(*mut core::ffi::c_void);
 impl vtkParametricEllipsoid {
-    /// Creates a new [vtkParametricEllipsoid] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricEllipsoid] via `vtkParametricEllipsoid::New()`
     #[doc(alias = "vtkParametricEllipsoid")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricEllipsoid_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricEllipsoid_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricEllipsoid_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricEllipsoid_get_ptr(self.0) }
+        Self(unsafe { vtkParametricEllipsoid_new() })
     }
 }
 impl std::default::Default for vtkParametricEllipsoid {
@@ -3828,12 +2706,8 @@ impl Drop for vtkParametricEllipsoid {
 #[test]
 fn test_vtkParametricEllipsoid_create_drop() {
     let obj = vtkParametricEllipsoid::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricEllipsoid(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Enneper's surface.
 ///
@@ -3852,22 +2726,13 @@ fn test_vtkParametricEllipsoid_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricEnneper(*mut core::ffi::c_void);
 impl vtkParametricEnneper {
-    /// Creates a new [vtkParametricEnneper] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricEnneper] via `vtkParametricEnneper::New()`
     #[doc(alias = "vtkParametricEnneper")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricEnneper_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricEnneper_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricEnneper_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricEnneper_get_ptr(self.0) }
+        Self(unsafe { vtkParametricEnneper_new() })
     }
 }
 impl std::default::Default for vtkParametricEnneper {
@@ -3887,12 +2752,8 @@ impl Drop for vtkParametricEnneper {
 #[test]
 fn test_vtkParametricEnneper_create_drop() {
     let obj = vtkParametricEnneper::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricEnneper(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a figure-8 Klein bottle.
 ///
@@ -3918,22 +2779,13 @@ fn test_vtkParametricEnneper_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricFigure8Klein(*mut core::ffi::c_void);
 impl vtkParametricFigure8Klein {
-    /// Creates a new [vtkParametricFigure8Klein] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricFigure8Klein] via `vtkParametricFigure8Klein::New()`
     #[doc(alias = "vtkParametricFigure8Klein")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricFigure8Klein_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricFigure8Klein_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricFigure8Klein_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricFigure8Klein_get_ptr(self.0) }
+        Self(unsafe { vtkParametricFigure8Klein_new() })
     }
 }
 impl std::default::Default for vtkParametricFigure8Klein {
@@ -3953,12 +2805,8 @@ impl Drop for vtkParametricFigure8Klein {
 #[test]
 fn test_vtkParametricFigure8Klein_create_drop() {
     let obj = vtkParametricFigure8Klein::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricFigure8Klein(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Henneberg's minimal surface.
 ///
@@ -3971,22 +2819,13 @@ fn test_vtkParametricFigure8Klein_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricHenneberg(*mut core::ffi::c_void);
 impl vtkParametricHenneberg {
-    /// Creates a new [vtkParametricHenneberg] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricHenneberg] via `vtkParametricHenneberg::New()`
     #[doc(alias = "vtkParametricHenneberg")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricHenneberg_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricHenneberg_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricHenneberg_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricHenneberg_get_ptr(self.0) }
+        Self(unsafe { vtkParametricHenneberg_new() })
     }
 }
 impl std::default::Default for vtkParametricHenneberg {
@@ -4006,12 +2845,8 @@ impl Drop for vtkParametricHenneberg {
 #[test]
 fn test_vtkParametricHenneberg_create_drop() {
     let obj = vtkParametricHenneberg::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricHenneberg(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generates a "classical" representation of a Klein bottle.
 ///
@@ -4037,22 +2872,13 @@ fn test_vtkParametricHenneberg_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricKlein(*mut core::ffi::c_void);
 impl vtkParametricKlein {
-    /// Creates a new [vtkParametricKlein] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricKlein] via `vtkParametricKlein::New()`
     #[doc(alias = "vtkParametricKlein")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricKlein_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricKlein_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricKlein_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricKlein_get_ptr(self.0) }
+        Self(unsafe { vtkParametricKlein_new() })
     }
 }
 impl std::default::Default for vtkParametricKlein {
@@ -4072,12 +2898,8 @@ impl Drop for vtkParametricKlein {
 #[test]
 fn test_vtkParametricKlein_create_drop() {
     let obj = vtkParametricKlein::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricKlein(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Kuens' surface.
 ///
@@ -4091,22 +2913,13 @@ fn test_vtkParametricKlein_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricKuen(*mut core::ffi::c_void);
 impl vtkParametricKuen {
-    /// Creates a new [vtkParametricKuen] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricKuen] via `vtkParametricKuen::New()`
     #[doc(alias = "vtkParametricKuen")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricKuen_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricKuen_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricKuen_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricKuen_get_ptr(self.0) }
+        Self(unsafe { vtkParametricKuen_new() })
     }
 }
 impl std::default::Default for vtkParametricKuen {
@@ -4126,12 +2939,8 @@ impl Drop for vtkParametricKuen {
 #[test]
 fn test_vtkParametricKuen_create_drop() {
     let obj = vtkParametricKuen::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricKuen(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a Mobius strip.
 ///
@@ -4148,22 +2957,13 @@ fn test_vtkParametricKuen_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricMobius(*mut core::ffi::c_void);
 impl vtkParametricMobius {
-    /// Creates a new [vtkParametricMobius] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricMobius] via `vtkParametricMobius::New()`
     #[doc(alias = "vtkParametricMobius")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricMobius_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricMobius_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricMobius_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricMobius_get_ptr(self.0) }
+        Self(unsafe { vtkParametricMobius_new() })
     }
 }
 impl std::default::Default for vtkParametricMobius {
@@ -4183,12 +2983,8 @@ impl Drop for vtkParametricMobius {
 #[test]
 fn test_vtkParametricMobius_create_drop() {
     let obj = vtkParametricMobius::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricMobius(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Plucker's conoid surface.
 ///
@@ -4206,22 +3002,13 @@ fn test_vtkParametricMobius_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricPluckerConoid(*mut core::ffi::c_void);
 impl vtkParametricPluckerConoid {
-    /// Creates a new [vtkParametricPluckerConoid] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricPluckerConoid] via `vtkParametricPluckerConoid::New()`
     #[doc(alias = "vtkParametricPluckerConoid")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricPluckerConoid_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricPluckerConoid_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricPluckerConoid_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricPluckerConoid_get_ptr(self.0) }
+        Self(unsafe { vtkParametricPluckerConoid_new() })
     }
 }
 impl std::default::Default for vtkParametricPluckerConoid {
@@ -4241,12 +3028,8 @@ impl Drop for vtkParametricPluckerConoid {
 #[test]
 fn test_vtkParametricPluckerConoid_create_drop() {
     let obj = vtkParametricPluckerConoid::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricPluckerConoid(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a pseudosphere.
 ///
@@ -4261,22 +3044,13 @@ fn test_vtkParametricPluckerConoid_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricPseudosphere(*mut core::ffi::c_void);
 impl vtkParametricPseudosphere {
-    /// Creates a new [vtkParametricPseudosphere] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricPseudosphere] via `vtkParametricPseudosphere::New()`
     #[doc(alias = "vtkParametricPseudosphere")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricPseudosphere_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricPseudosphere_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricPseudosphere_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricPseudosphere_get_ptr(self.0) }
+        Self(unsafe { vtkParametricPseudosphere_new() })
     }
 }
 impl std::default::Default for vtkParametricPseudosphere {
@@ -4296,12 +3070,8 @@ impl Drop for vtkParametricPseudosphere {
 #[test]
 fn test_vtkParametricPseudosphere_create_drop() {
     let obj = vtkParametricPseudosphere::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricPseudosphere(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a surface covered with randomly placed hills.
 ///
@@ -4322,22 +3092,13 @@ fn test_vtkParametricPseudosphere_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricRandomHills(*mut core::ffi::c_void);
 impl vtkParametricRandomHills {
-    /// Creates a new [vtkParametricRandomHills] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricRandomHills] via `vtkParametricRandomHills::New()`
     #[doc(alias = "vtkParametricRandomHills")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricRandomHills_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricRandomHills_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricRandomHills_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricRandomHills_get_ptr(self.0) }
+        Self(unsafe { vtkParametricRandomHills_new() })
     }
 }
 impl std::default::Default for vtkParametricRandomHills {
@@ -4357,12 +3118,8 @@ impl Drop for vtkParametricRandomHills {
 #[test]
 fn test_vtkParametricRandomHills_create_drop() {
     let obj = vtkParametricRandomHills::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricRandomHills(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate Steiner's Roman Surface.
 ///
@@ -4379,22 +3136,13 @@ fn test_vtkParametricRandomHills_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricRoman(*mut core::ffi::c_void);
 impl vtkParametricRoman {
-    /// Creates a new [vtkParametricRoman] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricRoman] via `vtkParametricRoman::New()`
     #[doc(alias = "vtkParametricRoman")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricRoman_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricRoman_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricRoman_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricRoman_get_ptr(self.0) }
+        Self(unsafe { vtkParametricRoman_new() })
     }
 }
 impl std::default::Default for vtkParametricRoman {
@@ -4414,12 +3162,8 @@ impl Drop for vtkParametricRoman {
 #[test]
 fn test_vtkParametricRoman_create_drop() {
     let obj = vtkParametricRoman::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricRoman(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// parametric function for 1D interpolating splines
 ///
@@ -4444,22 +3188,13 @@ fn test_vtkParametricRoman_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricSpline(*mut core::ffi::c_void);
 impl vtkParametricSpline {
-    /// Creates a new [vtkParametricSpline] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricSpline] via `vtkParametricSpline::New()`
     #[doc(alias = "vtkParametricSpline")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricSpline_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricSpline_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricSpline_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricSpline_get_ptr(self.0) }
+        Self(unsafe { vtkParametricSpline_new() })
     }
 }
 impl std::default::Default for vtkParametricSpline {
@@ -4479,12 +3214,8 @@ impl Drop for vtkParametricSpline {
 #[test]
 fn test_vtkParametricSpline_create_drop() {
     let obj = vtkParametricSpline::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricSpline(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a superellipsoid.
 ///
@@ -4510,22 +3241,13 @@ fn test_vtkParametricSpline_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricSuperEllipsoid(*mut core::ffi::c_void);
 impl vtkParametricSuperEllipsoid {
-    /// Creates a new [vtkParametricSuperEllipsoid] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricSuperEllipsoid] via `vtkParametricSuperEllipsoid::New()`
     #[doc(alias = "vtkParametricSuperEllipsoid")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricSuperEllipsoid_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricSuperEllipsoid_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricSuperEllipsoid_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricSuperEllipsoid_get_ptr(self.0) }
+        Self(unsafe { vtkParametricSuperEllipsoid_new() })
     }
 }
 impl std::default::Default for vtkParametricSuperEllipsoid {
@@ -4545,12 +3267,8 @@ impl Drop for vtkParametricSuperEllipsoid {
 #[test]
 fn test_vtkParametricSuperEllipsoid_create_drop() {
     let obj = vtkParametricSuperEllipsoid::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricSuperEllipsoid(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a supertoroid.
 ///
@@ -4580,22 +3298,13 @@ fn test_vtkParametricSuperEllipsoid_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricSuperToroid(*mut core::ffi::c_void);
 impl vtkParametricSuperToroid {
-    /// Creates a new [vtkParametricSuperToroid] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricSuperToroid] via `vtkParametricSuperToroid::New()`
     #[doc(alias = "vtkParametricSuperToroid")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricSuperToroid_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricSuperToroid_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricSuperToroid_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricSuperToroid_get_ptr(self.0) }
+        Self(unsafe { vtkParametricSuperToroid_new() })
     }
 }
 impl std::default::Default for vtkParametricSuperToroid {
@@ -4615,12 +3324,8 @@ impl Drop for vtkParametricSuperToroid {
 #[test]
 fn test_vtkParametricSuperToroid_create_drop() {
     let obj = vtkParametricSuperToroid::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricSuperToroid(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generate a torus.
 ///
@@ -4637,22 +3342,13 @@ fn test_vtkParametricSuperToroid_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkParametricTorus(*mut core::ffi::c_void);
 impl vtkParametricTorus {
-    /// Creates a new [vtkParametricTorus] wrapped inside `vtkNew`
+    /// Creates a new [vtkParametricTorus] via `vtkParametricTorus::New()`
     #[doc(alias = "vtkParametricTorus")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkParametricTorus_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkParametricTorus_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkParametricTorus_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkParametricTorus_get_ptr(self.0) }
+        Self(unsafe { vtkParametricTorus_new() })
     }
 }
 impl std::default::Default for vtkParametricTorus {
@@ -4672,10 +3368,6 @@ impl Drop for vtkParametricTorus {
 #[test]
 fn test_vtkParametricTorus_create_drop() {
     let obj = vtkParametricTorus::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkParametricTorus(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }

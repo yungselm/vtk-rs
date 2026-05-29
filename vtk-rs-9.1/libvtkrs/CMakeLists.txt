@@ -12,6 +12,7 @@ find_package(VTK COMPONENTS
     CommonMisc
     CommonSystem
     CommonTransforms
+    FiltersSources
 )
 
 if (NOT VTK_FOUND)
@@ -31,6 +32,7 @@ add_library(vtkrs STATIC
     ${PROJECT_SOURCE_DIR}/include/vtk_common_misc.h
     ${PROJECT_SOURCE_DIR}/include/vtk_common_system.h
     ${PROJECT_SOURCE_DIR}/include/vtk_common_transforms.h
+    ${PROJECT_SOURCE_DIR}/include/vtk_filters_sources.h
 )
 
 if (VTK094)
@@ -49,6 +51,7 @@ target_sources(vtkrs
         ${PROJECT_SOURCE_DIR}/src/vtk_common_misc.cpp
         ${PROJECT_SOURCE_DIR}/src/vtk_common_system.cpp
         ${PROJECT_SOURCE_DIR}/src/vtk_common_transforms.cpp
+        ${PROJECT_SOURCE_DIR}/src/vtk_filters_sources.cpp
 )
 
 set_target_properties(vtkrs PROPERTIES LINKER_LANGUAGE CXX)

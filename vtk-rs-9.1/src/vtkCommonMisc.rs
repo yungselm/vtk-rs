@@ -4,15 +4,8 @@ pub trait VtkContourValues {
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn set_value(&mut self, i: core::ffi::c_int, value: core::ffi::c_double) -> ();
     fn get_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_double;
-    fn get_values(&mut self) -> *mut core::ffi::c_double;
-    fn get_values(&mut self, contourValues: core::ffi::c_double) -> ();
     fn set_number_of_contours(&mut self, number: core::ffi::c_int) -> ();
     fn get_number_of_contours(&mut self) -> core::ffi::c_int;
-    fn generate_values(
-        &mut self,
-        numContours: core::ffi::c_int,
-        range: core::ffi::c_double,
-    ) -> ();
     fn generate_values(
         &mut self,
         numContours: core::ffi::c_int,
@@ -22,14 +15,8 @@ pub trait VtkContourValues {
     fn deep_copy(&mut self, other: *mut core::ffi::c_void) -> ();
 }
 pub trait VtkErrorCode {
-    fn get_string_from_error_code(
-        &mut self,
-        error: core::ffi::c_ulong,
-    ) -> *const core::ffi::c_char;
-    fn get_error_code_from_string(
-        &mut self,
-        error: core::ffi::c_char,
-    ) -> core::ffi::c_ulong;
+    fn get_string_from_error_code(&mut self, error: core::ffi::c_ulong) -> &str;
+    fn get_error_code_from_string(&mut self, error: &str) -> core::ffi::c_ulong;
     fn get_last_system_error(&mut self) -> core::ffi::c_ulong;
 }
 pub trait VtkExprTkFunctionParser {
@@ -37,25 +24,17 @@ pub trait VtkExprTkFunctionParser {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
-    fn set_function(&mut self, function: core::ffi::c_char) -> ();
-    fn get_function(&mut self) -> *const core::ffi::c_char;
+    fn set_function(&mut self, function: &str) -> ();
+    fn get_function(&mut self) -> &str;
     fn is_scalar_result(&mut self) -> core::ffi::c_int;
     fn is_vector_result(&mut self) -> core::ffi::c_int;
     fn get_scalar_result(&mut self) -> core::ffi::c_double;
-    fn get_vector_result(&mut self) -> *mut core::ffi::c_double;
-    fn get_vector_result(&mut self, result: core::ffi::c_double) -> ();
     fn set_scalar_variable_value(
         &mut self,
         variableName: &str,
-        value: core::ffi::c_double,
-    ) -> ();
-    fn set_scalar_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
         value: core::ffi::c_double,
     ) -> ();
     fn get_scalar_variable_value(&mut self, variableName: &str) -> core::ffi::c_double;
-    fn get_scalar_variable_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_double;
     fn set_vector_variable_value(
         &mut self,
         variableName: &str,
@@ -63,40 +42,44 @@ pub trait VtkExprTkFunctionParser {
         yValue: core::ffi::c_double,
         zValue: core::ffi::c_double,
     ) -> ();
+    fn get_number_of_scalar_variables(&mut self) -> core::ffi::c_int;
+    fn get_scalar_variable_index(&mut self, name: &str) -> core::ffi::c_int;
+    fn get_number_of_vector_variables(&mut self) -> core::ffi::c_int;
+    fn get_vector_variable_index(&mut self, name: &str) -> core::ffi::c_int;
+    fn get_scalar_variable_needed(&mut self, i: core::ffi::c_int) -> bool;
+    fn get_vector_variable_needed(&mut self, i: core::ffi::c_int) -> bool;
+    fn remove_all_variables(&mut self) -> ();
+    fn remove_scalar_variables(&mut self) -> ();
+    fn remove_vector_variables(&mut self) -> ();
+    fn set_replace_invalid_values(&mut self, _arg: core::ffi::c_int) -> ();
+    fn get_replace_invalid_values(&mut self) -> core::ffi::c_int;
+    fn replace_invalid_values_on(&mut self) -> ();
+    fn replace_invalid_values_off(&mut self) -> ();
+    fn set_replacement_value(&mut self, _arg: core::ffi::c_double) -> ();
+    fn get_replacement_value(&mut self) -> core::ffi::c_double;
+    fn invalidate_function(&mut self) -> ();
+}
+pub trait VtkFunctionParser {
+    fn new(&mut self) -> *mut core::ffi::c_void;
+    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
+    fn new_instance(&mut self) -> *mut core::ffi::c_void;
+    fn get_m_time(&mut self) -> core::ffi::c_ulong;
+    fn set_function(&mut self, function: &str) -> ();
+    fn is_scalar_result(&mut self) -> core::ffi::c_int;
+    fn is_vector_result(&mut self) -> core::ffi::c_int;
+    fn get_scalar_result(&mut self) -> core::ffi::c_double;
+    fn set_scalar_variable_value(
+        &mut self,
+        variableName: &str,
+        value: core::ffi::c_double,
+    ) -> ();
+    fn get_scalar_variable_value(&mut self, variableName: &str) -> core::ffi::c_double;
     fn set_vector_variable_value(
         &mut self,
         variableName: &str,
-        values: core::ffi::c_double,
-    ) -> ();
-    fn set_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
         xValue: core::ffi::c_double,
         yValue: core::ffi::c_double,
         zValue: core::ffi::c_double,
-    ) -> ();
-    fn set_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        values: core::ffi::c_double,
-    ) -> ();
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: &str,
-    ) -> *mut core::ffi::c_double;
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: &str,
-        value: core::ffi::c_double,
-    ) -> ();
-    fn get_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-    ) -> *mut core::ffi::c_double;
-    fn get_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        value: core::ffi::c_double,
     ) -> ();
     fn get_number_of_scalar_variables(&mut self) -> core::ffi::c_int;
     fn get_scalar_variable_index(&mut self, name: &str) -> core::ffi::c_int;
@@ -105,9 +88,7 @@ pub trait VtkExprTkFunctionParser {
     fn get_scalar_variable_name(&mut self, i: core::ffi::c_int) -> &str;
     fn get_vector_variable_name(&mut self, i: core::ffi::c_int) -> &str;
     fn get_scalar_variable_needed(&mut self, i: core::ffi::c_int) -> bool;
-    fn get_scalar_variable_needed(&mut self, variableName: &str) -> bool;
     fn get_vector_variable_needed(&mut self, i: core::ffi::c_int) -> bool;
-    fn get_vector_variable_needed(&mut self, variableName: &str) -> bool;
     fn remove_all_variables(&mut self) -> ();
     fn remove_scalar_variables(&mut self) -> ();
     fn remove_vector_variables(&mut self) -> ();
@@ -117,155 +98,19 @@ pub trait VtkExprTkFunctionParser {
     fn replace_invalid_values_off(&mut self) -> ();
     fn set_replacement_value(&mut self, _arg: core::ffi::c_double) -> ();
     fn get_replacement_value(&mut self) -> core::ffi::c_double;
-    fn invalidate_function(&mut self) -> ();
-    fn sanitize_name(&mut self, name: core::ffi::c_char) -> &str;
-}
-pub trait VtkFunctionParser {
-    fn new(&mut self) -> *mut core::ffi::c_void;
-    fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn get_m_time(&mut self) -> core::ffi::c_ulong;
-    fn set_function(&mut self, function: core::ffi::c_char) -> ();
-    fn get_function(&mut self) -> *mut core::ffi::c_char;
-    fn is_scalar_result(&mut self) -> core::ffi::c_int;
-    fn is_vector_result(&mut self) -> core::ffi::c_int;
-    fn get_scalar_result(&mut self) -> core::ffi::c_double;
-    fn get_vector_result(&mut self) -> *mut core::ffi::c_double;
-    fn get_vector_result(&mut self, result: core::ffi::c_double) -> ();
-    fn set_scalar_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-        value: core::ffi::c_double,
-    ) -> ();
-    fn set_scalar_variable_value(
-        &mut self,
-        variableName: &str,
-        value: core::ffi::c_double,
-    ) -> ();
-    fn set_scalar_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        value: core::ffi::c_double,
-    ) -> ();
-    fn get_scalar_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-    ) -> core::ffi::c_double;
-    fn get_scalar_variable_value(&mut self, variableName: &str) -> core::ffi::c_double;
-    fn get_scalar_variable_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_double;
-    fn set_vector_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-        xValue: core::ffi::c_double,
-        yValue: core::ffi::c_double,
-        zValue: core::ffi::c_double,
-    ) -> ();
-    fn set_vector_variable_value(
-        &mut self,
-        variableName: &str,
-        xValue: core::ffi::c_double,
-        yValue: core::ffi::c_double,
-        zValue: core::ffi::c_double,
-    ) -> ();
-    fn set_vector_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-        values: core::ffi::c_double,
-    ) -> ();
-    fn set_vector_variable_value(
-        &mut self,
-        variableName: &str,
-        values: core::ffi::c_double,
-    ) -> ();
-    fn set_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        xValue: core::ffi::c_double,
-        yValue: core::ffi::c_double,
-        zValue: core::ffi::c_double,
-    ) -> ();
-    fn set_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        values: core::ffi::c_double,
-    ) -> ();
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-    ) -> *mut core::ffi::c_double;
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: &str,
-    ) -> *mut core::ffi::c_double;
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-        value: core::ffi::c_double,
-    ) -> ();
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: &str,
-        value: core::ffi::c_double,
-    ) -> ();
-    fn get_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-    ) -> *mut core::ffi::c_double;
-    fn get_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        value: core::ffi::c_double,
-    ) -> ();
-    fn get_number_of_scalar_variables(&mut self) -> core::ffi::c_int;
-    fn get_scalar_variable_index(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
-    fn get_scalar_variable_index(&mut self, name: &str) -> core::ffi::c_int;
-    fn get_number_of_vector_variables(&mut self) -> core::ffi::c_int;
-    fn get_vector_variable_index(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
-    fn get_vector_variable_index(&mut self, name: &str) -> core::ffi::c_int;
-    fn get_scalar_variable_name(
-        &mut self,
-        i: core::ffi::c_int,
-    ) -> *const core::ffi::c_char;
-    fn get_vector_variable_name(
-        &mut self,
-        i: core::ffi::c_int,
-    ) -> *const core::ffi::c_char;
-    fn get_scalar_variable_needed(&mut self, i: core::ffi::c_int) -> bool;
-    fn get_scalar_variable_needed(&mut self, variableName: core::ffi::c_char) -> bool;
-    fn get_scalar_variable_needed(&mut self, variableName: &str) -> bool;
-    fn get_vector_variable_needed(&mut self, i: core::ffi::c_int) -> bool;
-    fn get_vector_variable_needed(&mut self, variableName: core::ffi::c_char) -> bool;
-    fn get_vector_variable_needed(&mut self, variableName: &str) -> bool;
-    fn remove_all_variables(&mut self) -> ();
-    fn remove_scalar_variables(&mut self) -> ();
-    fn remove_vector_variables(&mut self) -> ();
-    fn set_replace_invalid_values(&mut self, _arg: core::ffi::c_int) -> ();
-    fn get_replace_invalid_values(&mut self) -> core::ffi::c_int;
-    fn replace_invalid_values_on(&mut self) -> ();
-    fn replace_invalid_values_off(&mut self) -> ();
-    fn set_replacement_value(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_replacement_value(&mut self) -> core::ffi::c_double;
-    fn check_expression(
-        &mut self,
-        pos: core::ffi::c_int,
-        error: core::ffi::c_char,
-    ) -> ();
     fn invalidate_function(&mut self) -> ();
 }
 pub trait VtkHeap {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn allocate_memory(&mut self, n: usize) -> *mut ();
     fn set_block_size(&mut self, p0: usize) -> ();
     fn get_block_size(&mut self) -> usize;
     fn get_number_of_blocks(&mut self) -> core::ffi::c_int;
     fn get_number_of_allocations(&mut self) -> core::ffi::c_int;
     fn reset(&mut self) -> ();
-    fn string_dup(&mut self, str: core::ffi::c_char) -> *mut core::ffi::c_char;
 }
 pub trait VtkPolygonBuilder {
-    fn insert_triangle(&mut self, abc: core::ffi::c_uchar) -> ();
     fn get_polygons(&mut self, polys: *mut core::ffi::c_void) -> ();
     fn reset(&mut self) -> ();
 }
@@ -279,19 +124,6 @@ pub trait VtkResourceFileLocator {
     fn print_debug_information_off(&mut self) -> ();
     fn set_log_verbosity(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_log_verbosity(&mut self) -> core::ffi::c_int;
-    fn locate(&mut self, anchor: &str, landmark: &str, defaultDir: &str) -> &str;
-    fn locate(
-        &mut self,
-        anchor: &str,
-        landmark_prefixes: Vec<String>,
-        landmark: &str,
-        defaultDir: &str,
-    ) -> &str;
-    fn get_library_path_for_symbol_unix(
-        &mut self,
-        symbolname: core::ffi::c_char,
-    ) -> &str;
-    fn get_library_path_for_symbol_win_32(&mut self, fptr: ()) -> &str;
 }
 impl VtkContourValues for vtkContourValues {
     fn new(&mut self) -> *mut core::ffi::c_void {
@@ -338,23 +170,6 @@ impl VtkContourValues for vtkContourValues {
         }
         unsafe { vtk_contour_values_get_value(self.0, i) }
     }
-    fn get_values(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_contour_values_get_values(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_contour_values_get_values(self.0) }
-    }
-    fn get_values(&mut self, contourValues: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_contour_values_get_values(
-                sself: *mut core::ffi::c_void,
-                contourValues: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_contour_values_get_values(self.0, contourValues) }
-    }
     fn set_number_of_contours(&mut self, number: core::ffi::c_int) -> () {
         unsafe extern "C" {
             fn vtk_contour_values_set_number_of_contours(
@@ -371,20 +186,6 @@ impl VtkContourValues for vtkContourValues {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_contour_values_get_number_of_contours(self.0) }
-    }
-    fn generate_values(
-        &mut self,
-        numContours: core::ffi::c_int,
-        range: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_contour_values_generate_values(
-                sself: *mut core::ffi::c_void,
-                numContours: core::ffi::c_int,
-                range: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_contour_values_generate_values(self.0, numContours, range) }
     }
     fn generate_values(
         &mut self,
@@ -448,22 +249,27 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
         }
         unsafe { vtk_expr_tk_function_parser_get_m_time(self.0) }
     }
-    fn set_function(&mut self, function: core::ffi::c_char) -> () {
+    fn set_function(&mut self, function: &str) -> () {
+        let c_function = std::ffi::CString::new(function).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_expr_tk_function_parser_set_function(
                 sself: *mut core::ffi::c_void,
-                function: core::ffi::c_char,
+                function: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_expr_tk_function_parser_set_function(self.0, function) }
+        unsafe { vtk_expr_tk_function_parser_set_function(self.0, c_function.as_ptr()) }
     }
-    fn get_function(&mut self) -> *const core::ffi::c_char {
+    fn get_function(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_expr_tk_function_parser_get_function(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_expr_tk_function_parser_get_function(self.0) }
+        let ptr = unsafe { vtk_expr_tk_function_parser_get_function(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
     fn is_scalar_result(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
@@ -489,23 +295,6 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
         }
         unsafe { vtk_expr_tk_function_parser_get_scalar_result(self.0) }
     }
-    fn get_vector_result(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_vector_result(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_expr_tk_function_parser_get_vector_result(self.0) }
-    }
-    fn get_vector_result(&mut self, result: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_vector_result(
-                sself: *mut core::ffi::c_void,
-                result: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_expr_tk_function_parser_get_vector_result(self.0, result) }
-    }
     fn set_scalar_variable_value(
         &mut self,
         variableName: &str,
@@ -528,22 +317,6 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
             )
         }
     }
-    fn set_scalar_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        value: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_set_scalar_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_set_scalar_variable_value(self.0, i, value)
-        }
-    }
     fn get_scalar_variable_value(&mut self, variableName: &str) -> core::ffi::c_double {
         let c_variableName = std::ffi::CString::new(variableName)
             .expect("CString::new failed");
@@ -560,15 +333,6 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
             )
         }
     }
-    fn get_scalar_variable_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_scalar_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_expr_tk_function_parser_get_scalar_variable_value(self.0, i) }
-    }
     fn set_vector_variable_value(
         &mut self,
         variableName: &str,
@@ -595,139 +359,6 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
                 yValue,
                 zValue,
             )
-        }
-    }
-    fn set_vector_variable_value(
-        &mut self,
-        variableName: &str,
-        values: core::ffi::c_double,
-    ) -> () {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_set_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-                values: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_set_vector_variable_value(
-                self.0,
-                c_variableName.as_ptr(),
-                values,
-            )
-        }
-    }
-    fn set_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        xValue: core::ffi::c_double,
-        yValue: core::ffi::c_double,
-        zValue: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_set_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-                xValue: core::ffi::c_double,
-                yValue: core::ffi::c_double,
-                zValue: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_set_vector_variable_value(
-                self.0,
-                i,
-                xValue,
-                yValue,
-                zValue,
-            )
-        }
-    }
-    fn set_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        values: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_set_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-                values: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_set_vector_variable_value(self.0, i, values)
-        }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: &str,
-    ) -> *mut core::ffi::c_double {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_get_vector_variable_value(
-                self.0,
-                c_variableName.as_ptr(),
-            )
-        }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: &str,
-        value: core::ffi::c_double,
-    ) -> () {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_get_vector_variable_value(
-                self.0,
-                c_variableName.as_ptr(),
-                value,
-            )
-        }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-    ) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_expr_tk_function_parser_get_vector_variable_value(self.0, i) }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        value: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_get_vector_variable_value(self.0, i, value)
         }
     }
     fn get_number_of_scalar_variables(&mut self) -> core::ffi::c_int {
@@ -776,36 +407,6 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
             )
         }
     }
-    fn get_scalar_variable_name(&mut self, i: core::ffi::c_int) -> &str {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_scalar_variable_name(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-            ) -> *const core::ffi::c_char;
-        }
-        let ptr = unsafe {
-            vtk_expr_tk_function_parser_get_scalar_variable_name(self.0, i)
-        };
-        if ptr.is_null() {
-            return "";
-        }
-        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
-    }
-    fn get_vector_variable_name(&mut self, i: core::ffi::c_int) -> &str {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_vector_variable_name(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-            ) -> *const core::ffi::c_char;
-        }
-        let ptr = unsafe {
-            vtk_expr_tk_function_parser_get_vector_variable_name(self.0, i)
-        };
-        if ptr.is_null() {
-            return "";
-        }
-        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
-    }
     fn get_scalar_variable_needed(&mut self, i: core::ffi::c_int) -> bool {
         unsafe extern "C" {
             fn vtk_expr_tk_function_parser_get_scalar_variable_needed(
@@ -815,22 +416,6 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
         }
         unsafe { vtk_expr_tk_function_parser_get_scalar_variable_needed(self.0, i) }
     }
-    fn get_scalar_variable_needed(&mut self, variableName: &str) -> bool {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_scalar_variable_needed(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-            ) -> bool;
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_get_scalar_variable_needed(
-                self.0,
-                c_variableName.as_ptr(),
-            )
-        }
-    }
     fn get_vector_variable_needed(&mut self, i: core::ffi::c_int) -> bool {
         unsafe extern "C" {
             fn vtk_expr_tk_function_parser_get_vector_variable_needed(
@@ -839,22 +424,6 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
             ) -> bool;
         }
         unsafe { vtk_expr_tk_function_parser_get_vector_variable_needed(self.0, i) }
-    }
-    fn get_vector_variable_needed(&mut self, variableName: &str) -> bool {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_get_vector_variable_needed(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-            ) -> bool;
-        }
-        unsafe {
-            vtk_expr_tk_function_parser_get_vector_variable_needed(
-                self.0,
-                c_variableName.as_ptr(),
-            )
-        }
     }
     fn remove_all_variables(&mut self) -> () {
         unsafe extern "C" {
@@ -938,19 +507,6 @@ impl VtkExprTkFunctionParser for vtkExprTkFunctionParser {
         }
         unsafe { vtk_expr_tk_function_parser_invalidate_function(self.0) }
     }
-    fn sanitize_name(&mut self, name: core::ffi::c_char) -> &str {
-        unsafe extern "C" {
-            fn vtk_expr_tk_function_parser_sanitize_name(
-                sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
-            ) -> *const core::ffi::c_char;
-        }
-        let ptr = unsafe { vtk_expr_tk_function_parser_sanitize_name(self.0, name) };
-        if ptr.is_null() {
-            return "";
-        }
-        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
-    }
 }
 impl VtkFunctionParser for vtkFunctionParser {
     fn new(&mut self) -> *mut core::ffi::c_void {
@@ -986,22 +542,15 @@ impl VtkFunctionParser for vtkFunctionParser {
         }
         unsafe { vtk_function_parser_get_m_time(self.0) }
     }
-    fn set_function(&mut self, function: core::ffi::c_char) -> () {
+    fn set_function(&mut self, function: &str) -> () {
+        let c_function = std::ffi::CString::new(function).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_function_parser_set_function(
                 sself: *mut core::ffi::c_void,
-                function: core::ffi::c_char,
+                function: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_function_parser_set_function(self.0, function) }
-    }
-    fn get_function(&mut self) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_function(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_function_parser_get_function(self.0) }
+        unsafe { vtk_function_parser_set_function(self.0, c_function.as_ptr()) }
     }
     fn is_scalar_result(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
@@ -1027,39 +576,6 @@ impl VtkFunctionParser for vtkFunctionParser {
         }
         unsafe { vtk_function_parser_get_scalar_result(self.0) }
     }
-    fn get_vector_result(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_result(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_function_parser_get_vector_result(self.0) }
-    }
-    fn get_vector_result(&mut self, result: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_result(
-                sself: *mut core::ffi::c_void,
-                result: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_function_parser_get_vector_result(self.0, result) }
-    }
-    fn set_scalar_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-        value: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_set_scalar_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: core::ffi::c_char,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_function_parser_set_scalar_variable_value(self.0, variableName, value)
-        }
-    }
     fn set_scalar_variable_value(
         &mut self,
         variableName: &str,
@@ -1082,32 +598,6 @@ impl VtkFunctionParser for vtkFunctionParser {
             )
         }
     }
-    fn set_scalar_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        value: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_set_scalar_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_function_parser_set_scalar_variable_value(self.0, i, value) }
-    }
-    fn get_scalar_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_scalar_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: core::ffi::c_char,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_function_parser_get_scalar_variable_value(self.0, variableName) }
-    }
     fn get_scalar_variable_value(&mut self, variableName: &str) -> core::ffi::c_double {
         let c_variableName = std::ffi::CString::new(variableName)
             .expect("CString::new failed");
@@ -1124,41 +614,6 @@ impl VtkFunctionParser for vtkFunctionParser {
             )
         }
     }
-    fn get_scalar_variable_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_scalar_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_function_parser_get_scalar_variable_value(self.0, i) }
-    }
-    fn set_vector_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-        xValue: core::ffi::c_double,
-        yValue: core::ffi::c_double,
-        zValue: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_set_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: core::ffi::c_char,
-                xValue: core::ffi::c_double,
-                yValue: core::ffi::c_double,
-                zValue: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_function_parser_set_vector_variable_value(
-                self.0,
-                variableName,
-                xValue,
-                yValue,
-                zValue,
-            )
-        }
-    }
     fn set_vector_variable_value(
         &mut self,
         variableName: &str,
@@ -1186,179 +641,6 @@ impl VtkFunctionParser for vtkFunctionParser {
                 zValue,
             )
         }
-    }
-    fn set_vector_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-        values: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_set_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: core::ffi::c_char,
-                values: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_function_parser_set_vector_variable_value(self.0, variableName, values)
-        }
-    }
-    fn set_vector_variable_value(
-        &mut self,
-        variableName: &str,
-        values: core::ffi::c_double,
-    ) -> () {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_function_parser_set_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-                values: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_function_parser_set_vector_variable_value(
-                self.0,
-                c_variableName.as_ptr(),
-                values,
-            )
-        }
-    }
-    fn set_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        xValue: core::ffi::c_double,
-        yValue: core::ffi::c_double,
-        zValue: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_set_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-                xValue: core::ffi::c_double,
-                yValue: core::ffi::c_double,
-                zValue: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_function_parser_set_vector_variable_value(
-                self.0,
-                i,
-                xValue,
-                yValue,
-                zValue,
-            )
-        }
-    }
-    fn set_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        values: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_set_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-                values: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_function_parser_set_vector_variable_value(self.0, i, values) }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-    ) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: core::ffi::c_char,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_function_parser_get_vector_variable_value(self.0, variableName) }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: &str,
-    ) -> *mut core::ffi::c_double {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe {
-            vtk_function_parser_get_vector_variable_value(
-                self.0,
-                c_variableName.as_ptr(),
-            )
-        }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: core::ffi::c_char,
-        value: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: core::ffi::c_char,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_function_parser_get_vector_variable_value(self.0, variableName, value)
-        }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        variableName: &str,
-        value: core::ffi::c_double,
-    ) -> () {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_function_parser_get_vector_variable_value(
-                self.0,
-                c_variableName.as_ptr(),
-                value,
-            )
-        }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-    ) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_function_parser_get_vector_variable_value(self.0, i) }
-    }
-    fn get_vector_variable_value(
-        &mut self,
-        i: core::ffi::c_int,
-        value: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_function_parser_get_vector_variable_value(self.0, i, value) }
     }
     fn get_number_of_scalar_variables(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
@@ -1367,18 +649,6 @@ impl VtkFunctionParser for vtkFunctionParser {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_function_parser_get_number_of_scalar_variables(self.0) }
-    }
-    fn get_scalar_variable_index(
-        &mut self,
-        name: core::ffi::c_char,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_scalar_variable_index(
-                sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_function_parser_get_scalar_variable_index(self.0, name) }
     }
     fn get_scalar_variable_index(&mut self, name: &str) -> core::ffi::c_int {
         let c_name = std::ffi::CString::new(name).expect("CString::new failed");
@@ -1398,18 +668,6 @@ impl VtkFunctionParser for vtkFunctionParser {
         }
         unsafe { vtk_function_parser_get_number_of_vector_variables(self.0) }
     }
-    fn get_vector_variable_index(
-        &mut self,
-        name: core::ffi::c_char,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_index(
-                sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_function_parser_get_vector_variable_index(self.0, name) }
-    }
     fn get_vector_variable_index(&mut self, name: &str) -> core::ffi::c_int {
         let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
@@ -1420,29 +678,31 @@ impl VtkFunctionParser for vtkFunctionParser {
         }
         unsafe { vtk_function_parser_get_vector_variable_index(self.0, c_name.as_ptr()) }
     }
-    fn get_scalar_variable_name(
-        &mut self,
-        i: core::ffi::c_int,
-    ) -> *const core::ffi::c_char {
+    fn get_scalar_variable_name(&mut self, i: core::ffi::c_int) -> &str {
         unsafe extern "C" {
             fn vtk_function_parser_get_scalar_variable_name(
                 sself: *mut core::ffi::c_void,
                 i: core::ffi::c_int,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_function_parser_get_scalar_variable_name(self.0, i) }
+        let ptr = unsafe { vtk_function_parser_get_scalar_variable_name(self.0, i) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn get_vector_variable_name(
-        &mut self,
-        i: core::ffi::c_int,
-    ) -> *const core::ffi::c_char {
+    fn get_vector_variable_name(&mut self, i: core::ffi::c_int) -> &str {
         unsafe extern "C" {
             fn vtk_function_parser_get_vector_variable_name(
                 sself: *mut core::ffi::c_void,
                 i: core::ffi::c_int,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_function_parser_get_vector_variable_name(self.0, i) }
+        let ptr = unsafe { vtk_function_parser_get_vector_variable_name(self.0, i) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
     fn get_scalar_variable_needed(&mut self, i: core::ffi::c_int) -> bool {
         unsafe extern "C" {
@@ -1453,31 +713,6 @@ impl VtkFunctionParser for vtkFunctionParser {
         }
         unsafe { vtk_function_parser_get_scalar_variable_needed(self.0, i) }
     }
-    fn get_scalar_variable_needed(&mut self, variableName: core::ffi::c_char) -> bool {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_scalar_variable_needed(
-                sself: *mut core::ffi::c_void,
-                variableName: core::ffi::c_char,
-            ) -> bool;
-        }
-        unsafe { vtk_function_parser_get_scalar_variable_needed(self.0, variableName) }
-    }
-    fn get_scalar_variable_needed(&mut self, variableName: &str) -> bool {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_function_parser_get_scalar_variable_needed(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-            ) -> bool;
-        }
-        unsafe {
-            vtk_function_parser_get_scalar_variable_needed(
-                self.0,
-                c_variableName.as_ptr(),
-            )
-        }
-    }
     fn get_vector_variable_needed(&mut self, i: core::ffi::c_int) -> bool {
         unsafe extern "C" {
             fn vtk_function_parser_get_vector_variable_needed(
@@ -1486,31 +721,6 @@ impl VtkFunctionParser for vtkFunctionParser {
             ) -> bool;
         }
         unsafe { vtk_function_parser_get_vector_variable_needed(self.0, i) }
-    }
-    fn get_vector_variable_needed(&mut self, variableName: core::ffi::c_char) -> bool {
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_needed(
-                sself: *mut core::ffi::c_void,
-                variableName: core::ffi::c_char,
-            ) -> bool;
-        }
-        unsafe { vtk_function_parser_get_vector_variable_needed(self.0, variableName) }
-    }
-    fn get_vector_variable_needed(&mut self, variableName: &str) -> bool {
-        let c_variableName = std::ffi::CString::new(variableName)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_function_parser_get_vector_variable_needed(
-                sself: *mut core::ffi::c_void,
-                variableName: *const core::ffi::c_char,
-            ) -> bool;
-        }
-        unsafe {
-            vtk_function_parser_get_vector_variable_needed(
-                self.0,
-                c_variableName.as_ptr(),
-            )
-        }
     }
     fn remove_all_variables(&mut self) -> () {
         unsafe extern "C" {
@@ -1584,20 +794,6 @@ impl VtkFunctionParser for vtkFunctionParser {
         }
         unsafe { vtk_function_parser_get_replacement_value(self.0) }
     }
-    fn check_expression(
-        &mut self,
-        pos: core::ffi::c_int,
-        error: core::ffi::c_char,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_function_parser_check_expression(
-                sself: *mut core::ffi::c_void,
-                pos: core::ffi::c_int,
-                error: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_function_parser_check_expression(self.0, pos, error) }
-    }
     fn invalidate_function(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_function_parser_invalidate_function(sself: *mut core::ffi::c_void);
@@ -1628,15 +824,6 @@ impl VtkHeap for vtkHeap {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_heap_new_instance(self.0) }
-    }
-    fn allocate_memory(&mut self, n: usize) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_heap_allocate_memory(
-                sself: *mut core::ffi::c_void,
-                n: usize,
-            ) -> *mut ();
-        }
-        unsafe { vtk_heap_allocate_memory(self.0, n) }
     }
     fn set_block_size(&mut self, p0: usize) -> () {
         unsafe extern "C" {
@@ -1671,15 +858,6 @@ impl VtkHeap for vtkHeap {
             fn vtk_heap_reset(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_heap_reset(self.0) }
-    }
-    fn string_dup(&mut self, str: core::ffi::c_char) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_heap_string_dup(
-                sself: *mut core::ffi::c_void,
-                str: core::ffi::c_char,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_heap_string_dup(self.0, str) }
     }
 }
 impl VtkResourceFileLocator for vtkResourceFileLocator {
@@ -1758,102 +936,6 @@ impl VtkResourceFileLocator for vtkResourceFileLocator {
         }
         unsafe { vtk_resource_file_locator_get_log_verbosity(self.0) }
     }
-    fn locate(&mut self, anchor: &str, landmark: &str, defaultDir: &str) -> &str {
-        let c_anchor = std::ffi::CString::new(anchor).expect("CString::new failed");
-        let c_landmark = std::ffi::CString::new(landmark).expect("CString::new failed");
-        let c_defaultDir = std::ffi::CString::new(defaultDir)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_resource_file_locator_locate(
-                sself: *mut core::ffi::c_void,
-                anchor: *const core::ffi::c_char,
-                landmark: *const core::ffi::c_char,
-                defaultDir: *const core::ffi::c_char,
-            ) -> *const core::ffi::c_char;
-        }
-        let ptr = unsafe {
-            vtk_resource_file_locator_locate(
-                self.0,
-                c_anchor.as_ptr(),
-                c_landmark.as_ptr(),
-                c_defaultDir.as_ptr(),
-            )
-        };
-        if ptr.is_null() {
-            return "";
-        }
-        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
-    }
-    fn locate(
-        &mut self,
-        anchor: &str,
-        landmark_prefixes: Vec<String>,
-        landmark: &str,
-        defaultDir: &str,
-    ) -> &str {
-        let c_anchor = std::ffi::CString::new(anchor).expect("CString::new failed");
-        let c_landmark = std::ffi::CString::new(landmark).expect("CString::new failed");
-        let c_defaultDir = std::ffi::CString::new(defaultDir)
-            .expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_resource_file_locator_locate(
-                sself: *mut core::ffi::c_void,
-                anchor: *const core::ffi::c_char,
-                landmark_prefixes: Vec<String>,
-                landmark: *const core::ffi::c_char,
-                defaultDir: *const core::ffi::c_char,
-            ) -> *const core::ffi::c_char;
-        }
-        let ptr = unsafe {
-            vtk_resource_file_locator_locate(
-                self.0,
-                c_anchor.as_ptr(),
-                landmark_prefixes,
-                c_landmark.as_ptr(),
-                c_defaultDir.as_ptr(),
-            )
-        };
-        if ptr.is_null() {
-            return "";
-        }
-        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
-    }
-    fn get_library_path_for_symbol_unix(
-        &mut self,
-        symbolname: core::ffi::c_char,
-    ) -> &str {
-        unsafe extern "C" {
-            fn vtk_resource_file_locator_get_library_path_for_symbol_unix(
-                sself: *mut core::ffi::c_void,
-                symbolname: core::ffi::c_char,
-            ) -> *const core::ffi::c_char;
-        }
-        let ptr = unsafe {
-            vtk_resource_file_locator_get_library_path_for_symbol_unix(
-                self.0,
-                symbolname,
-            )
-        };
-        if ptr.is_null() {
-            return "";
-        }
-        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
-    }
-    fn get_library_path_for_symbol_win_32(&mut self, fptr: ()) -> &str {
-        unsafe extern "C" {
-            fn vtk_resource_file_locator_get_library_path_for_symbol_win_32(
-                sself: *mut core::ffi::c_void,
-                fptr: (),
-            ) -> *const core::ffi::c_char;
-        }
-        let ptr = unsafe {
-            vtk_resource_file_locator_get_library_path_for_symbol_win_32(self.0, fptr)
-        };
-        if ptr.is_null() {
-            return "";
-        }
-        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
-    }
 }
 /// helper object to manage setting and generating contour values
 ///
@@ -1867,22 +949,13 @@ impl VtkResourceFileLocator for vtkResourceFileLocator {
 #[allow(non_camel_case_types)]
 pub struct vtkContourValues(*mut core::ffi::c_void);
 impl vtkContourValues {
-    /// Creates a new [vtkContourValues] wrapped inside `vtkNew`
+    /// Creates a new [vtkContourValues] via `vtkContourValues::New()`
     #[doc(alias = "vtkContourValues")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkContourValues_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkContourValues_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkContourValues_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkContourValues_get_ptr(self.0) }
+        Self(unsafe { vtkContourValues_new() })
     }
 }
 impl std::default::Default for vtkContourValues {
@@ -1902,12 +975,8 @@ impl Drop for vtkContourValues {
 #[test]
 fn test_vtkContourValues_create_drop() {
     let obj = vtkContourValues::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkContourValues(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Parse and evaluate a mathematical expression
 ///
@@ -1928,22 +997,13 @@ fn test_vtkContourValues_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkExprTkFunctionParser(*mut core::ffi::c_void);
 impl vtkExprTkFunctionParser {
-    /// Creates a new [vtkExprTkFunctionParser] wrapped inside `vtkNew`
+    /// Creates a new [vtkExprTkFunctionParser] via `vtkExprTkFunctionParser::New()`
     #[doc(alias = "vtkExprTkFunctionParser")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkExprTkFunctionParser_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkExprTkFunctionParser_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkExprTkFunctionParser_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkExprTkFunctionParser_get_ptr(self.0) }
+        Self(unsafe { vtkExprTkFunctionParser_new() })
     }
 }
 impl std::default::Default for vtkExprTkFunctionParser {
@@ -1963,12 +1023,8 @@ impl Drop for vtkExprTkFunctionParser {
 #[test]
 fn test_vtkExprTkFunctionParser_create_drop() {
     let obj = vtkExprTkFunctionParser::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkExprTkFunctionParser(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Parse and evaluate a mathematical expression
 ///
@@ -2001,22 +1057,13 @@ fn test_vtkExprTkFunctionParser_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkFunctionParser(*mut core::ffi::c_void);
 impl vtkFunctionParser {
-    /// Creates a new [vtkFunctionParser] wrapped inside `vtkNew`
+    /// Creates a new [vtkFunctionParser] via `vtkFunctionParser::New()`
     #[doc(alias = "vtkFunctionParser")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkFunctionParser_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkFunctionParser_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkFunctionParser_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkFunctionParser_get_ptr(self.0) }
+        Self(unsafe { vtkFunctionParser_new() })
     }
 }
 impl std::default::Default for vtkFunctionParser {
@@ -2036,12 +1083,8 @@ impl Drop for vtkFunctionParser {
 #[test]
 fn test_vtkFunctionParser_create_drop() {
     let obj = vtkFunctionParser::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkFunctionParser(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// replacement for malloc/free and new/delete
 ///
@@ -2073,20 +1116,13 @@ fn test_vtkFunctionParser_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkHeap(*mut core::ffi::c_void);
 impl vtkHeap {
-    /// Creates a new [vtkHeap] wrapped inside `vtkNew`
+    /// Creates a new [vtkHeap] via `vtkHeap::New()`
     #[doc(alias = "vtkHeap")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkHeap_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkHeap_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkHeap_get_ptr(sself: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkHeap_get_ptr(self.0) }
+        Self(unsafe { vtkHeap_new() })
     }
 }
 impl std::default::Default for vtkHeap {
@@ -2106,12 +1142,8 @@ impl Drop for vtkHeap {
 #[test]
 fn test_vtkHeap_create_drop() {
     let obj = vtkHeap::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkHeap(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// utility to locate resource files.
 ///
@@ -2130,22 +1162,13 @@ fn test_vtkHeap_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkResourceFileLocator(*mut core::ffi::c_void);
 impl vtkResourceFileLocator {
-    /// Creates a new [vtkResourceFileLocator] wrapped inside `vtkNew`
+    /// Creates a new [vtkResourceFileLocator] via `vtkResourceFileLocator::New()`
     #[doc(alias = "vtkResourceFileLocator")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkResourceFileLocator_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkResourceFileLocator_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkResourceFileLocator_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkResourceFileLocator_get_ptr(self.0) }
+        Self(unsafe { vtkResourceFileLocator_new() })
     }
 }
 impl std::default::Default for vtkResourceFileLocator {
@@ -2165,10 +1188,6 @@ impl Drop for vtkResourceFileLocator {
 #[test]
 fn test_vtkResourceFileLocator_create_drop() {
     let obj = vtkResourceFileLocator::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkResourceFileLocator(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }

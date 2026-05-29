@@ -20,7 +20,6 @@ fn main() -> Result<()> {
     build_cmake();
     let modules = vec![
         "vtksys",
-        "vtktoken",
         "vtkCommonColor",
         "vtkCommonComputationalGeometry",
         "vtkCommonCore",
@@ -30,7 +29,9 @@ fn main() -> Result<()> {
         "vtkCommonMisc",
         "vtkCommonSystem",
         "vtkCommonTransforms",
+        "vtkFiltersSources",
     ];
     vtk_rs_link::link_cmake_project(modules)?;
+    println!("cargo:rustc-link-lib=tbb");
     Ok(())
 }

@@ -1,100 +1,62 @@
-pub trait VtkAOSDataArrayTemplate: VtkGenericDataArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkAOSDataArrayTemplate {
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn get_value(&mut self, valueIdx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
     fn get_typed_tuple(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         tuple: *mut core::ffi::c_void,
-    ) -> ();
-    fn set_typed_tuple(&mut self, tupleIdx: core::ffi::c_uchar, tuple: ValueTypeT) -> ();
-    fn get_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        comp: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn set_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        comp: core::ffi::c_int,
-        value: *mut core::ffi::c_void,
     ) -> ();
     fn write_pointer(
         &mut self,
-        valueIdx: core::ffi::c_uchar,
-        numValues: core::ffi::c_uchar,
+        valueIdx: core::ffi::c_longlong,
+        numValues: core::ffi::c_longlong,
     ) -> *mut core::ffi::c_void;
-    fn get_pointer(&mut self, valueIdx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
+    fn get_pointer(&mut self, valueIdx: core::ffi::c_longlong) -> *mut core::ffi::c_void;
     fn set_array(
         &mut self,
         array: *mut core::ffi::c_void,
-        size: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
         save: core::ffi::c_int,
         deleteMethod: core::ffi::c_int,
     ) -> ();
-    fn set_array(
-        &mut self,
-        array: *mut core::ffi::c_void,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> ();
-    fn data_element_changed(&mut self, p0: core::ffi::c_uchar) -> ();
+    fn data_element_changed(&mut self, p0: core::ffi::c_longlong) -> ();
     fn begin(&mut self) -> *mut core::ffi::c_void;
     fn end(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkAbstractArray: VtkObject + VtkObjectBase {
+pub trait VtkAbstractArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn allocate(
         &mut self,
-        numValues: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        numValues: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
     fn initialize(&mut self) -> ();
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
-    fn get_data_type_size(&mut self, type_: core::ffi::c_int) -> core::ffi::c_int;
     fn get_element_component_size(&mut self) -> core::ffi::c_int;
     fn set_number_of_components(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_number_of_components_min_value(&mut self) -> core::ffi::c_int;
     fn get_number_of_components_max_value(&mut self) -> core::ffi::c_int;
     fn get_number_of_components(&mut self) -> core::ffi::c_int;
-    fn set_component_name(
-        &mut self,
-        component: core::ffi::c_uchar,
-        name: core::ffi::c_char,
-    ) -> ();
-    fn get_component_name(
-        &mut self,
-        component: core::ffi::c_uchar,
-    ) -> *const core::ffi::c_char;
+    fn set_component_name(&mut self, component: core::ffi::c_longlong, name: &str) -> ();
+    fn get_component_name(&mut self, component: core::ffi::c_longlong) -> &str;
     fn has_a_component_name(&mut self) -> bool;
     fn copy_component_names(&mut self, da: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set_number_of_tuples(&mut self, numTuples: core::ffi::c_uchar) -> ();
-    fn set_number_of_values(&mut self, numValues: core::ffi::c_uchar) -> bool;
-    fn get_number_of_tuples(&mut self) -> core::ffi::c_uchar;
-    fn get_number_of_values(&mut self) -> core::ffi::c_uchar;
+    fn set_number_of_tuples(&mut self, numTuples: core::ffi::c_longlong) -> ();
+    fn set_number_of_values(&mut self, numValues: core::ffi::c_longlong) -> bool;
+    fn get_number_of_tuples(&mut self) -> core::ffi::c_longlong;
+    fn get_number_of_values(&mut self) -> core::ffi::c_longlong;
     fn set_tuple(
         &mut self,
-        dstTupleIdx: core::ffi::c_uchar,
-        srcTupleIdx: core::ffi::c_uchar,
+        dstTupleIdx: core::ffi::c_longlong,
+        srcTupleIdx: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuple(
         &mut self,
-        dstTupleIdx: core::ffi::c_uchar,
-        srcTupleIdx: core::ffi::c_uchar,
+        dstTupleIdx: core::ffi::c_longlong,
+        srcTupleIdx: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuples(
@@ -103,96 +65,31 @@ pub trait VtkAbstractArray: VtkObject + VtkObjectBase {
         srcIds: *mut core::ffi::c_void,
         source: *mut core::ffi::c_void,
     ) -> ();
-    fn insert_tuples(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> ();
     fn insert_next_tuple(
         &mut self,
-        srcTupleIdx: core::ffi::c_uchar,
+        srcTupleIdx: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
+    ) -> core::ffi::c_longlong;
     fn get_tuples(
         &mut self,
         tupleIds: *mut core::ffi::c_void,
         output: *mut core::ffi::c_void,
     ) -> ();
-    fn get_tuples(
-        &mut self,
-        p1: core::ffi::c_uchar,
-        p2: core::ffi::c_uchar,
-        output: *mut core::ffi::c_void,
-    ) -> ();
     fn has_standard_memory_layout(&mut self) -> bool;
-    fn get_void_pointer(&mut self, valueIdx: core::ffi::c_uchar) -> *mut ();
     fn deep_copy(&mut self, da: *mut core::ffi::c_void) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        dstTupleIdx: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        dstTupleIdx: core::ffi::c_uchar,
-        srcTupleIdx1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        srcTupleIdx2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> ();
     fn squeeze(&mut self) -> ();
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int;
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int;
     fn reset(&mut self) -> ();
-    fn get_size(&mut self) -> core::ffi::c_uchar;
-    fn get_max_id(&mut self) -> core::ffi::c_uchar;
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_size(&mut self) -> core::ffi::c_longlong;
+    fn get_max_id(&mut self) -> core::ffi::c_longlong;
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> ();
-    fn export_to_void_pointer(&mut self, out_ptr: ()) -> ();
     fn get_actual_memory_size(&mut self) -> core::ffi::c_ulong;
-    fn set_name(&mut self, _arg: core::ffi::c_char) -> ();
-    fn get_name(&mut self) -> *mut core::ffi::c_char;
-    fn get_data_type_as_string(&mut self) -> *const core::ffi::c_char;
+    fn set_name(&mut self, _arg: &str) -> ();
+    fn get_data_type_as_string(&mut self) -> &str;
     fn create_array(&mut self, dataType: core::ffi::c_int) -> *mut core::ffi::c_void;
     fn is_numeric(&mut self) -> core::ffi::c_int;
     fn new_iterator(&mut self) -> *mut core::ffi::c_void;
-    fn get_data_size(&mut self) -> core::ffi::c_uchar;
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        valueIds: *mut core::ffi::c_void,
-    ) -> ();
-    fn get_variant_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_void;
-    fn insert_variant_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn set_variant_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
+    fn get_data_size(&mut self) -> core::ffi::c_longlong;
     fn data_changed(&mut self) -> ();
     fn clear_lookup(&mut self) -> ();
     fn get_prominent_component_values(
@@ -219,7 +116,7 @@ pub trait VtkAbstractArray: VtkObject + VtkObjectBase {
     fn set_max_discrete_values(&mut self, _arg: core::ffi::c_uint) -> ();
     fn get_array_type(&mut self) -> core::ffi::c_int;
 }
-pub trait VtkAnimationCue: VtkObject + VtkObjectBase {
+pub trait VtkAnimationCue {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -243,23 +140,17 @@ pub trait VtkAnimationCue: VtkObject + VtkObjectBase {
     fn get_delta_time(&mut self) -> core::ffi::c_double;
     fn get_clock_time(&mut self) -> core::ffi::c_double;
 }
-pub trait VtkArchiver: VtkObject + VtkObjectBase {
+pub trait VtkArchiver {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn get_archive_name(&mut self) -> *mut core::ffi::c_char;
-    fn set_archive_name(&mut self, _arg: core::ffi::c_char) -> ();
+    fn set_archive_name(&mut self, _arg: &str) -> ();
     fn open_archive(&mut self) -> ();
     fn close_archive(&mut self) -> ();
-    fn insert_into_archive(
-        &mut self,
-        relativePath: &str,
-        data: core::ffi::c_char,
-        size: usize,
-    ) -> ();
+    fn insert_into_archive(&mut self, relativePath: &str, data: &str, size: usize) -> ();
     fn contains(&mut self, relativePath: &str) -> bool;
 }
-pub trait VtkArray: VtkObject + VtkObjectBase {
+pub trait VtkArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn create_array(
@@ -268,286 +159,132 @@ pub trait VtkArray: VtkObject + VtkObjectBase {
         ValueType: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
     fn is_dense(&mut self) -> bool;
-    fn resize(&mut self, i: core::ffi::c_uchar) -> ();
-    fn resize(&mut self, i: core::ffi::c_uchar, j: core::ffi::c_uchar) -> ();
-    fn resize(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-    ) -> ();
-    fn resize(&mut self, i: vtkArrayRange) -> ();
-    fn resize(&mut self, i: vtkArrayRange, j: vtkArrayRange) -> ();
-    fn resize(&mut self, i: vtkArrayRange, j: vtkArrayRange, k: vtkArrayRange) -> ();
-    fn resize(&mut self, extents: vtkArrayExtents) -> ();
-    fn get_extent(&mut self, dimension: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn get_extents(&mut self) -> vtkArrayExtents;
-    fn get_dimensions(&mut self) -> core::ffi::c_uchar;
+    fn resize(&mut self, i: core::ffi::c_longlong) -> ();
+    fn get_dimensions(&mut self) -> core::ffi::c_longlong;
     fn get_size(&mut self) -> core::ffi::c_ulonglong;
     fn get_non_null_size(&mut self) -> core::ffi::c_ulonglong;
-    fn set_name(&mut self, name: vtkStdString) -> ();
-    fn get_name(&mut self) -> *mut core::ffi::c_void;
-    fn set_dimension_label(&mut self, i: core::ffi::c_uchar, label: vtkStdString) -> ();
-    fn get_dimension_label(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn get_coordinates_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-        coordinates: *mut core::ffi::c_void,
-    ) -> ();
-    fn get_variant_value(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn get_variant_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_void;
-    fn get_variant_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_void;
-    fn get_variant_value(
-        &mut self,
-        coordinates: vtkArrayCoordinates,
-    ) -> *mut core::ffi::c_void;
-    fn get_variant_value_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-    ) -> *mut core::ffi::c_void;
-    fn set_variant_value(&mut self, i: core::ffi::c_uchar, value: vtkVariant) -> ();
-    fn set_variant_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        value: vtkVariant,
-    ) -> ();
-    fn set_variant_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-        value: vtkVariant,
-    ) -> ();
-    fn set_variant_value(
-        &mut self,
-        coordinates: vtkArrayCoordinates,
-        value: vtkVariant,
-    ) -> ();
-    fn set_variant_value_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-        value: vtkVariant,
-    ) -> ();
-    fn copy_value(
-        &mut self,
-        source: *mut core::ffi::c_void,
-        source_coordinates: vtkArrayCoordinates,
-        target_coordinates: vtkArrayCoordinates,
-    ) -> ();
-    fn copy_value(
-        &mut self,
-        source: *mut core::ffi::c_void,
-        source_index: core::ffi::c_ulonglong,
-        target_coordinates: vtkArrayCoordinates,
-    ) -> ();
-    fn copy_value(
-        &mut self,
-        source: *mut core::ffi::c_void,
-        source_coordinates: vtkArrayCoordinates,
-        target_index: core::ffi::c_ulonglong,
-    ) -> ();
     fn deep_copy(&mut self) -> *mut core::ffi::c_void;
 }
 pub trait VtkArrayCoordinates {
-    fn get_dimensions(&mut self) -> core::ffi::c_uchar;
-    fn set_dimensions(&mut self, dimensions: core::ffi::c_uchar) -> ();
-    fn get_coordinate(&mut self, i: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn set_coordinate(&mut self, i: core::ffi::c_uchar, p1: core::ffi::c_uchar) -> ();
+    fn get_dimensions(&mut self) -> core::ffi::c_longlong;
+    fn set_dimensions(&mut self, dimensions: core::ffi::c_longlong) -> ();
+    fn get_coordinate(&mut self, i: core::ffi::c_longlong) -> core::ffi::c_longlong;
+    fn set_coordinate(
+        &mut self,
+        i: core::ffi::c_longlong,
+        p1: &core::ffi::c_longlong,
+    ) -> ();
 }
 pub trait VtkArrayExtents {
-    fn uniform(
-        &mut self,
-        n: core::ffi::c_uchar,
-        m: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_void;
-    fn append(&mut self, extent: vtkArrayRange) -> ();
-    fn get_dimensions(&mut self) -> core::ffi::c_uchar;
+    fn get_dimensions(&mut self) -> core::ffi::c_longlong;
     fn get_size(&mut self) -> core::ffi::c_ulonglong;
-    fn set_dimensions(&mut self, dimensions: core::ffi::c_uchar) -> ();
-    fn get_extent(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_extent(&mut self, i: core::ffi::c_uchar, p1: vtkArrayRange) -> ();
+    fn set_dimensions(&mut self, dimensions: core::ffi::c_longlong) -> ();
     fn zero_based(&mut self) -> bool;
-    fn same_shape(&mut self, rhs: vtkArrayExtents) -> bool;
-    fn get_left_to_right_coordinates_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-        coordinates: *mut core::ffi::c_void,
-    ) -> ();
-    fn get_right_to_left_coordinates_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-        coordinates: *mut core::ffi::c_void,
-    ) -> ();
-    fn contains(&mut self, extents: vtkArrayExtents) -> bool;
-    fn contains(&mut self, coordinates: vtkArrayCoordinates) -> bool;
 }
 pub trait VtkArrayExtentsList {
-    fn get_count(&mut self) -> core::ffi::c_uchar;
-    fn set_count(&mut self, count: core::ffi::c_uchar) -> ();
+    fn get_count(&mut self) -> core::ffi::c_longlong;
+    fn set_count(&mut self, count: core::ffi::c_longlong) -> ();
 }
-pub trait VtkArrayIterator: VtkObject + VtkObjectBase {
+pub trait VtkArrayIterator {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn initialize(&mut self, array: *mut core::ffi::c_void) -> ();
     fn get_data_type(&mut self) -> core::ffi::c_int;
 }
-pub trait VtkArrayIteratorTemplate: VtkArrayIterator + VtkObject + VtkObjectBase {
+pub trait VtkArrayIteratorTemplate {
     fn initialize(&mut self, array: *mut core::ffi::c_void) -> ();
     fn get_array(&mut self) -> *mut core::ffi::c_void;
-    fn get_tuple(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: *mut core::ffi::c_void) -> ();
-    fn get_number_of_tuples(&mut self) -> core::ffi::c_uchar;
-    fn get_number_of_values(&mut self) -> core::ffi::c_uchar;
+    fn get_tuple(&mut self, id: core::ffi::c_longlong) -> *mut core::ffi::c_void;
+    fn get_number_of_tuples(&mut self) -> core::ffi::c_longlong;
+    fn get_number_of_values(&mut self) -> core::ffi::c_longlong;
     fn get_number_of_components(&mut self) -> core::ffi::c_int;
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
 }
 pub trait VtkArrayRange {
-    fn get_begin(&mut self) -> core::ffi::c_uchar;
-    fn get_end(&mut self) -> core::ffi::c_uchar;
-    fn get_size(&mut self) -> core::ffi::c_uchar;
-    fn contains(&mut self, range: vtkArrayRange) -> bool;
-    fn contains(&mut self, coordinate: core::ffi::c_uchar) -> bool;
+    fn get_begin(&mut self) -> core::ffi::c_longlong;
+    fn get_end(&mut self) -> core::ffi::c_longlong;
+    fn get_size(&mut self) -> core::ffi::c_longlong;
 }
 pub trait VtkArraySort {
-    fn get_dimensions(&mut self) -> core::ffi::c_uchar;
-    fn set_dimensions(&mut self, dimensions: core::ffi::c_uchar) -> ();
+    fn get_dimensions(&mut self) -> core::ffi::c_longlong;
+    fn set_dimensions(&mut self, dimensions: core::ffi::c_longlong) -> ();
 }
 pub trait VtkArrayWeights {
-    fn get_count(&mut self) -> core::ffi::c_uchar;
-    fn set_count(&mut self, count: core::ffi::c_uchar) -> ();
+    fn get_count(&mut self) -> core::ffi::c_longlong;
+    fn set_count(&mut self, count: core::ffi::c_longlong) -> ();
 }
-pub trait VtkBitArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkBitArray {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
     fn initialize(&mut self) -> ();
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
     fn set_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_next_tuple(
         &mut self,
-        j: core::ffi::c_uchar,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
-    fn get_tuple(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_double) -> ();
-    fn set_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_float) -> ();
-    fn set_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_double) -> ();
-    fn insert_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_float) -> ();
-    fn insert_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_double) -> ();
-    fn insert_next_tuple(&mut self, tuple: core::ffi::c_float) -> core::ffi::c_uchar;
-    fn insert_next_tuple(&mut self, tuple: core::ffi::c_double) -> core::ffi::c_uchar;
-    fn remove_tuple(&mut self, id: core::ffi::c_uchar) -> ();
+    ) -> core::ffi::c_longlong;
+    fn remove_tuple(&mut self, id: core::ffi::c_longlong) -> ();
     fn set_component(
         &mut self,
-        i: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
         j: core::ffi::c_int,
         c: core::ffi::c_double,
     ) -> ();
     fn squeeze(&mut self) -> ();
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_int;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_int) -> ();
-    fn insert_value(&mut self, id: core::ffi::c_uchar, i: core::ffi::c_int) -> ();
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_next_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_uchar;
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int;
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_int;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_int) -> ();
+    fn insert_value(&mut self, id: core::ffi::c_longlong, i: core::ffi::c_int) -> ();
+    fn insert_next_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_longlong;
     fn insert_component(
         &mut self,
-        i: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
         j: core::ffi::c_int,
         c: core::ffi::c_double,
     ) -> ();
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar;
-    fn write_void_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut ();
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut ();
     fn deep_copy(&mut self, da: *mut core::ffi::c_void) -> ();
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> ();
     fn new_iterator(&mut self) -> *mut core::ffi::c_void;
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> ();
-    fn lookup_value(&mut self, value: core::ffi::c_int) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        value: core::ffi::c_int,
-        ids: *mut core::ffi::c_void,
-    ) -> ();
     fn data_changed(&mut self) -> ();
     fn clear_lookup(&mut self) -> ();
 }
-pub trait VtkBitArrayIterator: VtkArrayIterator + VtkObject + VtkObjectBase {
+pub trait VtkBitArrayIterator {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn initialize(&mut self, array: *mut core::ffi::c_void) -> ();
     fn get_array(&mut self) -> *mut core::ffi::c_void;
-    fn get_tuple(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_int;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_int;
-    fn get_number_of_tuples(&mut self) -> core::ffi::c_uchar;
-    fn get_number_of_values(&mut self) -> core::ffi::c_uchar;
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_int;
+    fn get_number_of_tuples(&mut self) -> core::ffi::c_longlong;
+    fn get_number_of_values(&mut self) -> core::ffi::c_longlong;
     fn get_number_of_components(&mut self) -> core::ffi::c_int;
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_int) -> ();
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_int) -> ();
 }
-pub trait VtkBoxMuellerRandomSequence: VtkGaussianRandomSequence + VtkRandomSequence + VtkObject + VtkObjectBase {
+pub trait VtkBoxMuellerRandomSequence {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -560,13 +297,12 @@ pub trait VtkBoxMuellerRandomSequence: VtkGaussianRandomSequence + VtkRandomSequ
 pub trait VtkBreakPoint {
     fn break_(&mut self) -> ();
 }
-pub trait VtkBuffer: VtkObject + VtkObjectBase {
+pub trait VtkBuffer {
     fn get_buffer(&mut self) -> *mut core::ffi::c_void;
-    fn get_buffer(&mut self) -> *const ScalarTypeT;
     fn set_buffer(
         &mut self,
         array: *mut core::ffi::c_void,
-        size: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
     ) -> ();
     fn set_malloc_function(&mut self, mallocFunction: *mut core::ffi::c_void) -> ();
     fn set_realloc_function(&mut self, reallocFunction: *mut core::ffi::c_void) -> ();
@@ -575,92 +311,19 @@ pub trait VtkBuffer: VtkObject + VtkObjectBase {
         noFreeFunction: bool,
         deleteFunction: *mut core::ffi::c_void,
     ) -> ();
-    fn get_size(&mut self) -> core::ffi::c_uchar;
-    fn allocate(&mut self, size: core::ffi::c_uchar) -> bool;
-    fn reallocate(&mut self, newsize: core::ffi::c_uchar) -> bool;
+    fn get_size(&mut self) -> core::ffi::c_longlong;
+    fn allocate(&mut self, size: core::ffi::c_longlong) -> bool;
+    fn reallocate(&mut self, newsize: core::ffi::c_longlong) -> bool;
 }
-pub trait VtkByteSwap: VtkObject + VtkObjectBase {
+pub trait VtkByteSwap {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn swap_le(&mut self, p: core::ffi::c_float) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_float) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_float, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_float, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_double) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_double) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_double, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_double, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_char) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_char) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_char, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_char, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_short) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_short) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_short, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_short, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_int) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_int) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_int, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_int, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_long) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_long) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_long, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_long, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_uchar) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_uchar) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_uchar, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_uchar, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_char) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_char) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_char, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_char, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_uchar) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_uchar) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_uchar, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_uchar, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_ushort) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_ushort) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_ushort, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_ushort, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_uint) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_uint) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_uint, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_uint, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_ulong) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_ulong) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_ulong, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_ulong, num: usize) -> ();
-    fn swap_le(&mut self, p: core::ffi::c_ulonglong) -> ();
-    fn swap_be(&mut self, p: core::ffi::c_ulonglong) -> ();
-    fn swap_le_range(&mut self, p: core::ffi::c_ulonglong, num: usize) -> ();
-    fn swap_be_range(&mut self, p: core::ffi::c_ulonglong, num: usize) -> ();
-    fn swap_2_le(&mut self, p: ()) -> ();
-    fn swap_4_le(&mut self, p: ()) -> ();
-    fn swap_8_le(&mut self, p: ()) -> ();
-    fn swap_2_le_range(&mut self, p: (), num: usize) -> ();
-    fn swap_4_le_range(&mut self, p: (), num: usize) -> ();
-    fn swap_8_le_range(&mut self, p: (), num: usize) -> ();
-    fn swap_2_be(&mut self, p: ()) -> ();
-    fn swap_4_be(&mut self, p: ()) -> ();
-    fn swap_8_be(&mut self, p: ()) -> ();
-    fn swap_2_be_range(&mut self, p: (), num: usize) -> ();
-    fn swap_4_be_range(&mut self, p: (), num: usize) -> ();
-    fn swap_8_be_range(&mut self, p: (), num: usize) -> ();
-    fn swap_void_range(&mut self, buffer: (), numWords: usize, wordSize: usize) -> ();
 }
-pub trait VtkCallbackCommand: VtkCommand + VtkObjectBase {
+pub trait VtkCallbackCommand {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn execute(
-        &mut self,
-        caller: *mut core::ffi::c_void,
-        eid: core::ffi::c_ulong,
-        callData: (),
-    ) -> ();
-    fn set_client_data(&mut self, cd: ()) -> ();
-    fn get_client_data(&mut self) -> *mut ();
     fn set_callback(&mut self, f: *mut core::ffi::c_void) -> ();
     fn set_client_data_delete_callback(&mut self, f: *mut core::ffi::c_void) -> ();
     fn set_abort_flag_on_execute(&mut self, f: core::ffi::c_int) -> ();
@@ -668,57 +331,28 @@ pub trait VtkCallbackCommand: VtkCommand + VtkObjectBase {
     fn abort_flag_on_execute_on(&mut self) -> ();
     fn abort_flag_on_execute_off(&mut self) -> ();
 }
-pub trait VtkCharArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkCharArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_char) -> ();
-    fn set_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_char) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_char,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_char;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_char) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_char) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_char) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_char;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_char;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_char;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_char;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_char,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_char,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn set_typed_tuple(&mut self, i: core::ffi::c_longlong, tuple: &str) -> ();
+    fn insert_typed_tuple(&mut self, i: core::ffi::c_longlong, tuple: &str) -> ();
+    fn insert_next_typed_tuple(&mut self, tuple: &str) -> core::ffi::c_longlong;
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> &str;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: &str) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: &str) -> ();
+    fn insert_next_value(&mut self, f: &str) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
-    fn get_data_type_value_min(&mut self) -> core::ffi::c_char;
-    fn get_data_type_value_max(&mut self) -> core::ffi::c_char;
+    fn get_data_type_value_min(&mut self) -> &str;
+    fn get_data_type_value_max(&mut self) -> &str;
 }
-pub trait VtkCollection: VtkObject + VtkObjectBase {
+pub trait VtkCollection {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -726,19 +360,16 @@ pub trait VtkCollection: VtkObject + VtkObjectBase {
     fn insert_item(&mut self, i: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
     fn replace_item(&mut self, i: core::ffi::c_int, p1: *mut core::ffi::c_void) -> ();
     fn remove_item(&mut self, i: core::ffi::c_int) -> ();
-    fn remove_item(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn remove_all_items(&mut self) -> ();
     fn is_item_present(&mut self, a: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn get_number_of_items(&mut self) -> core::ffi::c_int;
     fn init_traversal(&mut self) -> ();
-    fn init_traversal(&mut self, cookie: ()) -> ();
     fn get_next_item_as_object(&mut self) -> *mut core::ffi::c_void;
     fn get_item_as_object(&mut self, i: core::ffi::c_int) -> *mut core::ffi::c_void;
-    fn get_next_item_as_object(&mut self, cookie: ()) -> *mut core::ffi::c_void;
     fn new_iterator(&mut self) -> *mut core::ffi::c_void;
     fn register(&mut self, o: *mut core::ffi::c_void) -> ();
 }
-pub trait VtkCollectionIterator: VtkObject + VtkObjectBase {
+pub trait VtkCollectionIterator {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -750,35 +381,22 @@ pub trait VtkCollectionIterator: VtkObject + VtkObjectBase {
     fn is_done_with_traversal(&mut self) -> core::ffi::c_int;
     fn get_current_object(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkCommand: VtkObjectBase {
-    fn is_type_of(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
-    fn is_a(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
+pub trait VtkCommand {
+    fn is_type_of(&mut self, type_: &str) -> core::ffi::c_int;
+    fn is_a(&mut self, type_: &str) -> core::ffi::c_int;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_number_of_generations_from_base_type(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn get_number_of_generations_from_base(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn un_register(&mut self) -> ();
-    fn un_register(&mut self, p0: *mut core::ffi::c_void) -> ();
-    fn execute(
-        &mut self,
-        caller: *mut core::ffi::c_void,
-        eventId: core::ffi::c_ulong,
-        callData: (),
-    ) -> ();
-    fn get_string_from_event_id(
-        &mut self,
-        event: core::ffi::c_ulong,
-    ) -> *const core::ffi::c_char;
-    fn get_event_id_from_string(
-        &mut self,
-        event: core::ffi::c_char,
-    ) -> core::ffi::c_ulong;
+    fn get_string_from_event_id(&mut self, event: core::ffi::c_ulong) -> &str;
+    fn get_event_id_from_string(&mut self, event: &str) -> core::ffi::c_ulong;
     fn event_has_data(&mut self, event: core::ffi::c_ulong) -> bool;
     fn set_abort_flag(&mut self, f: core::ffi::c_int) -> ();
     fn get_abort_flag(&mut self) -> core::ffi::c_int;
@@ -792,7 +410,7 @@ pub trait VtkCommand: VtkObjectBase {
 pub trait VtkCommonInformationKeyManager {
     fn register(&mut self, key: *mut core::ffi::c_void) -> ();
 }
-pub trait VtkConditionVariable: VtkObject + VtkObjectBase {
+pub trait VtkConditionVariable {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -800,14 +418,14 @@ pub trait VtkConditionVariable: VtkObject + VtkObjectBase {
     fn broadcast(&mut self) -> ();
     fn wait(&mut self, mutex: *mut core::ffi::c_void) -> core::ffi::c_int;
 }
-pub trait VtkCriticalSection: VtkObject + VtkObjectBase {
+pub trait VtkCriticalSection {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn lock(&mut self) -> ();
     fn unlock(&mut self) -> ();
 }
-pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkDataArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn fast_down_cast(
@@ -818,93 +436,49 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
     fn get_element_component_size(&mut self) -> core::ffi::c_int;
     fn insert_tuple(
         &mut self,
-        dstTupleIdx: core::ffi::c_uchar,
-        srcTupleIdx: core::ffi::c_uchar,
+        dstTupleIdx: core::ffi::c_longlong,
+        srcTupleIdx: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_next_tuple(
         &mut self,
-        srcTupleIdx: core::ffi::c_uchar,
+        srcTupleIdx: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
+    ) -> core::ffi::c_longlong;
     fn insert_tuples(
         &mut self,
         dstIds: *mut core::ffi::c_void,
         srcIds: *mut core::ffi::c_void,
         source: *mut core::ffi::c_void,
     ) -> ();
-    fn insert_tuples(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        dstTupleIdx: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        dstTupleIdx: core::ffi::c_uchar,
-        srcTupleIdx1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        srcTupleIdx2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> ();
-    fn get_tuple(&mut self, tupleIdx: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> ();
-    fn get_tuple_1(&mut self, tupleIdx: core::ffi::c_uchar) -> core::ffi::c_double;
-    fn get_tuple_2(&mut self, tupleIdx: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_tuple_3(&mut self, tupleIdx: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_tuple_4(&mut self, tupleIdx: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_tuple_6(&mut self, tupleIdx: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_tuple_9(&mut self, tupleIdx: core::ffi::c_uchar) -> *mut core::ffi::c_double;
+    fn get_tuple_1(&mut self, tupleIdx: core::ffi::c_longlong) -> core::ffi::c_double;
     fn set_tuple(
         &mut self,
-        dstTupleIdx: core::ffi::c_uchar,
-        srcTupleIdx: core::ffi::c_uchar,
+        dstTupleIdx: core::ffi::c_longlong,
+        srcTupleIdx: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> ();
-    fn set_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        tuple: core::ffi::c_float,
-    ) -> ();
-    fn set_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
     ) -> ();
     fn set_tuple_1(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         value: core::ffi::c_double,
     ) -> ();
     fn set_tuple_2(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
     ) -> ();
     fn set_tuple_3(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
         val2: core::ffi::c_double,
     ) -> ();
     fn set_tuple_4(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
         val2: core::ffi::c_double,
@@ -912,7 +486,7 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
     ) -> ();
     fn set_tuple_6(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
         val2: core::ffi::c_double,
@@ -922,7 +496,7 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
     ) -> ();
     fn set_tuple_9(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
         val2: core::ffi::c_double,
@@ -933,37 +507,27 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
         val7: core::ffi::c_double,
         val8: core::ffi::c_double,
     ) -> ();
-    fn insert_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        tuple: core::ffi::c_float,
-    ) -> ();
-    fn insert_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> ();
     fn insert_tuple_1(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         value: core::ffi::c_double,
     ) -> ();
     fn insert_tuple_2(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
     ) -> ();
     fn insert_tuple_3(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
         val2: core::ffi::c_double,
     ) -> ();
     fn insert_tuple_4(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
         val2: core::ffi::c_double,
@@ -971,7 +535,7 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
     ) -> ();
     fn insert_tuple_6(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
         val2: core::ffi::c_double,
@@ -981,7 +545,7 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
     ) -> ();
     fn insert_tuple_9(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         val0: core::ffi::c_double,
         val1: core::ffi::c_double,
         val2: core::ffi::c_double,
@@ -992,8 +556,6 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
         val7: core::ffi::c_double,
         val8: core::ffi::c_double,
     ) -> ();
-    fn insert_next_tuple(&mut self, tuple: core::ffi::c_float) -> core::ffi::c_uchar;
-    fn insert_next_tuple(&mut self, tuple: core::ffi::c_double) -> core::ffi::c_uchar;
     fn insert_next_tuple_1(&mut self, value: core::ffi::c_double) -> ();
     fn insert_next_tuple_2(
         &mut self,
@@ -1034,36 +596,35 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
         val7: core::ffi::c_double,
         val8: core::ffi::c_double,
     ) -> ();
-    fn remove_tuple(&mut self, tupleIdx: core::ffi::c_uchar) -> ();
+    fn remove_tuple(&mut self, tupleIdx: core::ffi::c_longlong) -> ();
     fn remove_first_tuple(&mut self) -> ();
     fn remove_last_tuple(&mut self) -> ();
     fn get_component(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         compIdx: core::ffi::c_int,
     ) -> core::ffi::c_double;
     fn set_component(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         compIdx: core::ffi::c_int,
         value: core::ffi::c_double,
     ) -> ();
     fn insert_component(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         compIdx: core::ffi::c_int,
         value: core::ffi::c_double,
     ) -> ();
     fn get_data(
         &mut self,
-        tupleMin: core::ffi::c_uchar,
-        tupleMax: core::ffi::c_uchar,
+        tupleMin: core::ffi::c_longlong,
+        tupleMax: core::ffi::c_longlong,
         compMin: core::ffi::c_int,
         compMax: core::ffi::c_int,
         data: *mut core::ffi::c_void,
     ) -> ();
     fn deep_copy(&mut self, aa: *mut core::ffi::c_void) -> ();
-    fn deep_copy(&mut self, da: *mut core::ffi::c_void) -> ();
     fn shallow_copy(&mut self, other: *mut core::ffi::c_void) -> ();
     fn fill_component(
         &mut self,
@@ -1077,37 +638,12 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
         src: *mut core::ffi::c_void,
         srcComponent: core::ffi::c_int,
     ) -> ();
-    fn write_void_pointer(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        numValues: core::ffi::c_uchar,
-    ) -> *mut ();
     fn get_actual_memory_size(&mut self) -> core::ffi::c_ulong;
     fn create_default_lookup_table(&mut self) -> ();
     fn set_lookup_table(&mut self, lut: *mut core::ffi::c_void) -> ();
     fn get_lookup_table(&mut self) -> *mut core::ffi::c_void;
-    fn get_range(&mut self, range: core::ffi::c_double, comp: core::ffi::c_int) -> ();
-    fn get_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_double;
-    fn get_range(&mut self) -> *mut core::ffi::c_double;
-    fn get_range(&mut self, range: core::ffi::c_double) -> ();
-    fn get_finite_range(
-        &mut self,
-        range: core::ffi::c_double,
-        comp: core::ffi::c_int,
-    ) -> ();
-    fn get_finite_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_double;
-    fn get_finite_range(&mut self) -> *mut core::ffi::c_double;
-    fn get_finite_range(&mut self, range: core::ffi::c_double) -> ();
-    fn get_data_type_range(&mut self, range: core::ffi::c_double) -> ();
     fn get_data_type_min(&mut self) -> core::ffi::c_double;
     fn get_data_type_max(&mut self) -> core::ffi::c_double;
-    fn get_data_type_range(
-        &mut self,
-        type_: core::ffi::c_int,
-        range: core::ffi::c_double,
-    ) -> ();
-    fn get_data_type_min(&mut self, type_: core::ffi::c_int) -> core::ffi::c_double;
-    fn get_data_type_max(&mut self, type_: core::ffi::c_int) -> core::ffi::c_double;
     fn get_max_norm(&mut self) -> core::ffi::c_double;
     fn create_data_array(
         &mut self,
@@ -1125,75 +661,54 @@ pub trait VtkDataArray: VtkAbstractArray + VtkObject + VtkObjectBase {
     ) -> core::ffi::c_int;
     fn get_array_type(&mut self) -> core::ffi::c_int;
 }
-pub trait VtkDataArrayCollection: VtkCollection + VtkObject + VtkObjectBase {
+pub trait VtkDataArrayCollection {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn add_item(&mut self, ds: *mut core::ffi::c_void) -> ();
     fn get_next_item(&mut self) -> *mut core::ffi::c_void;
     fn get_item(&mut self, i: core::ffi::c_int) -> *mut core::ffi::c_void;
-    fn get_next_data_array(&mut self, cookie: ()) -> *mut core::ffi::c_void;
     fn get_number_of_items(&mut self) -> core::ffi::c_int;
 }
-pub trait VtkDataArrayCollectionIterator: VtkCollectionIterator + VtkObject + VtkObjectBase {
+pub trait VtkDataArrayCollectionIterator {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn set_collection(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn set_collection(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn get_data_array(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkDataArraySelection: VtkObject + VtkObjectBase {
+pub trait VtkDataArraySelection {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn enable_array(&mut self, name: core::ffi::c_char) -> ();
-    fn disable_array(&mut self, name: core::ffi::c_char) -> ();
-    fn array_is_enabled(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
-    fn array_exists(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
+    fn enable_array(&mut self, name: &str) -> ();
+    fn disable_array(&mut self, name: &str) -> ();
+    fn array_is_enabled(&mut self, name: &str) -> core::ffi::c_int;
+    fn array_exists(&mut self, name: &str) -> core::ffi::c_int;
     fn enable_all_arrays(&mut self) -> ();
     fn disable_all_arrays(&mut self) -> ();
     fn get_number_of_arrays(&mut self) -> core::ffi::c_int;
     fn get_number_of_arrays_enabled(&mut self) -> core::ffi::c_int;
-    fn get_array_name(&mut self, index: core::ffi::c_int) -> *const core::ffi::c_char;
-    fn get_array_index(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
-    fn get_enabled_array_index(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
+    fn get_array_name(&mut self, index: core::ffi::c_int) -> &str;
+    fn get_array_index(&mut self, name: &str) -> core::ffi::c_int;
+    fn get_enabled_array_index(&mut self, name: &str) -> core::ffi::c_int;
     fn get_array_setting(&mut self, index: core::ffi::c_int) -> core::ffi::c_int;
-    fn get_array_setting(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
-    fn set_array_setting(
-        &mut self,
-        name: core::ffi::c_char,
-        setting: core::ffi::c_int,
-    ) -> ();
+    fn set_array_setting(&mut self, name: &str, setting: core::ffi::c_int) -> ();
     fn remove_all_arrays(&mut self) -> ();
-    fn add_array(&mut self, name: core::ffi::c_char, state: bool) -> core::ffi::c_int;
+    fn add_array(&mut self, name: &str, state: bool) -> core::ffi::c_int;
     fn remove_array_by_index(&mut self, index: core::ffi::c_int) -> ();
-    fn remove_array_by_name(&mut self, name: core::ffi::c_char) -> ();
-    fn set_arrays(
-        &mut self,
-        names: core::ffi::c_char,
-        numArrays: core::ffi::c_int,
-    ) -> ();
-    fn set_arrays_with_default(
-        &mut self,
-        names: core::ffi::c_char,
-        numArrays: core::ffi::c_int,
-        defaultStatus: core::ffi::c_int,
-    ) -> ();
+    fn remove_array_by_name(&mut self, name: &str) -> ();
     fn copy_selections(&mut self, selections: *mut core::ffi::c_void) -> ();
     fn union(&mut self, other: *mut core::ffi::c_void) -> ();
-    fn union(&mut self, other: *mut core::ffi::c_void, skipModified: bool) -> ();
     fn set_unknown_array_setting(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_unknown_array_setting(&mut self) -> core::ffi::c_int;
 }
-pub trait VtkDebugLeaks: VtkObject + VtkObjectBase {
+pub trait VtkDebugLeaks {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn construct_class(&mut self, object: *mut core::ffi::c_void) -> ();
-    fn construct_class(&mut self, className: core::ffi::c_char) -> ();
     fn destruct_class(&mut self, object: *mut core::ffi::c_void) -> ();
-    fn destruct_class(&mut self, className: core::ffi::c_char) -> ();
     fn print_current_leaks(&mut self) -> core::ffi::c_int;
     fn get_exit_error(&mut self) -> core::ffi::c_int;
     fn set_exit_error(&mut self, p0: core::ffi::c_int) -> ();
@@ -1204,102 +719,22 @@ pub trait VtkDebugLeaksObserver {
     fn constructing_object(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn destructing_object(&mut self, p0: *mut core::ffi::c_void) -> ();
 }
-pub trait VtkDenseArray: VtkTypedArray + VtkArray + VtkObject + VtkObjectBase {
+pub trait VtkDenseArray {
     fn is_dense(&mut self) -> bool;
-    fn get_extents(&mut self) -> vtkArrayExtents;
     fn get_non_null_size(&mut self) -> core::ffi::c_ulonglong;
-    fn get_coordinates_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-        coordinates: *mut core::ffi::c_void,
-    ) -> ();
     fn deep_copy(&mut self) -> *mut core::ffi::c_void;
-    fn get_value(&mut self, i: core::ffi::c_uchar) -> T;
-    fn get_value(&mut self, i: core::ffi::c_uchar, j: core::ffi::c_uchar) -> T;
-    fn get_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-    ) -> T;
-    fn get_value(&mut self, coordinates: vtkArrayCoordinates) -> T;
-    fn get_value_n(&mut self, n: core::ffi::c_ulonglong) -> T;
-    fn set_value(&mut self, i: core::ffi::c_uchar, value: T) -> ();
-    fn set_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        value: T,
-    ) -> ();
-    fn set_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-        value: T,
-    ) -> ();
-    fn set_value(&mut self, coordinates: vtkArrayCoordinates, value: T) -> ();
-    fn set_value_n(&mut self, n: core::ffi::c_ulonglong, value: T) -> ();
-    fn external_storage(
-        &mut self,
-        extents: vtkArrayExtents,
-        storage: *mut core::ffi::c_void,
-    ) -> ();
-    fn fill(&mut self, value: T) -> ();
-    fn get_storage(&mut self) -> *const T;
-    fn get_storage(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkDoubleArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkDoubleArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> ();
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_double,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_double;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_double) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_double) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_double) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_double;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_double;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_double;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_double,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_double,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_double;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_double) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_double) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_double) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -1307,98 +742,59 @@ pub trait VtkDoubleArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjec
     fn get_data_type_value_min(&mut self) -> core::ffi::c_double;
     fn get_data_type_value_max(&mut self) -> core::ffi::c_double;
 }
-pub trait VtkDynamicLoader: VtkObject + VtkObjectBase {
+pub trait VtkDynamicLoader {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn open_library(&mut self, p0: core::ffi::c_char) -> *mut core::ffi::c_void;
-    fn open_library(
-        &mut self,
-        p0: core::ffi::c_char,
-        p1: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn close_library(&mut self, p0: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn get_symbol_address(
-        &mut self,
-        p0: *mut core::ffi::c_void,
-        p1: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
-    fn lib_prefix(&mut self) -> *const core::ffi::c_char;
-    fn lib_extension(&mut self) -> *const core::ffi::c_char;
-    fn last_error(&mut self) -> *const core::ffi::c_char;
+    fn lib_prefix(&mut self) -> &str;
+    fn lib_extension(&mut self) -> &str;
+    fn last_error(&mut self) -> &str;
 }
-pub trait VtkEventData: VtkObjectBase {
-    fn is_type_of(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
-    fn is_a(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
+pub trait VtkEventData {
+    fn is_type_of(&mut self, type_: &str) -> core::ffi::c_int;
+    fn is_a(&mut self, type_: &str) -> core::ffi::c_int;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_number_of_generations_from_base_type(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn get_number_of_generations_from_base(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn get_type(&mut self) -> core::ffi::c_int;
     fn set_type(&mut self, val: core::ffi::c_int) -> ();
     fn get_as_event_data_for_device(&mut self) -> *mut core::ffi::c_void;
     fn get_as_event_data_device_3_d(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkEventDataDevice3D: VtkEventDataForDevice + VtkEventData + VtkObjectBase {
+pub trait VtkEventDataDevice3D {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn get_world_position(&mut self, v: core::ffi::c_double) -> ();
-    fn get_world_position(&mut self) -> *const core::ffi::c_double;
-    fn set_world_position(&mut self, p: core::ffi::c_double) -> ();
-    fn get_world_direction(&mut self, v: core::ffi::c_double) -> ();
-    fn get_world_direction(&mut self) -> *const core::ffi::c_double;
-    fn set_world_direction(&mut self, p: core::ffi::c_double) -> ();
-    fn get_world_orientation(&mut self, v: core::ffi::c_double) -> ();
-    fn get_world_orientation(&mut self) -> *const core::ffi::c_double;
-    fn set_world_orientation(&mut self, p: core::ffi::c_double) -> ();
-    fn get_track_pad_position(&mut self, v: core::ffi::c_double) -> ();
-    fn get_track_pad_position(&mut self) -> *const core::ffi::c_double;
-    fn set_track_pad_position(&mut self, p: core::ffi::c_double) -> ();
     fn set_track_pad_position(
         &mut self,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
     ) -> ();
 }
-pub trait VtkEventDataForDevice: VtkEventData + VtkObjectBase {
+pub trait VtkEventDataForDevice {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn get_device(&mut self) -> *mut core::ffi::c_void;
-    fn get_input(&mut self) -> *mut core::ffi::c_void;
-    fn get_action(&mut self) -> *mut core::ffi::c_void;
-    fn set_device(&mut self, v: *mut core::ffi::c_void) -> ();
-    fn set_input(&mut self, v: *mut core::ffi::c_void) -> ();
-    fn set_action(&mut self, v: *mut core::ffi::c_void) -> ();
-    fn device_matches(&mut self, val: *mut core::ffi::c_void) -> bool;
 }
-pub trait VtkEventForwarderCommand: VtkCommand + VtkObjectBase {
+pub trait VtkEventForwarderCommand {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn execute(
-        &mut self,
-        caller: *mut core::ffi::c_void,
-        eid: core::ffi::c_ulong,
-        callData: (),
-    ) -> ();
     fn set_target(&mut self, obj: *mut core::ffi::c_void) -> ();
-    fn get_target(&mut self) -> *mut ();
 }
-pub trait VtkFileOutputWindow: VtkOutputWindow + VtkObject + VtkObjectBase {
+pub trait VtkFileOutputWindow {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn display_text(&mut self, p0: core::ffi::c_char) -> ();
-    fn set_file_name(&mut self, _arg: core::ffi::c_char) -> ();
-    fn get_file_name(&mut self) -> *mut core::ffi::c_char;
+    fn display_text(&mut self, p0: &str) -> ();
+    fn set_file_name(&mut self, _arg: &str) -> ();
     fn set_flush(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_flush(&mut self) -> core::ffi::c_int;
     fn flush_on(&mut self) -> ();
@@ -1408,57 +804,17 @@ pub trait VtkFileOutputWindow: VtkOutputWindow + VtkObject + VtkObjectBase {
     fn append_on(&mut self) -> ();
     fn append_off(&mut self) -> ();
 }
-pub trait VtkFloatArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkFloatArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_float,
-    ) -> ();
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_float,
-    ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_float,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_float,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_float;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_float) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_float) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_float) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_float;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_float;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_float;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_float;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_float,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_float,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_float;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_float) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_float) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_float) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -1470,18 +826,17 @@ pub trait VtkFloatingPointExceptions {
     fn enable(&mut self) -> ();
     fn disable(&mut self) -> ();
 }
-pub trait VtkGarbageCollector: VtkObject + VtkObjectBase {
+pub trait VtkGarbageCollector {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn collect(&mut self) -> ();
-    fn collect(&mut self, root: *mut core::ffi::c_void) -> ();
     fn deferred_collection_push(&mut self) -> ();
     fn deferred_collection_pop(&mut self) -> ();
     fn set_global_debug_flag(&mut self, flag: bool) -> ();
     fn get_global_debug_flag(&mut self) -> bool;
 }
-pub trait VtkGaussianRandomSequence: VtkRandomSequence + VtkObject + VtkObjectBase {
+pub trait VtkGaussianRandomSequence {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_scaled_value(
@@ -1495,367 +850,128 @@ pub trait VtkGaussianRandomSequence: VtkRandomSequence + VtkObject + VtkObjectBa
         standardDeviation: core::ffi::c_double,
     ) -> core::ffi::c_double;
 }
-pub trait VtkGenericDataArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
-    fn get_value(&mut self, valueIdx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
+pub trait VtkGenericDataArray {
     fn get_typed_tuple(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         tuple: *mut core::ffi::c_void,
     ) -> ();
-    fn set_typed_tuple(&mut self, tupleIdx: core::ffi::c_uchar, tuple: ValueTypeT) -> ();
-    fn get_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        compIdx: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn set_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        compIdx: core::ffi::c_int,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn get_void_pointer(&mut self, valueIdx: core::ffi::c_uchar) -> *mut ();
-    fn get_pointer(&mut self, valueIdx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_void_array(
-        &mut self,
-        p0: (),
-        p1: core::ffi::c_uchar,
-        p2: core::ffi::c_int,
-    ) -> ();
-    fn set_void_array(
-        &mut self,
-        p0: (),
-        p1: core::ffi::c_uchar,
-        p2: core::ffi::c_int,
-        p3: core::ffi::c_int,
-    ) -> ();
+    fn get_pointer(&mut self, valueIdx: core::ffi::c_longlong) -> *mut core::ffi::c_void;
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> ();
-    fn write_void_pointer(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        numValues: core::ffi::c_uchar,
-    ) -> *mut ();
     fn write_pointer(
         &mut self,
-        valueIdx: core::ffi::c_uchar,
-        numValues: core::ffi::c_uchar,
+        valueIdx: core::ffi::c_longlong,
+        numValues: core::ffi::c_longlong,
     ) -> *mut core::ffi::c_void;
-    fn remove_tuple(&mut self, tupleIdx: core::ffi::c_uchar) -> ();
-    fn insert_next_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn insert_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_typed_tuple(&mut self, tupleIdx: core::ffi::c_uchar, t: ValueTypeT) -> ();
-    fn insert_next_typed_tuple(&mut self, t: ValueTypeT) -> core::ffi::c_uchar;
-    fn insert_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        compIdx: core::ffi::c_int,
-        val: *mut core::ffi::c_void,
-    ) -> ();
-    fn get_value_range(
-        &mut self,
-        range: *mut core::ffi::c_void,
-        comp: core::ffi::c_int,
-    ) -> ();
+    fn remove_tuple(&mut self, tupleIdx: core::ffi::c_longlong) -> ();
     fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_void;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_void;
-    fn get_value_range(&mut self, range: *mut core::ffi::c_void) -> ();
-    fn get_finite_value_range(
-        &mut self,
-        range: *mut core::ffi::c_void,
-        comp: core::ffi::c_int,
-    ) -> ();
     fn get_finite_value_range(
         &mut self,
         comp: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
-    fn get_finite_value_range(&mut self) -> *mut core::ffi::c_void;
-    fn get_finite_value_range(&mut self, range: *mut core::ffi::c_void) -> ();
-    fn capacity(&mut self) -> core::ffi::c_uchar;
-    fn fill_typed_component(
-        &mut self,
-        compIdx: core::ffi::c_int,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn fill_value(&mut self, value: *mut core::ffi::c_void) -> ();
+    fn capacity(&mut self) -> core::ffi::c_longlong;
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
     fn allocate(
         &mut self,
-        size: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int;
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int;
     fn set_number_of_components(&mut self, num: core::ffi::c_int) -> ();
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> ();
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> ();
     fn initialize(&mut self) -> ();
     fn squeeze(&mut self) -> ();
-    fn insert_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        source: core::ffi::c_float,
-    ) -> ();
-    fn insert_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        source: core::ffi::c_double,
-    ) -> ();
-    fn insert_next_tuple(&mut self, tuple: core::ffi::c_float) -> core::ffi::c_uchar;
-    fn insert_next_tuple(&mut self, tuple: core::ffi::c_double) -> core::ffi::c_uchar;
-    fn get_tuple(&mut self, tupleIdx: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> ();
-    fn set_variant_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_variant_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn lookup_typed_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        valueIds: *mut core::ffi::c_void,
-    ) -> ();
-    fn lookup_typed_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        valueIds: *mut core::ffi::c_void,
-    ) -> ();
     fn clear_lookup(&mut self) -> ();
     fn data_changed(&mut self) -> ();
     fn new_iterator(&mut self) -> *mut core::ffi::c_void;
 }
 pub trait VtkGenericDataArrayLookupHelper {
     fn set_array(&mut self, array: *mut core::ffi::c_void) -> ();
-    fn lookup_value(&mut self, elem: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        elem: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> ();
     fn clear_lookup(&mut self) -> ();
 }
-pub trait VtkIdList: VtkObject + VtkObjectBase {
+pub trait VtkIdList {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn initialize(&mut self) -> ();
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
         strategy: core::ffi::c_int,
     ) -> core::ffi::c_int;
-    fn get_number_of_ids(&mut self) -> core::ffi::c_uchar;
-    fn get_id(&mut self, i: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn find_id_location(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn set_number_of_ids(&mut self, number: core::ffi::c_uchar) -> ();
-    fn set_id(&mut self, i: core::ffi::c_uchar, vtkid: core::ffi::c_uchar) -> ();
-    fn insert_id(&mut self, i: core::ffi::c_uchar, vtkid: core::ffi::c_uchar) -> ();
-    fn insert_next_id(&mut self, vtkid: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn insert_unique_id(&mut self, vtkid: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn sort(&mut self) -> ();
-    fn fill(&mut self, value: core::ffi::c_uchar) -> ();
-    fn get_pointer(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_uchar;
-    fn write_pointer(
+    fn get_number_of_ids(&mut self) -> core::ffi::c_longlong;
+    fn get_id(&mut self, i: core::ffi::c_longlong) -> core::ffi::c_longlong;
+    fn find_id_location(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_longlong;
+    fn set_number_of_ids(&mut self, number: core::ffi::c_longlong) -> ();
+    fn set_id(&mut self, i: core::ffi::c_longlong, vtkid: core::ffi::c_longlong) -> ();
+    fn insert_id(
         &mut self,
-        i: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar;
-    fn set_array(&mut self, array: core::ffi::c_uchar, size: core::ffi::c_uchar) -> ();
+        i: core::ffi::c_longlong,
+        vtkid: core::ffi::c_longlong,
+    ) -> ();
+    fn insert_next_id(&mut self, vtkid: core::ffi::c_longlong) -> core::ffi::c_longlong;
+    fn insert_unique_id(
+        &mut self,
+        vtkid: core::ffi::c_longlong,
+    ) -> core::ffi::c_longlong;
+    fn sort(&mut self) -> ();
+    fn fill(&mut self, value: core::ffi::c_longlong) -> ();
     fn reset(&mut self) -> ();
     fn squeeze(&mut self) -> ();
     fn deep_copy(&mut self, ids: *mut core::ffi::c_void) -> ();
-    fn delete_id(&mut self, vtkid: core::ffi::c_uchar) -> ();
-    fn is_id(&mut self, vtkid: core::ffi::c_uchar) -> core::ffi::c_uchar;
+    fn delete_id(&mut self, vtkid: core::ffi::c_longlong) -> ();
+    fn is_id(&mut self, vtkid: core::ffi::c_longlong) -> core::ffi::c_longlong;
     fn intersect_with(&mut self, otherIds: *mut core::ffi::c_void) -> ();
-    fn resize(&mut self, sz: core::ffi::c_uchar) -> *mut core::ffi::c_uchar;
-    fn intersect_with(&mut self, otherIds: *mut core::ffi::c_void) -> ();
-    fn begin(&mut self) -> *mut core::ffi::c_uchar;
-    fn end(&mut self) -> *mut core::ffi::c_uchar;
-    fn begin(&mut self) -> *const core::ffi::c_uchar;
-    fn end(&mut self) -> *const core::ffi::c_uchar;
 }
-pub trait VtkIdListCollection: VtkCollection + VtkObject + VtkObjectBase {
+pub trait VtkIdListCollection {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn add_item(&mut self, ds: *mut core::ffi::c_void) -> ();
     fn get_next_item(&mut self) -> *mut core::ffi::c_void;
     fn get_item(&mut self, i: core::ffi::c_int) -> *mut core::ffi::c_void;
-    fn get_next_id_list(&mut self, cookie: ()) -> *mut core::ffi::c_void;
     fn get_number_of_items(&mut self) -> core::ffi::c_int;
 }
-pub trait VtkIdTypeArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkIdTypeArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_longlong;
+    fn set_value(
         &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
+        value: core::ffi::c_longlong,
     ) -> ();
-    fn set_typed_tuple(
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(
         &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
+        f: core::ffi::c_longlong,
     ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_uchar,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_uchar) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_uchar) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_uchar;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_uchar;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_longlong) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
-    fn get_data_type_value_min(&mut self) -> core::ffi::c_uchar;
-    fn get_data_type_value_max(&mut self) -> core::ffi::c_uchar;
+    fn get_data_type_value_min(&mut self) -> core::ffi::c_longlong;
+    fn get_data_type_value_max(&mut self) -> core::ffi::c_longlong;
 }
 pub trait VtkIndent {
     fn delete(&mut self) -> ();
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn get_next_indent(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkInformation: VtkObject + VtkObjectBase {
+pub trait VtkInformation {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn modified(&mut self) -> ();
-    fn modified(&mut self, key: *mut core::ffi::c_void) -> ();
     fn clear(&mut self) -> ();
     fn get_number_of_keys(&mut self) -> core::ffi::c_int;
     fn copy(&mut self, from: *mut core::ffi::c_void, deep: core::ffi::c_int) -> ();
     fn append(&mut self, from: *mut core::ffi::c_void, deep: core::ffi::c_int) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> ();
     fn copy_entry(
         &mut self,
         from: *mut core::ffi::c_void,
@@ -1871,376 +987,22 @@ pub trait VtkInformation: VtkObject + VtkObjectBase {
     fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
     fn set(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_int) -> ();
     fn get(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_uchar) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_double) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_double;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, value: vtkVariant) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> vtkVariant;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn append(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_int) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: core::ffi::c_int,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: core::ffi::c_int,
-        value2: core::ffi::c_int,
-        value3: core::ffi::c_int,
-    ) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: core::ffi::c_int,
-        value2: core::ffi::c_int,
-        value3: core::ffi::c_int,
-        value4: core::ffi::c_int,
-        value5: core::ffi::c_int,
-        value6: core::ffi::c_int,
-    ) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_int;
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> core::ffi::c_int;
-    fn get(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_int) -> ();
     fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn append(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_char) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: core::ffi::c_char,
-        idx: core::ffi::c_int,
-    ) -> ();
-    fn append(&mut self, key: *mut core::ffi::c_void, value: &str) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: &str,
-        idx: core::ffi::c_int,
-    ) -> ();
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> *const core::ffi::c_char;
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: core::ffi::c_int,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_int;
-    fn get(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_int) -> ();
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_ulong) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_ulong;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn append(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_double) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: core::ffi::c_double,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: core::ffi::c_double,
-        value2: core::ffi::c_double,
-        value3: core::ffi::c_double,
-    ) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: core::ffi::c_double,
-        value2: core::ffi::c_double,
-        value3: core::ffi::c_double,
-        value4: core::ffi::c_double,
-        value5: core::ffi::c_double,
-        value6: core::ffi::c_double,
-    ) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_double;
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> core::ffi::c_double;
-    fn get(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_double) -> ();
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn append(&mut self, key: *mut core::ffi::c_void, value: vtkVariant) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: vtkVariant,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: vtkVariant,
-        value2: vtkVariant,
-        value3: vtkVariant,
-    ) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: vtkVariant,
-        value2: vtkVariant,
-        value3: vtkVariant,
-        value4: vtkVariant,
-        value5: vtkVariant,
-        value6: vtkVariant,
-    ) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *const vtkVariant;
-    fn get(&mut self, key: *mut core::ffi::c_void, idx: core::ffi::c_int) -> vtkVariant;
-    fn get(&mut self, key: *mut core::ffi::c_void, value: *mut core::ffi::c_void) -> ();
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
     fn append_unique(
         &mut self,
         key: *mut core::ffi::c_void,
         value: *mut core::ffi::c_void,
     ) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn remove(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut &mut vtkInformationKey;
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn get(&mut self, key: *mut core::ffi::c_void, value: *mut core::ffi::c_void) -> ();
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: core::ffi::c_char) -> ();
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: &str) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *const core::ffi::c_char;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        data: *mut core::ffi::c_void,
-    ) -> ();
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> ();
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn remove(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        objectToRemove: *mut core::ffi::c_void,
-    ) -> ();
-    fn remove(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        indexToRemove: core::ffi::c_int,
-    ) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> ();
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> ();
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn register(&mut self, o: *mut core::ffi::c_void) -> ();
     fn set_request(&mut self, request: *mut core::ffi::c_void) -> ();
     fn get_request(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkInformationDataObjectKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationDataObjectKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
     fn set(&mut self, info: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> ();
     fn get(&mut self, info: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn shallow_copy(
@@ -2249,14 +1011,10 @@ pub trait VtkInformationDataObjectKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationDoubleKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationDoubleKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
     fn set(&mut self, info: *mut core::ffi::c_void, p1: core::ffi::c_double) -> ();
     fn get(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_double;
     fn shallow_copy(
@@ -2265,29 +1023,16 @@ pub trait VtkInformationDoubleKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationDoubleVectorKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationDoubleVectorKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn make_key(
         &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
+        name: &str,
+        location: &str,
         length: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
     fn append(&mut self, info: *mut core::ffi::c_void, value: core::ffi::c_double) -> ();
-    fn set(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        value: core::ffi::c_double,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn get(&mut self, info: *mut core::ffi::c_void) -> *mut core::ffi::c_double;
-    fn get(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> core::ffi::c_double;
-    fn get(&mut self, info: *mut core::ffi::c_void, value: core::ffi::c_double) -> ();
     fn length(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn shallow_copy(
         &mut self,
@@ -2295,30 +1040,22 @@ pub trait VtkInformationDoubleVectorKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationIdTypeKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationIdTypeKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
-    fn set(&mut self, info: *mut core::ffi::c_void, p1: core::ffi::c_uchar) -> ();
-    fn get(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_uchar;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
+    fn set(&mut self, info: *mut core::ffi::c_void, p1: core::ffi::c_longlong) -> ();
+    fn get(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_longlong;
     fn shallow_copy(
         &mut self,
         from: *mut core::ffi::c_void,
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationInformationKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationInformationKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
     fn set(&mut self, info: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> ();
     fn get(&mut self, info: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn shallow_copy(
@@ -2332,7 +1069,7 @@ pub trait VtkInformationInformationKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationInformationVectorKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationInformationVectorKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn set(&mut self, info: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> ();
@@ -2348,14 +1085,10 @@ pub trait VtkInformationInformationVectorKey: VtkInformationKey + VtkObjectBase 
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationIntegerKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationIntegerKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
     fn set(&mut self, info: *mut core::ffi::c_void, p1: core::ffi::c_int) -> ();
     fn get(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn shallow_copy(
@@ -2364,17 +1097,9 @@ pub trait VtkInformationIntegerKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationIntegerPointerKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationIntegerPointerKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn set(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        value: core::ffi::c_int,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn get(&mut self, info: *mut core::ffi::c_void) -> *mut core::ffi::c_int;
-    fn get(&mut self, info: *mut core::ffi::c_void, value: core::ffi::c_int) -> ();
     fn length(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn shallow_copy(
         &mut self,
@@ -2382,30 +1107,16 @@ pub trait VtkInformationIntegerPointerKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationIntegerVectorKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationIntegerVectorKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn make_key(
         &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
+        name: &str,
+        location: &str,
         length: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
     fn append(&mut self, info: *mut core::ffi::c_void, value: core::ffi::c_int) -> ();
-    fn set(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        value: core::ffi::c_int,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn set(&mut self, info: *mut core::ffi::c_void) -> ();
-    fn get(&mut self, info: *mut core::ffi::c_void) -> *mut core::ffi::c_int;
-    fn get(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> core::ffi::c_int;
-    fn get(&mut self, info: *mut core::ffi::c_void, value: core::ffi::c_int) -> ();
     fn length(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn shallow_copy(
         &mut self,
@@ -2413,7 +1124,7 @@ pub trait VtkInformationIntegerVectorKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationIterator: VtkObject + VtkObjectBase {
+pub trait VtkInformationIterator {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -2426,23 +1137,23 @@ pub trait VtkInformationIterator: VtkObject + VtkObjectBase {
     fn is_done_with_traversal(&mut self) -> core::ffi::c_int;
     fn get_current_key(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkInformationKey: VtkObjectBase {
-    fn is_type_of(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
-    fn is_a(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
+pub trait VtkInformationKey {
+    fn is_type_of(&mut self, type_: &str) -> core::ffi::c_int;
+    fn is_a(&mut self, type_: &str) -> core::ffi::c_int;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_number_of_generations_from_base_type(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn get_number_of_generations_from_base(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn register(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn un_register(&mut self, p0: *mut core::ffi::c_void) -> ();
-    fn get_name(&mut self) -> *const core::ffi::c_char;
-    fn get_location(&mut self) -> *const core::ffi::c_char;
+    fn get_name(&mut self) -> &str;
+    fn get_location(&mut self) -> &str;
     fn shallow_copy(
         &mut self,
         from: *mut core::ffi::c_void,
@@ -2479,20 +1190,16 @@ pub trait VtkInformationKey: VtkObjectBase {
         toInfo: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationKeyLookup: VtkObject + VtkObjectBase {
+pub trait VtkInformationKeyLookup {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn find(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
 }
-pub trait VtkInformationKeyVectorKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationKeyVectorKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
     fn append(
         &mut self,
         info: *mut core::ffi::c_void,
@@ -2503,24 +1210,16 @@ pub trait VtkInformationKeyVectorKey: VtkInformationKey + VtkObjectBase {
         info: *mut core::ffi::c_void,
         value: *mut core::ffi::c_void,
     ) -> ();
-    fn set(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-        length: core::ffi::c_int,
-    ) -> ();
     fn remove_item(
         &mut self,
         info: *mut core::ffi::c_void,
         value: *mut core::ffi::c_void,
     ) -> ();
-    fn get(&mut self, info: *mut core::ffi::c_void) -> *mut &mut vtkInformationKey;
     fn get(
         &mut self,
         info: *mut core::ffi::c_void,
         idx: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
-    fn get(&mut self, info: *mut core::ffi::c_void, value: *mut core::ffi::c_void) -> ();
     fn length(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn shallow_copy(
         &mut self,
@@ -2528,14 +1227,14 @@ pub trait VtkInformationKeyVectorKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationObjectBaseKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationObjectBaseKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn make_key(
         &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-        requiredClass: core::ffi::c_char,
+        name: &str,
+        location: &str,
+        requiredClass: &str,
     ) -> *mut core::ffi::c_void;
     fn set(&mut self, info: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> ();
     fn get(&mut self, info: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
@@ -2545,14 +1244,14 @@ pub trait VtkInformationObjectBaseKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationObjectBaseVectorKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationObjectBaseVectorKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn make_key(
         &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-        requiredClass: core::ffi::c_char,
+        name: &str,
+        location: &str,
+        requiredClass: &str,
     ) -> *mut core::ffi::c_void;
     fn clear(&mut self, info: *mut core::ffi::c_void) -> ();
     fn resize(&mut self, info: *mut core::ffi::c_void, size: core::ffi::c_int) -> ();
@@ -2574,23 +1273,6 @@ pub trait VtkInformationObjectBaseVectorKey: VtkInformationKey + VtkObjectBase {
         info: *mut core::ffi::c_void,
         val: *mut core::ffi::c_void,
     ) -> ();
-    fn remove(&mut self, info: *mut core::ffi::c_void, idx: core::ffi::c_int) -> ();
-    fn set_range(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        from: core::ffi::c_int,
-        to: core::ffi::c_int,
-        n: core::ffi::c_int,
-    ) -> ();
-    fn get_range(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        dest: *mut core::ffi::c_void,
-        from: core::ffi::c_int,
-        to: core::ffi::c_int,
-        n: core::ffi::c_int,
-    ) -> ();
     fn get(
         &mut self,
         info: *mut core::ffi::c_void,
@@ -2602,14 +1284,10 @@ pub trait VtkInformationObjectBaseVectorKey: VtkInformationKey + VtkObjectBase {
         dest: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationRequestKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationRequestKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
     fn set(&mut self, info: *mut core::ffi::c_void) -> ();
     fn shallow_copy(
         &mut self,
@@ -2617,51 +1295,35 @@ pub trait VtkInformationRequestKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationStringKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationStringKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
-    fn set(&mut self, info: *mut core::ffi::c_void, p1: core::ffi::c_char) -> ();
-    fn set(&mut self, info: *mut core::ffi::c_void, str: &str) -> ();
-    fn get(&mut self, info: *mut core::ffi::c_void) -> *const core::ffi::c_char;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
+    fn set(&mut self, info: *mut core::ffi::c_void, p1: &str) -> ();
+    fn get(&mut self, info: *mut core::ffi::c_void) -> &str;
     fn shallow_copy(
         &mut self,
         from: *mut core::ffi::c_void,
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationStringVectorKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationStringVectorKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn make_key(
         &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
+        name: &str,
+        location: &str,
         length: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
-    fn append(&mut self, info: *mut core::ffi::c_void, value: core::ffi::c_char) -> ();
-    fn set(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        value: core::ffi::c_char,
-        index: core::ffi::c_int,
-    ) -> ();
     fn append(&mut self, info: *mut core::ffi::c_void, value: &str) -> ();
     fn set(
         &mut self,
         info: *mut core::ffi::c_void,
         value: &str,
-        idx: core::ffi::c_int,
+        index: core::ffi::c_int,
     ) -> ();
-    fn get(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> *const core::ffi::c_char;
+    fn get(&mut self, info: *mut core::ffi::c_void, idx: core::ffi::c_int) -> &str;
     fn length(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn shallow_copy(
         &mut self,
@@ -2669,14 +1331,10 @@ pub trait VtkInformationStringVectorKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationUnsignedLongKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationUnsignedLongKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
     fn set(&mut self, info: *mut core::ffi::c_void, p1: core::ffi::c_ulong) -> ();
     fn get(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_ulong;
     fn shallow_copy(
@@ -2685,41 +1343,25 @@ pub trait VtkInformationUnsignedLongKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationVariantKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationVariantKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn make_key(
-        &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
-    fn set(&mut self, info: *mut core::ffi::c_void, p1: vtkVariant) -> ();
-    fn get(&mut self, info: *mut core::ffi::c_void) -> vtkVariant;
+    fn make_key(&mut self, name: &str, location: &str) -> *mut core::ffi::c_void;
     fn shallow_copy(
         &mut self,
         from: *mut core::ffi::c_void,
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationVariantVectorKey: VtkInformationKey + VtkObjectBase {
+pub trait VtkInformationVariantVectorKey {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn make_key(
         &mut self,
-        name: core::ffi::c_char,
-        location: core::ffi::c_char,
+        name: &str,
+        location: &str,
         length: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
-    fn append(&mut self, info: *mut core::ffi::c_void, value: vtkVariant) -> ();
-    fn set(
-        &mut self,
-        info: *mut core::ffi::c_void,
-        value: vtkVariant,
-        length: core::ffi::c_int,
-    ) -> ();
-    fn get(&mut self, info: *mut core::ffi::c_void) -> *const vtkVariant;
-    fn get(&mut self, info: *mut core::ffi::c_void, idx: core::ffi::c_int) -> vtkVariant;
-    fn get(&mut self, info: *mut core::ffi::c_void, value: *mut core::ffi::c_void) -> ();
     fn length(&mut self, info: *mut core::ffi::c_void) -> core::ffi::c_int;
     fn shallow_copy(
         &mut self,
@@ -2727,7 +1369,7 @@ pub trait VtkInformationVariantVectorKey: VtkInformationKey + VtkObjectBase {
         to: *mut core::ffi::c_void,
     ) -> ();
 }
-pub trait VtkInformationVector: VtkObject + VtkObjectBase {
+pub trait VtkInformationVector {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -2744,50 +1386,20 @@ pub trait VtkInformationVector: VtkObject + VtkObjectBase {
     ) -> *mut core::ffi::c_void;
     fn append(&mut self, info: *mut core::ffi::c_void) -> ();
     fn remove(&mut self, info: *mut core::ffi::c_void) -> ();
-    fn remove(&mut self, idx: core::ffi::c_int) -> ();
     fn register(&mut self, o: *mut core::ffi::c_void) -> ();
     fn copy(&mut self, from: *mut core::ffi::c_void, deep: core::ffi::c_int) -> ();
 }
-pub trait VtkIntArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkIntArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_int) -> ();
-    fn set_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_int) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_int,
-    ) -> ();
-    fn insert_next_typed_tuple(&mut self, tuple: core::ffi::c_int) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_int;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_int) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_int) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_int) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_int;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_int;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_int;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_int;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_int,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_int,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_int;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_int) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_int) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_int) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -2796,7 +1408,7 @@ pub trait VtkIntArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBa
     fn get_data_type_value_max(&mut self) -> core::ffi::c_int;
 }
 pub trait VtkLargeInteger {
-    fn cast_to_char(&mut self) -> core::ffi::c_char;
+    fn cast_to_char(&mut self) -> &str;
     fn cast_to_short(&mut self) -> core::ffi::c_short;
     fn cast_to_int(&mut self) -> core::ffi::c_int;
     fn cast_to_long(&mut self) -> core::ffi::c_long;
@@ -2810,111 +1422,37 @@ pub trait VtkLargeInteger {
     fn truncate(&mut self, n: core::ffi::c_uint) -> ();
     fn complement(&mut self) -> ();
 }
-pub trait VtkLogger: VtkObjectBase {
-    fn is_type_of(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
-    fn is_a(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
+pub trait VtkLogger {
+    fn is_type_of(&mut self, type_: &str) -> core::ffi::c_int;
+    fn is_a(&mut self, type_: &str) -> core::ffi::c_int;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_number_of_generations_from_base_type(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn get_number_of_generations_from_base(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
-    fn init(
-        &mut self,
-        argc: core::ffi::c_int,
-        argv: core::ffi::c_char,
-        verbosity_flag: core::ffi::c_char,
-    ) -> ();
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn init(&mut self) -> ();
-    fn set_stderr_verbosity(&mut self, level: *mut core::ffi::c_void) -> ();
-    fn set_internal_verbosity_level(&mut self, level: *mut core::ffi::c_void) -> ();
-    fn end_log_to_file(&mut self, path: core::ffi::c_char) -> ();
+    fn end_log_to_file(&mut self, path: &str) -> ();
     fn set_thread_name(&mut self, name: &str) -> ();
-    fn get_thread_name(&mut self) -> &str;
-    fn get_identifier(&mut self, obj: *mut core::ffi::c_void) -> &str;
-    fn add_callback(
-        &mut self,
-        id: core::ffi::c_char,
-        callback: (),
-        user_data: (),
-        verbosity: *mut core::ffi::c_void,
-        on_close: (),
-        on_flush: (),
-    ) -> ();
-    fn remove_callback(&mut self, id: core::ffi::c_char) -> bool;
+    fn remove_callback(&mut self, id: &str) -> bool;
     fn is_enabled(&mut self) -> bool;
-    fn get_current_verbosity_cutoff(&mut self) -> *mut core::ffi::c_void;
-    fn convert_to_verbosity(
-        &mut self,
-        value: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn convert_to_verbosity(
-        &mut self,
-        text: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
-    fn log(
-        &mut self,
-        verbosity: *mut core::ffi::c_void,
-        fname: core::ffi::c_char,
-        lineno: core::ffi::c_uint,
-        txt: core::ffi::c_char,
-    ) -> ();
-    fn start_scope(
-        &mut self,
-        verbosity: *mut core::ffi::c_void,
-        id: core::ffi::c_char,
-        fname: core::ffi::c_char,
-        lineno: core::ffi::c_uint,
-    ) -> ();
-    fn end_scope(&mut self, id: core::ffi::c_char) -> ();
+    fn end_scope(&mut self, id: &str) -> ();
 }
-pub trait VtkLongArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkLongArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_long) -> ();
-    fn set_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_long) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_long,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_long,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_long;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_long) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_long) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_long) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_long;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_long;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_long;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_long;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_long,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_long,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_long;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_long) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_long) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_long) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -2922,65 +1460,33 @@ pub trait VtkLongArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectB
     fn get_data_type_value_min(&mut self) -> core::ffi::c_long;
     fn get_data_type_value_max(&mut self) -> core::ffi::c_long;
 }
-pub trait VtkLongLongArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkLongLongArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_longlong;
+    fn set_value(
         &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
+        value: core::ffi::c_longlong,
     ) -> ();
-    fn set_typed_tuple(
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(
         &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
+        f: core::ffi::c_longlong,
     ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_uchar,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_uchar) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_uchar) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_uchar;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_uchar;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_longlong) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
-    fn get_data_type_value_min(&mut self) -> core::ffi::c_uchar;
-    fn get_data_type_value_max(&mut self) -> core::ffi::c_uchar;
+    fn get_data_type_value_min(&mut self) -> core::ffi::c_longlong;
+    fn get_data_type_value_max(&mut self) -> core::ffi::c_longlong;
 }
-pub trait VtkLookupTable: VtkScalarsToColors + VtkObject + VtkObjectBase {
+pub trait VtkLookupTable {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -3002,88 +1508,37 @@ pub trait VtkLookupTable: VtkScalarsToColors + VtkObject + VtkObjectBase {
     fn set_scale_to_linear(&mut self) -> ();
     fn set_scale_to_log_10(&mut self) -> ();
     fn get_scale(&mut self) -> core::ffi::c_int;
-    fn set_table_range(&mut self, r: core::ffi::c_double) -> ();
     fn set_table_range(
         &mut self,
         min: core::ffi::c_double,
         max: core::ffi::c_double,
     ) -> ();
-    fn get_table_range(&mut self) -> *mut core::ffi::c_double;
-    fn get_table_range(&mut self, data: core::ffi::c_double) -> ();
     fn set_hue_range(
         &mut self,
         _arg1: core::ffi::c_double,
         _arg2: core::ffi::c_double,
     ) -> ();
-    fn set_hue_range(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_hue_range(&mut self) -> *mut core::ffi::c_double;
-    fn get_hue_range(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-    ) -> ();
-    fn get_hue_range(&mut self, _arg: core::ffi::c_double) -> ();
     fn set_saturation_range(
         &mut self,
         _arg1: core::ffi::c_double,
         _arg2: core::ffi::c_double,
     ) -> ();
-    fn set_saturation_range(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_saturation_range(&mut self) -> *mut core::ffi::c_double;
-    fn get_saturation_range(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-    ) -> ();
-    fn get_saturation_range(&mut self, _arg: core::ffi::c_double) -> ();
     fn set_value_range(
         &mut self,
         _arg1: core::ffi::c_double,
         _arg2: core::ffi::c_double,
     ) -> ();
-    fn set_value_range(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_value_range(&mut self) -> *mut core::ffi::c_double;
-    fn get_value_range(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-    ) -> ();
-    fn get_value_range(&mut self, _arg: core::ffi::c_double) -> ();
     fn set_alpha_range(
         &mut self,
         _arg1: core::ffi::c_double,
         _arg2: core::ffi::c_double,
     ) -> ();
-    fn set_alpha_range(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_alpha_range(&mut self) -> *mut core::ffi::c_double;
-    fn get_alpha_range(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-    ) -> ();
-    fn get_alpha_range(&mut self, _arg: core::ffi::c_double) -> ();
     fn set_nan_color(
         &mut self,
         _arg1: core::ffi::c_double,
         _arg2: core::ffi::c_double,
         _arg3: core::ffi::c_double,
         _arg4: core::ffi::c_double,
-    ) -> ();
-    fn set_nan_color(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_nan_color(&mut self) -> *mut core::ffi::c_double;
-    fn get_nan_color(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-        _arg3: core::ffi::c_double,
-        _arg4: core::ffi::c_double,
-    ) -> ();
-    fn get_nan_color(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_nan_color_as_unsigned_chars(&mut self) -> *mut core::ffi::c_uchar;
-    fn get_color_as_unsigned_chars(
-        &mut self,
-        colorIn: core::ffi::c_double,
-        colorOut: core::ffi::c_uchar,
     ) -> ();
     fn set_below_range_color(
         &mut self,
@@ -3092,16 +1547,6 @@ pub trait VtkLookupTable: VtkScalarsToColors + VtkObject + VtkObjectBase {
         _arg3: core::ffi::c_double,
         _arg4: core::ffi::c_double,
     ) -> ();
-    fn set_below_range_color(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_below_range_color(&mut self) -> *mut core::ffi::c_double;
-    fn get_below_range_color(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-        _arg3: core::ffi::c_double,
-        _arg4: core::ffi::c_double,
-    ) -> ();
-    fn get_below_range_color(&mut self, _arg: core::ffi::c_double) -> ();
     fn set_use_below_range_color(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_use_below_range_color(&mut self) -> core::ffi::c_int;
     fn use_below_range_color_on(&mut self) -> ();
@@ -3113,139 +1558,42 @@ pub trait VtkLookupTable: VtkScalarsToColors + VtkObject + VtkObjectBase {
         _arg3: core::ffi::c_double,
         _arg4: core::ffi::c_double,
     ) -> ();
-    fn set_above_range_color(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_above_range_color(&mut self) -> *mut core::ffi::c_double;
-    fn get_above_range_color(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-        _arg3: core::ffi::c_double,
-        _arg4: core::ffi::c_double,
-    ) -> ();
-    fn get_above_range_color(&mut self, _arg: core::ffi::c_double) -> ();
     fn set_use_above_range_color(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_use_above_range_color(&mut self) -> core::ffi::c_int;
     fn use_above_range_color_on(&mut self) -> ();
     fn use_above_range_color_off(&mut self) -> ();
-    fn map_value(&mut self, v: core::ffi::c_double) -> *const core::ffi::c_uchar;
-    fn get_color(&mut self, v: core::ffi::c_double, rgb: core::ffi::c_double) -> ();
     fn get_opacity(&mut self, v: core::ffi::c_double) -> core::ffi::c_double;
-    fn get_index(&mut self, v: core::ffi::c_double) -> core::ffi::c_uchar;
-    fn set_number_of_table_values(&mut self, number: core::ffi::c_uchar) -> ();
-    fn get_number_of_table_values(&mut self) -> core::ffi::c_uchar;
+    fn get_index(&mut self, v: core::ffi::c_double) -> core::ffi::c_longlong;
+    fn set_number_of_table_values(&mut self, number: core::ffi::c_longlong) -> ();
+    fn get_number_of_table_values(&mut self) -> core::ffi::c_longlong;
     fn set_table_value(
         &mut self,
-        indx: core::ffi::c_uchar,
-        rgba: core::ffi::c_double,
-    ) -> ();
-    fn set_table_value(
-        &mut self,
-        indx: core::ffi::c_uchar,
+        indx: core::ffi::c_longlong,
         r: core::ffi::c_double,
         g: core::ffi::c_double,
         b: core::ffi::c_double,
         a: core::ffi::c_double,
     ) -> ();
-    fn get_table_value(&mut self, indx: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_table_value(
-        &mut self,
-        indx: core::ffi::c_uchar,
-        rgba: core::ffi::c_double,
-    ) -> ();
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_int,
-    ) -> *mut core::ffi::c_uchar;
-    fn get_range(&mut self) -> *mut core::ffi::c_double;
-    fn get_log_range(
-        &mut self,
-        range: core::ffi::c_double,
-        log_range: core::ffi::c_double,
-    ) -> ();
-    fn apply_log_scale(
-        &mut self,
-        v: core::ffi::c_double,
-        range: core::ffi::c_double,
-        log_range: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn set_number_of_colors(&mut self, _arg: core::ffi::c_uchar) -> ();
-    fn get_number_of_colors_min_value(&mut self) -> core::ffi::c_uchar;
-    fn get_number_of_colors_max_value(&mut self) -> core::ffi::c_uchar;
-    fn get_number_of_colors(&mut self) -> core::ffi::c_uchar;
+    fn set_number_of_colors(&mut self, _arg: core::ffi::c_longlong) -> ();
+    fn get_number_of_colors_min_value(&mut self) -> core::ffi::c_longlong;
+    fn get_number_of_colors_max_value(&mut self) -> core::ffi::c_longlong;
+    fn get_number_of_colors(&mut self) -> core::ffi::c_longlong;
     fn set_table(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn get_table(&mut self) -> *mut core::ffi::c_void;
-    fn map_scalars_through_table_2(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> ();
     fn deep_copy(&mut self, obj: *mut core::ffi::c_void) -> ();
     fn using_log_scale(&mut self) -> core::ffi::c_int;
-    fn get_indexed_color(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        rgba: core::ffi::c_double,
-    ) -> ();
 }
-pub trait VtkMappedDataArray: VtkTypedDataArray + VtkGenericDataArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkMappedDataArray {
     fn deep_copy(&mut self, aa: *mut core::ffi::c_void) -> ();
-    fn get_variant_value(&mut self, idx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
     fn get_tuples(
         &mut self,
         ptIds: *mut core::ffi::c_void,
         output: *mut core::ffi::c_void,
     ) -> ();
-    fn get_tuples(
-        &mut self,
-        p1: core::ffi::c_uchar,
-        p2: core::ffi::c_uchar,
-        output: *mut core::ffi::c_void,
-    ) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        id1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        id2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> ();
-    fn deep_copy(&mut self, da: *mut core::ffi::c_void) -> ();
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut ();
-    fn export_to_void_pointer(&mut self, ptr: ()) -> ();
     fn data_changed(&mut self) -> ();
-    fn set_void_array(
-        &mut self,
-        p0: (),
-        p1: core::ffi::c_uchar,
-        p2: core::ffi::c_int,
-    ) -> ();
-    fn write_void_pointer(
-        &mut self,
-        p0: core::ffi::c_uchar,
-        p1: core::ffi::c_uchar,
-    ) -> *mut ();
     fn modified(&mut self) -> ();
 }
-pub trait VtkMath: VtkObject + VtkObjectBase {
+pub trait VtkMath {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -3254,341 +1602,42 @@ pub trait VtkMath: VtkObject + VtkObjectBase {
         &mut self,
         degrees: core::ffi::c_float,
     ) -> core::ffi::c_float;
-    fn radians_from_degrees(
-        &mut self,
-        degrees: core::ffi::c_double,
-    ) -> core::ffi::c_double;
     fn degrees_from_radians(
         &mut self,
         radians: core::ffi::c_float,
     ) -> core::ffi::c_float;
-    fn degrees_from_radians(
-        &mut self,
-        radians: core::ffi::c_double,
-    ) -> core::ffi::c_double;
     fn round(&mut self, f: core::ffi::c_float) -> core::ffi::c_int;
-    fn round(&mut self, f: core::ffi::c_double) -> core::ffi::c_int;
     fn floor(&mut self, x: core::ffi::c_double) -> core::ffi::c_int;
     fn ceil(&mut self, x: core::ffi::c_double) -> core::ffi::c_int;
     fn ceil_log_2(&mut self, x: core::ffi::c_ulonglong) -> core::ffi::c_int;
     fn is_power_of_two(&mut self, x: core::ffi::c_ulonglong) -> bool;
     fn nearest_power_of_two(&mut self, x: core::ffi::c_int) -> core::ffi::c_int;
-    fn factorial(&mut self, N: core::ffi::c_int) -> core::ffi::c_uchar;
+    fn factorial(&mut self, N: core::ffi::c_int) -> core::ffi::c_longlong;
     fn binomial(
         &mut self,
         m: core::ffi::c_int,
         n: core::ffi::c_int,
-    ) -> core::ffi::c_uchar;
-    fn begin_combination(
-        &mut self,
-        m: core::ffi::c_int,
-        n: core::ffi::c_int,
-    ) -> *mut core::ffi::c_int;
-    fn next_combination(
-        &mut self,
-        m: core::ffi::c_int,
-        n: core::ffi::c_int,
-        combination: core::ffi::c_int,
-    ) -> core::ffi::c_int;
-    fn free_combination(&mut self, combination: core::ffi::c_int) -> ();
+    ) -> core::ffi::c_longlong;
     fn random_seed(&mut self, s: core::ffi::c_int) -> ();
     fn get_seed(&mut self) -> core::ffi::c_int;
     fn random(&mut self) -> core::ffi::c_double;
-    fn random(
-        &mut self,
-        min: core::ffi::c_double,
-        max: core::ffi::c_double,
-    ) -> core::ffi::c_double;
     fn gaussian(&mut self) -> core::ffi::c_double;
-    fn gaussian(
-        &mut self,
-        mean: core::ffi::c_double,
-        std: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn assign(&mut self, a: core::ffi::c_double, b: core::ffi::c_double) -> ();
-    fn add(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        c: core::ffi::c_float,
-    ) -> ();
-    fn add(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-    ) -> ();
-    fn subtract(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        c: core::ffi::c_float,
-    ) -> ();
-    fn subtract(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-    ) -> ();
-    fn multiply_scalar(&mut self, a: core::ffi::c_float, s: core::ffi::c_float) -> ();
-    fn multiply_scalar_2_d(
-        &mut self,
-        a: core::ffi::c_float,
-        s: core::ffi::c_float,
-    ) -> ();
-    fn multiply_scalar(&mut self, a: core::ffi::c_double, s: core::ffi::c_double) -> ();
-    fn multiply_scalar_2_d(
-        &mut self,
-        a: core::ffi::c_double,
-        s: core::ffi::c_double,
-    ) -> ();
-    fn dot(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-    ) -> core::ffi::c_float;
-    fn dot(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn outer(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        c: core::ffi::c_float,
-    ) -> ();
-    fn outer(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-    ) -> ();
-    fn cross(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        c: core::ffi::c_float,
-    ) -> ();
-    fn cross(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-    ) -> ();
-    fn norm(&mut self, x: core::ffi::c_float, n: core::ffi::c_int) -> core::ffi::c_float;
-    fn norm(
-        &mut self,
-        x: core::ffi::c_double,
-        n: core::ffi::c_int,
-    ) -> core::ffi::c_double;
-    fn norm(&mut self, v: core::ffi::c_float) -> core::ffi::c_float;
-    fn norm(&mut self, v: core::ffi::c_double) -> core::ffi::c_double;
-    fn normalize(&mut self, v: core::ffi::c_float) -> core::ffi::c_float;
-    fn normalize(&mut self, v: core::ffi::c_double) -> core::ffi::c_double;
-    fn perpendiculars(
-        &mut self,
-        v1: core::ffi::c_double,
-        v2: core::ffi::c_double,
-        v3: core::ffi::c_double,
-        theta: core::ffi::c_double,
-    ) -> ();
-    fn perpendiculars(
-        &mut self,
-        v1: core::ffi::c_float,
-        v2: core::ffi::c_float,
-        v3: core::ffi::c_float,
-        theta: core::ffi::c_double,
-    ) -> ();
-    fn project_vector(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        projection: core::ffi::c_float,
-    ) -> bool;
-    fn project_vector(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        projection: core::ffi::c_double,
-    ) -> bool;
-    fn project_vector_2_d(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        projection: core::ffi::c_float,
-    ) -> bool;
-    fn project_vector_2_d(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        projection: core::ffi::c_double,
-    ) -> bool;
-    fn distance_2_between_points(
-        &mut self,
-        p1: core::ffi::c_float,
-        p2: core::ffi::c_float,
-    ) -> core::ffi::c_float;
-    fn distance_2_between_points(
-        &mut self,
-        p1: core::ffi::c_double,
-        p2: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn angle_between_vectors(
-        &mut self,
-        v1: core::ffi::c_double,
-        v2: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn signed_angle_between_vectors(
-        &mut self,
-        v1: core::ffi::c_double,
-        v2: core::ffi::c_double,
-        vn: core::ffi::c_double,
-    ) -> core::ffi::c_double;
     fn gaussian_amplitude(
         &mut self,
         variance: core::ffi::c_double,
         distanceFromMean: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn gaussian_amplitude(
-        &mut self,
-        mean: core::ffi::c_double,
-        variance: core::ffi::c_double,
-        position: core::ffi::c_double,
     ) -> core::ffi::c_double;
     fn gaussian_weight(
         &mut self,
         variance: core::ffi::c_double,
         distanceFromMean: core::ffi::c_double,
     ) -> core::ffi::c_double;
-    fn gaussian_weight(
-        &mut self,
-        mean: core::ffi::c_double,
-        variance: core::ffi::c_double,
-        position: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn dot_2_d(
-        &mut self,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-    ) -> core::ffi::c_float;
-    fn dot_2_d(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn outer_2_d(
-        &mut self,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-        A: core::ffi::c_float,
-    ) -> ();
-    fn outer_2_d(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        A: core::ffi::c_double,
-    ) -> ();
-    fn norm_2_d(&mut self, x: core::ffi::c_float) -> core::ffi::c_float;
-    fn norm_2_d(&mut self, x: core::ffi::c_double) -> core::ffi::c_double;
-    fn normalize_2_d(&mut self, v: core::ffi::c_float) -> core::ffi::c_float;
-    fn normalize_2_d(&mut self, v: core::ffi::c_double) -> core::ffi::c_double;
-    fn determinant_2_x_2(
-        &mut self,
-        c1: core::ffi::c_float,
-        c2: core::ffi::c_float,
-    ) -> core::ffi::c_float;
     fn determinant_2_x_2(
         &mut self,
         a: core::ffi::c_double,
         b: core::ffi::c_double,
         c: core::ffi::c_double,
         d: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn determinant_2_x_2(
-        &mut self,
-        c1: core::ffi::c_double,
-        c2: core::ffi::c_double,
-    ) -> core::ffi::c_double;
-    fn lu_factor_3_x_3(&mut self, A: core::ffi::c_float, index: core::ffi::c_int) -> ();
-    fn lu_factor_3_x_3(&mut self, A: core::ffi::c_double, index: core::ffi::c_int) -> ();
-    fn lu_solve_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        index: core::ffi::c_int,
-        x: core::ffi::c_float,
-    ) -> ();
-    fn lu_solve_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-        x: core::ffi::c_double,
-    ) -> ();
-    fn linear_solve_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-    ) -> ();
-    fn linear_solve_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-    ) -> ();
-    fn multiply_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        v: core::ffi::c_float,
-        u: core::ffi::c_float,
-    ) -> ();
-    fn multiply_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        v: core::ffi::c_double,
-        u: core::ffi::c_double,
-    ) -> ();
-    fn multiply_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        B: core::ffi::c_float,
-        C: core::ffi::c_float,
-    ) -> ();
-    fn multiply_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        B: core::ffi::c_double,
-        C: core::ffi::c_double,
-    ) -> ();
-    fn multiply_matrix(
-        &mut self,
-        A: core::ffi::c_double,
-        B: core::ffi::c_double,
-        rowA: core::ffi::c_uint,
-        colA: core::ffi::c_uint,
-        rowB: core::ffi::c_uint,
-        colB: core::ffi::c_uint,
-        C: core::ffi::c_double,
-    ) -> ();
-    fn transpose_3_x_3(&mut self, A: core::ffi::c_float, AT: core::ffi::c_float) -> ();
-    fn transpose_3_x_3(&mut self, A: core::ffi::c_double, AT: core::ffi::c_double) -> ();
-    fn invert_3_x_3(&mut self, A: core::ffi::c_float, AI: core::ffi::c_float) -> ();
-    fn invert_3_x_3(&mut self, A: core::ffi::c_double, AI: core::ffi::c_double) -> ();
-    fn identity_3_x_3(&mut self, A: core::ffi::c_float) -> ();
-    fn identity_3_x_3(&mut self, A: core::ffi::c_double) -> ();
-    fn determinant_3_x_3(&mut self, A: core::ffi::c_float) -> core::ffi::c_double;
-    fn determinant_3_x_3(&mut self, A: core::ffi::c_double) -> core::ffi::c_double;
-    fn determinant_3_x_3(
-        &mut self,
-        c1: core::ffi::c_float,
-        c2: core::ffi::c_float,
-        c3: core::ffi::c_float,
-    ) -> core::ffi::c_float;
-    fn determinant_3_x_3(
-        &mut self,
-        c1: core::ffi::c_double,
-        c2: core::ffi::c_double,
-        c3: core::ffi::c_double,
     ) -> core::ffi::c_double;
     fn determinant_3_x_3(
         &mut self,
@@ -3602,98 +1651,6 @@ pub trait VtkMath: VtkObject + VtkObjectBase {
         c2: core::ffi::c_double,
         c3: core::ffi::c_double,
     ) -> core::ffi::c_double;
-    fn quaternion_to_matrix_3_x_3(
-        &mut self,
-        quat: core::ffi::c_float,
-        A: core::ffi::c_float,
-    ) -> ();
-    fn quaternion_to_matrix_3_x_3(
-        &mut self,
-        quat: core::ffi::c_double,
-        A: core::ffi::c_double,
-    ) -> ();
-    fn matrix_3_x_3_to_quaternion(
-        &mut self,
-        A: core::ffi::c_float,
-        quat: core::ffi::c_float,
-    ) -> ();
-    fn matrix_3_x_3_to_quaternion(
-        &mut self,
-        A: core::ffi::c_double,
-        quat: core::ffi::c_double,
-    ) -> ();
-    fn multiply_quaternion(
-        &mut self,
-        q1: core::ffi::c_float,
-        q2: core::ffi::c_float,
-        q: core::ffi::c_float,
-    ) -> ();
-    fn multiply_quaternion(
-        &mut self,
-        q1: core::ffi::c_double,
-        q2: core::ffi::c_double,
-        q: core::ffi::c_double,
-    ) -> ();
-    fn rotate_vector_by_normalized_quaternion(
-        &mut self,
-        v: core::ffi::c_float,
-        q: core::ffi::c_float,
-        r: core::ffi::c_float,
-    ) -> ();
-    fn rotate_vector_by_normalized_quaternion(
-        &mut self,
-        v: core::ffi::c_double,
-        q: core::ffi::c_double,
-        r: core::ffi::c_double,
-    ) -> ();
-    fn rotate_vector_by_wxyz(
-        &mut self,
-        v: core::ffi::c_float,
-        q: core::ffi::c_float,
-        r: core::ffi::c_float,
-    ) -> ();
-    fn rotate_vector_by_wxyz(
-        &mut self,
-        v: core::ffi::c_double,
-        q: core::ffi::c_double,
-        r: core::ffi::c_double,
-    ) -> ();
-    fn orthogonalize_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        B: core::ffi::c_float,
-    ) -> ();
-    fn orthogonalize_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        B: core::ffi::c_double,
-    ) -> ();
-    fn diagonalize_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        w: core::ffi::c_float,
-        V: core::ffi::c_float,
-    ) -> ();
-    fn diagonalize_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        w: core::ffi::c_double,
-        V: core::ffi::c_double,
-    ) -> ();
-    fn singular_value_decomposition_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        U: core::ffi::c_float,
-        w: core::ffi::c_float,
-        VT: core::ffi::c_float,
-    ) -> ();
-    fn singular_value_decomposition_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        U: core::ffi::c_double,
-        w: core::ffi::c_double,
-        VT: core::ffi::c_double,
-    ) -> ();
     fn solve_linear_system_gepp_2_x_2(
         &mut self,
         a00: core::ffi::c_double,
@@ -3702,231 +1659,9 @@ pub trait VtkMath: VtkObject + VtkObjectBase {
         a11: core::ffi::c_double,
         b0: core::ffi::c_double,
         b1: core::ffi::c_double,
-        x0: core::ffi::c_double,
-        x1: core::ffi::c_double,
+        x0: &mut core::ffi::c_double,
+        x1: &mut core::ffi::c_double,
     ) -> core::ffi::c_int;
-    fn solve_linear_system(
-        &mut self,
-        A: core::ffi::c_double,
-        x: core::ffi::c_double,
-        size: core::ffi::c_int,
-    ) -> core::ffi::c_int;
-    fn invert_matrix(
-        &mut self,
-        A: core::ffi::c_double,
-        AI: core::ffi::c_double,
-        size: core::ffi::c_int,
-    ) -> core::ffi::c_int;
-    fn invert_matrix(
-        &mut self,
-        A: core::ffi::c_double,
-        AI: core::ffi::c_double,
-        size: core::ffi::c_int,
-        tmp1Size: core::ffi::c_int,
-        tmp2Size: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn lu_factor_linear_system(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-        size: core::ffi::c_int,
-    ) -> core::ffi::c_int;
-    fn lu_factor_linear_system(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-        size: core::ffi::c_int,
-        tmpSize: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn lu_solve_linear_system(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-        x: core::ffi::c_double,
-        size: core::ffi::c_int,
-    ) -> ();
-    fn estimate_matrix_condition(
-        &mut self,
-        A: core::ffi::c_double,
-        size: core::ffi::c_int,
-    ) -> core::ffi::c_double;
-    fn jacobi(
-        &mut self,
-        a: core::ffi::c_float,
-        w: core::ffi::c_float,
-        v: core::ffi::c_float,
-    ) -> core::ffi::c_int;
-    fn jacobi(
-        &mut self,
-        a: core::ffi::c_double,
-        w: core::ffi::c_double,
-        v: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn jacobi_n(
-        &mut self,
-        a: core::ffi::c_float,
-        n: core::ffi::c_int,
-        w: core::ffi::c_float,
-        v: core::ffi::c_float,
-    ) -> core::ffi::c_int;
-    fn jacobi_n(
-        &mut self,
-        a: core::ffi::c_double,
-        n: core::ffi::c_int,
-        w: core::ffi::c_double,
-        v: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn solve_homogeneous_least_squares(
-        &mut self,
-        numberOfSamples: core::ffi::c_int,
-        xt: core::ffi::c_double,
-        xOrder: core::ffi::c_int,
-        mt: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn solve_least_squares(
-        &mut self,
-        numberOfSamples: core::ffi::c_int,
-        xt: core::ffi::c_double,
-        xOrder: core::ffi::c_int,
-        yt: core::ffi::c_double,
-        yOrder: core::ffi::c_int,
-        mt: core::ffi::c_double,
-        checkHomogeneous: core::ffi::c_int,
-    ) -> core::ffi::c_int;
-    fn rgb_to_hsv(&mut self, rgb: core::ffi::c_float, hsv: core::ffi::c_float) -> ();
-    fn rgb_to_hsv(
-        &mut self,
-        r: core::ffi::c_float,
-        g: core::ffi::c_float,
-        b: core::ffi::c_float,
-        h: core::ffi::c_float,
-        s: core::ffi::c_float,
-        v: core::ffi::c_float,
-    ) -> ();
-    fn rgb_to_hsv(&mut self, rgb: core::ffi::c_double, hsv: core::ffi::c_double) -> ();
-    fn rgb_to_hsv(
-        &mut self,
-        r: core::ffi::c_double,
-        g: core::ffi::c_double,
-        b: core::ffi::c_double,
-        h: core::ffi::c_double,
-        s: core::ffi::c_double,
-        v: core::ffi::c_double,
-    ) -> ();
-    fn hsv_to_rgb(&mut self, hsv: core::ffi::c_float, rgb: core::ffi::c_float) -> ();
-    fn hsv_to_rgb(
-        &mut self,
-        h: core::ffi::c_float,
-        s: core::ffi::c_float,
-        v: core::ffi::c_float,
-        r: core::ffi::c_float,
-        g: core::ffi::c_float,
-        b: core::ffi::c_float,
-    ) -> ();
-    fn hsv_to_rgb(&mut self, hsv: core::ffi::c_double, rgb: core::ffi::c_double) -> ();
-    fn hsv_to_rgb(
-        &mut self,
-        h: core::ffi::c_double,
-        s: core::ffi::c_double,
-        v: core::ffi::c_double,
-        r: core::ffi::c_double,
-        g: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> ();
-    fn lab_to_xyz(&mut self, lab: core::ffi::c_double, xyz: core::ffi::c_double) -> ();
-    fn lab_to_xyz(
-        &mut self,
-        L: core::ffi::c_double,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> ();
-    fn xyz_to_lab(&mut self, xyz: core::ffi::c_double, lab: core::ffi::c_double) -> ();
-    fn xyz_to_lab(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-        L: core::ffi::c_double,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> ();
-    fn xyz_to_rgb(&mut self, xyz: core::ffi::c_double, rgb: core::ffi::c_double) -> ();
-    fn xyz_to_rgb(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-        r: core::ffi::c_double,
-        g: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> ();
-    fn rgb_to_xyz(&mut self, rgb: core::ffi::c_double, xyz: core::ffi::c_double) -> ();
-    fn rgb_to_xyz(
-        &mut self,
-        r: core::ffi::c_double,
-        g: core::ffi::c_double,
-        b: core::ffi::c_double,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> ();
-    fn rgb_to_lab(&mut self, rgb: core::ffi::c_double, lab: core::ffi::c_double) -> ();
-    fn rgb_to_lab(
-        &mut self,
-        red: core::ffi::c_double,
-        green: core::ffi::c_double,
-        blue: core::ffi::c_double,
-        L: core::ffi::c_double,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> ();
-    fn lab_to_rgb(&mut self, lab: core::ffi::c_double, rgb: core::ffi::c_double) -> ();
-    fn lab_to_rgb(
-        &mut self,
-        L: core::ffi::c_double,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        red: core::ffi::c_double,
-        green: core::ffi::c_double,
-        blue: core::ffi::c_double,
-    ) -> ();
-    fn uninitialize_bounds(&mut self, bounds: core::ffi::c_double) -> ();
-    fn are_bounds_initialized(
-        &mut self,
-        bounds: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn clamp_value(
-        &mut self,
-        value: core::ffi::c_double,
-        range: core::ffi::c_double,
-    ) -> ();
-    fn clamp_value(
-        &mut self,
-        value: core::ffi::c_double,
-        range: core::ffi::c_double,
-        clamped_value: core::ffi::c_double,
-    ) -> ();
-    fn clamp_values(
-        &mut self,
-        values: core::ffi::c_double,
-        nb_values: core::ffi::c_int,
-        range: core::ffi::c_double,
-    ) -> ();
-    fn clamp_values(
-        &mut self,
-        values: core::ffi::c_double,
-        nb_values: core::ffi::c_int,
-        range: core::ffi::c_double,
-        clamped_values: core::ffi::c_double,
-    ) -> ();
-    fn clamp_and_normalize_value(
-        &mut self,
-        value: core::ffi::c_double,
-        range: core::ffi::c_double,
-    ) -> core::ffi::c_double;
     fn get_scalar_type_fitting_range(
         &mut self,
         range_min: core::ffi::c_double,
@@ -3934,59 +1669,14 @@ pub trait VtkMath: VtkObject + VtkObjectBase {
         scale: core::ffi::c_double,
         shift: core::ffi::c_double,
     ) -> core::ffi::c_int;
-    fn get_adjusted_scalar_range(
-        &mut self,
-        array: *mut core::ffi::c_void,
-        comp: core::ffi::c_int,
-        range: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn extent_is_within_other_extent(
-        &mut self,
-        extent1: core::ffi::c_int,
-        extent2: core::ffi::c_int,
-    ) -> core::ffi::c_int;
-    fn bounds_is_within_other_bounds(
-        &mut self,
-        bounds1: core::ffi::c_double,
-        bounds2: core::ffi::c_double,
-        delta: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn point_is_within_bounds(
-        &mut self,
-        point: core::ffi::c_double,
-        bounds: core::ffi::c_double,
-        delta: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn plane_intersects_aabb(
-        &mut self,
-        bounds: core::ffi::c_double,
-        normal: core::ffi::c_double,
-        point: core::ffi::c_double,
-    ) -> core::ffi::c_int;
-    fn solve_3_point_circle(
-        &mut self,
-        p1: core::ffi::c_double,
-        p2: core::ffi::c_double,
-        p3: core::ffi::c_double,
-        center: core::ffi::c_double,
-    ) -> core::ffi::c_double;
     fn inf(&mut self) -> core::ffi::c_double;
     fn neg_inf(&mut self) -> core::ffi::c_double;
     fn nan(&mut self) -> core::ffi::c_double;
     fn is_inf(&mut self, x: core::ffi::c_double) -> core::ffi::c_int;
     fn is_nan(&mut self, x: core::ffi::c_double) -> core::ffi::c_int;
     fn is_finite(&mut self, x: core::ffi::c_double) -> bool;
-    fn quadratic_root(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-        min: core::ffi::c_double,
-        max: core::ffi::c_double,
-        u: core::ffi::c_double,
-    ) -> core::ffi::c_int;
 }
-pub trait VtkMersenneTwister: VtkRandomSequence + VtkObject + VtkObjectBase {
+pub trait VtkMersenneTwister {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -4003,11 +1693,9 @@ pub trait VtkMersenneTwister: VtkRandomSequence + VtkObject + VtkObjectBase {
         p: core::ffi::c_int,
     ) -> ();
     fn get_value(&mut self, id: core::ffi::c_uint) -> core::ffi::c_double;
-    fn get_value(&mut self) -> core::ffi::c_double;
     fn next(&mut self, id: core::ffi::c_uint) -> ();
-    fn next(&mut self) -> ();
 }
-pub trait VtkMinimalStandardRandomSequence: VtkRandomSequence + VtkObject + VtkObjectBase {
+pub trait VtkMinimalStandardRandomSequence {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -4028,7 +1716,7 @@ pub trait VtkMinimalStandardRandomSequence: VtkRandomSequence + VtkObject + VtkO
         rangeMax: core::ffi::c_double,
     ) -> core::ffi::c_double;
 }
-pub trait VtkMultiThreader: VtkObject + VtkObjectBase {
+pub trait VtkMultiThreader {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -4043,24 +1731,10 @@ pub trait VtkMultiThreader: VtkObject + VtkObjectBase {
     fn get_global_default_number_of_threads(&mut self) -> core::ffi::c_int;
     fn single_method_execute(&mut self) -> ();
     fn multiple_method_execute(&mut self) -> ();
-    fn set_single_method(&mut self, p0: *mut core::ffi::c_void, data: ()) -> ();
-    fn set_multiple_method(
-        &mut self,
-        index: core::ffi::c_int,
-        p1: *mut core::ffi::c_void,
-        data: (),
-    ) -> ();
-    fn spawn_thread(&mut self, p0: *mut core::ffi::c_void, data: ()) -> core::ffi::c_int;
     fn terminate_thread(&mut self, threadId: core::ffi::c_int) -> ();
     fn is_thread_active(&mut self, threadId: core::ffi::c_int) -> core::ffi::c_int;
-    fn get_current_thread_id(&mut self) -> *mut core::ffi::c_void;
-    fn threads_equal(
-        &mut self,
-        t1: *mut core::ffi::c_void,
-        t2: *mut core::ffi::c_void,
-    ) -> core::ffi::c_int;
 }
-pub trait VtkMutexLock: VtkObject + VtkObjectBase {
+pub trait VtkMutexLock {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -4073,24 +1747,22 @@ pub trait VtkNew {
     fn get(&mut self) -> *mut core::ffi::c_void;
 }
 pub trait VtkOStrStreamWrapper {
-    fn str(&mut self) -> *mut core::ffi::c_char;
     fn rdbuf(&mut self) -> *mut core::ffi::c_void;
     fn freeze(&mut self) -> ();
-    fn freeze(&mut self, p0: core::ffi::c_int) -> ();
 }
-pub trait VtkObject: VtkObjectBase {
-    fn is_type_of(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
-    fn is_a(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int;
+pub trait VtkObject {
+    fn is_type_of(&mut self, type_: &str) -> core::ffi::c_int;
+    fn is_a(&mut self, type_: &str) -> core::ffi::c_int;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_number_of_generations_from_base_type(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn get_number_of_generations_from_base(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        type_: &str,
+    ) -> core::ffi::c_longlong;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn debug_on(&mut self) -> ();
     fn debug_off(&mut self) -> ();
@@ -4109,12 +1781,6 @@ pub trait VtkObject: VtkObjectBase {
         p1: *mut core::ffi::c_void,
         priority: core::ffi::c_float,
     ) -> core::ffi::c_ulong;
-    fn add_observer(
-        &mut self,
-        event: core::ffi::c_char,
-        p1: *mut core::ffi::c_void,
-        priority: core::ffi::c_float,
-    ) -> core::ffi::c_ulong;
     fn get_command(&mut self, tag: core::ffi::c_ulong) -> *mut core::ffi::c_void;
     fn remove_observer(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn remove_observers(
@@ -4122,52 +1788,25 @@ pub trait VtkObject: VtkObjectBase {
         event: core::ffi::c_ulong,
         p1: *mut core::ffi::c_void,
     ) -> ();
-    fn remove_observers(
-        &mut self,
-        event: core::ffi::c_char,
-        p1: *mut core::ffi::c_void,
-    ) -> ();
     fn has_observer(
         &mut self,
         event: core::ffi::c_ulong,
         p1: *mut core::ffi::c_void,
     ) -> core::ffi::c_int;
-    fn has_observer(
-        &mut self,
-        event: core::ffi::c_char,
-        p1: *mut core::ffi::c_void,
-    ) -> core::ffi::c_int;
-    fn remove_observer(&mut self, tag: core::ffi::c_ulong) -> ();
-    fn remove_observers(&mut self, event: core::ffi::c_ulong) -> ();
-    fn remove_observers(&mut self, event: core::ffi::c_char) -> ();
     fn remove_all_observers(&mut self) -> ();
-    fn has_observer(&mut self, event: core::ffi::c_ulong) -> core::ffi::c_int;
-    fn has_observer(&mut self, event: core::ffi::c_char) -> core::ffi::c_int;
-    fn invoke_event(
-        &mut self,
-        event: core::ffi::c_ulong,
-        callData: (),
-    ) -> core::ffi::c_int;
-    fn invoke_event(
-        &mut self,
-        event: core::ffi::c_char,
-        callData: (),
-    ) -> core::ffi::c_int;
-    fn invoke_event(&mut self, event: core::ffi::c_ulong) -> core::ffi::c_int;
-    fn invoke_event(&mut self, event: core::ffi::c_char) -> core::ffi::c_int;
 }
 pub trait VtkObjectBase {
-    fn get_class_name(&mut self) -> *const core::ffi::c_char;
-    fn is_type_of(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
-    fn is_a(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
+    fn get_class_name(&mut self) -> &str;
+    fn is_type_of(&mut self, name: &str) -> core::ffi::c_int;
+    fn is_a(&mut self, name: &str) -> core::ffi::c_int;
     fn get_number_of_generations_from_base_type(
         &mut self,
-        name: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        name: &str,
+    ) -> core::ffi::c_longlong;
     fn get_number_of_generations_from_base(
         &mut self,
-        name: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
+        name: &str,
+    ) -> core::ffi::c_longlong;
     fn delete(&mut self) -> ();
     fn fast_delete(&mut self) -> ();
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -4176,19 +1815,19 @@ pub trait VtkObjectBase {
     fn un_register(&mut self, o: *mut core::ffi::c_void) -> ();
     fn get_reference_count(&mut self) -> core::ffi::c_int;
     fn set_reference_count(&mut self, p0: core::ffi::c_int) -> ();
-    fn set_memkind_directory(&mut self, directoryname: core::ffi::c_char) -> ();
+    fn set_memkind_directory(&mut self, directoryname: &str) -> ();
     fn get_using_memkind(&mut self) -> bool;
     fn get_is_in_memkind(&mut self) -> bool;
 }
-pub trait VtkObjectFactory: VtkObject + VtkObjectBase {
+pub trait VtkObjectFactory {
     fn create_instance(
         &mut self,
-        vtkclassname: core::ffi::c_char,
+        vtkclassname: &str,
         isAbstract: bool,
     ) -> *mut core::ffi::c_void;
     fn create_all_instance(
         &mut self,
-        vtkclassname: core::ffi::c_char,
+        vtkclassname: &str,
         retList: *mut core::ffi::c_void,
     ) -> ();
     fn re_hash(&mut self) -> ();
@@ -4196,94 +1835,52 @@ pub trait VtkObjectFactory: VtkObject + VtkObjectBase {
     fn un_register_factory(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn un_register_all_factories(&mut self) -> ();
     fn get_registered_factories(&mut self) -> *mut core::ffi::c_void;
-    fn has_override_any(&mut self, className: core::ffi::c_char) -> core::ffi::c_int;
-    fn get_override_information(
-        &mut self,
-        name: core::ffi::c_char,
-        p1: *mut core::ffi::c_void,
-    ) -> ();
-    fn set_all_enable_flags(
-        &mut self,
-        flag: core::ffi::c_int,
-        className: core::ffi::c_char,
-    ) -> ();
-    fn set_all_enable_flags(
-        &mut self,
-        flag: core::ffi::c_int,
-        className: core::ffi::c_char,
-        subclassName: core::ffi::c_char,
-    ) -> ();
+    fn has_override_any(&mut self, className: &str) -> core::ffi::c_int;
+    fn get_override_information(&mut self, name: &str, p1: *mut core::ffi::c_void) -> ();
+    fn set_all_enable_flags(&mut self, flag: core::ffi::c_int, className: &str) -> ();
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn get_vtk_source_version(&mut self) -> *const core::ffi::c_char;
-    fn get_description(&mut self) -> *const core::ffi::c_char;
+    fn get_vtk_source_version(&mut self) -> &str;
+    fn get_description(&mut self) -> &str;
     fn get_number_of_overrides(&mut self) -> core::ffi::c_int;
-    fn get_class_override_name(
-        &mut self,
-        index: core::ffi::c_int,
-    ) -> *const core::ffi::c_char;
-    fn get_class_override_with_name(
-        &mut self,
-        index: core::ffi::c_int,
-    ) -> *const core::ffi::c_char;
+    fn get_class_override_name(&mut self, index: core::ffi::c_int) -> &str;
+    fn get_class_override_with_name(&mut self, index: core::ffi::c_int) -> &str;
     fn get_enable_flag(&mut self, index: core::ffi::c_int) -> core::ffi::c_int;
-    fn get_override_description(
-        &mut self,
-        index: core::ffi::c_int,
-    ) -> *const core::ffi::c_char;
+    fn get_override_description(&mut self, index: core::ffi::c_int) -> &str;
     fn set_enable_flag(
         &mut self,
         flag: core::ffi::c_int,
-        className: core::ffi::c_char,
-        subclassName: core::ffi::c_char,
+        className: &str,
+        subclassName: &str,
     ) -> ();
-    fn get_enable_flag(
-        &mut self,
-        className: core::ffi::c_char,
-        subclassName: core::ffi::c_char,
-    ) -> core::ffi::c_int;
-    fn has_override(&mut self, className: core::ffi::c_char) -> core::ffi::c_int;
-    fn has_override(
-        &mut self,
-        className: core::ffi::c_char,
-        subclassName: core::ffi::c_char,
-    ) -> core::ffi::c_int;
-    fn disable(&mut self, className: core::ffi::c_char) -> ();
-    fn get_library_path(&mut self) -> *mut core::ffi::c_char;
+    fn has_override(&mut self, className: &str) -> core::ffi::c_int;
+    fn disable(&mut self, className: &str) -> ();
 }
-pub trait VtkObjectFactoryCollection: VtkCollection + VtkObject + VtkObjectBase {
+pub trait VtkObjectFactoryCollection {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn add_item(&mut self, t: *mut core::ffi::c_void) -> ();
     fn get_next_item(&mut self) -> *mut core::ffi::c_void;
-    fn get_next_object_factory(&mut self, cookie: ()) -> *mut core::ffi::c_void;
 }
-pub trait VtkOldStyleCallbackCommand: VtkCommand + VtkObjectBase {
+pub trait VtkOldStyleCallbackCommand {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn execute(
-        &mut self,
-        invoker: *mut core::ffi::c_void,
-        eid: core::ffi::c_ulong,
-        calldata: (),
-    ) -> ();
-    fn set_client_data(&mut self, cd: ()) -> ();
     fn set_callback(&mut self, f: *mut core::ffi::c_void) -> ();
     fn set_client_data_delete_callback(&mut self, f: *mut core::ffi::c_void) -> ();
 }
-pub trait VtkOutputWindow: VtkObject + VtkObjectBase {
+pub trait VtkOutputWindow {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn get_instance(&mut self) -> *mut core::ffi::c_void;
     fn set_instance(&mut self, instance: *mut core::ffi::c_void) -> ();
-    fn display_text(&mut self, p0: core::ffi::c_char) -> ();
-    fn display_error_text(&mut self, p0: core::ffi::c_char) -> ();
-    fn display_warning_text(&mut self, p0: core::ffi::c_char) -> ();
-    fn display_generic_warning_text(&mut self, p0: core::ffi::c_char) -> ();
-    fn display_debug_text(&mut self, p0: core::ffi::c_char) -> ();
+    fn display_text(&mut self, p0: &str) -> ();
+    fn display_error_text(&mut self, p0: &str) -> ();
+    fn display_warning_text(&mut self, p0: &str) -> ();
+    fn display_generic_warning_text(&mut self, p0: &str) -> ();
+    fn display_debug_text(&mut self, p0: &str) -> ();
     fn prompt_user_on(&mut self) -> ();
     fn prompt_user_off(&mut self) -> ();
     fn set_prompt_user(&mut self, _arg: bool) -> ();
@@ -4300,35 +1897,33 @@ pub trait VtkOutputWindow: VtkObject + VtkObjectBase {
     fn set_display_mode_to_always(&mut self) -> ();
     fn set_display_mode_to_always_std_err(&mut self) -> ();
 }
-pub trait VtkOverrideInformation: VtkObject + VtkObjectBase {
+pub trait VtkOverrideInformation {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn get_class_override_name(&mut self) -> *const core::ffi::c_char;
-    fn get_class_override_with_name(&mut self) -> *const core::ffi::c_char;
-    fn get_description(&mut self) -> *const core::ffi::c_char;
+    fn get_class_override_name(&mut self) -> &str;
+    fn get_class_override_with_name(&mut self) -> &str;
+    fn get_description(&mut self) -> &str;
     fn get_object_factory(&mut self) -> *mut core::ffi::c_void;
-    fn set_class_override_name(&mut self, _arg: core::ffi::c_char) -> ();
-    fn set_class_override_with_name(&mut self, _arg: core::ffi::c_char) -> ();
-    fn set_description(&mut self, _arg: core::ffi::c_char) -> ();
+    fn set_class_override_name(&mut self, _arg: &str) -> ();
+    fn set_class_override_with_name(&mut self, _arg: &str) -> ();
+    fn set_description(&mut self, _arg: &str) -> ();
 }
-pub trait VtkOverrideInformationCollection: VtkCollection + VtkObject + VtkObjectBase {
+pub trait VtkOverrideInformationCollection {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn add_item(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn get_next_item(&mut self) -> *mut core::ffi::c_void;
-    fn get_next_override_information(&mut self, cookie: ()) -> *mut core::ffi::c_void;
 }
-pub trait VtkPoints: VtkObject + VtkObjectBase {
+pub trait VtkPoints {
     fn new(&mut self, dataType: core::ffi::c_int) -> *mut core::ffi::c_void;
-    fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
     fn initialize(&mut self) -> ();
     fn set_data(&mut self, p0: *mut core::ffi::c_void) -> ();
@@ -4346,29 +1941,22 @@ pub trait VtkPoints: VtkObject + VtkObjectBase {
     fn set_data_type_to_unsigned_long(&mut self) -> ();
     fn set_data_type_to_float(&mut self) -> ();
     fn set_data_type_to_double(&mut self) -> ();
-    fn get_void_pointer(&mut self, id: core::ffi::c_int) -> *mut ();
     fn squeeze(&mut self) -> ();
     fn reset(&mut self) -> ();
     fn deep_copy(&mut self, ad: *mut core::ffi::c_void) -> ();
     fn shallow_copy(&mut self, ad: *mut core::ffi::c_void) -> ();
     fn get_actual_memory_size(&mut self) -> core::ffi::c_ulong;
-    fn get_number_of_points(&mut self) -> core::ffi::c_uchar;
-    fn get_point(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> ();
-    fn set_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_float) -> ();
-    fn set_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> ();
+    fn get_number_of_points(&mut self) -> core::ffi::c_longlong;
     fn set_point(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
     ) -> ();
-    fn insert_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_float) -> ();
-    fn insert_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> ();
     fn insert_point(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
@@ -4379,43 +1967,31 @@ pub trait VtkPoints: VtkObject + VtkObjectBase {
         srcIds: *mut core::ffi::c_void,
         source: *mut core::ffi::c_void,
     ) -> ();
-    fn insert_points(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_next_point(&mut self, x: core::ffi::c_float) -> core::ffi::c_uchar;
-    fn insert_next_point(&mut self, x: core::ffi::c_double) -> core::ffi::c_uchar;
     fn insert_next_point(
         &mut self,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
-    ) -> core::ffi::c_uchar;
-    fn set_number_of_points(&mut self, numPoints: core::ffi::c_uchar) -> ();
-    fn resize(&mut self, numPoints: core::ffi::c_uchar) -> core::ffi::c_int;
+    ) -> core::ffi::c_longlong;
+    fn set_number_of_points(&mut self, numPoints: core::ffi::c_longlong) -> ();
+    fn resize(&mut self, numPoints: core::ffi::c_longlong) -> core::ffi::c_int;
     fn get_points(
         &mut self,
         ptId: *mut core::ffi::c_void,
         outPoints: *mut core::ffi::c_void,
     ) -> ();
     fn compute_bounds(&mut self) -> ();
-    fn get_bounds(&mut self) -> *mut core::ffi::c_double;
-    fn get_bounds(&mut self, bounds: core::ffi::c_double) -> ();
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
     fn modified(&mut self) -> ();
 }
-pub trait VtkPoints2D: VtkObject + VtkObjectBase {
+pub trait VtkPoints2D {
     fn new(&mut self, dataType: core::ffi::c_int) -> *mut core::ffi::c_void;
-    fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
     fn initialize(&mut self) -> ();
     fn set_data(&mut self, p0: *mut core::ffi::c_void) -> ();
@@ -4433,115 +2009,88 @@ pub trait VtkPoints2D: VtkObject + VtkObjectBase {
     fn set_data_type_to_unsigned_long(&mut self) -> ();
     fn set_data_type_to_float(&mut self) -> ();
     fn set_data_type_to_double(&mut self) -> ();
-    fn get_void_pointer(&mut self, id: core::ffi::c_int) -> *mut ();
     fn squeeze(&mut self) -> ();
     fn reset(&mut self) -> ();
     fn deep_copy(&mut self, ad: *mut core::ffi::c_void) -> ();
     fn shallow_copy(&mut self, ad: *mut core::ffi::c_void) -> ();
     fn get_actual_memory_size(&mut self) -> core::ffi::c_ulong;
-    fn get_number_of_points(&mut self) -> core::ffi::c_uchar;
-    fn get_point(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_double;
-    fn get_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> ();
-    fn set_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_float) -> ();
-    fn set_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> ();
+    fn get_number_of_points(&mut self) -> core::ffi::c_longlong;
     fn set_point(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
     ) -> ();
-    fn insert_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_float) -> ();
-    fn insert_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> ();
     fn insert_point(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
     ) -> ();
-    fn insert_next_point(&mut self, x: core::ffi::c_float) -> core::ffi::c_uchar;
-    fn insert_next_point(&mut self, x: core::ffi::c_double) -> core::ffi::c_uchar;
     fn insert_next_point(
         &mut self,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
-    ) -> core::ffi::c_uchar;
-    fn remove_point(&mut self, id: core::ffi::c_uchar) -> ();
-    fn set_number_of_points(&mut self, numPoints: core::ffi::c_uchar) -> ();
-    fn resize(&mut self, numPoints: core::ffi::c_uchar) -> core::ffi::c_int;
+    ) -> core::ffi::c_longlong;
+    fn remove_point(&mut self, id: core::ffi::c_longlong) -> ();
+    fn set_number_of_points(&mut self, numPoints: core::ffi::c_longlong) -> ();
+    fn resize(&mut self, numPoints: core::ffi::c_longlong) -> core::ffi::c_int;
     fn get_points(
         &mut self,
         ptId: *mut core::ffi::c_void,
         fp: *mut core::ffi::c_void,
     ) -> ();
     fn compute_bounds(&mut self) -> ();
-    fn get_bounds(&mut self) -> *mut core::ffi::c_double;
-    fn get_bounds(&mut self, bounds: core::ffi::c_double) -> ();
 }
-pub trait VtkPriorityQueue: VtkObject + VtkObjectBase {
+pub trait VtkPriorityQueue {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn allocate(&mut self, sz: core::ffi::c_uchar, ext: core::ffi::c_uchar) -> ();
-    fn insert(&mut self, priority: core::ffi::c_double, id: core::ffi::c_uchar) -> ();
+    fn allocate(&mut self, sz: core::ffi::c_longlong, ext: core::ffi::c_longlong) -> ();
+    fn insert(&mut self, priority: core::ffi::c_double, id: core::ffi::c_longlong) -> ();
     fn pop(
         &mut self,
-        location: core::ffi::c_uchar,
-        priority: core::ffi::c_double,
-    ) -> core::ffi::c_uchar;
-    fn pop(&mut self, location: core::ffi::c_uchar) -> core::ffi::c_uchar;
+        location: core::ffi::c_longlong,
+        priority: &mut core::ffi::c_double,
+    ) -> core::ffi::c_longlong;
     fn peek(
         &mut self,
-        location: core::ffi::c_uchar,
-        priority: core::ffi::c_double,
-    ) -> core::ffi::c_uchar;
-    fn peek(&mut self, location: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn delete_id(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_double;
-    fn get_priority(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_double;
-    fn get_number_of_items(&mut self) -> core::ffi::c_uchar;
+        location: core::ffi::c_longlong,
+        priority: &mut core::ffi::c_double,
+    ) -> core::ffi::c_longlong;
+    fn delete_id(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_double;
+    fn get_priority(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_double;
+    fn get_number_of_items(&mut self) -> core::ffi::c_longlong;
     fn reset(&mut self) -> ();
 }
-pub trait VtkRandomPool: VtkObject + VtkObjectBase {
+pub trait VtkRandomPool {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn set_sequence(&mut self, seq: *mut core::ffi::c_void) -> ();
     fn get_sequence(&mut self) -> *mut core::ffi::c_void;
-    fn set_size(&mut self, _arg: core::ffi::c_uchar) -> ();
-    fn get_size_min_value(&mut self) -> core::ffi::c_uchar;
-    fn get_size_max_value(&mut self) -> core::ffi::c_uchar;
-    fn get_size(&mut self) -> core::ffi::c_uchar;
-    fn set_number_of_components(&mut self, _arg: core::ffi::c_uchar) -> ();
-    fn get_number_of_components_min_value(&mut self) -> core::ffi::c_uchar;
-    fn get_number_of_components_max_value(&mut self) -> core::ffi::c_uchar;
-    fn get_number_of_components(&mut self) -> core::ffi::c_uchar;
-    fn get_total_size(&mut self) -> core::ffi::c_uchar;
-    fn generate_pool(&mut self) -> *const core::ffi::c_double;
-    fn get_pool(&mut self) -> *const core::ffi::c_double;
-    fn get_value(&mut self, i: core::ffi::c_uchar) -> core::ffi::c_double;
-    fn get_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        compNum: core::ffi::c_int,
-    ) -> core::ffi::c_double;
+    fn set_size(&mut self, _arg: core::ffi::c_longlong) -> ();
+    fn get_size_min_value(&mut self) -> core::ffi::c_longlong;
+    fn get_size_max_value(&mut self) -> core::ffi::c_longlong;
+    fn get_size(&mut self) -> core::ffi::c_longlong;
+    fn set_number_of_components(&mut self, _arg: core::ffi::c_longlong) -> ();
+    fn get_number_of_components_min_value(&mut self) -> core::ffi::c_longlong;
+    fn get_number_of_components_max_value(&mut self) -> core::ffi::c_longlong;
+    fn get_number_of_components(&mut self) -> core::ffi::c_longlong;
+    fn get_total_size(&mut self) -> core::ffi::c_longlong;
+    fn get_value(&mut self, i: core::ffi::c_longlong) -> core::ffi::c_double;
     fn populate_data_array(
         &mut self,
         da: *mut core::ffi::c_void,
         minRange: core::ffi::c_double,
         maxRange: core::ffi::c_double,
     ) -> ();
-    fn populate_data_array(
-        &mut self,
-        da: *mut core::ffi::c_void,
-        compNumber: core::ffi::c_int,
-        minRange: core::ffi::c_double,
-        maxRange: core::ffi::c_double,
-    ) -> ();
-    fn set_chunk_size(&mut self, _arg: core::ffi::c_uchar) -> ();
-    fn get_chunk_size_min_value(&mut self) -> core::ffi::c_uchar;
-    fn get_chunk_size_max_value(&mut self) -> core::ffi::c_uchar;
-    fn get_chunk_size(&mut self) -> core::ffi::c_uchar;
+    fn set_chunk_size(&mut self, _arg: core::ffi::c_longlong) -> ();
+    fn get_chunk_size_min_value(&mut self) -> core::ffi::c_longlong;
+    fn get_chunk_size_max_value(&mut self) -> core::ffi::c_longlong;
+    fn get_chunk_size(&mut self) -> core::ffi::c_longlong;
 }
-pub trait VtkRandomSequence: VtkObject + VtkObjectBase {
+pub trait VtkRandomSequence {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn initialize(&mut self, seed: core::ffi::c_uint) -> ();
@@ -4549,107 +2098,61 @@ pub trait VtkRandomSequence: VtkObject + VtkObjectBase {
     fn next(&mut self) -> ();
     fn get_next_value(&mut self) -> core::ffi::c_double;
 }
-pub trait VtkReferenceCount: VtkObject + VtkObjectBase {
+pub trait VtkReferenceCount {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
 }
 pub trait VtkSMPThreadLocal {
-    fn local(&mut self) -> *mut core::ffi::c_void;
     fn size(&mut self) -> usize;
 }
 pub trait VtkSMPThreadLocalObject {
     fn local(&mut self) -> *mut core::ffi::c_void;
     fn size(&mut self) -> usize;
-    fn begin(&mut self) -> *mut core::ffi::c_void;
-    fn end(&mut self) -> *mut core::ffi::c_void;
 }
 pub trait VtkSMPTools {
-    fn get_backend(&mut self) -> *const core::ffi::c_char;
-    fn set_backend(&mut self, backend: core::ffi::c_char) -> bool;
+    fn get_backend(&mut self) -> &str;
+    fn set_backend(&mut self, backend: &str) -> bool;
     fn initialize(&mut self, numThreads: core::ffi::c_int) -> ();
     fn get_estimated_number_of_threads(&mut self) -> core::ffi::c_int;
     fn set_nested_parallelism(&mut self, isNested: bool) -> ();
     fn get_nested_parallelism(&mut self) -> bool;
     fn is_parallel_scope(&mut self) -> bool;
 }
-pub trait VtkSOADataArrayTemplate: VtkGenericDataArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkSOADataArrayTemplate {
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn get_value(&mut self, valueIdx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
     fn get_typed_tuple(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         tuple: *mut core::ffi::c_void,
-    ) -> ();
-    fn set_typed_tuple(&mut self, tupleIdx: core::ffi::c_uchar, tuple: ValueTypeT) -> ();
-    fn get_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        comp: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn set_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        comp: core::ffi::c_int,
-        value: *mut core::ffi::c_void,
     ) -> ();
     fn set_array(
         &mut self,
         comp: core::ffi::c_int,
         array: *mut core::ffi::c_void,
-        size: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
         updateMaxId: bool,
         save: bool,
         deleteMethod: core::ffi::c_int,
     ) -> ();
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> ();
-    fn set_array_free_function(
-        &mut self,
-        comp: core::ffi::c_int,
-        callback: *mut core::ffi::c_void,
-    ) -> ();
     fn get_component_array_pointer(
         &mut self,
         comp: core::ffi::c_int,
     ) -> *mut core::ffi::c_void;
-    fn get_void_pointer(&mut self, valueIdx: core::ffi::c_uchar) -> *mut ();
-    fn export_to_void_pointer(&mut self, ptr: ()) -> ();
     fn set_number_of_components(&mut self, numComps: core::ffi::c_int) -> ();
 }
-pub trait VtkScalarsToColors: VtkObject + VtkObjectBase {
+pub trait VtkScalarsToColors {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn is_opaque(&mut self) -> core::ffi::c_int;
-    fn is_opaque(
-        &mut self,
-        scalars: *mut core::ffi::c_void,
-        colorMode: core::ffi::c_int,
-        component: core::ffi::c_int,
-    ) -> core::ffi::c_int;
     fn build(&mut self) -> ();
-    fn get_range(&mut self) -> *mut core::ffi::c_double;
     fn set_range(&mut self, min: core::ffi::c_double, max: core::ffi::c_double) -> ();
-    fn set_range(&mut self, rng: core::ffi::c_double) -> ();
-    fn map_value(&mut self, v: core::ffi::c_double) -> *const core::ffi::c_uchar;
-    fn get_color(&mut self, v: core::ffi::c_double, rgb: core::ffi::c_double) -> ();
-    fn get_color(&mut self, v: core::ffi::c_double) -> *mut core::ffi::c_double;
     fn get_opacity(&mut self, v: core::ffi::c_double) -> core::ffi::c_double;
     fn get_luminance(&mut self, x: core::ffi::c_double) -> core::ffi::c_double;
     fn set_alpha(&mut self, alpha: core::ffi::c_double) -> ();
     fn get_alpha(&mut self) -> core::ffi::c_double;
-    fn map_scalars(
-        &mut self,
-        scalars: *mut core::ffi::c_void,
-        colorMode: core::ffi::c_int,
-        component: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
     fn map_scalars(
         &mut self,
         scalars: *mut core::ffi::c_void,
@@ -4666,58 +2169,9 @@ pub trait VtkScalarsToColors: VtkObject + VtkObjectBase {
     fn get_vector_component(&mut self) -> core::ffi::c_int;
     fn set_vector_size(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_vector_size(&mut self) -> core::ffi::c_int;
-    fn map_vectors_through_table(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-        vectorComponent: core::ffi::c_int,
-        vectorSize: core::ffi::c_int,
-    ) -> ();
-    fn map_vectors_through_table(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> ();
-    fn map_scalars_through_table(
-        &mut self,
-        scalars: *mut core::ffi::c_void,
-        output: core::ffi::c_uchar,
-        outputFormat: core::ffi::c_int,
-    ) -> ();
-    fn map_scalars_through_table(
-        &mut self,
-        scalars: *mut core::ffi::c_void,
-        output: core::ffi::c_uchar,
-    ) -> ();
-    fn map_scalars_through_table(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> ();
-    fn map_scalars_through_table_2(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> ();
     fn deep_copy(&mut self, o: *mut core::ffi::c_void) -> ();
     fn using_log_scale(&mut self) -> core::ffi::c_int;
-    fn get_number_of_available_colors(&mut self) -> core::ffi::c_uchar;
+    fn get_number_of_available_colors(&mut self) -> core::ffi::c_longlong;
     fn set_annotations(
         &mut self,
         values: *mut core::ffi::c_void,
@@ -4725,91 +2179,24 @@ pub trait VtkScalarsToColors: VtkObject + VtkObjectBase {
     ) -> ();
     fn get_annotated_values(&mut self) -> *mut core::ffi::c_void;
     fn get_annotations(&mut self) -> *mut core::ffi::c_void;
-    fn set_annotation(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        annotation: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
-    fn set_annotation(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        annotation: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
-    fn get_number_of_annotated_values(&mut self) -> core::ffi::c_uchar;
-    fn get_annotated_value(&mut self, idx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn get_annotation(&mut self, idx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn get_annotation_color(&mut self, val: vtkVariant, rgba: core::ffi::c_double) -> ();
-    fn get_annotated_value_index(
-        &mut self,
-        val: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
-    fn get_annotated_value_index_internal(
-        &mut self,
-        val: vtkVariant,
-    ) -> core::ffi::c_uchar;
-    fn get_indexed_color(
-        &mut self,
-        i: core::ffi::c_uchar,
-        rgba: core::ffi::c_double,
-    ) -> ();
-    fn remove_annotation(&mut self, value: *mut core::ffi::c_void) -> bool;
+    fn get_number_of_annotated_values(&mut self) -> core::ffi::c_longlong;
     fn reset_annotations(&mut self) -> ();
     fn set_indexed_lookup(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_indexed_lookup(&mut self) -> core::ffi::c_int;
     fn indexed_lookup_on(&mut self) -> ();
     fn indexed_lookup_off(&mut self) -> ();
 }
-pub trait VtkShortArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkShortArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_short,
-    ) -> ();
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_short,
-    ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_short,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_short,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_short;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_short) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_short) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_short) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_short;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_short;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_short;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_short;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_short,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_short,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_short;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_short) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_short) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_short) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -4817,62 +2204,29 @@ pub trait VtkShortArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObject
     fn get_data_type_value_min(&mut self) -> core::ffi::c_short;
     fn get_data_type_value_max(&mut self) -> core::ffi::c_short;
 }
-pub trait VtkSignedCharArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkSignedCharArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_char) -> ();
-    fn set_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_char) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_char,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_char,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_char;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_char) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_char) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_char) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_char;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_char;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_char;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_char;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_char,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_char,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_schar;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_schar) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_schar) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_schar) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
-    fn get_data_type_value_min(&mut self) -> core::ffi::c_char;
-    fn get_data_type_value_max(&mut self) -> core::ffi::c_char;
+    fn get_data_type_value_min(&mut self) -> core::ffi::c_schar;
+    fn get_data_type_value_max(&mut self) -> core::ffi::c_schar;
 }
 pub trait VtkSimpleConditionVariable {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn delete(&mut self) -> ();
     fn signal(&mut self) -> ();
     fn broadcast(&mut self) -> ();
-    fn wait(&mut self, mutex: *mut core::ffi::c_void) -> core::ffi::c_int;
 }
 pub trait VtkSimpleCriticalSection {
     fn init(&mut self) -> ();
@@ -4885,167 +2239,36 @@ pub trait VtkSimpleMutexLock {
     fn lock(&mut self) -> ();
     fn unlock(&mut self) -> ();
 }
-pub trait VtkSmartPointer: VtkSmartPointerBase {
+pub trait VtkSmartPointer {
     fn get_pointer(&mut self) -> *mut core::ffi::c_void;
     fn get(&mut self) -> *mut core::ffi::c_void;
     fn take_reference(&mut self, t: *mut core::ffi::c_void) -> ();
 }
 pub trait VtkSmartPointerBase {
     fn get_pointer(&mut self) -> *mut core::ffi::c_void;
-    fn report(
-        &mut self,
-        collector: *mut core::ffi::c_void,
-        desc: core::ffi::c_char,
-    ) -> ();
+    fn report(&mut self, collector: *mut core::ffi::c_void, desc: &str) -> ();
 }
-pub trait VtkSortDataArray: VtkObject + VtkObjectBase {
+pub trait VtkSortDataArray {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn sort(&mut self, keys: *mut core::ffi::c_void) -> ();
-    fn sort(&mut self, keys: *mut core::ffi::c_void) -> ();
-    fn sort(&mut self, keys: *mut core::ffi::c_void, dir: core::ffi::c_int) -> ();
-    fn sort(&mut self, keys: *mut core::ffi::c_void, dir: core::ffi::c_int) -> ();
-    fn sort(
-        &mut self,
-        keys: *mut core::ffi::c_void,
-        values: *mut core::ffi::c_void,
-    ) -> ();
-    fn sort(
-        &mut self,
-        keys: *mut core::ffi::c_void,
-        values: *mut core::ffi::c_void,
-    ) -> ();
-    fn sort(
-        &mut self,
-        keys: *mut core::ffi::c_void,
-        values: *mut core::ffi::c_void,
-        dir: core::ffi::c_int,
-    ) -> ();
-    fn sort(
-        &mut self,
-        keys: *mut core::ffi::c_void,
-        values: *mut core::ffi::c_void,
-        dir: core::ffi::c_int,
-    ) -> ();
     fn sort_array_by_component(
         &mut self,
         arr: *mut core::ffi::c_void,
         k: core::ffi::c_int,
-    ) -> ();
-    fn sort_array_by_component(
-        &mut self,
-        arr: *mut core::ffi::c_void,
-        k: core::ffi::c_int,
-        dir: core::ffi::c_int,
-    ) -> ();
-    fn initialize_sort_indices(
-        &mut self,
-        numKeys: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar;
-    fn generate_sort_indices(
-        &mut self,
-        dataType: core::ffi::c_int,
-        dataIn: (),
-        numKeys: core::ffi::c_uchar,
-        numComp: core::ffi::c_int,
-        k: core::ffi::c_int,
-        idx: core::ffi::c_uchar,
-    ) -> ();
-    fn shuffle_array(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        dataType: core::ffi::c_int,
-        numKeys: core::ffi::c_uchar,
-        numComp: core::ffi::c_int,
-        arr: *mut core::ffi::c_void,
-        dataIn: (),
-        dir: core::ffi::c_int,
-    ) -> ();
-    fn shuffle_id_list(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        sze: core::ffi::c_uchar,
-        arrayIn: *mut core::ffi::c_void,
-        dataIn: core::ffi::c_uchar,
-        dir: core::ffi::c_int,
     ) -> ();
 }
-pub trait VtkSparseArray: VtkTypedArray + VtkArray + VtkObject + VtkObjectBase {
+pub trait VtkSparseArray {
     fn is_dense(&mut self) -> bool;
-    fn get_extents(&mut self) -> vtkArrayExtents;
     fn get_non_null_size(&mut self) -> core::ffi::c_ulonglong;
-    fn get_coordinates_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-        coordinates: *mut core::ffi::c_void,
-    ) -> ();
     fn deep_copy(&mut self) -> *mut core::ffi::c_void;
-    fn get_value(&mut self, i: core::ffi::c_uchar) -> T;
-    fn get_value(&mut self, i: core::ffi::c_uchar, j: core::ffi::c_uchar) -> T;
-    fn get_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-    ) -> T;
-    fn get_value(&mut self, coordinates: vtkArrayCoordinates) -> T;
-    fn get_value_n(&mut self, n: core::ffi::c_ulonglong) -> T;
-    fn set_value(&mut self, i: core::ffi::c_uchar, value: T) -> ();
-    fn set_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        value: T,
-    ) -> ();
-    fn set_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-        value: T,
-    ) -> ();
-    fn set_value(&mut self, coordinates: vtkArrayCoordinates, value: T) -> ();
-    fn set_value_n(&mut self, n: core::ffi::c_ulonglong, value: T) -> ();
-    fn set_null_value(&mut self, value: T) -> ();
-    fn get_null_value(&mut self) -> T;
     fn clear(&mut self) -> ();
-    fn sort(&mut self, sort: vtkArraySort) -> ();
-    fn get_unique_coordinates(
-        &mut self,
-        dimension: core::ffi::c_uchar,
-    ) -> Vec<core::ffi::c_uchar>;
-    fn get_coordinate_storage(
-        &mut self,
-        dimension: core::ffi::c_uchar,
-    ) -> *const core::ffi::c_uchar;
-    fn get_coordinate_storage(
-        &mut self,
-        dimension: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar;
-    fn get_value_storage(&mut self) -> *const T;
-    fn get_value_storage(&mut self) -> *mut core::ffi::c_void;
     fn reserve_storage(&mut self, value_count: core::ffi::c_ulonglong) -> ();
     fn set_extents_from_contents(&mut self) -> ();
-    fn set_extents(&mut self, extents: vtkArrayExtents) -> ();
-    fn add_value(&mut self, i: core::ffi::c_uchar, value: T) -> ();
-    fn add_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        value: T,
-    ) -> ();
-    fn add_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-        value: T,
-    ) -> ();
-    fn add_value(&mut self, coordinates: vtkArrayCoordinates, value: T) -> ();
     fn validate(&mut self) -> bool;
 }
-pub trait VtkStringArray: VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkStringArray {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
@@ -5055,17 +2278,17 @@ pub trait VtkStringArray: VtkAbstractArray + VtkObject + VtkObjectBase {
     fn initialize(&mut self) -> ();
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
     fn squeeze(&mut self) -> ();
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int;
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int;
     fn set_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuples(
@@ -5074,152 +2297,61 @@ pub trait VtkStringArray: VtkAbstractArray + VtkObject + VtkObjectBase {
         srcIds: *mut core::ffi::c_void,
         source: *mut core::ffi::c_void,
     ) -> ();
-    fn insert_tuples(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> ();
     fn insert_next_tuple(
         &mut self,
-        j: core::ffi::c_uchar,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        id1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        id2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> ();
+    ) -> core::ffi::c_longlong;
     fn get_tuples(
         &mut self,
         ptIds: *mut core::ffi::c_void,
         output: *mut core::ffi::c_void,
     ) -> ();
-    fn get_tuples(
-        &mut self,
-        p1: core::ffi::c_uchar,
-        p2: core::ffi::c_uchar,
-        output: *mut core::ffi::c_void,
-    ) -> ();
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> vtkStdString;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: *mut core::ffi::c_void) -> ();
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_char) -> ();
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> ();
-    fn get_number_of_values(&mut self) -> core::ffi::c_uchar;
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> ();
+    fn get_number_of_values(&mut self) -> core::ffi::c_longlong;
     fn get_number_of_element_components(&mut self) -> core::ffi::c_int;
     fn get_element_component_size(&mut self) -> core::ffi::c_int;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: *mut core::ffi::c_void) -> ();
-    fn insert_value(&mut self, id: core::ffi::c_uchar, val: core::ffi::c_char) -> ();
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_next_value(&mut self, f: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn insert_next_value(&mut self, f: core::ffi::c_char) -> core::ffi::c_uchar;
     fn write_pointer(
         &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
+        number: core::ffi::c_longlong,
     ) -> *mut core::ffi::c_void;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut ();
+    fn get_pointer(&mut self, id: core::ffi::c_longlong) -> *mut core::ffi::c_void;
     fn deep_copy(&mut self, aa: *mut core::ffi::c_void) -> ();
     fn set_array(
         &mut self,
         array: *mut core::ffi::c_void,
-        size: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
         save: core::ffi::c_int,
         deleteMethod: core::ffi::c_int,
-    ) -> ();
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
     ) -> ();
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> ();
     fn get_actual_memory_size(&mut self) -> core::ffi::c_ulong;
     fn new_iterator(&mut self) -> *mut core::ffi::c_void;
-    fn get_data_size(&mut self) -> core::ffi::c_uchar;
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> ();
-    fn lookup_value(&mut self, value: vtkStdString) -> core::ffi::c_uchar;
-    fn lookup_value(&mut self, value: vtkStdString, ids: *mut core::ffi::c_void) -> ();
-    fn lookup_value(&mut self, value: core::ffi::c_char) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        value: core::ffi::c_char,
-        ids: *mut core::ffi::c_void,
-    ) -> ();
+    fn get_data_size(&mut self) -> core::ffi::c_longlong;
     fn data_changed(&mut self) -> ();
-    fn data_element_changed(&mut self, id: core::ffi::c_uchar) -> ();
+    fn data_element_changed(&mut self, id: core::ffi::c_longlong) -> ();
     fn clear_lookup(&mut self) -> ();
 }
-pub trait VtkStringOutputWindow: VtkOutputWindow + VtkObject + VtkObjectBase {
+pub trait VtkStringOutputWindow {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn display_text(&mut self, p0: core::ffi::c_char) -> ();
-    fn get_output(&mut self) -> &str;
+    fn display_text(&mut self, p0: &str) -> ();
 }
-pub trait VtkTestDataArray: VtkGenericDataArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
-    fn get_value(&mut self, valueIdx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_value(
-        &mut self,
-        valueIdx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
+pub trait VtkTestDataArray {
     fn get_typed_tuple(
         &mut self,
-        tupleIdx: core::ffi::c_uchar,
+        tupleIdx: core::ffi::c_longlong,
         tuple: *mut core::ffi::c_void,
     ) -> ();
-    fn set_typed_tuple(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        tuple: ArrayT::ValueType,
-    ) -> ();
-    fn get_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        compIdx: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn set_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        compIdx: core::ffi::c_int,
-        value: *mut core::ffi::c_void,
-    ) -> ();
 }
-pub trait VtkTimePointUtility: VtkObject + VtkObjectBase {
+pub trait VtkTimePointUtility {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5249,28 +2381,28 @@ pub trait VtkTimePointUtility: VtkObject + VtkObjectBase {
     fn get_date(
         &mut self,
         time: core::ffi::c_ulonglong,
-        year: core::ffi::c_int,
-        month: core::ffi::c_int,
-        day: core::ffi::c_int,
+        year: &mut core::ffi::c_int,
+        month: &mut core::ffi::c_int,
+        day: &mut core::ffi::c_int,
     ) -> ();
     fn get_time(
         &mut self,
         time: core::ffi::c_ulonglong,
-        hour: core::ffi::c_int,
-        minute: core::ffi::c_int,
-        second: core::ffi::c_int,
-        millis: core::ffi::c_int,
+        hour: &mut core::ffi::c_int,
+        minute: &mut core::ffi::c_int,
+        second: &mut core::ffi::c_int,
+        millis: &mut core::ffi::c_int,
     ) -> ();
     fn get_date_time(
         &mut self,
         time: core::ffi::c_ulonglong,
-        year: core::ffi::c_int,
-        month: core::ffi::c_int,
-        day: core::ffi::c_int,
-        hour: core::ffi::c_int,
-        minute: core::ffi::c_int,
-        second: core::ffi::c_int,
-        millis: core::ffi::c_int,
+        year: &mut core::ffi::c_int,
+        month: &mut core::ffi::c_int,
+        day: &mut core::ffi::c_int,
+        hour: &mut core::ffi::c_int,
+        minute: &mut core::ffi::c_int,
+        second: &mut core::ffi::c_int,
+        millis: &mut core::ffi::c_int,
     ) -> ();
     fn get_year(&mut self, time: core::ffi::c_ulonglong) -> core::ffi::c_int;
     fn get_month(&mut self, time: core::ffi::c_ulonglong) -> core::ffi::c_int;
@@ -5279,16 +2411,11 @@ pub trait VtkTimePointUtility: VtkObject + VtkObjectBase {
     fn get_minute(&mut self, time: core::ffi::c_ulonglong) -> core::ffi::c_int;
     fn get_second(&mut self, time: core::ffi::c_ulonglong) -> core::ffi::c_int;
     fn get_millisecond(&mut self, time: core::ffi::c_ulonglong) -> core::ffi::c_int;
-    fn iso_8601_to_time_point(
-        &mut self,
-        str: core::ffi::c_char,
-        ok: bool,
-    ) -> core::ffi::c_ulonglong;
     fn time_point_to_iso_8601(
         &mut self,
         p0: core::ffi::c_ulonglong,
         format: core::ffi::c_int,
-    ) -> *const core::ffi::c_char;
+    ) -> &str;
 }
 pub trait VtkTimeStamp {
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -5296,7 +2423,7 @@ pub trait VtkTimeStamp {
     fn modified(&mut self) -> ();
     fn get_m_time(&mut self) -> core::ffi::c_ulong;
 }
-pub trait VtkTypeFloat32Array: VtkFloatArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeFloat32Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5305,7 +2432,7 @@ pub trait VtkTypeFloat32Array: VtkFloatArray + VtkDataArray + VtkAbstractArray +
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeFloat64Array: VtkDoubleArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeFloat64Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5314,7 +2441,7 @@ pub trait VtkTypeFloat64Array: VtkDoubleArray + VtkDataArray + VtkAbstractArray 
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeInt16Array: VtkShortArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeInt16Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5323,7 +2450,7 @@ pub trait VtkTypeInt16Array: VtkShortArray + VtkDataArray + VtkAbstractArray + V
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeInt32Array: VtkIntArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeInt32Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5332,7 +2459,7 @@ pub trait VtkTypeInt32Array: VtkIntArray + VtkDataArray + VtkAbstractArray + Vtk
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeInt64Array: VtkLongLongArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeInt64Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5341,7 +2468,7 @@ pub trait VtkTypeInt64Array: VtkLongLongArray + VtkDataArray + VtkAbstractArray 
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeInt8Array: VtkSignedCharArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeInt8Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5350,7 +2477,7 @@ pub trait VtkTypeInt8Array: VtkSignedCharArray + VtkDataArray + VtkAbstractArray
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeUInt16Array: VtkUnsignedShortArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeUInt16Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5359,7 +2486,7 @@ pub trait VtkTypeUInt16Array: VtkUnsignedShortArray + VtkDataArray + VtkAbstract
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeUInt32Array: VtkUnsignedIntArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeUInt32Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5368,7 +2495,7 @@ pub trait VtkTypeUInt32Array: VtkUnsignedIntArray + VtkDataArray + VtkAbstractAr
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeUInt64Array: VtkUnsignedLongLongArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeUInt64Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5377,7 +2504,7 @@ pub trait VtkTypeUInt64Array: VtkUnsignedLongLongArray + VtkDataArray + VtkAbstr
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypeUInt8Array: VtkUnsignedCharArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypeUInt8Array {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -5386,186 +2513,53 @@ pub trait VtkTypeUInt8Array: VtkUnsignedCharArray + VtkDataArray + VtkAbstractAr
         source: *mut core::ffi::c_void,
     ) -> *mut core::ffi::c_void;
 }
-pub trait VtkTypedArray: VtkArray + VtkObject + VtkObjectBase {
-    fn get_variant_value(
-        &mut self,
-        coordinates: vtkArrayCoordinates,
-    ) -> *mut core::ffi::c_void;
-    fn get_variant_value_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-    ) -> *mut core::ffi::c_void;
-    fn set_variant_value(
-        &mut self,
-        coordinates: vtkArrayCoordinates,
-        value: vtkVariant,
-    ) -> ();
-    fn set_variant_value_n(
-        &mut self,
-        n: core::ffi::c_ulonglong,
-        value: vtkVariant,
-    ) -> ();
-    fn copy_value(
-        &mut self,
-        source: *mut core::ffi::c_void,
-        source_coordinates: vtkArrayCoordinates,
-        target_coordinates: vtkArrayCoordinates,
-    ) -> ();
-    fn copy_value(
-        &mut self,
-        source: *mut core::ffi::c_void,
-        source_index: core::ffi::c_ulonglong,
-        target_coordinates: vtkArrayCoordinates,
-    ) -> ();
-    fn copy_value(
-        &mut self,
-        source: *mut core::ffi::c_void,
-        source_coordinates: vtkArrayCoordinates,
-        target_index: core::ffi::c_ulonglong,
-    ) -> ();
-    fn get_value(&mut self, i: core::ffi::c_uchar) -> T;
-    fn get_value(&mut self, i: core::ffi::c_uchar, j: core::ffi::c_uchar) -> T;
-    fn get_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-    ) -> T;
-    fn get_value(&mut self, coordinates: vtkArrayCoordinates) -> T;
-    fn get_value_n(&mut self, n: core::ffi::c_ulonglong) -> T;
-    fn set_value(&mut self, i: core::ffi::c_uchar, value: T) -> ();
-    fn set_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        value: T,
-    ) -> ();
-    fn set_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
-        k: core::ffi::c_uchar,
-        value: T,
-    ) -> ();
-    fn set_value(&mut self, coordinates: vtkArrayCoordinates, value: T) -> ();
-    fn set_value_n(&mut self, n: core::ffi::c_ulonglong, value: T) -> ();
-}
-pub trait VtkTypedDataArray: VtkGenericDataArray + VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkTypedArray {}
+pub trait VtkTypedDataArray {
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
-    fn set_typed_tuple(&mut self, i: core::ffi::c_uchar, t: ValueTypeT) -> ();
-    fn insert_typed_tuple(&mut self, i: core::ffi::c_uchar, t: ValueTypeT) -> ();
-    fn insert_next_typed_tuple(&mut self, t: ValueTypeT) -> core::ffi::c_uchar;
-    fn get_value(&mut self, idx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn get_value_reference(&mut self, idx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
     fn get_typed_tuple(
         &mut self,
-        idx: core::ffi::c_uchar,
+        idx: core::ffi::c_longlong,
         t: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_next_value(&mut self, v: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn insert_value(&mut self, idx: core::ffi::c_uchar, v: *mut core::ffi::c_void) -> ();
-    fn get_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        comp: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn set_typed_component(
-        &mut self,
-        tupleIdx: core::ffi::c_uchar,
-        comp: core::ffi::c_int,
-        v: *mut core::ffi::c_void,
     ) -> ();
     fn allocate(
         &mut self,
-        size: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
 }
 pub trait VtkUnicodeString {
-    fn is_utf_8(&mut self, p0: core::ffi::c_char) -> bool;
     fn is_utf_8(&mut self, p0: &str) -> bool;
-    fn from_utf_8(&mut self, p0: core::ffi::c_char) -> *mut core::ffi::c_void;
-    fn from_utf_8(
-        &mut self,
-        begin: core::ffi::c_char,
-        end: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void;
-    fn from_utf_8(&mut self, p0: &str) -> *mut core::ffi::c_void;
-    fn from_utf_16(&mut self, p0: core::ffi::c_ushort) -> *mut core::ffi::c_void;
-    fn begin(&mut self) -> *mut core::ffi::c_void;
-    fn end(&mut self) -> *mut core::ffi::c_void;
-    fn at(&mut self, offset: *mut core::ffi::c_void) -> core::ffi::c_uint;
-    fn utf_8_str(&mut self) -> *const core::ffi::c_char;
-    fn utf_8_str(&mut self, result: &str) -> ();
-    fn utf_16_str(&mut self) -> Vec<core::ffi::c_ushort>;
-    fn utf_16_str(&mut self, result: Vec<core::ffi::c_ushort>) -> ();
-    fn byte_count(&mut self) -> *mut core::ffi::c_void;
-    fn character_count(&mut self) -> *mut core::ffi::c_void;
+    fn utf_8_str(&mut self) -> &str;
     fn empty(&mut self) -> bool;
     fn push_back(&mut self, p0: core::ffi::c_uint) -> ();
-    fn append(&mut self, value: vtkUnicodeString) -> ();
-    fn append(
-        &mut self,
-        count: *mut core::ffi::c_void,
-        character: core::ffi::c_uint,
-    ) -> ();
-    fn append(
-        &mut self,
-        begin: *mut core::ffi::c_void,
-        end: *mut core::ffi::c_void,
-    ) -> ();
-    fn assign(&mut self, value: vtkUnicodeString) -> ();
-    fn assign(
-        &mut self,
-        count: *mut core::ffi::c_void,
-        character: core::ffi::c_uint,
-    ) -> ();
-    fn assign(
-        &mut self,
-        begin: *mut core::ffi::c_void,
-        end: *mut core::ffi::c_void,
-    ) -> ();
     fn clear(&mut self) -> ();
-    fn fold_case(&mut self) -> *mut core::ffi::c_void;
-    fn compare(&mut self, p0: vtkUnicodeString) -> core::ffi::c_int;
-    fn substr(
-        &mut self,
-        offset: *mut core::ffi::c_void,
-        count: *mut core::ffi::c_void,
-    ) -> *mut core::ffi::c_void;
-    fn swap(&mut self, p0: *mut core::ffi::c_void) -> ();
 }
-pub trait VtkUnicodeStringArray: VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkUnicodeStringArray {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
     fn initialize(&mut self) -> ();
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
     fn get_element_component_size(&mut self) -> core::ffi::c_int;
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> ();
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> ();
     fn set_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuples(
@@ -5574,125 +2568,34 @@ pub trait VtkUnicodeStringArray: VtkAbstractArray + VtkObject + VtkObjectBase {
         srcIds: *mut core::ffi::c_void,
         source: *mut core::ffi::c_void,
     ) -> ();
-    fn insert_tuples(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> ();
     fn insert_next_tuple(
         &mut self,
-        j: core::ffi::c_uchar,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut ();
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        id1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        id2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> ();
+    ) -> core::ffi::c_longlong;
     fn squeeze(&mut self) -> ();
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int;
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int;
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> ();
     fn get_actual_memory_size(&mut self) -> core::ffi::c_ulong;
     fn is_numeric(&mut self) -> core::ffi::c_int;
     fn new_iterator(&mut self) -> *mut core::ffi::c_void;
-    fn get_variant_value(&mut self, idx: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> ();
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
     fn data_changed(&mut self) -> ();
     fn clear_lookup(&mut self) -> ();
-    fn insert_next_value(&mut self, p0: vtkUnicodeString) -> core::ffi::c_uchar;
-    fn insert_value(&mut self, idx: core::ffi::c_uchar, p1: vtkUnicodeString) -> ();
-    fn set_value(&mut self, i: core::ffi::c_uchar, p1: vtkUnicodeString) -> ();
-    fn get_value(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn insert_next_utf_8_value(&mut self, p0: core::ffi::c_char) -> ();
-    fn set_utf_8_value(&mut self, i: core::ffi::c_uchar, p1: core::ffi::c_char) -> ();
-    fn get_utf_8_value(&mut self, i: core::ffi::c_uchar) -> *const core::ffi::c_char;
+    fn insert_next_utf_8_value(&mut self, p0: &str) -> ();
+    fn set_utf_8_value(&mut self, i: core::ffi::c_longlong, p1: &str) -> ();
+    fn get_utf_8_value(&mut self, i: core::ffi::c_longlong) -> &str;
 }
-pub trait VtkUnsignedCharArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkUnsignedCharArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> ();
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_uchar,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_uchar) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_uchar) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_uchar) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_uchar;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_uchar;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_uchar;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_uchar) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_uchar) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_uchar) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -5700,49 +2603,17 @@ pub trait VtkUnsignedCharArray: VtkDataArray + VtkAbstractArray + VtkObject + Vt
     fn get_data_type_value_min(&mut self) -> core::ffi::c_uchar;
     fn get_data_type_value_max(&mut self) -> core::ffi::c_uchar;
 }
-pub trait VtkUnsignedIntArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkUnsignedIntArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_uint) -> ();
-    fn set_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_uint) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uint,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_uint,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uint;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_uint) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_uint) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_uint) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_uint;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_uint;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uint;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uint;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uint,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uint,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_uint;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_uint) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_uint) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_uint) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -5750,57 +2621,17 @@ pub trait VtkUnsignedIntArray: VtkDataArray + VtkAbstractArray + VtkObject + Vtk
     fn get_data_type_value_min(&mut self) -> core::ffi::c_uint;
     fn get_data_type_value_max(&mut self) -> core::ffi::c_uint;
 }
-pub trait VtkUnsignedLongArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkUnsignedLongArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulong,
-    ) -> ();
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulong,
-    ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulong,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_ulong,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_ulong;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_ulong) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_ulong) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_ulong) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_ulong;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_ulong;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_ulong;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_ulong;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ulong,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ulong,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_ulong;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_ulong) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_ulong) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_ulong) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -5808,57 +2639,25 @@ pub trait VtkUnsignedLongArray: VtkDataArray + VtkAbstractArray + VtkObject + Vt
     fn get_data_type_value_min(&mut self) -> core::ffi::c_ulong;
     fn get_data_type_value_max(&mut self) -> core::ffi::c_ulong;
 }
-pub trait VtkUnsignedLongLongArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkUnsignedLongLongArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_ulonglong;
+    fn set_value(
         &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulonglong,
+        id: core::ffi::c_longlong,
+        value: core::ffi::c_ulonglong,
     ) -> ();
-    fn set_typed_tuple(
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(
         &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulonglong,
+        id: core::ffi::c_longlong,
+        f: core::ffi::c_ulonglong,
     ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulonglong,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_ulonglong,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_ulonglong;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_ulonglong) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_ulonglong) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_ulonglong) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_ulonglong;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_ulonglong;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_ulonglong;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_ulonglong;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ulonglong,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ulonglong,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_ulonglong) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -5866,57 +2665,17 @@ pub trait VtkUnsignedLongLongArray: VtkDataArray + VtkAbstractArray + VtkObject 
     fn get_data_type_value_min(&mut self) -> core::ffi::c_ulonglong;
     fn get_data_type_value_max(&mut self) -> core::ffi::c_ulonglong;
 }
-pub trait VtkUnsignedShortArray: VtkDataArray + VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkUnsignedShortArray {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn get_data_type(&mut self) -> core::ffi::c_int;
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ushort,
-    ) -> ();
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ushort,
-    ) -> ();
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ushort,
-    ) -> ();
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_ushort,
-    ) -> core::ffi::c_uchar;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_ushort;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_ushort) -> ();
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool;
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_ushort) -> ();
-    fn insert_next_value(&mut self, f: core::ffi::c_ushort) -> core::ffi::c_uchar;
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_ushort;
-    fn get_value_range(&mut self) -> *mut core::ffi::c_ushort;
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_ushort;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_ushort;
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ushort,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ushort,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> ();
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_ushort;
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_ushort) -> ();
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool;
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_ushort) -> ();
+    fn insert_next_value(&mut self, f: core::ffi::c_ushort) -> core::ffi::c_longlong;
     fn fast_down_cast(
         &mut self,
         source: *mut core::ffi::c_void,
@@ -5947,76 +2706,35 @@ pub trait VtkVariant {
     fn is_vtk_object(&mut self) -> bool;
     fn is_array(&mut self) -> bool;
     fn get_type(&mut self) -> core::ffi::c_uint;
-    fn get_type_as_string(&mut self) -> *const core::ffi::c_char;
-    fn to_string(
-        &mut self,
-        formatting: core::ffi::c_int,
-        precision: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn to_unicode_string(
-        &mut self,
-        formatting: core::ffi::c_int,
-        precision: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void;
-    fn to_float(&mut self, valid: bool) -> core::ffi::c_float;
-    fn to_float(&mut self) -> core::ffi::c_float;
-    fn to_double(&mut self, valid: bool) -> core::ffi::c_double;
-    fn to_double(&mut self) -> core::ffi::c_double;
-    fn to_char(&mut self, valid: bool) -> core::ffi::c_char;
-    fn to_char(&mut self) -> core::ffi::c_char;
-    fn to_unsigned_char(&mut self, valid: bool) -> core::ffi::c_uchar;
-    fn to_unsigned_char(&mut self) -> core::ffi::c_uchar;
-    fn to_signed_char(&mut self, valid: bool) -> core::ffi::c_char;
-    fn to_signed_char(&mut self) -> core::ffi::c_char;
-    fn to_short(&mut self, valid: bool) -> core::ffi::c_short;
-    fn to_short(&mut self) -> core::ffi::c_short;
-    fn to_unsigned_short(&mut self, valid: bool) -> core::ffi::c_ushort;
-    fn to_unsigned_short(&mut self) -> core::ffi::c_ushort;
-    fn to_int(&mut self, valid: bool) -> core::ffi::c_int;
-    fn to_int(&mut self) -> core::ffi::c_int;
-    fn to_unsigned_int(&mut self, valid: bool) -> core::ffi::c_uint;
-    fn to_unsigned_int(&mut self) -> core::ffi::c_uint;
-    fn to_long(&mut self, valid: bool) -> core::ffi::c_long;
-    fn to_long(&mut self) -> core::ffi::c_long;
-    fn to_unsigned_long(&mut self, valid: bool) -> core::ffi::c_ulong;
-    fn to_unsigned_long(&mut self) -> core::ffi::c_ulong;
-    fn to_long_long(&mut self, valid: bool) -> core::ffi::c_uchar;
-    fn to_long_long(&mut self) -> core::ffi::c_uchar;
-    fn to_unsigned_long_long(&mut self, valid: bool) -> core::ffi::c_ulonglong;
-    fn to_unsigned_long_long(&mut self) -> core::ffi::c_ulonglong;
-    fn to_type_int_64(&mut self, valid: bool) -> core::ffi::c_uchar;
-    fn to_type_int_64(&mut self) -> core::ffi::c_uchar;
-    fn to_type_u_int_64(&mut self, valid: bool) -> core::ffi::c_ulonglong;
-    fn to_type_u_int_64(&mut self) -> core::ffi::c_ulonglong;
+    fn get_type_as_string(&mut self) -> &str;
     fn to_vtk_object(&mut self) -> *mut core::ffi::c_void;
     fn to_array(&mut self) -> *mut core::ffi::c_void;
-    fn is_equal(&mut self, other: vtkVariant) -> bool;
 }
-pub trait VtkVariantArray: VtkAbstractArray + VtkObject + VtkObjectBase {
+pub trait VtkVariantArray {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
     fn initialize(&mut self) -> ();
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
     fn get_element_component_size(&mut self) -> core::ffi::c_int;
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> ();
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> ();
     fn set_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> ();
     fn insert_tuples(
@@ -6025,167 +2743,82 @@ pub trait VtkVariantArray: VtkAbstractArray + VtkObject + VtkObjectBase {
         srcIds: *mut core::ffi::c_void,
         source: *mut core::ffi::c_void,
     ) -> ();
-    fn insert_tuples(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> ();
     fn insert_next_tuple(
         &mut self,
-        j: core::ffi::c_uchar,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar;
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut ();
+    ) -> core::ffi::c_longlong;
     fn deep_copy(&mut self, da: *mut core::ffi::c_void) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> ();
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        id1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        id2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> ();
     fn squeeze(&mut self) -> ();
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int;
-    fn set_void_array(
-        &mut self,
-        arr: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> ();
-    fn set_void_array(
-        &mut self,
-        arr: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteM: core::ffi::c_int,
-    ) -> ();
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int;
     fn get_actual_memory_size(&mut self) -> core::ffi::c_ulong;
     fn is_numeric(&mut self) -> core::ffi::c_int;
     fn new_iterator(&mut self) -> *mut core::ffi::c_void;
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void;
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: *mut core::ffi::c_void) -> ();
-    fn insert_value(
-        &mut self,
-        id: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> ();
-    fn insert_next_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void;
+    fn get_pointer(&mut self, id: core::ffi::c_longlong) -> *mut core::ffi::c_void;
     fn set_array(
         &mut self,
         arr: *mut core::ffi::c_void,
-        size: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
         save: core::ffi::c_int,
         deleteMethod: core::ffi::c_int,
     ) -> ();
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> ();
-    fn get_number_of_values(&mut self) -> core::ffi::c_uchar;
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar;
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> ();
+    fn get_number_of_values(&mut self) -> core::ffi::c_longlong;
     fn data_changed(&mut self) -> ();
-    fn data_element_changed(&mut self, id: core::ffi::c_uchar) -> ();
+    fn data_element_changed(&mut self, id: core::ffi::c_longlong) -> ();
     fn clear_lookup(&mut self) -> ();
 }
-pub trait VtkVersion: VtkObject + VtkObjectBase {
+pub trait VtkVersion {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn get_vtk_version(&mut self) -> *const core::ffi::c_char;
-    fn get_vtk_version_full(&mut self) -> *const core::ffi::c_char;
+    fn get_vtk_version(&mut self) -> &str;
+    fn get_vtk_version_full(&mut self) -> &str;
     fn get_vtk_major_version(&mut self) -> core::ffi::c_int;
     fn get_vtk_minor_version(&mut self) -> core::ffi::c_int;
     fn get_vtk_build_version(&mut self) -> core::ffi::c_int;
-    fn get_vtk_source_version(&mut self) -> *const core::ffi::c_char;
+    fn get_vtk_source_version(&mut self) -> &str;
 }
-pub trait VtkVoidArray: VtkObject + VtkObjectBase {
+pub trait VtkVoidArray {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn extended_new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int;
     fn initialize(&mut self) -> ();
     fn get_data_type(&mut self) -> core::ffi::c_int;
     fn get_data_type_size(&mut self) -> core::ffi::c_int;
-    fn set_number_of_pointers(&mut self, number: core::ffi::c_uchar) -> ();
-    fn get_number_of_pointers(&mut self) -> core::ffi::c_uchar;
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut ();
-    fn set_void_pointer(&mut self, id: core::ffi::c_uchar, ptr: ()) -> ();
-    fn insert_void_pointer(&mut self, i: core::ffi::c_uchar, ptr: ()) -> ();
-    fn insert_next_void_pointer(&mut self, tuple: ()) -> core::ffi::c_uchar;
+    fn set_number_of_pointers(&mut self, number: core::ffi::c_longlong) -> ();
+    fn get_number_of_pointers(&mut self) -> core::ffi::c_longlong;
     fn reset(&mut self) -> ();
     fn squeeze(&mut self) -> ();
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut &mut ();
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut &mut ();
     fn deep_copy(&mut self, va: *mut core::ffi::c_void) -> ();
 }
-pub trait VtkWeakPointer: VtkWeakPointerBase {
+pub trait VtkWeakPointer {
     fn get_pointer(&mut self) -> *mut core::ffi::c_void;
     fn get(&mut self) -> *mut core::ffi::c_void;
 }
 pub trait VtkWeakPointerBase {
     fn get_pointer(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkWeakReference: VtkObject + VtkObjectBase {
+pub trait VtkWeakReference {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn set(&mut self, object: *mut core::ffi::c_void) -> ();
     fn get(&mut self) -> *mut core::ffi::c_void;
 }
-pub trait VtkWindow: VtkObject + VtkObjectBase {
+pub trait VtkWindow {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
-    fn set_display_id(&mut self, p0: ()) -> ();
-    fn set_window_id(&mut self, p0: ()) -> ();
-    fn set_parent_id(&mut self, p0: ()) -> ();
-    fn get_generic_display_id(&mut self) -> *mut ();
-    fn get_generic_window_id(&mut self) -> *mut ();
-    fn get_generic_parent_id(&mut self) -> *mut ();
-    fn get_generic_context(&mut self) -> *mut ();
-    fn get_generic_drawable(&mut self) -> *mut ();
-    fn set_window_info(&mut self, p0: core::ffi::c_char) -> ();
-    fn set_parent_info(&mut self, p0: core::ffi::c_char) -> ();
-    fn get_position(&mut self) -> *mut core::ffi::c_int;
+    fn set_window_info(&mut self, p0: &str) -> ();
+    fn set_parent_info(&mut self, p0: &str) -> ();
     fn set_position(&mut self, x: core::ffi::c_int, y: core::ffi::c_int) -> ();
-    fn set_position(&mut self, a: core::ffi::c_int) -> ();
-    fn get_size(&mut self) -> *mut core::ffi::c_int;
     fn set_size(&mut self, width: core::ffi::c_int, height: core::ffi::c_int) -> ();
-    fn set_size(&mut self, a: core::ffi::c_int) -> ();
-    fn get_actual_size(&mut self) -> *mut core::ffi::c_int;
-    fn get_screen_size(&mut self) -> *mut core::ffi::c_int;
     fn get_mapped(&mut self) -> core::ffi::c_int;
     fn get_show_window(&mut self) -> bool;
     fn set_show_window(&mut self, _arg: bool) -> ();
@@ -6203,30 +2836,10 @@ pub trait VtkWindow: VtkObject + VtkObjectBase {
     fn get_double_buffer(&mut self) -> core::ffi::c_int;
     fn double_buffer_on(&mut self) -> ();
     fn double_buffer_off(&mut self) -> ();
-    fn get_window_name(&mut self) -> *mut core::ffi::c_char;
-    fn set_window_name(&mut self, _arg: core::ffi::c_char) -> ();
+    fn set_window_name(&mut self, _arg: &str) -> ();
     fn set_icon(&mut self, p0: *mut core::ffi::c_void) -> ();
     fn render(&mut self) -> ();
     fn release_graphics_resources(&mut self, p0: *mut core::ffi::c_void) -> ();
-    fn get_pixel_data(
-        &mut self,
-        p0: core::ffi::c_int,
-        p1: core::ffi::c_int,
-        p2: core::ffi::c_int,
-        p3: core::ffi::c_int,
-        p4: core::ffi::c_int,
-        p5: core::ffi::c_int,
-    ) -> *mut core::ffi::c_uchar;
-    fn get_pixel_data(
-        &mut self,
-        p0: core::ffi::c_int,
-        p1: core::ffi::c_int,
-        p2: core::ffi::c_int,
-        p3: core::ffi::c_int,
-        p4: core::ffi::c_int,
-        p5: *mut core::ffi::c_void,
-        p6: core::ffi::c_int,
-    ) -> core::ffi::c_int;
     fn get_dpi(&mut self) -> core::ffi::c_int;
     fn set_dpi(&mut self, _arg: core::ffi::c_int) -> ();
     fn get_dpi_min_value(&mut self) -> core::ffi::c_int;
@@ -6239,11 +2852,6 @@ pub trait VtkWindow: VtkObject + VtkObjectBase {
     fn make_current(&mut self) -> ();
     fn release_current(&mut self) -> ();
     fn set_tile_scale(&mut self, _arg1: core::ffi::c_int, _arg2: core::ffi::c_int) -> ();
-    fn set_tile_scale(&mut self, _arg: core::ffi::c_int) -> ();
-    fn get_tile_scale(&mut self) -> *mut core::ffi::c_int;
-    fn get_tile_scale(&mut self, _arg1: core::ffi::c_int, _arg2: core::ffi::c_int) -> ();
-    fn get_tile_scale(&mut self, _arg: core::ffi::c_int) -> ();
-    fn set_tile_scale(&mut self, s: core::ffi::c_int) -> ();
     fn set_tile_viewport(
         &mut self,
         _arg1: core::ffi::c_double,
@@ -6251,23 +2859,13 @@ pub trait VtkWindow: VtkObject + VtkObjectBase {
         _arg3: core::ffi::c_double,
         _arg4: core::ffi::c_double,
     ) -> ();
-    fn set_tile_viewport(&mut self, _arg: core::ffi::c_double) -> ();
-    fn get_tile_viewport(&mut self) -> *mut core::ffi::c_double;
-    fn get_tile_viewport(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-        _arg3: core::ffi::c_double,
-        _arg4: core::ffi::c_double,
-    ) -> ();
-    fn get_tile_viewport(&mut self, _arg: core::ffi::c_double) -> ();
 }
-pub trait VtkXMLFileOutputWindow: VtkFileOutputWindow + VtkOutputWindow + VtkObject + VtkObjectBase {
+pub trait VtkXMLFileOutputWindow {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn display_text(&mut self, p0: core::ffi::c_char) -> ();
-    fn display_tag(&mut self, p0: core::ffi::c_char) -> ();
+    fn display_text(&mut self, p0: &str) -> ();
+    fn display_tag(&mut self, p0: &str) -> ();
 }
 impl VtkAnimationCue for vtkAnimationCue {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -6439,22 +3037,15 @@ impl VtkArchiver for vtkArchiver {
         }
         unsafe { vtk_archiver_new_instance(self.0) }
     }
-    fn get_archive_name(&mut self) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_archiver_get_archive_name(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_archiver_get_archive_name(self.0) }
-    }
-    fn set_archive_name(&mut self, _arg: core::ffi::c_char) -> () {
+    fn set_archive_name(&mut self, _arg: &str) -> () {
+        let c__arg = std::ffi::CString::new(_arg).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_archiver_set_archive_name(
                 sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_char,
+                _arg: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_archiver_set_archive_name(self.0, _arg) }
+        unsafe { vtk_archiver_set_archive_name(self.0, c__arg.as_ptr()) }
     }
     fn open_archive(&mut self) -> () {
         unsafe extern "C" {
@@ -6471,21 +3062,27 @@ impl VtkArchiver for vtkArchiver {
     fn insert_into_archive(
         &mut self,
         relativePath: &str,
-        data: core::ffi::c_char,
+        data: &str,
         size: usize,
     ) -> () {
         let c_relativePath = std::ffi::CString::new(relativePath)
             .expect("CString::new failed");
+        let c_data = std::ffi::CString::new(data).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_archiver_insert_into_archive(
                 sself: *mut core::ffi::c_void,
                 relativePath: *const core::ffi::c_char,
-                data: core::ffi::c_char,
+                data: *const core::ffi::c_char,
                 size: usize,
             );
         }
         unsafe {
-            vtk_archiver_insert_into_archive(self.0, c_relativePath.as_ptr(), data, size)
+            vtk_archiver_insert_into_archive(
+                self.0,
+                c_relativePath.as_ptr(),
+                c_data.as_ptr(),
+                size,
+            )
         }
     }
     fn contains(&mut self, relativePath: &str) -> bool {
@@ -6528,14 +3125,14 @@ impl VtkBitArray for vtkBitArray {
     }
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_bit_array_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-                ext: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
+                ext: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_bit_array_allocate(self.0, sz, ext) }
@@ -6562,35 +3159,35 @@ impl VtkBitArray for vtkBitArray {
         }
         unsafe { vtk_bit_array_get_data_type_size(self.0) }
     }
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> () {
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_set_number_of_tuples(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_bit_array_set_number_of_tuples(self.0, number) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_bit_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_bit_array_set_number_of_values(self.0, number) }
     }
     fn set_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_set_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                j: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
             );
         }
@@ -6598,15 +3195,15 @@ impl VtkBitArray for vtkBitArray {
     }
     fn insert_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_insert_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                j: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
             );
         }
@@ -6614,114 +3211,37 @@ impl VtkBitArray for vtkBitArray {
     }
     fn insert_next_tuple(
         &mut self,
-        j: core::ffi::c_uchar,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar {
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_bit_array_insert_next_tuple(
                 sself: *mut core::ffi::c_void,
-                j: core::ffi::c_uchar,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_bit_array_insert_next_tuple(self.0, j, source) }
     }
-    fn get_tuple(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_bit_array_get_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_bit_array_get_tuple(self.0, i) }
-    }
-    fn get_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_get_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_bit_array_get_tuple(self.0, i, tuple) }
-    }
-    fn set_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_set_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_bit_array_set_tuple(self.0, i, tuple) }
-    }
-    fn set_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_set_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_bit_array_set_tuple(self.0, i, tuple) }
-    }
-    fn insert_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_insert_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_bit_array_insert_tuple(self.0, i, tuple) }
-    }
-    fn insert_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_insert_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_bit_array_insert_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_tuple(&mut self, tuple: core::ffi::c_float) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_bit_array_insert_next_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_float,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_bit_array_insert_next_tuple(self.0, tuple) }
-    }
-    fn insert_next_tuple(&mut self, tuple: core::ffi::c_double) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_bit_array_insert_next_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_bit_array_insert_next_tuple(self.0, tuple) }
-    }
-    fn remove_tuple(&mut self, id: core::ffi::c_uchar) -> () {
+    fn remove_tuple(&mut self, id: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_remove_tuple(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_bit_array_remove_tuple(self.0, id) }
     }
     fn set_component(
         &mut self,
-        i: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
         j: core::ffi::c_int,
         c: core::ffi::c_double,
     ) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_set_component(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
                 j: core::ffi::c_int,
                 c: core::ffi::c_double,
             );
@@ -6734,142 +3254,68 @@ impl VtkBitArray for vtkBitArray {
         }
         unsafe { vtk_bit_array_squeeze(self.0) }
     }
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_bit_array_resize(
                 sself: *mut core::ffi::c_void,
-                numTuples: core::ffi::c_uchar,
+                numTuples: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_bit_array_resize(self.0, numTuples) }
     }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_bit_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_bit_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_int) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_int) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_int,
             );
         }
         unsafe { vtk_bit_array_set_value(self.0, id, value) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, i: core::ffi::c_int) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, i: core::ffi::c_int) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 i: core::ffi::c_int,
             );
         }
         unsafe { vtk_bit_array_insert_value(self.0, id, i) }
     }
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_set_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_bit_array_set_variant_value(self.0, idx, value) }
-    }
-    fn insert_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_insert_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_bit_array_insert_variant_value(self.0, idx, value) }
-    }
-    fn insert_next_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, i: core::ffi::c_int) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_bit_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 i: core::ffi::c_int,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_bit_array_insert_next_value(self.0, i) }
     }
     fn insert_component(
         &mut self,
-        i: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
         j: core::ffi::c_int,
         c: core::ffi::c_double,
     ) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_insert_component(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
                 j: core::ffi::c_int,
                 c: core::ffi::c_double,
             );
         }
         unsafe { vtk_bit_array_insert_component(self.0, i, j, c) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_bit_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_bit_array_get_pointer(self.0, id) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_bit_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_bit_array_write_pointer(self.0, id, number) }
-    }
-    fn write_void_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_bit_array_write_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut ();
-        }
-        unsafe { vtk_bit_array_write_void_pointer(self.0, id, number) }
-    }
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_bit_array_get_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut ();
-        }
-        unsafe { vtk_bit_array_get_void_pointer(self.0, id) }
     }
     fn deep_copy(&mut self, da: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -6879,22 +3325,6 @@ impl VtkBitArray for vtkBitArray {
             );
         }
         unsafe { vtk_bit_array_deep_copy(self.0, da) }
-    }
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_set_void_array(
-                sself: *mut core::ffi::c_void,
-                array: (),
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_bit_array_set_void_array(self.0, array, size, save) }
     }
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -6912,52 +3342,6 @@ impl VtkBitArray for vtkBitArray {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_bit_array_new_iterator(self.0) }
-    }
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_bit_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_bit_array_lookup_value(self.0, value) }
-    }
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-                ids: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_bit_array_lookup_value(self.0, value, ids) }
-    }
-    fn lookup_value(&mut self, value: core::ffi::c_int) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_bit_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: core::ffi::c_int,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_bit_array_lookup_value(self.0, value) }
-    }
-    fn lookup_value(
-        &mut self,
-        value: core::ffi::c_int,
-        ids: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_bit_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: core::ffi::c_int,
-                ids: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_bit_array_lookup_value(self.0, value, ids) }
     }
     fn data_changed(&mut self) -> () {
         unsafe extern "C" {
@@ -7015,37 +3399,28 @@ impl VtkBitArrayIterator for vtkBitArrayIterator {
         }
         unsafe { vtk_bit_array_iterator_get_array(self.0) }
     }
-    fn get_tuple(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_bit_array_iterator_get_tuple(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_int;
-        }
-        unsafe { vtk_bit_array_iterator_get_tuple(self.0, id) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_bit_array_iterator_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_bit_array_iterator_get_value(self.0, id) }
     }
-    fn get_number_of_tuples(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_tuples(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_bit_array_iterator_get_number_of_tuples(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_bit_array_iterator_get_number_of_tuples(self.0) }
     }
-    fn get_number_of_values(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_values(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_bit_array_iterator_get_number_of_values(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_bit_array_iterator_get_number_of_values(self.0) }
     }
@@ -7073,11 +3448,11 @@ impl VtkBitArrayIterator for vtkBitArrayIterator {
         }
         unsafe { vtk_bit_array_iterator_get_data_type_size(self.0) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_int) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_int) -> () {
         unsafe extern "C" {
             fn vtk_bit_array_iterator_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_int,
             );
         }
@@ -7179,601 +3554,6 @@ impl VtkByteSwap for vtkByteSwap {
         }
         unsafe { vtk_byte_swap_new_instance(self.0) }
     }
-    fn swap_le(&mut self, p: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_float, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_float,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_float, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_float,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_double, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_double,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_double, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_double,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_char, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_char,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_char, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_char,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_short) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_short,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_short) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_short,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_short, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_short,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_short, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_short,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(sself: *mut core::ffi::c_void, p: core::ffi::c_int);
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(sself: *mut core::ffi::c_void, p: core::ffi::c_int);
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_int, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_int,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_int, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_int,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_long) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_long,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_long) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_long,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_long, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_long,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_long, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_long,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_uchar) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_uchar) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_uchar, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uchar,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_uchar, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uchar,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_char, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_char,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_char, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_char,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_uchar) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_uchar) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_uchar, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uchar,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_uchar, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uchar,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_ushort) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ushort,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_ushort) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ushort,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_ushort, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ushort,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_ushort, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ushort,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_uint) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uint,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_uint) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uint,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_uint, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uint,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_uint, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_uint,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_ulong) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ulong,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_ulong) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ulong,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_ulong, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ulong,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_ulong, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ulong,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_le(&mut self, p: core::ffi::c_ulonglong) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ulonglong,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le(self.0, p) }
-    }
-    fn swap_be(&mut self, p: core::ffi::c_ulonglong) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ulonglong,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be(self.0, p) }
-    }
-    fn swap_le_range(&mut self, p: core::ffi::c_ulonglong, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_le_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ulonglong,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_le_range(self.0, p, num) }
-    }
-    fn swap_be_range(&mut self, p: core::ffi::c_ulonglong, num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_be_range(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_ulonglong,
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_be_range(self.0, p, num) }
-    }
-    fn swap_2_le(&mut self, p: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_2_le(sself: *mut core::ffi::c_void, p: ());
-        }
-        unsafe { vtk_byte_swap_swap_2_le(self.0, p) }
-    }
-    fn swap_4_le(&mut self, p: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_4_le(sself: *mut core::ffi::c_void, p: ());
-        }
-        unsafe { vtk_byte_swap_swap_4_le(self.0, p) }
-    }
-    fn swap_8_le(&mut self, p: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_8_le(sself: *mut core::ffi::c_void, p: ());
-        }
-        unsafe { vtk_byte_swap_swap_8_le(self.0, p) }
-    }
-    fn swap_2_le_range(&mut self, p: (), num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_2_le_range(
-                sself: *mut core::ffi::c_void,
-                p: (),
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_2_le_range(self.0, p, num) }
-    }
-    fn swap_4_le_range(&mut self, p: (), num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_4_le_range(
-                sself: *mut core::ffi::c_void,
-                p: (),
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_4_le_range(self.0, p, num) }
-    }
-    fn swap_8_le_range(&mut self, p: (), num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_8_le_range(
-                sself: *mut core::ffi::c_void,
-                p: (),
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_8_le_range(self.0, p, num) }
-    }
-    fn swap_2_be(&mut self, p: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_2_be(sself: *mut core::ffi::c_void, p: ());
-        }
-        unsafe { vtk_byte_swap_swap_2_be(self.0, p) }
-    }
-    fn swap_4_be(&mut self, p: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_4_be(sself: *mut core::ffi::c_void, p: ());
-        }
-        unsafe { vtk_byte_swap_swap_4_be(self.0, p) }
-    }
-    fn swap_8_be(&mut self, p: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_8_be(sself: *mut core::ffi::c_void, p: ());
-        }
-        unsafe { vtk_byte_swap_swap_8_be(self.0, p) }
-    }
-    fn swap_2_be_range(&mut self, p: (), num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_2_be_range(
-                sself: *mut core::ffi::c_void,
-                p: (),
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_2_be_range(self.0, p, num) }
-    }
-    fn swap_4_be_range(&mut self, p: (), num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_4_be_range(
-                sself: *mut core::ffi::c_void,
-                p: (),
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_4_be_range(self.0, p, num) }
-    }
-    fn swap_8_be_range(&mut self, p: (), num: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_8_be_range(
-                sself: *mut core::ffi::c_void,
-                p: (),
-                num: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_8_be_range(self.0, p, num) }
-    }
-    fn swap_void_range(&mut self, buffer: (), numWords: usize, wordSize: usize) -> () {
-        unsafe extern "C" {
-            fn vtk_byte_swap_swap_void_range(
-                sself: *mut core::ffi::c_void,
-                buffer: (),
-                numWords: usize,
-                wordSize: usize,
-            );
-        }
-        unsafe { vtk_byte_swap_swap_void_range(self.0, buffer, numWords, wordSize) }
-    }
 }
 impl VtkCallbackCommand for vtkCallbackCommand {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -7800,39 +3580,6 @@ impl VtkCallbackCommand for vtkCallbackCommand {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_callback_command_new(self.0) }
-    }
-    fn execute(
-        &mut self,
-        caller: *mut core::ffi::c_void,
-        eid: core::ffi::c_ulong,
-        callData: (),
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_callback_command_execute(
-                sself: *mut core::ffi::c_void,
-                caller: *mut core::ffi::c_void,
-                eid: core::ffi::c_ulong,
-                callData: (),
-            );
-        }
-        unsafe { vtk_callback_command_execute(self.0, caller, eid, callData) }
-    }
-    fn set_client_data(&mut self, cd: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_callback_command_set_client_data(
-                sself: *mut core::ffi::c_void,
-                cd: (),
-            );
-        }
-        unsafe { vtk_callback_command_set_client_data(self.0, cd) }
-    }
-    fn get_client_data(&mut self) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_callback_command_get_client_data(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut ();
-        }
-        unsafe { vtk_callback_command_get_client_data(self.0) }
     }
     fn set_callback(&mut self, f: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -7928,180 +3675,91 @@ impl VtkCharArray for vtkCharArray {
         }
         unsafe { vtk_char_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_char,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_char_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_char_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_char,
-    ) -> () {
+    fn set_typed_tuple(&mut self, i: core::ffi::c_longlong, tuple: &str) -> () {
+        let c_tuple = std::ffi::CString::new(tuple).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_char_array_set_typed_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_char,
+                i: core::ffi::c_longlong,
+                tuple: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_char_array_set_typed_tuple(self.0, i, tuple) }
+        unsafe { vtk_char_array_set_typed_tuple(self.0, i, c_tuple.as_ptr()) }
     }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_char,
-    ) -> () {
+    fn insert_typed_tuple(&mut self, i: core::ffi::c_longlong, tuple: &str) -> () {
+        let c_tuple = std::ffi::CString::new(tuple).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_char_array_insert_typed_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_char,
+                i: core::ffi::c_longlong,
+                tuple: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_char_array_insert_typed_tuple(self.0, i, tuple) }
+        unsafe { vtk_char_array_insert_typed_tuple(self.0, i, c_tuple.as_ptr()) }
     }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_char,
-    ) -> core::ffi::c_uchar {
+    fn insert_next_typed_tuple(&mut self, tuple: &str) -> core::ffi::c_longlong {
+        let c_tuple = std::ffi::CString::new(tuple).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_char_array_insert_next_typed_tuple(
                 sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_char,
-            ) -> core::ffi::c_uchar;
+                tuple: *const core::ffi::c_char,
+            ) -> core::ffi::c_longlong;
         }
-        unsafe { vtk_char_array_insert_next_typed_tuple(self.0, tuple) }
+        unsafe { vtk_char_array_insert_next_typed_tuple(self.0, c_tuple.as_ptr()) }
     }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_char {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> &str {
         unsafe extern "C" {
             fn vtk_char_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> core::ffi::c_char;
+                id: core::ffi::c_longlong,
+            ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_char_array_get_value(self.0, id) }
+        let ptr = unsafe { vtk_char_array_get_value(self.0, id) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_char) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: &str) -> () {
+        let c_value = std::ffi::CString::new(value).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_char_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                value: core::ffi::c_char,
+                id: core::ffi::c_longlong,
+                value: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_char_array_set_value(self.0, id, value) }
+        unsafe { vtk_char_array_set_value(self.0, id, c_value.as_ptr()) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_char_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_char_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_char) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: &str) -> () {
+        let c_f = std::ffi::CString::new(f).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_char_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                f: core::ffi::c_char,
+                id: core::ffi::c_longlong,
+                f: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_char_array_insert_value(self.0, id, f) }
+        unsafe { vtk_char_array_insert_value(self.0, id, c_f.as_ptr()) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_char) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: &str) -> core::ffi::c_longlong {
+        let c_f = std::ffi::CString::new(f).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_char_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
-                f: core::ffi::c_char,
-            ) -> core::ffi::c_uchar;
+                f: *const core::ffi::c_char,
+            ) -> core::ffi::c_longlong;
         }
-        unsafe { vtk_char_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_char_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_char_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_char_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_char_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_char_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_char_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_char_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_char_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_char,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_char_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_char,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_char_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_char,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_char_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_char,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_char_array_set_array(self.0, array, size, save, deleteMethod) }
+        unsafe { vtk_char_array_insert_next_value(self.0, c_f.as_ptr()) }
     }
     fn fast_down_cast(
         &mut self,
@@ -8115,21 +3773,29 @@ impl VtkCharArray for vtkCharArray {
         }
         unsafe { vtk_char_array_fast_down_cast(self.0, source) }
     }
-    fn get_data_type_value_min(&mut self) -> core::ffi::c_char {
+    fn get_data_type_value_min(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_char_array_get_data_type_value_min(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_char;
+            ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_char_array_get_data_type_value_min(self.0) }
+        let ptr = unsafe { vtk_char_array_get_data_type_value_min(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn get_data_type_value_max(&mut self) -> core::ffi::c_char {
+    fn get_data_type_value_max(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_char_array_get_data_type_value_max(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_char;
+            ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_char_array_get_data_type_value_max(self.0) }
+        let ptr = unsafe { vtk_char_array_get_data_type_value_max(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
 }
 impl VtkCollection for vtkCollection {
@@ -8196,15 +3862,6 @@ impl VtkCollection for vtkCollection {
         }
         unsafe { vtk_collection_remove_item(self.0, i) }
     }
-    fn remove_item(&mut self, p0: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_collection_remove_item(
-                sself: *mut core::ffi::c_void,
-                p0: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_collection_remove_item(self.0, p0) }
-    }
     fn remove_all_items(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_collection_remove_all_items(sself: *mut core::ffi::c_void);
@@ -8234,12 +3891,6 @@ impl VtkCollection for vtkCollection {
         }
         unsafe { vtk_collection_init_traversal(self.0) }
     }
-    fn init_traversal(&mut self, cookie: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_collection_init_traversal(sself: *mut core::ffi::c_void, cookie: ());
-        }
-        unsafe { vtk_collection_init_traversal(self.0, cookie) }
-    }
     fn get_next_item_as_object(&mut self) -> *mut core::ffi::c_void {
         unsafe extern "C" {
             fn vtk_collection_get_next_item_as_object(
@@ -8256,15 +3907,6 @@ impl VtkCollection for vtkCollection {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_collection_get_item_as_object(self.0, i) }
-    }
-    fn get_next_item_as_object(&mut self, cookie: ()) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_collection_get_next_item_as_object(
-                sself: *mut core::ffi::c_void,
-                cookie: (),
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_collection_get_next_item_as_object(self.0, cookie) }
     }
     fn new_iterator(&mut self) -> *mut core::ffi::c_void {
         unsafe extern "C" {
@@ -8453,15 +4095,6 @@ impl VtkDataArrayCollection for vtkDataArrayCollection {
         }
         unsafe { vtk_data_array_collection_get_item(self.0, i) }
     }
-    fn get_next_data_array(&mut self, cookie: ()) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_data_array_collection_get_next_data_array(
-                sself: *mut core::ffi::c_void,
-                cookie: (),
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_data_array_collection_get_next_data_array(self.0, cookie) }
-    }
     fn get_number_of_items(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_data_array_collection_get_number_of_items(
@@ -8496,15 +4129,6 @@ impl VtkDataArrayCollectionIterator for vtkDataArrayCollectionIterator {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_data_array_collection_iterator_new(self.0) }
-    }
-    fn set_collection(&mut self, p0: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_data_array_collection_iterator_set_collection(
-                sself: *mut core::ffi::c_void,
-                p0: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_data_array_collection_iterator_set_collection(self.0, p0) }
     }
     fn set_collection(&mut self, p0: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -8550,41 +4174,45 @@ impl VtkDataArraySelection for vtkDataArraySelection {
         }
         unsafe { vtk_data_array_selection_new(self.0) }
     }
-    fn enable_array(&mut self, name: core::ffi::c_char) -> () {
+    fn enable_array(&mut self, name: &str) -> () {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_enable_array(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_data_array_selection_enable_array(self.0, name) }
+        unsafe { vtk_data_array_selection_enable_array(self.0, c_name.as_ptr()) }
     }
-    fn disable_array(&mut self, name: core::ffi::c_char) -> () {
+    fn disable_array(&mut self, name: &str) -> () {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_disable_array(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_data_array_selection_disable_array(self.0, name) }
+        unsafe { vtk_data_array_selection_disable_array(self.0, c_name.as_ptr()) }
     }
-    fn array_is_enabled(&mut self, name: core::ffi::c_char) -> core::ffi::c_int {
+    fn array_is_enabled(&mut self, name: &str) -> core::ffi::c_int {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_array_is_enabled(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_data_array_selection_array_is_enabled(self.0, name) }
+        unsafe { vtk_data_array_selection_array_is_enabled(self.0, c_name.as_ptr()) }
     }
-    fn array_exists(&mut self, name: core::ffi::c_char) -> core::ffi::c_int {
+    fn array_exists(&mut self, name: &str) -> core::ffi::c_int {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_array_exists(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_data_array_selection_array_exists(self.0, name) }
+        unsafe { vtk_data_array_selection_array_exists(self.0, c_name.as_ptr()) }
     }
     fn enable_all_arrays(&mut self) -> () {
         unsafe extern "C" {
@@ -8616,32 +4244,40 @@ impl VtkDataArraySelection for vtkDataArraySelection {
         }
         unsafe { vtk_data_array_selection_get_number_of_arrays_enabled(self.0) }
     }
-    fn get_array_name(&mut self, index: core::ffi::c_int) -> *const core::ffi::c_char {
+    fn get_array_name(&mut self, index: core::ffi::c_int) -> &str {
         unsafe extern "C" {
             fn vtk_data_array_selection_get_array_name(
                 sself: *mut core::ffi::c_void,
                 index: core::ffi::c_int,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_data_array_selection_get_array_name(self.0, index) }
+        let ptr = unsafe { vtk_data_array_selection_get_array_name(self.0, index) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn get_array_index(&mut self, name: core::ffi::c_char) -> core::ffi::c_int {
+    fn get_array_index(&mut self, name: &str) -> core::ffi::c_int {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_get_array_index(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_data_array_selection_get_array_index(self.0, name) }
+        unsafe { vtk_data_array_selection_get_array_index(self.0, c_name.as_ptr()) }
     }
-    fn get_enabled_array_index(&mut self, name: core::ffi::c_char) -> core::ffi::c_int {
+    fn get_enabled_array_index(&mut self, name: &str) -> core::ffi::c_int {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_get_enabled_array_index(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_data_array_selection_get_enabled_array_index(self.0, name) }
+        unsafe {
+            vtk_data_array_selection_get_enabled_array_index(self.0, c_name.as_ptr())
+        }
     }
     fn get_array_setting(&mut self, index: core::ffi::c_int) -> core::ffi::c_int {
         unsafe extern "C" {
@@ -8652,28 +4288,18 @@ impl VtkDataArraySelection for vtkDataArraySelection {
         }
         unsafe { vtk_data_array_selection_get_array_setting(self.0, index) }
     }
-    fn get_array_setting(&mut self, name: core::ffi::c_char) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_data_array_selection_get_array_setting(
-                sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_data_array_selection_get_array_setting(self.0, name) }
-    }
-    fn set_array_setting(
-        &mut self,
-        name: core::ffi::c_char,
-        setting: core::ffi::c_int,
-    ) -> () {
+    fn set_array_setting(&mut self, name: &str, setting: core::ffi::c_int) -> () {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_set_array_setting(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
                 setting: core::ffi::c_int,
             );
         }
-        unsafe { vtk_data_array_selection_set_array_setting(self.0, name, setting) }
+        unsafe {
+            vtk_data_array_selection_set_array_setting(self.0, c_name.as_ptr(), setting)
+        }
     }
     fn remove_all_arrays(&mut self) -> () {
         unsafe extern "C" {
@@ -8681,15 +4307,16 @@ impl VtkDataArraySelection for vtkDataArraySelection {
         }
         unsafe { vtk_data_array_selection_remove_all_arrays(self.0) }
     }
-    fn add_array(&mut self, name: core::ffi::c_char, state: bool) -> core::ffi::c_int {
+    fn add_array(&mut self, name: &str, state: bool) -> core::ffi::c_int {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_add_array(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
                 state: bool,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_data_array_selection_add_array(self.0, name, state) }
+        unsafe { vtk_data_array_selection_add_array(self.0, c_name.as_ptr(), state) }
     }
     fn remove_array_by_index(&mut self, index: core::ffi::c_int) -> () {
         unsafe extern "C" {
@@ -8700,51 +4327,15 @@ impl VtkDataArraySelection for vtkDataArraySelection {
         }
         unsafe { vtk_data_array_selection_remove_array_by_index(self.0, index) }
     }
-    fn remove_array_by_name(&mut self, name: core::ffi::c_char) -> () {
+    fn remove_array_by_name(&mut self, name: &str) -> () {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_data_array_selection_remove_array_by_name(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_data_array_selection_remove_array_by_name(self.0, name) }
-    }
-    fn set_arrays(
-        &mut self,
-        names: core::ffi::c_char,
-        numArrays: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_data_array_selection_set_arrays(
-                sself: *mut core::ffi::c_void,
-                names: core::ffi::c_char,
-                numArrays: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_data_array_selection_set_arrays(self.0, names, numArrays) }
-    }
-    fn set_arrays_with_default(
-        &mut self,
-        names: core::ffi::c_char,
-        numArrays: core::ffi::c_int,
-        defaultStatus: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_data_array_selection_set_arrays_with_default(
-                sself: *mut core::ffi::c_void,
-                names: core::ffi::c_char,
-                numArrays: core::ffi::c_int,
-                defaultStatus: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_data_array_selection_set_arrays_with_default(
-                self.0,
-                names,
-                numArrays,
-                defaultStatus,
-            )
-        }
+        unsafe { vtk_data_array_selection_remove_array_by_name(self.0, c_name.as_ptr()) }
     }
     fn copy_selections(&mut self, selections: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -8763,16 +4354,6 @@ impl VtkDataArraySelection for vtkDataArraySelection {
             );
         }
         unsafe { vtk_data_array_selection_union(self.0, other) }
-    }
-    fn union(&mut self, other: *mut core::ffi::c_void, skipModified: bool) -> () {
-        unsafe extern "C" {
-            fn vtk_data_array_selection_union(
-                sself: *mut core::ffi::c_void,
-                other: *mut core::ffi::c_void,
-                skipModified: bool,
-            );
-        }
-        unsafe { vtk_data_array_selection_union(self.0, other, skipModified) }
     }
     fn set_unknown_array_setting(&mut self, _arg: core::ffi::c_int) -> () {
         unsafe extern "C" {
@@ -8827,15 +4408,6 @@ impl VtkDebugLeaks for vtkDebugLeaks {
         }
         unsafe { vtk_debug_leaks_construct_class(self.0, object) }
     }
-    fn construct_class(&mut self, className: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_debug_leaks_construct_class(
-                sself: *mut core::ffi::c_void,
-                className: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_debug_leaks_construct_class(self.0, className) }
-    }
     fn destruct_class(&mut self, object: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_debug_leaks_destruct_class(
@@ -8844,15 +4416,6 @@ impl VtkDebugLeaks for vtkDebugLeaks {
             );
         }
         unsafe { vtk_debug_leaks_destruct_class(self.0, object) }
-    }
-    fn destruct_class(&mut self, className: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_debug_leaks_destruct_class(
-                sself: *mut core::ffi::c_void,
-                className: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_debug_leaks_destruct_class(self.0, className) }
     }
     fn print_current_leaks(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
@@ -8939,180 +4502,56 @@ impl VtkDoubleArray for vtkDoubleArray {
         }
         unsafe { vtk_double_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_double_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_double_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_double_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_double_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_double_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_double_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_double,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_double_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_double_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_double {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_double {
         unsafe extern "C" {
             fn vtk_double_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_double;
         }
         unsafe { vtk_double_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_double) -> () {
+    fn set_value(
+        &mut self,
+        id: core::ffi::c_longlong,
+        value: core::ffi::c_double,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_double_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_double,
             );
         }
         unsafe { vtk_double_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_double_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_double_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_double) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_double) -> () {
         unsafe extern "C" {
             fn vtk_double_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_double,
             );
         }
         unsafe { vtk_double_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_double) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_double) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_double_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_double_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_double_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_double_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_double_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_double_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_double_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_double_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_double_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_double_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_double,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_double_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_double,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_double_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_double,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_double_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_double,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_double_array_set_array(self.0, array, size, save, deleteMethod) }
     }
     fn fast_down_cast(
         &mut self,
@@ -9169,75 +4608,41 @@ impl VtkDynamicLoader for vtkDynamicLoader {
         }
         unsafe { vtk_dynamic_loader_new_instance(self.0) }
     }
-    fn open_library(&mut self, p0: core::ffi::c_char) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_dynamic_loader_open_library(
-                sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_dynamic_loader_open_library(self.0, p0) }
-    }
-    fn open_library(
-        &mut self,
-        p0: core::ffi::c_char,
-        p1: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_dynamic_loader_open_library(
-                sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
-                p1: core::ffi::c_int,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_dynamic_loader_open_library(self.0, p0, p1) }
-    }
-    fn close_library(&mut self, p0: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_dynamic_loader_close_library(
-                sself: *mut core::ffi::c_void,
-                p0: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_dynamic_loader_close_library(self.0, p0) }
-    }
-    fn get_symbol_address(
-        &mut self,
-        p0: *mut core::ffi::c_void,
-        p1: core::ffi::c_char,
-    ) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_dynamic_loader_get_symbol_address(
-                sself: *mut core::ffi::c_void,
-                p0: *mut core::ffi::c_void,
-                p1: core::ffi::c_char,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_dynamic_loader_get_symbol_address(self.0, p0, p1) }
-    }
-    fn lib_prefix(&mut self) -> *const core::ffi::c_char {
+    fn lib_prefix(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_dynamic_loader_lib_prefix(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_dynamic_loader_lib_prefix(self.0) }
+        let ptr = unsafe { vtk_dynamic_loader_lib_prefix(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn lib_extension(&mut self) -> *const core::ffi::c_char {
+    fn lib_extension(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_dynamic_loader_lib_extension(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_dynamic_loader_lib_extension(self.0) }
+        let ptr = unsafe { vtk_dynamic_loader_lib_extension(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn last_error(&mut self) -> *const core::ffi::c_char {
+    fn last_error(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_dynamic_loader_last_error(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_dynamic_loader_last_error(self.0) }
+        let ptr = unsafe { vtk_dynamic_loader_last_error(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
 }
 impl VtkEventDataDevice3D for vtkEventDataDevice3D {
@@ -9265,110 +4670,6 @@ impl VtkEventDataDevice3D for vtkEventDataDevice3D {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_event_data_device_3_d_new(self.0) }
-    }
-    fn get_world_position(&mut self, v: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_get_world_position(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_event_data_device_3_d_get_world_position(self.0, v) }
-    }
-    fn get_world_position(&mut self) -> *const core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_get_world_position(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_double;
-        }
-        unsafe { vtk_event_data_device_3_d_get_world_position(self.0) }
-    }
-    fn set_world_position(&mut self, p: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_set_world_position(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_event_data_device_3_d_set_world_position(self.0, p) }
-    }
-    fn get_world_direction(&mut self, v: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_get_world_direction(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_event_data_device_3_d_get_world_direction(self.0, v) }
-    }
-    fn get_world_direction(&mut self) -> *const core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_get_world_direction(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_double;
-        }
-        unsafe { vtk_event_data_device_3_d_get_world_direction(self.0) }
-    }
-    fn set_world_direction(&mut self, p: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_set_world_direction(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_event_data_device_3_d_set_world_direction(self.0, p) }
-    }
-    fn get_world_orientation(&mut self, v: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_get_world_orientation(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_event_data_device_3_d_get_world_orientation(self.0, v) }
-    }
-    fn get_world_orientation(&mut self) -> *const core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_get_world_orientation(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_double;
-        }
-        unsafe { vtk_event_data_device_3_d_get_world_orientation(self.0) }
-    }
-    fn set_world_orientation(&mut self, p: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_set_world_orientation(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_event_data_device_3_d_set_world_orientation(self.0, p) }
-    }
-    fn get_track_pad_position(&mut self, v: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_get_track_pad_position(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_event_data_device_3_d_get_track_pad_position(self.0, v) }
-    }
-    fn get_track_pad_position(&mut self) -> *const core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_get_track_pad_position(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_double;
-        }
-        unsafe { vtk_event_data_device_3_d_get_track_pad_position(self.0) }
-    }
-    fn set_track_pad_position(&mut self, p: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_device_3_d_set_track_pad_position(
-                sself: *mut core::ffi::c_void,
-                p: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_event_data_device_3_d_set_track_pad_position(self.0, p) }
     }
     fn set_track_pad_position(
         &mut self,
@@ -9411,66 +4712,6 @@ impl VtkEventDataForDevice for vtkEventDataForDevice {
         }
         unsafe { vtk_event_data_for_device_new(self.0) }
     }
-    fn get_device(&mut self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_event_data_for_device_get_device(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_event_data_for_device_get_device(self.0) }
-    }
-    fn get_input(&mut self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_event_data_for_device_get_input(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_event_data_for_device_get_input(self.0) }
-    }
-    fn get_action(&mut self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_event_data_for_device_get_action(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_event_data_for_device_get_action(self.0) }
-    }
-    fn set_device(&mut self, v: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_for_device_set_device(
-                sself: *mut core::ffi::c_void,
-                v: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_event_data_for_device_set_device(self.0, v) }
-    }
-    fn set_input(&mut self, v: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_for_device_set_input(
-                sself: *mut core::ffi::c_void,
-                v: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_event_data_for_device_set_input(self.0, v) }
-    }
-    fn set_action(&mut self, v: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_event_data_for_device_set_action(
-                sself: *mut core::ffi::c_void,
-                v: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_event_data_for_device_set_action(self.0, v) }
-    }
-    fn device_matches(&mut self, val: *mut core::ffi::c_void) -> bool {
-        unsafe extern "C" {
-            fn vtk_event_data_for_device_device_matches(
-                sself: *mut core::ffi::c_void,
-                val: *mut core::ffi::c_void,
-            ) -> bool;
-        }
-        unsafe { vtk_event_data_for_device_device_matches(self.0, val) }
-    }
 }
 impl VtkEventForwarderCommand for vtkEventForwarderCommand {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -9498,22 +4739,6 @@ impl VtkEventForwarderCommand for vtkEventForwarderCommand {
         }
         unsafe { vtk_event_forwarder_command_new(self.0) }
     }
-    fn execute(
-        &mut self,
-        caller: *mut core::ffi::c_void,
-        eid: core::ffi::c_ulong,
-        callData: (),
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_event_forwarder_command_execute(
-                sself: *mut core::ffi::c_void,
-                caller: *mut core::ffi::c_void,
-                eid: core::ffi::c_ulong,
-                callData: (),
-            );
-        }
-        unsafe { vtk_event_forwarder_command_execute(self.0, caller, eid, callData) }
-    }
     fn set_target(&mut self, obj: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_event_forwarder_command_set_target(
@@ -9522,14 +4747,6 @@ impl VtkEventForwarderCommand for vtkEventForwarderCommand {
             );
         }
         unsafe { vtk_event_forwarder_command_set_target(self.0, obj) }
-    }
-    fn get_target(&mut self) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_event_forwarder_command_get_target(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut ();
-        }
-        unsafe { vtk_event_forwarder_command_get_target(self.0) }
     }
 }
 impl VtkFileOutputWindow for vtkFileOutputWindow {
@@ -9558,31 +4775,25 @@ impl VtkFileOutputWindow for vtkFileOutputWindow {
         }
         unsafe { vtk_file_output_window_new(self.0) }
     }
-    fn display_text(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_text(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_file_output_window_display_text(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_file_output_window_display_text(self.0, p0) }
+        unsafe { vtk_file_output_window_display_text(self.0, c_p0.as_ptr()) }
     }
-    fn set_file_name(&mut self, _arg: core::ffi::c_char) -> () {
+    fn set_file_name(&mut self, _arg: &str) -> () {
+        let c__arg = std::ffi::CString::new(_arg).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_file_output_window_set_file_name(
                 sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_char,
+                _arg: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_file_output_window_set_file_name(self.0, _arg) }
-    }
-    fn get_file_name(&mut self) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_file_output_window_get_file_name(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_file_output_window_get_file_name(self.0) }
+        unsafe { vtk_file_output_window_set_file_name(self.0, c__arg.as_ptr()) }
     }
     fn set_flush(&mut self, _arg: core::ffi::c_int) -> () {
         unsafe extern "C" {
@@ -9685,180 +4896,52 @@ impl VtkFloatArray for vtkFloatArray {
         }
         unsafe { vtk_float_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_float_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_float_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_float_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_float_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_float_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_float_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_float,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_float_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_float,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_float_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_float {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_float {
         unsafe extern "C" {
             fn vtk_float_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_float;
         }
         unsafe { vtk_float_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_float) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_float) -> () {
         unsafe extern "C" {
             fn vtk_float_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_float,
             );
         }
         unsafe { vtk_float_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_float_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_float_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_float) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_float) -> () {
         unsafe extern "C" {
             fn vtk_float_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_float,
             );
         }
         unsafe { vtk_float_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_float) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_float) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_float_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_float,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_float_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_float_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_float;
-        }
-        unsafe { vtk_float_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_float_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_float;
-        }
-        unsafe { vtk_float_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_float_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_float;
-        }
-        unsafe { vtk_float_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_float_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_float;
-        }
-        unsafe { vtk_float_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_float,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_float_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_float,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_float_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_float,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_float_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_float,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_float_array_set_array(self.0, array, size, save, deleteMethod) }
     }
     fn fast_down_cast(
         &mut self,
@@ -9920,15 +5003,6 @@ impl VtkGarbageCollector for vtkGarbageCollector {
             fn vtk_garbage_collector_collect(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_garbage_collector_collect(self.0) }
-    }
-    fn collect(&mut self, root: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_garbage_collector_collect(
-                sself: *mut core::ffi::c_void,
-                root: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_garbage_collector_collect(self.0, root) }
     }
     fn deferred_collection_push(&mut self) -> () {
         unsafe extern "C" {
@@ -9996,88 +5070,95 @@ impl VtkIdList for vtkIdList {
     }
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
         strategy: core::ffi::c_int,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_id_list_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
                 strategy: core::ffi::c_int,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_id_list_allocate(self.0, sz, strategy) }
     }
-    fn get_number_of_ids(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_ids(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_list_get_number_of_ids(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_list_get_number_of_ids(self.0) }
     }
-    fn get_id(&mut self, i: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn get_id(&mut self, i: core::ffi::c_longlong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_list_get_id(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                i: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_list_get_id(self.0, i) }
     }
-    fn find_id_location(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn find_id_location(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_list_find_id_location(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                id: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_list_find_id_location(self.0, id) }
     }
-    fn set_number_of_ids(&mut self, number: core::ffi::c_uchar) -> () {
+    fn set_number_of_ids(&mut self, number: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_id_list_set_number_of_ids(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_id_list_set_number_of_ids(self.0, number) }
     }
-    fn set_id(&mut self, i: core::ffi::c_uchar, vtkid: core::ffi::c_uchar) -> () {
+    fn set_id(&mut self, i: core::ffi::c_longlong, vtkid: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_id_list_set_id(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                vtkid: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                vtkid: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_id_list_set_id(self.0, i, vtkid) }
     }
-    fn insert_id(&mut self, i: core::ffi::c_uchar, vtkid: core::ffi::c_uchar) -> () {
+    fn insert_id(
+        &mut self,
+        i: core::ffi::c_longlong,
+        vtkid: core::ffi::c_longlong,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_id_list_insert_id(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                vtkid: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                vtkid: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_id_list_insert_id(self.0, i, vtkid) }
     }
-    fn insert_next_id(&mut self, vtkid: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn insert_next_id(&mut self, vtkid: core::ffi::c_longlong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_list_insert_next_id(
                 sself: *mut core::ffi::c_void,
-                vtkid: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                vtkid: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_list_insert_next_id(self.0, vtkid) }
     }
-    fn insert_unique_id(&mut self, vtkid: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn insert_unique_id(
+        &mut self,
+        vtkid: core::ffi::c_longlong,
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_list_insert_unique_id(
                 sself: *mut core::ffi::c_void,
-                vtkid: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                vtkid: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_list_insert_unique_id(self.0, vtkid) }
     }
@@ -10087,47 +5168,14 @@ impl VtkIdList for vtkIdList {
         }
         unsafe { vtk_id_list_sort(self.0) }
     }
-    fn fill(&mut self, value: core::ffi::c_uchar) -> () {
+    fn fill(&mut self, value: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_id_list_fill(
                 sself: *mut core::ffi::c_void,
-                value: core::ffi::c_uchar,
+                value: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_id_list_fill(self.0, value) }
-    }
-    fn get_pointer(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_list_get_pointer(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_list_get_pointer(self.0, i) }
-    }
-    fn write_pointer(
-        &mut self,
-        i: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_list_write_pointer(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_list_write_pointer(self.0, i, number) }
-    }
-    fn set_array(&mut self, array: core::ffi::c_uchar, size: core::ffi::c_uchar) -> () {
-        unsafe extern "C" {
-            fn vtk_id_list_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uchar,
-                size: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_id_list_set_array(self.0, array, size) }
     }
     fn reset(&mut self) -> () {
         unsafe extern "C" {
@@ -10150,21 +5198,21 @@ impl VtkIdList for vtkIdList {
         }
         unsafe { vtk_id_list_deep_copy(self.0, ids) }
     }
-    fn delete_id(&mut self, vtkid: core::ffi::c_uchar) -> () {
+    fn delete_id(&mut self, vtkid: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_id_list_delete_id(
                 sself: *mut core::ffi::c_void,
-                vtkid: core::ffi::c_uchar,
+                vtkid: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_id_list_delete_id(self.0, vtkid) }
     }
-    fn is_id(&mut self, vtkid: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn is_id(&mut self, vtkid: core::ffi::c_longlong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_list_is_id(
                 sself: *mut core::ffi::c_void,
-                vtkid: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                vtkid: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_list_is_id(self.0, vtkid) }
     }
@@ -10176,54 +5224,6 @@ impl VtkIdList for vtkIdList {
             );
         }
         unsafe { vtk_id_list_intersect_with(self.0, otherIds) }
-    }
-    fn resize(&mut self, sz: core::ffi::c_uchar) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_list_resize(
-                sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_list_resize(self.0, sz) }
-    }
-    fn intersect_with(&mut self, otherIds: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_id_list_intersect_with(
-                sself: *mut core::ffi::c_void,
-                otherIds: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_id_list_intersect_with(self.0, otherIds) }
-    }
-    fn begin(&mut self) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_list_begin(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_list_begin(self.0) }
-    }
-    fn end(&mut self) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_list_end(sself: *mut core::ffi::c_void) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_list_end(self.0) }
-    }
-    fn begin(&mut self) -> *const core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_list_begin(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_list_begin(self.0) }
-    }
-    fn end(&mut self) -> *const core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_list_end(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_list_end(self.0) }
     }
 }
 impl VtkIdListCollection for vtkIdListCollection {
@@ -10278,15 +5278,6 @@ impl VtkIdListCollection for vtkIdListCollection {
         }
         unsafe { vtk_id_list_collection_get_item(self.0, i) }
     }
-    fn get_next_id_list(&mut self, cookie: ()) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_id_list_collection_get_next_id_list(
-                sself: *mut core::ffi::c_void,
-                cookie: (),
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_id_list_collection_get_next_id_list(self.0, cookie) }
-    }
     fn get_number_of_items(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_id_list_collection_get_number_of_items(
@@ -10338,180 +5329,60 @@ impl VtkIdTypeArray for vtkIdTypeArray {
         }
         unsafe { vtk_id_type_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_id_type_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_id_type_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_id_type_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_id_type_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_id_type_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_id_type_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_uchar,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_type_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_type_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_type_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                id: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_type_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_uchar) -> () {
+    fn set_value(
+        &mut self,
+        id: core::ffi::c_longlong,
+        value: core::ffi::c_longlong,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_id_type_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                value: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
+                value: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_id_type_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_id_type_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_id_type_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_uchar) -> () {
+    fn insert_value(
+        &mut self,
+        id: core::ffi::c_longlong,
+        f: core::ffi::c_longlong,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_id_type_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                f: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
+                f: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_id_type_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_longlong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_type_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
-                f: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                f: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_type_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_type_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_type_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_type_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_type_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_type_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_type_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_id_type_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_id_type_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_id_type_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uchar,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_id_type_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_id_type_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uchar,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_id_type_array_set_array(self.0, array, size, save, deleteMethod) }
     }
     fn fast_down_cast(
         &mut self,
@@ -10525,19 +5396,19 @@ impl VtkIdTypeArray for vtkIdTypeArray {
         }
         unsafe { vtk_id_type_array_fast_down_cast(self.0, source) }
     }
-    fn get_data_type_value_min(&mut self) -> core::ffi::c_uchar {
+    fn get_data_type_value_min(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_type_array_get_data_type_value_min(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_type_array_get_data_type_value_min(self.0) }
     }
-    fn get_data_type_value_max(&mut self) -> core::ffi::c_uchar {
+    fn get_data_type_value_max(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_id_type_array_get_data_type_value_max(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_id_type_array_get_data_type_value_max(self.0) }
     }
@@ -10574,15 +5445,6 @@ impl VtkInformation for vtkInformation {
         }
         unsafe { vtk_information_modified(self.0) }
     }
-    fn modified(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_modified(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_modified(self.0, key) }
-    }
     fn clear(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_information_clear(sself: *mut core::ffi::c_void);
@@ -10616,214 +5478,6 @@ impl VtkInformation for vtkInformation {
             );
         }
         unsafe { vtk_information_append(self.0, from, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
-    }
-    fn copy_entry(
-        &mut self,
-        from: *mut core::ffi::c_void,
-        key: *mut core::ffi::c_void,
-        deep: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_copy_entry(
-                sself: *mut core::ffi::c_void,
-                from: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                deep: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_copy_entry(self.0, from, key, deep) }
     }
     fn copy_entry(
         &mut self,
@@ -10884,34 +5538,6 @@ impl VtkInformation for vtkInformation {
         }
         unsafe { vtk_information_set(self.0, key) }
     }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value) }
-    }
     fn get(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_information_get(
@@ -10921,247 +5547,6 @@ impl VtkInformation for vtkInformation {
         }
         unsafe { vtk_information_get(self.0, key) }
     }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_uchar) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, value: vtkVariant) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: vtkVariant,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> vtkVariant {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> vtkVariant;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn append(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: core::ffi::c_int,
-        length: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_int,
-                length: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value, length) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: core::ffi::c_int,
-        value2: core::ffi::c_int,
-        value3: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value1: core::ffi::c_int,
-                value2: core::ffi::c_int,
-                value3: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value1, value2, value3) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: core::ffi::c_int,
-        value2: core::ffi::c_int,
-        value3: core::ffi::c_int,
-        value4: core::ffi::c_int,
-        value5: core::ffi::c_int,
-        value6: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value1: core::ffi::c_int,
-                value2: core::ffi::c_int,
-                value3: core::ffi::c_int,
-                value4: core::ffi::c_int,
-                value5: core::ffi::c_int,
-                value6: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_information_set(
-                self.0,
-                key,
-                value1,
-                value2,
-                value3,
-                value4,
-                value5,
-                value6,
-            )
-        }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_int;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                idx: core::ffi::c_int,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_get(self.0, key, idx) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_get(self.0, key, value) }
-    }
     fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_information_length(
@@ -11171,506 +5556,6 @@ impl VtkInformation for vtkInformation {
         }
         unsafe { vtk_information_length(self.0, key) }
     }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn append(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: core::ffi::c_char,
-        idx: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_char,
-                idx: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value, idx) }
-    }
-    fn append(&mut self, key: *mut core::ffi::c_void, value: &str) -> () {
-        let c_value = std::ffi::CString::new(value).expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *const core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, c_value.as_ptr()) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: &str,
-        idx: core::ffi::c_int,
-    ) -> () {
-        let c_value = std::ffi::CString::new(value).expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *const core::ffi::c_char,
-                idx: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, c_value.as_ptr(), idx) }
-    }
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> *const core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                idx: core::ffi::c_int,
-            ) -> *const core::ffi::c_char;
-        }
-        unsafe { vtk_information_get(self.0, key, idx) }
-    }
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_length(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_length(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: core::ffi::c_int,
-        length: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_int,
-                length: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value, length) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_int;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_get(self.0, key, value) }
-    }
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_length(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_length(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_ulong) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_ulong,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_ulong {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_ulong;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn append(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: core::ffi::c_double,
-        length: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_double,
-                length: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value, length) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: core::ffi::c_double,
-        value2: core::ffi::c_double,
-        value3: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value1: core::ffi::c_double,
-                value2: core::ffi::c_double,
-                value3: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value1, value2, value3) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: core::ffi::c_double,
-        value2: core::ffi::c_double,
-        value3: core::ffi::c_double,
-        value4: core::ffi::c_double,
-        value5: core::ffi::c_double,
-        value6: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value1: core::ffi::c_double,
-                value2: core::ffi::c_double,
-                value3: core::ffi::c_double,
-                value4: core::ffi::c_double,
-                value5: core::ffi::c_double,
-                value6: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_information_set(
-                self.0,
-                key,
-                value1,
-                value2,
-                value3,
-                value4,
-                value5,
-                value6,
-            )
-        }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                idx: core::ffi::c_int,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_information_get(self.0, key, idx) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void, value: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_information_get(self.0, key, value) }
-    }
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_length(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_length(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn append(&mut self, key: *mut core::ffi::c_void, value: vtkVariant) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: vtkVariant,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: vtkVariant,
-        length: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: vtkVariant,
-                length: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value, length) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: vtkVariant,
-        value2: vtkVariant,
-        value3: vtkVariant,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value1: vtkVariant,
-                value2: vtkVariant,
-                value3: vtkVariant,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value1, value2, value3) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value1: vtkVariant,
-        value2: vtkVariant,
-        value3: vtkVariant,
-        value4: vtkVariant,
-        value5: vtkVariant,
-        value6: vtkVariant,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value1: vtkVariant,
-                value2: vtkVariant,
-                value3: vtkVariant,
-                value4: vtkVariant,
-                value5: vtkVariant,
-                value6: vtkVariant,
-            );
-        }
-        unsafe {
-            vtk_information_set(
-                self.0,
-                key,
-                value1,
-                value2,
-                value3,
-                value4,
-                value5,
-                value6,
-            )
-        }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *const vtkVariant {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *const vtkVariant;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void, idx: core::ffi::c_int) -> vtkVariant {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                idx: core::ffi::c_int,
-            ) -> vtkVariant;
-        }
-        unsafe { vtk_information_get(self.0, key, idx) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void, value: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_get(self.0, key, value) }
-    }
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_length(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_length(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
     fn append_unique(
         &mut self,
         key: *mut core::ffi::c_void,
@@ -11684,816 +5569,6 @@ impl VtkInformation for vtkInformation {
             );
         }
         unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-        length: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-                length: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value, length) }
-    }
-    fn remove(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key, value) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut &mut vtkInformationKey {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut &mut vtkInformationKey;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                idx: core::ffi::c_int,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get(self.0, key, idx) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void, value: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_get(self.0, key, value) }
-    }
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_length(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_length(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn append_unique(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append_unique(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append_unique(self.0, key, value) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                p1: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, p1) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: &str) -> () {
-        let c_p1 = std::ffi::CString::new(p1).expect("CString::new failed");
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                p1: *const core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, c_p1.as_ptr()) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *const core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_char;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                p1: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, p1) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                p1: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, p1) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                p1: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, p1) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn append(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        data: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_append(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                data: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_append(self.0, key, data) }
-    }
-    fn set(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        value: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-                idx: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, value, idx) }
-    }
-    fn get(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        idx: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                idx: core::ffi::c_int,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get(self.0, key, idx) }
-    }
-    fn length(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_length(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_length(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn remove(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        objectToRemove: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                objectToRemove: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key, objectToRemove) }
-    }
-    fn remove(
-        &mut self,
-        key: *mut core::ffi::c_void,
-        indexToRemove: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                indexToRemove: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key, indexToRemove) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn set(&mut self, key: *mut core::ffi::c_void, p1: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_set(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-                p1: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_set(self.0, key, p1) }
-    }
-    fn get(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get(self.0, key) }
-    }
-    fn remove(&mut self, key: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_information_remove(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_information_remove(self.0, key) }
-    }
-    fn has(&mut self, key: *mut core::ffi::c_void) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_information_has(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_information_has(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
-    }
-    fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_information_get_key(
-                sself: *mut core::ffi::c_void,
-                key: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_information_get_key(self.0, key) }
     }
     fn get_key(&mut self, key: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
         unsafe extern "C" {
@@ -12746,15 +5821,6 @@ impl VtkInformationVector for vtkInformationVector {
         }
         unsafe { vtk_information_vector_remove(self.0, info) }
     }
-    fn remove(&mut self, idx: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_information_vector_remove(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_information_vector_remove(self.0, idx) }
-    }
     fn register(&mut self, o: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_information_vector_register(
@@ -12817,172 +5883,52 @@ impl VtkIntArray for vtkIntArray {
         }
         unsafe { vtk_int_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_int_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_int_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(&mut self, i: core::ffi::c_uchar, tuple: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_int_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_int_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_int_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_int_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_int,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_int_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_int,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_int_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_int_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_int_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_int) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_int) -> () {
         unsafe extern "C" {
             fn vtk_int_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_int,
             );
         }
         unsafe { vtk_int_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_int_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_int_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_int) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_int) -> () {
         unsafe extern "C" {
             fn vtk_int_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_int,
             );
         }
         unsafe { vtk_int_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_int) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_int) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_int_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_int,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_int_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_int_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_int;
-        }
-        unsafe { vtk_int_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_int_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_int;
-        }
-        unsafe { vtk_int_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_int_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_int;
-        }
-        unsafe { vtk_int_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_int_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_int;
-        }
-        unsafe { vtk_int_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_int,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_int_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_int,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_int_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_int,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_int_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_int,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_int_array_set_array(self.0, array, size, save, deleteMethod) }
     }
     fn fast_down_cast(
         &mut self,
@@ -13055,180 +6001,52 @@ impl VtkLongArray for vtkLongArray {
         }
         unsafe { vtk_long_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_long,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_long,
-            );
-        }
-        unsafe { vtk_long_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_long,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_long,
-            );
-        }
-        unsafe { vtk_long_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_long,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_long,
-            );
-        }
-        unsafe { vtk_long_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_long,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_long_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_long,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_long_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_long {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_long {
         unsafe extern "C" {
             fn vtk_long_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_long;
         }
         unsafe { vtk_long_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_long) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_long) -> () {
         unsafe extern "C" {
             fn vtk_long_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_long,
             );
         }
         unsafe { vtk_long_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_long_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_long_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_long) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_long) -> () {
         unsafe extern "C" {
             fn vtk_long_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_long,
             );
         }
         unsafe { vtk_long_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_long) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_long) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_long_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_long,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_long_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_long {
-        unsafe extern "C" {
-            fn vtk_long_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_long;
-        }
-        unsafe { vtk_long_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_long {
-        unsafe extern "C" {
-            fn vtk_long_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_long;
-        }
-        unsafe { vtk_long_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_long {
-        unsafe extern "C" {
-            fn vtk_long_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_long;
-        }
-        unsafe { vtk_long_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_long {
-        unsafe extern "C" {
-            fn vtk_long_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_long;
-        }
-        unsafe { vtk_long_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_long,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_long,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_long_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_long,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_long,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_long_array_set_array(self.0, array, size, save, deleteMethod) }
     }
     fn fast_down_cast(
         &mut self,
@@ -13301,180 +6119,60 @@ impl VtkLongLongArray for vtkLongLongArray {
         }
         unsafe { vtk_long_long_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_long_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_long_long_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_long_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_long_long_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_long_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_long_long_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_uchar,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_long_long_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_long_long_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_long_long_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                id: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_long_long_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_uchar) -> () {
+    fn set_value(
+        &mut self,
+        id: core::ffi::c_longlong,
+        value: core::ffi::c_longlong,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_long_long_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                value: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
+                value: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_long_long_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_long_long_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_long_long_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_uchar) -> () {
+    fn insert_value(
+        &mut self,
+        id: core::ffi::c_longlong,
+        f: core::ffi::c_longlong,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_long_long_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                f: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
+                f: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_long_long_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_longlong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_long_long_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
-                f: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+                f: core::ffi::c_longlong,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_long_long_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_long_long_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_long_long_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_long_long_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_long_long_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_long_long_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_long_long_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_long_long_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_long_long_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_long_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uchar,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_long_long_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_long_long_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uchar,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_long_long_array_set_array(self.0, array, size, save, deleteMethod) }
     }
     fn fast_down_cast(
         &mut self,
@@ -13488,19 +6186,19 @@ impl VtkLongLongArray for vtkLongLongArray {
         }
         unsafe { vtk_long_long_array_fast_down_cast(self.0, source) }
     }
-    fn get_data_type_value_min(&mut self) -> core::ffi::c_uchar {
+    fn get_data_type_value_min(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_long_long_array_get_data_type_value_min(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_long_long_array_get_data_type_value_min(self.0) }
     }
-    fn get_data_type_value_max(&mut self) -> core::ffi::c_uchar {
+    fn get_data_type_value_max(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_long_long_array_get_data_type_value_max(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_long_long_array_get_data_type_value_max(self.0) }
     }
@@ -13635,15 +6333,6 @@ impl VtkLookupTable for vtkLookupTable {
         }
         unsafe { vtk_lookup_table_get_scale(self.0) }
     }
-    fn set_table_range(&mut self, r: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_table_range(
-                sself: *mut core::ffi::c_void,
-                r: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_table_range(self.0, r) }
-    }
     fn set_table_range(
         &mut self,
         min: core::ffi::c_double,
@@ -13657,23 +6346,6 @@ impl VtkLookupTable for vtkLookupTable {
             );
         }
         unsafe { vtk_lookup_table_set_table_range(self.0, min, max) }
-    }
-    fn get_table_range(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_table_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_table_range(self.0) }
-    }
-    fn get_table_range(&mut self, data: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_table_range(
-                sself: *mut core::ffi::c_void,
-                data: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_table_range(self.0, data) }
     }
     fn set_hue_range(
         &mut self,
@@ -13689,46 +6361,6 @@ impl VtkLookupTable for vtkLookupTable {
         }
         unsafe { vtk_lookup_table_set_hue_range(self.0, _arg1, _arg2) }
     }
-    fn set_hue_range(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_hue_range(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_hue_range(self.0, _arg) }
-    }
-    fn get_hue_range(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_hue_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_hue_range(self.0) }
-    }
-    fn get_hue_range(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_hue_range(
-                sself: *mut core::ffi::c_void,
-                _arg1: core::ffi::c_double,
-                _arg2: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_hue_range(self.0, _arg1, _arg2) }
-    }
-    fn get_hue_range(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_hue_range(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_hue_range(self.0, _arg) }
-    }
     fn set_saturation_range(
         &mut self,
         _arg1: core::ffi::c_double,
@@ -13742,46 +6374,6 @@ impl VtkLookupTable for vtkLookupTable {
             );
         }
         unsafe { vtk_lookup_table_set_saturation_range(self.0, _arg1, _arg2) }
-    }
-    fn set_saturation_range(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_saturation_range(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_saturation_range(self.0, _arg) }
-    }
-    fn get_saturation_range(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_saturation_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_saturation_range(self.0) }
-    }
-    fn get_saturation_range(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_saturation_range(
-                sself: *mut core::ffi::c_void,
-                _arg1: core::ffi::c_double,
-                _arg2: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_saturation_range(self.0, _arg1, _arg2) }
-    }
-    fn get_saturation_range(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_saturation_range(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_saturation_range(self.0, _arg) }
     }
     fn set_value_range(
         &mut self,
@@ -13797,46 +6389,6 @@ impl VtkLookupTable for vtkLookupTable {
         }
         unsafe { vtk_lookup_table_set_value_range(self.0, _arg1, _arg2) }
     }
-    fn set_value_range(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_value_range(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_value_range(self.0, _arg) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_value_range(self.0) }
-    }
-    fn get_value_range(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_value_range(
-                sself: *mut core::ffi::c_void,
-                _arg1: core::ffi::c_double,
-                _arg2: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_value_range(self.0, _arg1, _arg2) }
-    }
-    fn get_value_range(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_value_range(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_value_range(self.0, _arg) }
-    }
     fn set_alpha_range(
         &mut self,
         _arg1: core::ffi::c_double,
@@ -13850,46 +6402,6 @@ impl VtkLookupTable for vtkLookupTable {
             );
         }
         unsafe { vtk_lookup_table_set_alpha_range(self.0, _arg1, _arg2) }
-    }
-    fn set_alpha_range(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_alpha_range(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_alpha_range(self.0, _arg) }
-    }
-    fn get_alpha_range(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_alpha_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_alpha_range(self.0) }
-    }
-    fn get_alpha_range(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_alpha_range(
-                sself: *mut core::ffi::c_void,
-                _arg1: core::ffi::c_double,
-                _arg2: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_alpha_range(self.0, _arg1, _arg2) }
-    }
-    fn get_alpha_range(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_alpha_range(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_alpha_range(self.0, _arg) }
     }
     fn set_nan_color(
         &mut self,
@@ -13908,74 +6420,6 @@ impl VtkLookupTable for vtkLookupTable {
             );
         }
         unsafe { vtk_lookup_table_set_nan_color(self.0, _arg1, _arg2, _arg3, _arg4) }
-    }
-    fn set_nan_color(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_nan_color(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_nan_color(self.0, _arg) }
-    }
-    fn get_nan_color(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_nan_color(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_nan_color(self.0) }
-    }
-    fn get_nan_color(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-        _arg3: core::ffi::c_double,
-        _arg4: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_nan_color(
-                sself: *mut core::ffi::c_void,
-                _arg1: core::ffi::c_double,
-                _arg2: core::ffi::c_double,
-                _arg3: core::ffi::c_double,
-                _arg4: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_nan_color(self.0, _arg1, _arg2, _arg3, _arg4) }
-    }
-    fn get_nan_color(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_nan_color(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_nan_color(self.0, _arg) }
-    }
-    fn get_nan_color_as_unsigned_chars(&mut self) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_nan_color_as_unsigned_chars(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_lookup_table_get_nan_color_as_unsigned_chars(self.0) }
-    }
-    fn get_color_as_unsigned_chars(
-        &mut self,
-        colorIn: core::ffi::c_double,
-        colorOut: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_color_as_unsigned_chars(
-                sself: *mut core::ffi::c_void,
-                colorIn: core::ffi::c_double,
-                colorOut: core::ffi::c_uchar,
-            );
-        }
-        unsafe {
-            vtk_lookup_table_get_color_as_unsigned_chars(self.0, colorIn, colorOut)
-        }
     }
     fn set_below_range_color(
         &mut self,
@@ -13996,52 +6440,6 @@ impl VtkLookupTable for vtkLookupTable {
         unsafe {
             vtk_lookup_table_set_below_range_color(self.0, _arg1, _arg2, _arg3, _arg4)
         }
-    }
-    fn set_below_range_color(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_below_range_color(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_below_range_color(self.0, _arg) }
-    }
-    fn get_below_range_color(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_below_range_color(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_below_range_color(self.0) }
-    }
-    fn get_below_range_color(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-        _arg3: core::ffi::c_double,
-        _arg4: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_below_range_color(
-                sself: *mut core::ffi::c_void,
-                _arg1: core::ffi::c_double,
-                _arg2: core::ffi::c_double,
-                _arg3: core::ffi::c_double,
-                _arg4: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_lookup_table_get_below_range_color(self.0, _arg1, _arg2, _arg3, _arg4)
-        }
-    }
-    fn get_below_range_color(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_below_range_color(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_below_range_color(self.0, _arg) }
     }
     fn set_use_below_range_color(&mut self, _arg: core::ffi::c_int) -> () {
         unsafe extern "C" {
@@ -14092,52 +6490,6 @@ impl VtkLookupTable for vtkLookupTable {
             vtk_lookup_table_set_above_range_color(self.0, _arg1, _arg2, _arg3, _arg4)
         }
     }
-    fn set_above_range_color(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_above_range_color(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_above_range_color(self.0, _arg) }
-    }
-    fn get_above_range_color(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_above_range_color(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_above_range_color(self.0) }
-    }
-    fn get_above_range_color(
-        &mut self,
-        _arg1: core::ffi::c_double,
-        _arg2: core::ffi::c_double,
-        _arg3: core::ffi::c_double,
-        _arg4: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_above_range_color(
-                sself: *mut core::ffi::c_void,
-                _arg1: core::ffi::c_double,
-                _arg2: core::ffi::c_double,
-                _arg3: core::ffi::c_double,
-                _arg4: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_lookup_table_get_above_range_color(self.0, _arg1, _arg2, _arg3, _arg4)
-        }
-    }
-    fn get_above_range_color(&mut self, _arg: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_above_range_color(
-                sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_above_range_color(self.0, _arg) }
-    }
     fn set_use_above_range_color(&mut self, _arg: core::ffi::c_int) -> () {
         unsafe extern "C" {
             fn vtk_lookup_table_set_use_above_range_color(
@@ -14167,25 +6519,6 @@ impl VtkLookupTable for vtkLookupTable {
         }
         unsafe { vtk_lookup_table_use_above_range_color_off(self.0) }
     }
-    fn map_value(&mut self, v: core::ffi::c_double) -> *const core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_lookup_table_map_value(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            ) -> *const core::ffi::c_uchar;
-        }
-        unsafe { vtk_lookup_table_map_value(self.0, v) }
-    }
-    fn get_color(&mut self, v: core::ffi::c_double, rgb: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_color(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-                rgb: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_color(self.0, v, rgb) }
-    }
     fn get_opacity(&mut self, v: core::ffi::c_double) -> core::ffi::c_double {
         unsafe extern "C" {
             fn vtk_lookup_table_get_opacity(
@@ -14195,49 +6528,35 @@ impl VtkLookupTable for vtkLookupTable {
         }
         unsafe { vtk_lookup_table_get_opacity(self.0, v) }
     }
-    fn get_index(&mut self, v: core::ffi::c_double) -> core::ffi::c_uchar {
+    fn get_index(&mut self, v: core::ffi::c_double) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_lookup_table_get_index(
                 sself: *mut core::ffi::c_void,
                 v: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_lookup_table_get_index(self.0, v) }
     }
-    fn set_number_of_table_values(&mut self, number: core::ffi::c_uchar) -> () {
+    fn set_number_of_table_values(&mut self, number: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_lookup_table_set_number_of_table_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_lookup_table_set_number_of_table_values(self.0, number) }
     }
-    fn get_number_of_table_values(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_table_values(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_lookup_table_get_number_of_table_values(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_lookup_table_get_number_of_table_values(self.0) }
     }
     fn set_table_value(
         &mut self,
-        indx: core::ffi::c_uchar,
-        rgba: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_set_table_value(
-                sself: *mut core::ffi::c_void,
-                indx: core::ffi::c_uchar,
-                rgba: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_set_table_value(self.0, indx, rgba) }
-    }
-    fn set_table_value(
-        &mut self,
-        indx: core::ffi::c_uchar,
+        indx: core::ffi::c_longlong,
         r: core::ffi::c_double,
         g: core::ffi::c_double,
         b: core::ffi::c_double,
@@ -14246,7 +6565,7 @@ impl VtkLookupTable for vtkLookupTable {
         unsafe extern "C" {
             fn vtk_lookup_table_set_table_value(
                 sself: *mut core::ffi::c_void,
-                indx: core::ffi::c_uchar,
+                indx: core::ffi::c_longlong,
                 r: core::ffi::c_double,
                 g: core::ffi::c_double,
                 b: core::ffi::c_double,
@@ -14255,120 +6574,36 @@ impl VtkLookupTable for vtkLookupTable {
         }
         unsafe { vtk_lookup_table_set_table_value(self.0, indx, r, g, b, a) }
     }
-    fn get_table_value(&mut self, indx: core::ffi::c_uchar) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_table_value(
-                sself: *mut core::ffi::c_void,
-                indx: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_table_value(self.0, indx) }
-    }
-    fn get_table_value(
-        &mut self,
-        indx: core::ffi::c_uchar,
-        rgba: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_table_value(
-                sself: *mut core::ffi::c_void,
-                indx: core::ffi::c_uchar,
-                rgba: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_table_value(self.0, indx, rgba) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_lookup_table_get_pointer(self.0, id) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_int,
-    ) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_lookup_table_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_int,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_lookup_table_write_pointer(self.0, id, number) }
-    }
-    fn get_range(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_get_range(self.0) }
-    }
-    fn get_log_range(
-        &mut self,
-        range: core::ffi::c_double,
-        log_range: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_log_range(
-                sself: *mut core::ffi::c_void,
-                range: core::ffi::c_double,
-                log_range: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_log_range(self.0, range, log_range) }
-    }
-    fn apply_log_scale(
-        &mut self,
-        v: core::ffi::c_double,
-        range: core::ffi::c_double,
-        log_range: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_lookup_table_apply_log_scale(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-                range: core::ffi::c_double,
-                log_range: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_lookup_table_apply_log_scale(self.0, v, range, log_range) }
-    }
-    fn set_number_of_colors(&mut self, _arg: core::ffi::c_uchar) -> () {
+    fn set_number_of_colors(&mut self, _arg: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_lookup_table_set_number_of_colors(
                 sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_uchar,
+                _arg: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_lookup_table_set_number_of_colors(self.0, _arg) }
     }
-    fn get_number_of_colors_min_value(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_colors_min_value(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_lookup_table_get_number_of_colors_min_value(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_lookup_table_get_number_of_colors_min_value(self.0) }
     }
-    fn get_number_of_colors_max_value(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_colors_max_value(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_lookup_table_get_number_of_colors_max_value(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_lookup_table_get_number_of_colors_max_value(self.0) }
     }
-    fn get_number_of_colors(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_colors(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_lookup_table_get_number_of_colors(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_lookup_table_get_number_of_colors(self.0) }
     }
@@ -14389,38 +6624,6 @@ impl VtkLookupTable for vtkLookupTable {
         }
         unsafe { vtk_lookup_table_get_table(self.0) }
     }
-    fn map_scalars_through_table_2(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_map_scalars_through_table_2(
-                sself: *mut core::ffi::c_void,
-                input: (),
-                output: core::ffi::c_uchar,
-                inputDataType: core::ffi::c_int,
-                numberOfValues: core::ffi::c_int,
-                inputIncrement: core::ffi::c_int,
-                outputFormat: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_lookup_table_map_scalars_through_table_2(
-                self.0,
-                input,
-                output,
-                inputDataType,
-                numberOfValues,
-                inputIncrement,
-                outputFormat,
-            )
-        }
-    }
     fn deep_copy(&mut self, obj: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_lookup_table_deep_copy(
@@ -14437,20 +6640,6 @@ impl VtkLookupTable for vtkLookupTable {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_lookup_table_using_log_scale(self.0) }
-    }
-    fn get_indexed_color(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        rgba: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_lookup_table_get_indexed_color(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                rgba: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_lookup_table_get_indexed_color(self.0, idx, rgba) }
     }
 }
 impl VtkMath for vtkMath {
@@ -14495,18 +6684,6 @@ impl VtkMath for vtkMath {
         }
         unsafe { vtk_math_radians_from_degrees(self.0, degrees) }
     }
-    fn radians_from_degrees(
-        &mut self,
-        degrees: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_radians_from_degrees(
-                sself: *mut core::ffi::c_void,
-                degrees: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_radians_from_degrees(self.0, degrees) }
-    }
     fn degrees_from_radians(
         &mut self,
         radians: core::ffi::c_float,
@@ -14519,32 +6696,11 @@ impl VtkMath for vtkMath {
         }
         unsafe { vtk_math_degrees_from_radians(self.0, radians) }
     }
-    fn degrees_from_radians(
-        &mut self,
-        radians: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_degrees_from_radians(
-                sself: *mut core::ffi::c_void,
-                radians: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_degrees_from_radians(self.0, radians) }
-    }
     fn round(&mut self, f: core::ffi::c_float) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_math_round(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_float,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_round(self.0, f) }
-    }
-    fn round(&mut self, f: core::ffi::c_double) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_round(
-                sself: *mut core::ffi::c_void,
-                f: core::ffi::c_double,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_math_round(self.0, f) }
@@ -14594,12 +6750,12 @@ impl VtkMath for vtkMath {
         }
         unsafe { vtk_math_nearest_power_of_two(self.0, x) }
     }
-    fn factorial(&mut self, N: core::ffi::c_int) -> core::ffi::c_uchar {
+    fn factorial(&mut self, N: core::ffi::c_int) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_math_factorial(
                 sself: *mut core::ffi::c_void,
                 N: core::ffi::c_int,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_math_factorial(self.0, N) }
     }
@@ -14607,54 +6763,15 @@ impl VtkMath for vtkMath {
         &mut self,
         m: core::ffi::c_int,
         n: core::ffi::c_int,
-    ) -> core::ffi::c_uchar {
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_math_binomial(
                 sself: *mut core::ffi::c_void,
                 m: core::ffi::c_int,
                 n: core::ffi::c_int,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_math_binomial(self.0, m, n) }
-    }
-    fn begin_combination(
-        &mut self,
-        m: core::ffi::c_int,
-        n: core::ffi::c_int,
-    ) -> *mut core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_begin_combination(
-                sself: *mut core::ffi::c_void,
-                m: core::ffi::c_int,
-                n: core::ffi::c_int,
-            ) -> *mut core::ffi::c_int;
-        }
-        unsafe { vtk_math_begin_combination(self.0, m, n) }
-    }
-    fn next_combination(
-        &mut self,
-        m: core::ffi::c_int,
-        n: core::ffi::c_int,
-        combination: core::ffi::c_int,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_next_combination(
-                sself: *mut core::ffi::c_void,
-                m: core::ffi::c_int,
-                n: core::ffi::c_int,
-                combination: core::ffi::c_int,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_next_combination(self.0, m, n, combination) }
-    }
-    fn free_combination(&mut self, combination: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_math_free_combination(
-                sself: *mut core::ffi::c_void,
-                combination: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_math_free_combination(self.0, combination) }
     }
     fn random_seed(&mut self, s: core::ffi::c_int) -> () {
         unsafe extern "C" {
@@ -14674,475 +6791,11 @@ impl VtkMath for vtkMath {
         }
         unsafe { vtk_math_random(self.0) }
     }
-    fn random(
-        &mut self,
-        min: core::ffi::c_double,
-        max: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_random(
-                sself: *mut core::ffi::c_void,
-                min: core::ffi::c_double,
-                max: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_random(self.0, min, max) }
-    }
     fn gaussian(&mut self) -> core::ffi::c_double {
         unsafe extern "C" {
             fn vtk_math_gaussian(sself: *mut core::ffi::c_void) -> core::ffi::c_double;
         }
         unsafe { vtk_math_gaussian(self.0) }
-    }
-    fn gaussian(
-        &mut self,
-        mean: core::ffi::c_double,
-        std: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_gaussian(
-                sself: *mut core::ffi::c_void,
-                mean: core::ffi::c_double,
-                std: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_gaussian(self.0, mean, std) }
-    }
-    fn assign(&mut self, a: core::ffi::c_double, b: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_assign(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_assign(self.0, a, b) }
-    }
-    fn add(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        c: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_add(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                b: core::ffi::c_float,
-                c: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_add(self.0, a, b, c) }
-    }
-    fn add(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_add(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                c: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_add(self.0, a, b, c) }
-    }
-    fn subtract(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        c: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_subtract(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                b: core::ffi::c_float,
-                c: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_subtract(self.0, a, b, c) }
-    }
-    fn subtract(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_subtract(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                c: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_subtract(self.0, a, b, c) }
-    }
-    fn multiply_scalar(&mut self, a: core::ffi::c_float, s: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_scalar(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                s: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_multiply_scalar(self.0, a, s) }
-    }
-    fn multiply_scalar_2_d(
-        &mut self,
-        a: core::ffi::c_float,
-        s: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_scalar_2_d(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                s: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_multiply_scalar_2_d(self.0, a, s) }
-    }
-    fn multiply_scalar(&mut self, a: core::ffi::c_double, s: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_scalar(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                s: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_multiply_scalar(self.0, a, s) }
-    }
-    fn multiply_scalar_2_d(
-        &mut self,
-        a: core::ffi::c_double,
-        s: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_scalar_2_d(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                s: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_multiply_scalar_2_d(self.0, a, s) }
-    }
-    fn dot(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-    ) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_dot(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                b: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_dot(self.0, a, b) }
-    }
-    fn dot(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_dot(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_dot(self.0, a, b) }
-    }
-    fn outer(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        c: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_outer(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                b: core::ffi::c_float,
-                c: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_outer(self.0, a, b, c) }
-    }
-    fn outer(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_outer(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                c: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_outer(self.0, a, b, c) }
-    }
-    fn cross(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        c: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_cross(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                b: core::ffi::c_float,
-                c: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_cross(self.0, a, b, c) }
-    }
-    fn cross(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_cross(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                c: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_cross(self.0, a, b, c) }
-    }
-    fn norm(
-        &mut self,
-        x: core::ffi::c_float,
-        n: core::ffi::c_int,
-    ) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_norm(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-                n: core::ffi::c_int,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_norm(self.0, x, n) }
-    }
-    fn norm(
-        &mut self,
-        x: core::ffi::c_double,
-        n: core::ffi::c_int,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_norm(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-                n: core::ffi::c_int,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_norm(self.0, x, n) }
-    }
-    fn norm(&mut self, v: core::ffi::c_float) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_norm(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_norm(self.0, v) }
-    }
-    fn norm(&mut self, v: core::ffi::c_double) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_norm(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_norm(self.0, v) }
-    }
-    fn normalize(&mut self, v: core::ffi::c_float) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_normalize(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_normalize(self.0, v) }
-    }
-    fn normalize(&mut self, v: core::ffi::c_double) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_normalize(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_normalize(self.0, v) }
-    }
-    fn perpendiculars(
-        &mut self,
-        v1: core::ffi::c_double,
-        v2: core::ffi::c_double,
-        v3: core::ffi::c_double,
-        theta: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_perpendiculars(
-                sself: *mut core::ffi::c_void,
-                v1: core::ffi::c_double,
-                v2: core::ffi::c_double,
-                v3: core::ffi::c_double,
-                theta: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_perpendiculars(self.0, v1, v2, v3, theta) }
-    }
-    fn perpendiculars(
-        &mut self,
-        v1: core::ffi::c_float,
-        v2: core::ffi::c_float,
-        v3: core::ffi::c_float,
-        theta: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_perpendiculars(
-                sself: *mut core::ffi::c_void,
-                v1: core::ffi::c_float,
-                v2: core::ffi::c_float,
-                v3: core::ffi::c_float,
-                theta: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_perpendiculars(self.0, v1, v2, v3, theta) }
-    }
-    fn project_vector(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        projection: core::ffi::c_float,
-    ) -> bool {
-        unsafe extern "C" {
-            fn vtk_math_project_vector(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                b: core::ffi::c_float,
-                projection: core::ffi::c_float,
-            ) -> bool;
-        }
-        unsafe { vtk_math_project_vector(self.0, a, b, projection) }
-    }
-    fn project_vector(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        projection: core::ffi::c_double,
-    ) -> bool {
-        unsafe extern "C" {
-            fn vtk_math_project_vector(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                projection: core::ffi::c_double,
-            ) -> bool;
-        }
-        unsafe { vtk_math_project_vector(self.0, a, b, projection) }
-    }
-    fn project_vector_2_d(
-        &mut self,
-        a: core::ffi::c_float,
-        b: core::ffi::c_float,
-        projection: core::ffi::c_float,
-    ) -> bool {
-        unsafe extern "C" {
-            fn vtk_math_project_vector_2_d(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                b: core::ffi::c_float,
-                projection: core::ffi::c_float,
-            ) -> bool;
-        }
-        unsafe { vtk_math_project_vector_2_d(self.0, a, b, projection) }
-    }
-    fn project_vector_2_d(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        projection: core::ffi::c_double,
-    ) -> bool {
-        unsafe extern "C" {
-            fn vtk_math_project_vector_2_d(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                projection: core::ffi::c_double,
-            ) -> bool;
-        }
-        unsafe { vtk_math_project_vector_2_d(self.0, a, b, projection) }
-    }
-    fn distance_2_between_points(
-        &mut self,
-        p1: core::ffi::c_float,
-        p2: core::ffi::c_float,
-    ) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_distance_2_between_points(
-                sself: *mut core::ffi::c_void,
-                p1: core::ffi::c_float,
-                p2: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_distance_2_between_points(self.0, p1, p2) }
-    }
-    fn distance_2_between_points(
-        &mut self,
-        p1: core::ffi::c_double,
-        p2: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_distance_2_between_points(
-                sself: *mut core::ffi::c_void,
-                p1: core::ffi::c_double,
-                p2: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_distance_2_between_points(self.0, p1, p2) }
-    }
-    fn angle_between_vectors(
-        &mut self,
-        v1: core::ffi::c_double,
-        v2: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_angle_between_vectors(
-                sself: *mut core::ffi::c_void,
-                v1: core::ffi::c_double,
-                v2: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_angle_between_vectors(self.0, v1, v2) }
-    }
-    fn signed_angle_between_vectors(
-        &mut self,
-        v1: core::ffi::c_double,
-        v2: core::ffi::c_double,
-        vn: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_signed_angle_between_vectors(
-                sself: *mut core::ffi::c_void,
-                v1: core::ffi::c_double,
-                v2: core::ffi::c_double,
-                vn: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_signed_angle_between_vectors(self.0, v1, v2, vn) }
     }
     fn gaussian_amplitude(
         &mut self,
@@ -15158,22 +6811,6 @@ impl VtkMath for vtkMath {
         }
         unsafe { vtk_math_gaussian_amplitude(self.0, variance, distanceFromMean) }
     }
-    fn gaussian_amplitude(
-        &mut self,
-        mean: core::ffi::c_double,
-        variance: core::ffi::c_double,
-        position: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_gaussian_amplitude(
-                sself: *mut core::ffi::c_void,
-                mean: core::ffi::c_double,
-                variance: core::ffi::c_double,
-                position: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_gaussian_amplitude(self.0, mean, variance, position) }
-    }
     fn gaussian_weight(
         &mut self,
         variance: core::ffi::c_double,
@@ -15187,132 +6824,6 @@ impl VtkMath for vtkMath {
             ) -> core::ffi::c_double;
         }
         unsafe { vtk_math_gaussian_weight(self.0, variance, distanceFromMean) }
-    }
-    fn gaussian_weight(
-        &mut self,
-        mean: core::ffi::c_double,
-        variance: core::ffi::c_double,
-        position: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_gaussian_weight(
-                sself: *mut core::ffi::c_void,
-                mean: core::ffi::c_double,
-                variance: core::ffi::c_double,
-                position: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_gaussian_weight(self.0, mean, variance, position) }
-    }
-    fn dot_2_d(
-        &mut self,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-    ) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_dot_2_d(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-                y: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_dot_2_d(self.0, x, y) }
-    }
-    fn dot_2_d(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_dot_2_d(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-                y: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_dot_2_d(self.0, x, y) }
-    }
-    fn outer_2_d(
-        &mut self,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-        A: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_outer_2_d(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-                y: core::ffi::c_float,
-                A: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_outer_2_d(self.0, x, y, A) }
-    }
-    fn outer_2_d(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        A: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_outer_2_d(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-                y: core::ffi::c_double,
-                A: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_outer_2_d(self.0, x, y, A) }
-    }
-    fn norm_2_d(&mut self, x: core::ffi::c_float) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_norm_2_d(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_norm_2_d(self.0, x) }
-    }
-    fn norm_2_d(&mut self, x: core::ffi::c_double) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_norm_2_d(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_norm_2_d(self.0, x) }
-    }
-    fn normalize_2_d(&mut self, v: core::ffi::c_float) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_normalize_2_d(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_normalize_2_d(self.0, v) }
-    }
-    fn normalize_2_d(&mut self, v: core::ffi::c_double) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_normalize_2_d(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_normalize_2_d(self.0, v) }
-    }
-    fn determinant_2_x_2(
-        &mut self,
-        c1: core::ffi::c_float,
-        c2: core::ffi::c_float,
-    ) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_determinant_2_x_2(
-                sself: *mut core::ffi::c_void,
-                c1: core::ffi::c_float,
-                c2: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_determinant_2_x_2(self.0, c1, c2) }
     }
     fn determinant_2_x_2(
         &mut self,
@@ -15331,308 +6842,6 @@ impl VtkMath for vtkMath {
             ) -> core::ffi::c_double;
         }
         unsafe { vtk_math_determinant_2_x_2(self.0, a, b, c, d) }
-    }
-    fn determinant_2_x_2(
-        &mut self,
-        c1: core::ffi::c_double,
-        c2: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_determinant_2_x_2(
-                sself: *mut core::ffi::c_void,
-                c1: core::ffi::c_double,
-                c2: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_determinant_2_x_2(self.0, c1, c2) }
-    }
-    fn lu_factor_3_x_3(&mut self, A: core::ffi::c_float, index: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lu_factor_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                index: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_math_lu_factor_3_x_3(self.0, A, index) }
-    }
-    fn lu_factor_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lu_factor_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                index: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_math_lu_factor_3_x_3(self.0, A, index) }
-    }
-    fn lu_solve_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        index: core::ffi::c_int,
-        x: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lu_solve_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                index: core::ffi::c_int,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_lu_solve_3_x_3(self.0, A, index, x) }
-    }
-    fn lu_solve_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-        x: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lu_solve_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                index: core::ffi::c_int,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_lu_solve_3_x_3(self.0, A, index, x) }
-    }
-    fn linear_solve_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        x: core::ffi::c_float,
-        y: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_linear_solve_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                x: core::ffi::c_float,
-                y: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_linear_solve_3_x_3(self.0, A, x, y) }
-    }
-    fn linear_solve_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_linear_solve_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                x: core::ffi::c_double,
-                y: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_linear_solve_3_x_3(self.0, A, x, y) }
-    }
-    fn multiply_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        v: core::ffi::c_float,
-        u: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                v: core::ffi::c_float,
-                u: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_multiply_3_x_3(self.0, A, v, u) }
-    }
-    fn multiply_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        v: core::ffi::c_double,
-        u: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                v: core::ffi::c_double,
-                u: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_multiply_3_x_3(self.0, A, v, u) }
-    }
-    fn multiply_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        B: core::ffi::c_float,
-        C: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                B: core::ffi::c_float,
-                C: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_multiply_3_x_3(self.0, A, B, C) }
-    }
-    fn multiply_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        B: core::ffi::c_double,
-        C: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                B: core::ffi::c_double,
-                C: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_multiply_3_x_3(self.0, A, B, C) }
-    }
-    fn multiply_matrix(
-        &mut self,
-        A: core::ffi::c_double,
-        B: core::ffi::c_double,
-        rowA: core::ffi::c_uint,
-        colA: core::ffi::c_uint,
-        rowB: core::ffi::c_uint,
-        colB: core::ffi::c_uint,
-        C: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_matrix(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                B: core::ffi::c_double,
-                rowA: core::ffi::c_uint,
-                colA: core::ffi::c_uint,
-                rowB: core::ffi::c_uint,
-                colB: core::ffi::c_uint,
-                C: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_multiply_matrix(self.0, A, B, rowA, colA, rowB, colB, C) }
-    }
-    fn transpose_3_x_3(&mut self, A: core::ffi::c_float, AT: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_math_transpose_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                AT: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_transpose_3_x_3(self.0, A, AT) }
-    }
-    fn transpose_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        AT: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_transpose_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                AT: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_transpose_3_x_3(self.0, A, AT) }
-    }
-    fn invert_3_x_3(&mut self, A: core::ffi::c_float, AI: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_math_invert_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                AI: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_invert_3_x_3(self.0, A, AI) }
-    }
-    fn invert_3_x_3(&mut self, A: core::ffi::c_double, AI: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_invert_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                AI: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_invert_3_x_3(self.0, A, AI) }
-    }
-    fn identity_3_x_3(&mut self, A: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_math_identity_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_identity_3_x_3(self.0, A) }
-    }
-    fn identity_3_x_3(&mut self, A: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_identity_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_identity_3_x_3(self.0, A) }
-    }
-    fn determinant_3_x_3(&mut self, A: core::ffi::c_float) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_determinant_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_determinant_3_x_3(self.0, A) }
-    }
-    fn determinant_3_x_3(&mut self, A: core::ffi::c_double) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_determinant_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_determinant_3_x_3(self.0, A) }
-    }
-    fn determinant_3_x_3(
-        &mut self,
-        c1: core::ffi::c_float,
-        c2: core::ffi::c_float,
-        c3: core::ffi::c_float,
-    ) -> core::ffi::c_float {
-        unsafe extern "C" {
-            fn vtk_math_determinant_3_x_3(
-                sself: *mut core::ffi::c_void,
-                c1: core::ffi::c_float,
-                c2: core::ffi::c_float,
-                c3: core::ffi::c_float,
-            ) -> core::ffi::c_float;
-        }
-        unsafe { vtk_math_determinant_3_x_3(self.0, c1, c2, c3) }
-    }
-    fn determinant_3_x_3(
-        &mut self,
-        c1: core::ffi::c_double,
-        c2: core::ffi::c_double,
-        c3: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_determinant_3_x_3(
-                sself: *mut core::ffi::c_void,
-                c1: core::ffi::c_double,
-                c2: core::ffi::c_double,
-                c3: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_determinant_3_x_3(self.0, c1, c2, c3) }
     }
     fn determinant_3_x_3(
         &mut self,
@@ -15662,254 +6871,6 @@ impl VtkMath for vtkMath {
         }
         unsafe { vtk_math_determinant_3_x_3(self.0, a1, a2, a3, b1, b2, b3, c1, c2, c3) }
     }
-    fn quaternion_to_matrix_3_x_3(
-        &mut self,
-        quat: core::ffi::c_float,
-        A: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_quaternion_to_matrix_3_x_3(
-                sself: *mut core::ffi::c_void,
-                quat: core::ffi::c_float,
-                A: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_quaternion_to_matrix_3_x_3(self.0, quat, A) }
-    }
-    fn quaternion_to_matrix_3_x_3(
-        &mut self,
-        quat: core::ffi::c_double,
-        A: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_quaternion_to_matrix_3_x_3(
-                sself: *mut core::ffi::c_void,
-                quat: core::ffi::c_double,
-                A: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_quaternion_to_matrix_3_x_3(self.0, quat, A) }
-    }
-    fn matrix_3_x_3_to_quaternion(
-        &mut self,
-        A: core::ffi::c_float,
-        quat: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_matrix_3_x_3_to_quaternion(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                quat: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_matrix_3_x_3_to_quaternion(self.0, A, quat) }
-    }
-    fn matrix_3_x_3_to_quaternion(
-        &mut self,
-        A: core::ffi::c_double,
-        quat: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_matrix_3_x_3_to_quaternion(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                quat: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_matrix_3_x_3_to_quaternion(self.0, A, quat) }
-    }
-    fn multiply_quaternion(
-        &mut self,
-        q1: core::ffi::c_float,
-        q2: core::ffi::c_float,
-        q: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_quaternion(
-                sself: *mut core::ffi::c_void,
-                q1: core::ffi::c_float,
-                q2: core::ffi::c_float,
-                q: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_multiply_quaternion(self.0, q1, q2, q) }
-    }
-    fn multiply_quaternion(
-        &mut self,
-        q1: core::ffi::c_double,
-        q2: core::ffi::c_double,
-        q: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_multiply_quaternion(
-                sself: *mut core::ffi::c_void,
-                q1: core::ffi::c_double,
-                q2: core::ffi::c_double,
-                q: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_multiply_quaternion(self.0, q1, q2, q) }
-    }
-    fn rotate_vector_by_normalized_quaternion(
-        &mut self,
-        v: core::ffi::c_float,
-        q: core::ffi::c_float,
-        r: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rotate_vector_by_normalized_quaternion(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_float,
-                q: core::ffi::c_float,
-                r: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_rotate_vector_by_normalized_quaternion(self.0, v, q, r) }
-    }
-    fn rotate_vector_by_normalized_quaternion(
-        &mut self,
-        v: core::ffi::c_double,
-        q: core::ffi::c_double,
-        r: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rotate_vector_by_normalized_quaternion(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-                q: core::ffi::c_double,
-                r: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_rotate_vector_by_normalized_quaternion(self.0, v, q, r) }
-    }
-    fn rotate_vector_by_wxyz(
-        &mut self,
-        v: core::ffi::c_float,
-        q: core::ffi::c_float,
-        r: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rotate_vector_by_wxyz(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_float,
-                q: core::ffi::c_float,
-                r: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_rotate_vector_by_wxyz(self.0, v, q, r) }
-    }
-    fn rotate_vector_by_wxyz(
-        &mut self,
-        v: core::ffi::c_double,
-        q: core::ffi::c_double,
-        r: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rotate_vector_by_wxyz(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-                q: core::ffi::c_double,
-                r: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_rotate_vector_by_wxyz(self.0, v, q, r) }
-    }
-    fn orthogonalize_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        B: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_orthogonalize_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                B: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_orthogonalize_3_x_3(self.0, A, B) }
-    }
-    fn orthogonalize_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        B: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_orthogonalize_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                B: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_orthogonalize_3_x_3(self.0, A, B) }
-    }
-    fn diagonalize_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        w: core::ffi::c_float,
-        V: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_diagonalize_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                w: core::ffi::c_float,
-                V: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_diagonalize_3_x_3(self.0, A, w, V) }
-    }
-    fn diagonalize_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        w: core::ffi::c_double,
-        V: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_diagonalize_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                w: core::ffi::c_double,
-                V: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_diagonalize_3_x_3(self.0, A, w, V) }
-    }
-    fn singular_value_decomposition_3_x_3(
-        &mut self,
-        A: core::ffi::c_float,
-        U: core::ffi::c_float,
-        w: core::ffi::c_float,
-        VT: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_singular_value_decomposition_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_float,
-                U: core::ffi::c_float,
-                w: core::ffi::c_float,
-                VT: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_singular_value_decomposition_3_x_3(self.0, A, U, w, VT) }
-    }
-    fn singular_value_decomposition_3_x_3(
-        &mut self,
-        A: core::ffi::c_double,
-        U: core::ffi::c_double,
-        w: core::ffi::c_double,
-        VT: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_singular_value_decomposition_3_x_3(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                U: core::ffi::c_double,
-                w: core::ffi::c_double,
-                VT: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_singular_value_decomposition_3_x_3(self.0, A, U, w, VT) }
-    }
     fn solve_linear_system_gepp_2_x_2(
         &mut self,
         a00: core::ffi::c_double,
@@ -15918,8 +6879,8 @@ impl VtkMath for vtkMath {
         a11: core::ffi::c_double,
         b0: core::ffi::c_double,
         b1: core::ffi::c_double,
-        x0: core::ffi::c_double,
-        x1: core::ffi::c_double,
+        x0: &mut core::ffi::c_double,
+        x1: &mut core::ffi::c_double,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_math_solve_linear_system_gepp_2_x_2(
@@ -15930,8 +6891,8 @@ impl VtkMath for vtkMath {
                 a11: core::ffi::c_double,
                 b0: core::ffi::c_double,
                 b1: core::ffi::c_double,
-                x0: core::ffi::c_double,
-                x1: core::ffi::c_double,
+                x0: &mut core::ffi::c_double,
+                x1: &mut core::ffi::c_double,
             ) -> core::ffi::c_int;
         }
         unsafe {
@@ -15947,674 +6908,6 @@ impl VtkMath for vtkMath {
                 x1,
             )
         }
-    }
-    fn solve_linear_system(
-        &mut self,
-        A: core::ffi::c_double,
-        x: core::ffi::c_double,
-        size: core::ffi::c_int,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_solve_linear_system(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                x: core::ffi::c_double,
-                size: core::ffi::c_int,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_solve_linear_system(self.0, A, x, size) }
-    }
-    fn invert_matrix(
-        &mut self,
-        A: core::ffi::c_double,
-        AI: core::ffi::c_double,
-        size: core::ffi::c_int,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_invert_matrix(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                AI: core::ffi::c_double,
-                size: core::ffi::c_int,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_invert_matrix(self.0, A, AI, size) }
-    }
-    fn invert_matrix(
-        &mut self,
-        A: core::ffi::c_double,
-        AI: core::ffi::c_double,
-        size: core::ffi::c_int,
-        tmp1Size: core::ffi::c_int,
-        tmp2Size: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_invert_matrix(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                AI: core::ffi::c_double,
-                size: core::ffi::c_int,
-                tmp1Size: core::ffi::c_int,
-                tmp2Size: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_invert_matrix(self.0, A, AI, size, tmp1Size, tmp2Size) }
-    }
-    fn lu_factor_linear_system(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-        size: core::ffi::c_int,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_lu_factor_linear_system(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                index: core::ffi::c_int,
-                size: core::ffi::c_int,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_lu_factor_linear_system(self.0, A, index, size) }
-    }
-    fn lu_factor_linear_system(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-        size: core::ffi::c_int,
-        tmpSize: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_lu_factor_linear_system(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                index: core::ffi::c_int,
-                size: core::ffi::c_int,
-                tmpSize: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_lu_factor_linear_system(self.0, A, index, size, tmpSize) }
-    }
-    fn lu_solve_linear_system(
-        &mut self,
-        A: core::ffi::c_double,
-        index: core::ffi::c_int,
-        x: core::ffi::c_double,
-        size: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lu_solve_linear_system(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                index: core::ffi::c_int,
-                x: core::ffi::c_double,
-                size: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_math_lu_solve_linear_system(self.0, A, index, x, size) }
-    }
-    fn estimate_matrix_condition(
-        &mut self,
-        A: core::ffi::c_double,
-        size: core::ffi::c_int,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_estimate_matrix_condition(
-                sself: *mut core::ffi::c_void,
-                A: core::ffi::c_double,
-                size: core::ffi::c_int,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_estimate_matrix_condition(self.0, A, size) }
-    }
-    fn jacobi(
-        &mut self,
-        a: core::ffi::c_float,
-        w: core::ffi::c_float,
-        v: core::ffi::c_float,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_jacobi(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                w: core::ffi::c_float,
-                v: core::ffi::c_float,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_jacobi(self.0, a, w, v) }
-    }
-    fn jacobi(
-        &mut self,
-        a: core::ffi::c_double,
-        w: core::ffi::c_double,
-        v: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_jacobi(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                w: core::ffi::c_double,
-                v: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_jacobi(self.0, a, w, v) }
-    }
-    fn jacobi_n(
-        &mut self,
-        a: core::ffi::c_float,
-        n: core::ffi::c_int,
-        w: core::ffi::c_float,
-        v: core::ffi::c_float,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_jacobi_n(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_float,
-                n: core::ffi::c_int,
-                w: core::ffi::c_float,
-                v: core::ffi::c_float,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_jacobi_n(self.0, a, n, w, v) }
-    }
-    fn jacobi_n(
-        &mut self,
-        a: core::ffi::c_double,
-        n: core::ffi::c_int,
-        w: core::ffi::c_double,
-        v: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_jacobi_n(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                n: core::ffi::c_int,
-                w: core::ffi::c_double,
-                v: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_jacobi_n(self.0, a, n, w, v) }
-    }
-    fn solve_homogeneous_least_squares(
-        &mut self,
-        numberOfSamples: core::ffi::c_int,
-        xt: core::ffi::c_double,
-        xOrder: core::ffi::c_int,
-        mt: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_solve_homogeneous_least_squares(
-                sself: *mut core::ffi::c_void,
-                numberOfSamples: core::ffi::c_int,
-                xt: core::ffi::c_double,
-                xOrder: core::ffi::c_int,
-                mt: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe {
-            vtk_math_solve_homogeneous_least_squares(
-                self.0,
-                numberOfSamples,
-                xt,
-                xOrder,
-                mt,
-            )
-        }
-    }
-    fn solve_least_squares(
-        &mut self,
-        numberOfSamples: core::ffi::c_int,
-        xt: core::ffi::c_double,
-        xOrder: core::ffi::c_int,
-        yt: core::ffi::c_double,
-        yOrder: core::ffi::c_int,
-        mt: core::ffi::c_double,
-        checkHomogeneous: core::ffi::c_int,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_solve_least_squares(
-                sself: *mut core::ffi::c_void,
-                numberOfSamples: core::ffi::c_int,
-                xt: core::ffi::c_double,
-                xOrder: core::ffi::c_int,
-                yt: core::ffi::c_double,
-                yOrder: core::ffi::c_int,
-                mt: core::ffi::c_double,
-                checkHomogeneous: core::ffi::c_int,
-            ) -> core::ffi::c_int;
-        }
-        unsafe {
-            vtk_math_solve_least_squares(
-                self.0,
-                numberOfSamples,
-                xt,
-                xOrder,
-                yt,
-                yOrder,
-                mt,
-                checkHomogeneous,
-            )
-        }
-    }
-    fn rgb_to_hsv(&mut self, rgb: core::ffi::c_float, hsv: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rgb_to_hsv(
-                sself: *mut core::ffi::c_void,
-                rgb: core::ffi::c_float,
-                hsv: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_rgb_to_hsv(self.0, rgb, hsv) }
-    }
-    fn rgb_to_hsv(
-        &mut self,
-        r: core::ffi::c_float,
-        g: core::ffi::c_float,
-        b: core::ffi::c_float,
-        h: core::ffi::c_float,
-        s: core::ffi::c_float,
-        v: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rgb_to_hsv(
-                sself: *mut core::ffi::c_void,
-                r: core::ffi::c_float,
-                g: core::ffi::c_float,
-                b: core::ffi::c_float,
-                h: core::ffi::c_float,
-                s: core::ffi::c_float,
-                v: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_rgb_to_hsv(self.0, r, g, b, h, s, v) }
-    }
-    fn rgb_to_hsv(&mut self, rgb: core::ffi::c_double, hsv: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rgb_to_hsv(
-                sself: *mut core::ffi::c_void,
-                rgb: core::ffi::c_double,
-                hsv: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_rgb_to_hsv(self.0, rgb, hsv) }
-    }
-    fn rgb_to_hsv(
-        &mut self,
-        r: core::ffi::c_double,
-        g: core::ffi::c_double,
-        b: core::ffi::c_double,
-        h: core::ffi::c_double,
-        s: core::ffi::c_double,
-        v: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rgb_to_hsv(
-                sself: *mut core::ffi::c_void,
-                r: core::ffi::c_double,
-                g: core::ffi::c_double,
-                b: core::ffi::c_double,
-                h: core::ffi::c_double,
-                s: core::ffi::c_double,
-                v: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_rgb_to_hsv(self.0, r, g, b, h, s, v) }
-    }
-    fn hsv_to_rgb(&mut self, hsv: core::ffi::c_float, rgb: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_math_hsv_to_rgb(
-                sself: *mut core::ffi::c_void,
-                hsv: core::ffi::c_float,
-                rgb: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_hsv_to_rgb(self.0, hsv, rgb) }
-    }
-    fn hsv_to_rgb(
-        &mut self,
-        h: core::ffi::c_float,
-        s: core::ffi::c_float,
-        v: core::ffi::c_float,
-        r: core::ffi::c_float,
-        g: core::ffi::c_float,
-        b: core::ffi::c_float,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_hsv_to_rgb(
-                sself: *mut core::ffi::c_void,
-                h: core::ffi::c_float,
-                s: core::ffi::c_float,
-                v: core::ffi::c_float,
-                r: core::ffi::c_float,
-                g: core::ffi::c_float,
-                b: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_math_hsv_to_rgb(self.0, h, s, v, r, g, b) }
-    }
-    fn hsv_to_rgb(&mut self, hsv: core::ffi::c_double, rgb: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_hsv_to_rgb(
-                sself: *mut core::ffi::c_void,
-                hsv: core::ffi::c_double,
-                rgb: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_hsv_to_rgb(self.0, hsv, rgb) }
-    }
-    fn hsv_to_rgb(
-        &mut self,
-        h: core::ffi::c_double,
-        s: core::ffi::c_double,
-        v: core::ffi::c_double,
-        r: core::ffi::c_double,
-        g: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_hsv_to_rgb(
-                sself: *mut core::ffi::c_void,
-                h: core::ffi::c_double,
-                s: core::ffi::c_double,
-                v: core::ffi::c_double,
-                r: core::ffi::c_double,
-                g: core::ffi::c_double,
-                b: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_hsv_to_rgb(self.0, h, s, v, r, g, b) }
-    }
-    fn lab_to_xyz(&mut self, lab: core::ffi::c_double, xyz: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lab_to_xyz(
-                sself: *mut core::ffi::c_void,
-                lab: core::ffi::c_double,
-                xyz: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_lab_to_xyz(self.0, lab, xyz) }
-    }
-    fn lab_to_xyz(
-        &mut self,
-        L: core::ffi::c_double,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lab_to_xyz(
-                sself: *mut core::ffi::c_void,
-                L: core::ffi::c_double,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                x: core::ffi::c_double,
-                y: core::ffi::c_double,
-                z: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_lab_to_xyz(self.0, L, a, b, x, y, z) }
-    }
-    fn xyz_to_lab(&mut self, xyz: core::ffi::c_double, lab: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_xyz_to_lab(
-                sself: *mut core::ffi::c_void,
-                xyz: core::ffi::c_double,
-                lab: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_xyz_to_lab(self.0, xyz, lab) }
-    }
-    fn xyz_to_lab(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-        L: core::ffi::c_double,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_xyz_to_lab(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-                y: core::ffi::c_double,
-                z: core::ffi::c_double,
-                L: core::ffi::c_double,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_xyz_to_lab(self.0, x, y, z, L, a, b) }
-    }
-    fn xyz_to_rgb(&mut self, xyz: core::ffi::c_double, rgb: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_xyz_to_rgb(
-                sself: *mut core::ffi::c_void,
-                xyz: core::ffi::c_double,
-                rgb: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_xyz_to_rgb(self.0, xyz, rgb) }
-    }
-    fn xyz_to_rgb(
-        &mut self,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-        r: core::ffi::c_double,
-        g: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_xyz_to_rgb(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-                y: core::ffi::c_double,
-                z: core::ffi::c_double,
-                r: core::ffi::c_double,
-                g: core::ffi::c_double,
-                b: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_xyz_to_rgb(self.0, x, y, z, r, g, b) }
-    }
-    fn rgb_to_xyz(&mut self, rgb: core::ffi::c_double, xyz: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rgb_to_xyz(
-                sself: *mut core::ffi::c_void,
-                rgb: core::ffi::c_double,
-                xyz: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_rgb_to_xyz(self.0, rgb, xyz) }
-    }
-    fn rgb_to_xyz(
-        &mut self,
-        r: core::ffi::c_double,
-        g: core::ffi::c_double,
-        b: core::ffi::c_double,
-        x: core::ffi::c_double,
-        y: core::ffi::c_double,
-        z: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rgb_to_xyz(
-                sself: *mut core::ffi::c_void,
-                r: core::ffi::c_double,
-                g: core::ffi::c_double,
-                b: core::ffi::c_double,
-                x: core::ffi::c_double,
-                y: core::ffi::c_double,
-                z: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_rgb_to_xyz(self.0, r, g, b, x, y, z) }
-    }
-    fn rgb_to_lab(&mut self, rgb: core::ffi::c_double, lab: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rgb_to_lab(
-                sself: *mut core::ffi::c_void,
-                rgb: core::ffi::c_double,
-                lab: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_rgb_to_lab(self.0, rgb, lab) }
-    }
-    fn rgb_to_lab(
-        &mut self,
-        red: core::ffi::c_double,
-        green: core::ffi::c_double,
-        blue: core::ffi::c_double,
-        L: core::ffi::c_double,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_rgb_to_lab(
-                sself: *mut core::ffi::c_void,
-                red: core::ffi::c_double,
-                green: core::ffi::c_double,
-                blue: core::ffi::c_double,
-                L: core::ffi::c_double,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_rgb_to_lab(self.0, red, green, blue, L, a, b) }
-    }
-    fn lab_to_rgb(&mut self, lab: core::ffi::c_double, rgb: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lab_to_rgb(
-                sself: *mut core::ffi::c_void,
-                lab: core::ffi::c_double,
-                rgb: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_lab_to_rgb(self.0, lab, rgb) }
-    }
-    fn lab_to_rgb(
-        &mut self,
-        L: core::ffi::c_double,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        red: core::ffi::c_double,
-        green: core::ffi::c_double,
-        blue: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_lab_to_rgb(
-                sself: *mut core::ffi::c_void,
-                L: core::ffi::c_double,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                red: core::ffi::c_double,
-                green: core::ffi::c_double,
-                blue: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_lab_to_rgb(self.0, L, a, b, red, green, blue) }
-    }
-    fn uninitialize_bounds(&mut self, bounds: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_math_uninitialize_bounds(
-                sself: *mut core::ffi::c_void,
-                bounds: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_uninitialize_bounds(self.0, bounds) }
-    }
-    fn are_bounds_initialized(
-        &mut self,
-        bounds: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_are_bounds_initialized(
-                sself: *mut core::ffi::c_void,
-                bounds: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_are_bounds_initialized(self.0, bounds) }
-    }
-    fn clamp_value(
-        &mut self,
-        value: core::ffi::c_double,
-        range: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_clamp_value(
-                sself: *mut core::ffi::c_void,
-                value: core::ffi::c_double,
-                range: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_clamp_value(self.0, value, range) }
-    }
-    fn clamp_value(
-        &mut self,
-        value: core::ffi::c_double,
-        range: core::ffi::c_double,
-        clamped_value: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_clamp_value(
-                sself: *mut core::ffi::c_void,
-                value: core::ffi::c_double,
-                range: core::ffi::c_double,
-                clamped_value: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_clamp_value(self.0, value, range, clamped_value) }
-    }
-    fn clamp_values(
-        &mut self,
-        values: core::ffi::c_double,
-        nb_values: core::ffi::c_int,
-        range: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_clamp_values(
-                sself: *mut core::ffi::c_void,
-                values: core::ffi::c_double,
-                nb_values: core::ffi::c_int,
-                range: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_math_clamp_values(self.0, values, nb_values, range) }
-    }
-    fn clamp_values(
-        &mut self,
-        values: core::ffi::c_double,
-        nb_values: core::ffi::c_int,
-        range: core::ffi::c_double,
-        clamped_values: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_math_clamp_values(
-                sself: *mut core::ffi::c_void,
-                values: core::ffi::c_double,
-                nb_values: core::ffi::c_int,
-                range: core::ffi::c_double,
-                clamped_values: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_math_clamp_values(self.0, values, nb_values, range, clamped_values)
-        }
-    }
-    fn clamp_and_normalize_value(
-        &mut self,
-        value: core::ffi::c_double,
-        range: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_clamp_and_normalize_value(
-                sself: *mut core::ffi::c_void,
-                value: core::ffi::c_double,
-                range: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_clamp_and_normalize_value(self.0, value, range) }
     }
     fn get_scalar_type_fitting_range(
         &mut self,
@@ -16641,104 +6934,6 @@ impl VtkMath for vtkMath {
                 shift,
             )
         }
-    }
-    fn get_adjusted_scalar_range(
-        &mut self,
-        array: *mut core::ffi::c_void,
-        comp: core::ffi::c_int,
-        range: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_get_adjusted_scalar_range(
-                sself: *mut core::ffi::c_void,
-                array: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-                range: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_get_adjusted_scalar_range(self.0, array, comp, range) }
-    }
-    fn extent_is_within_other_extent(
-        &mut self,
-        extent1: core::ffi::c_int,
-        extent2: core::ffi::c_int,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_extent_is_within_other_extent(
-                sself: *mut core::ffi::c_void,
-                extent1: core::ffi::c_int,
-                extent2: core::ffi::c_int,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_extent_is_within_other_extent(self.0, extent1, extent2) }
-    }
-    fn bounds_is_within_other_bounds(
-        &mut self,
-        bounds1: core::ffi::c_double,
-        bounds2: core::ffi::c_double,
-        delta: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_bounds_is_within_other_bounds(
-                sself: *mut core::ffi::c_void,
-                bounds1: core::ffi::c_double,
-                bounds2: core::ffi::c_double,
-                delta: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe {
-            vtk_math_bounds_is_within_other_bounds(self.0, bounds1, bounds2, delta)
-        }
-    }
-    fn point_is_within_bounds(
-        &mut self,
-        point: core::ffi::c_double,
-        bounds: core::ffi::c_double,
-        delta: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_point_is_within_bounds(
-                sself: *mut core::ffi::c_void,
-                point: core::ffi::c_double,
-                bounds: core::ffi::c_double,
-                delta: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_point_is_within_bounds(self.0, point, bounds, delta) }
-    }
-    fn plane_intersects_aabb(
-        &mut self,
-        bounds: core::ffi::c_double,
-        normal: core::ffi::c_double,
-        point: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_plane_intersects_aabb(
-                sself: *mut core::ffi::c_void,
-                bounds: core::ffi::c_double,
-                normal: core::ffi::c_double,
-                point: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_plane_intersects_aabb(self.0, bounds, normal, point) }
-    }
-    fn solve_3_point_circle(
-        &mut self,
-        p1: core::ffi::c_double,
-        p2: core::ffi::c_double,
-        p3: core::ffi::c_double,
-        center: core::ffi::c_double,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_math_solve_3_point_circle(
-                sself: *mut core::ffi::c_void,
-                p1: core::ffi::c_double,
-                p2: core::ffi::c_double,
-                p3: core::ffi::c_double,
-                center: core::ffi::c_double,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_math_solve_3_point_circle(self.0, p1, p2, p3, center) }
     }
     fn inf(&mut self) -> core::ffi::c_double {
         unsafe extern "C" {
@@ -16784,28 +6979,6 @@ impl VtkMath for vtkMath {
             ) -> bool;
         }
         unsafe { vtk_math_is_finite(self.0, x) }
-    }
-    fn quadratic_root(
-        &mut self,
-        a: core::ffi::c_double,
-        b: core::ffi::c_double,
-        c: core::ffi::c_double,
-        min: core::ffi::c_double,
-        max: core::ffi::c_double,
-        u: core::ffi::c_double,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_math_quadratic_root(
-                sself: *mut core::ffi::c_void,
-                a: core::ffi::c_double,
-                b: core::ffi::c_double,
-                c: core::ffi::c_double,
-                min: core::ffi::c_double,
-                max: core::ffi::c_double,
-                u: core::ffi::c_double,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_math_quadratic_root(self.0, a, b, c, min, max, u) }
     }
 }
 impl VtkMersenneTwister for vtkMersenneTwister {
@@ -16882,14 +7055,6 @@ impl VtkMersenneTwister for vtkMersenneTwister {
         }
         unsafe { vtk_mersenne_twister_get_value(self.0, id) }
     }
-    fn get_value(&mut self) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_mersenne_twister_get_value(
-                sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_mersenne_twister_get_value(self.0) }
-    }
     fn next(&mut self, id: core::ffi::c_uint) -> () {
         unsafe extern "C" {
             fn vtk_mersenne_twister_next(
@@ -16898,12 +7063,6 @@ impl VtkMersenneTwister for vtkMersenneTwister {
             );
         }
         unsafe { vtk_mersenne_twister_next(self.0, id) }
-    }
-    fn next(&mut self) -> () {
-        unsafe extern "C" {
-            fn vtk_mersenne_twister_next(sself: *mut core::ffi::c_void);
-        }
-        unsafe { vtk_mersenne_twister_next(self.0) }
     }
 }
 impl VtkMinimalStandardRandomSequence for vtkMinimalStandardRandomSequence {
@@ -17135,46 +7294,6 @@ impl VtkMultiThreader for vtkMultiThreader {
         }
         unsafe { vtk_multi_threader_multiple_method_execute(self.0) }
     }
-    fn set_single_method(&mut self, p0: *mut core::ffi::c_void, data: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_multi_threader_set_single_method(
-                sself: *mut core::ffi::c_void,
-                p0: *mut core::ffi::c_void,
-                data: (),
-            );
-        }
-        unsafe { vtk_multi_threader_set_single_method(self.0, p0, data) }
-    }
-    fn set_multiple_method(
-        &mut self,
-        index: core::ffi::c_int,
-        p1: *mut core::ffi::c_void,
-        data: (),
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_multi_threader_set_multiple_method(
-                sself: *mut core::ffi::c_void,
-                index: core::ffi::c_int,
-                p1: *mut core::ffi::c_void,
-                data: (),
-            );
-        }
-        unsafe { vtk_multi_threader_set_multiple_method(self.0, index, p1, data) }
-    }
-    fn spawn_thread(
-        &mut self,
-        p0: *mut core::ffi::c_void,
-        data: (),
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_multi_threader_spawn_thread(
-                sself: *mut core::ffi::c_void,
-                p0: *mut core::ffi::c_void,
-                data: (),
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_multi_threader_spawn_thread(self.0, p0, data) }
-    }
     fn terminate_thread(&mut self, threadId: core::ffi::c_int) -> () {
         unsafe extern "C" {
             fn vtk_multi_threader_terminate_thread(
@@ -17193,47 +7312,27 @@ impl VtkMultiThreader for vtkMultiThreader {
         }
         unsafe { vtk_multi_threader_is_thread_active(self.0, threadId) }
     }
-    fn get_current_thread_id(&mut self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_multi_threader_get_current_thread_id(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_multi_threader_get_current_thread_id(self.0) }
-    }
-    fn threads_equal(
-        &mut self,
-        t1: *mut core::ffi::c_void,
-        t2: *mut core::ffi::c_void,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_multi_threader_threads_equal(
-                sself: *mut core::ffi::c_void,
-                t1: *mut core::ffi::c_void,
-                t2: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_multi_threader_threads_equal(self.0, t1, t2) }
-    }
 }
 impl VtkObject for vtkObject {
-    fn is_type_of(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int {
+    fn is_type_of(&mut self, type_: &str) -> core::ffi::c_int {
+        let c_type = std::ffi::CString::new(type_).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_object_is_type_of(
                 sself: *mut core::ffi::c_void,
-                type_: core::ffi::c_char,
+                type_: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_object_is_type_of(self.0, type_) }
+        unsafe { vtk_object_is_type_of(self.0, c_type.as_ptr()) }
     }
-    fn is_a(&mut self, type_: core::ffi::c_char) -> core::ffi::c_int {
+    fn is_a(&mut self, type_: &str) -> core::ffi::c_int {
+        let c_type = std::ffi::CString::new(type_).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_object_is_a(
                 sself: *mut core::ffi::c_void,
-                type_: core::ffi::c_char,
+                type_: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_object_is_a(self.0, type_) }
+        unsafe { vtk_object_is_a(self.0, c_type.as_ptr()) }
     }
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
         unsafe extern "C" {
@@ -17254,27 +7353,33 @@ impl VtkObject for vtkObject {
     }
     fn get_number_of_generations_from_base_type(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar {
+        type_: &str,
+    ) -> core::ffi::c_longlong {
+        let c_type = std::ffi::CString::new(type_).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_object_get_number_of_generations_from_base_type(
                 sself: *mut core::ffi::c_void,
-                type_: core::ffi::c_char,
-            ) -> core::ffi::c_uchar;
+                type_: *const core::ffi::c_char,
+            ) -> core::ffi::c_longlong;
         }
-        unsafe { vtk_object_get_number_of_generations_from_base_type(self.0, type_) }
+        unsafe {
+            vtk_object_get_number_of_generations_from_base_type(self.0, c_type.as_ptr())
+        }
     }
     fn get_number_of_generations_from_base(
         &mut self,
-        type_: core::ffi::c_char,
-    ) -> core::ffi::c_uchar {
+        type_: &str,
+    ) -> core::ffi::c_longlong {
+        let c_type = std::ffi::CString::new(type_).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_object_get_number_of_generations_from_base(
                 sself: *mut core::ffi::c_void,
-                type_: core::ffi::c_char,
-            ) -> core::ffi::c_uchar;
+                type_: *const core::ffi::c_char,
+            ) -> core::ffi::c_longlong;
         }
-        unsafe { vtk_object_get_number_of_generations_from_base(self.0, type_) }
+        unsafe {
+            vtk_object_get_number_of_generations_from_base(self.0, c_type.as_ptr())
+        }
     }
     fn new(&mut self) -> *mut core::ffi::c_void {
         unsafe extern "C" {
@@ -17371,22 +7476,6 @@ impl VtkObject for vtkObject {
         }
         unsafe { vtk_object_add_observer(self.0, event, p1, priority) }
     }
-    fn add_observer(
-        &mut self,
-        event: core::ffi::c_char,
-        p1: *mut core::ffi::c_void,
-        priority: core::ffi::c_float,
-    ) -> core::ffi::c_ulong {
-        unsafe extern "C" {
-            fn vtk_object_add_observer(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_char,
-                p1: *mut core::ffi::c_void,
-                priority: core::ffi::c_float,
-            ) -> core::ffi::c_ulong;
-        }
-        unsafe { vtk_object_add_observer(self.0, event, p1, priority) }
-    }
     fn get_command(&mut self, tag: core::ffi::c_ulong) -> *mut core::ffi::c_void {
         unsafe extern "C" {
             fn vtk_object_get_command(
@@ -17419,20 +7508,6 @@ impl VtkObject for vtkObject {
         }
         unsafe { vtk_object_remove_observers(self.0, event, p1) }
     }
-    fn remove_observers(
-        &mut self,
-        event: core::ffi::c_char,
-        p1: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_object_remove_observers(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_char,
-                p1: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_object_remove_observers(self.0, event, p1) }
-    }
     fn has_observer(
         &mut self,
         event: core::ffi::c_ulong,
@@ -17446,117 +7521,12 @@ impl VtkObject for vtkObject {
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_object_has_observer(self.0, event, p1) }
-    }
-    fn has_observer(
-        &mut self,
-        event: core::ffi::c_char,
-        p1: *mut core::ffi::c_void,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_object_has_observer(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_char,
-                p1: *mut core::ffi::c_void,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_object_has_observer(self.0, event, p1) }
-    }
-    fn remove_observer(&mut self, tag: core::ffi::c_ulong) -> () {
-        unsafe extern "C" {
-            fn vtk_object_remove_observer(
-                sself: *mut core::ffi::c_void,
-                tag: core::ffi::c_ulong,
-            );
-        }
-        unsafe { vtk_object_remove_observer(self.0, tag) }
-    }
-    fn remove_observers(&mut self, event: core::ffi::c_ulong) -> () {
-        unsafe extern "C" {
-            fn vtk_object_remove_observers(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_ulong,
-            );
-        }
-        unsafe { vtk_object_remove_observers(self.0, event) }
-    }
-    fn remove_observers(&mut self, event: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_object_remove_observers(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_object_remove_observers(self.0, event) }
     }
     fn remove_all_observers(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_object_remove_all_observers(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_object_remove_all_observers(self.0) }
-    }
-    fn has_observer(&mut self, event: core::ffi::c_ulong) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_object_has_observer(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_ulong,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_object_has_observer(self.0, event) }
-    }
-    fn has_observer(&mut self, event: core::ffi::c_char) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_object_has_observer(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_char,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_object_has_observer(self.0, event) }
-    }
-    fn invoke_event(
-        &mut self,
-        event: core::ffi::c_ulong,
-        callData: (),
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_object_invoke_event(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_ulong,
-                callData: (),
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_object_invoke_event(self.0, event, callData) }
-    }
-    fn invoke_event(
-        &mut self,
-        event: core::ffi::c_char,
-        callData: (),
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_object_invoke_event(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_char,
-                callData: (),
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_object_invoke_event(self.0, event, callData) }
-    }
-    fn invoke_event(&mut self, event: core::ffi::c_ulong) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_object_invoke_event(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_ulong,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_object_invoke_event(self.0, event) }
-    }
-    fn invoke_event(&mut self, event: core::ffi::c_char) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_object_invoke_event(
-                sself: *mut core::ffi::c_void,
-                event: core::ffi::c_char,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_object_invoke_event(self.0, event) }
     }
 }
 impl VtkObjectFactoryCollection for vtkObjectFactoryCollection {
@@ -17602,15 +7572,6 @@ impl VtkObjectFactoryCollection for vtkObjectFactoryCollection {
         }
         unsafe { vtk_object_factory_collection_get_next_item(self.0) }
     }
-    fn get_next_object_factory(&mut self, cookie: ()) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_object_factory_collection_get_next_object_factory(
-                sself: *mut core::ffi::c_void,
-                cookie: (),
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_object_factory_collection_get_next_object_factory(self.0, cookie) }
-    }
 }
 impl VtkOldStyleCallbackCommand for vtkOldStyleCallbackCommand {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
@@ -17637,31 +7598,6 @@ impl VtkOldStyleCallbackCommand for vtkOldStyleCallbackCommand {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_old_style_callback_command_new(self.0) }
-    }
-    fn execute(
-        &mut self,
-        invoker: *mut core::ffi::c_void,
-        eid: core::ffi::c_ulong,
-        calldata: (),
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_old_style_callback_command_execute(
-                sself: *mut core::ffi::c_void,
-                invoker: *mut core::ffi::c_void,
-                eid: core::ffi::c_ulong,
-                calldata: (),
-            );
-        }
-        unsafe { vtk_old_style_callback_command_execute(self.0, invoker, eid, calldata) }
-    }
-    fn set_client_data(&mut self, cd: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_old_style_callback_command_set_client_data(
-                sself: *mut core::ffi::c_void,
-                cd: (),
-            );
-        }
-        unsafe { vtk_old_style_callback_command_set_client_data(self.0, cd) }
     }
     fn set_callback(&mut self, f: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -17727,50 +7663,55 @@ impl VtkOutputWindow for vtkOutputWindow {
         }
         unsafe { vtk_output_window_set_instance(self.0, instance) }
     }
-    fn display_text(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_text(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_output_window_display_text(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_output_window_display_text(self.0, p0) }
+        unsafe { vtk_output_window_display_text(self.0, c_p0.as_ptr()) }
     }
-    fn display_error_text(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_error_text(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_output_window_display_error_text(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_output_window_display_error_text(self.0, p0) }
+        unsafe { vtk_output_window_display_error_text(self.0, c_p0.as_ptr()) }
     }
-    fn display_warning_text(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_warning_text(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_output_window_display_warning_text(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_output_window_display_warning_text(self.0, p0) }
+        unsafe { vtk_output_window_display_warning_text(self.0, c_p0.as_ptr()) }
     }
-    fn display_generic_warning_text(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_generic_warning_text(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_output_window_display_generic_warning_text(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_output_window_display_generic_warning_text(self.0, p0) }
+        unsafe { vtk_output_window_display_generic_warning_text(self.0, c_p0.as_ptr()) }
     }
-    fn display_debug_text(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_debug_text(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_output_window_display_debug_text(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_output_window_display_debug_text(self.0, p0) }
+        unsafe { vtk_output_window_display_debug_text(self.0, c_p0.as_ptr()) }
     }
     fn prompt_user_on(&mut self) -> () {
         unsafe extern "C" {
@@ -17935,20 +7876,6 @@ impl VtkOverrideInformationCollection for vtkOverrideInformationCollection {
         }
         unsafe { vtk_override_information_collection_get_next_item(self.0) }
     }
-    fn get_next_override_information(&mut self, cookie: ()) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_override_information_collection_get_next_override_information(
-                sself: *mut core::ffi::c_void,
-                cookie: (),
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe {
-            vtk_override_information_collection_get_next_override_information(
-                self.0,
-                cookie,
-            )
-        }
-    }
 }
 impl VtkPoints for vtkPoints {
     fn new(&mut self, dataType: core::ffi::c_int) -> *mut core::ffi::c_void {
@@ -17959,12 +7886,6 @@ impl VtkPoints for vtkPoints {
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_points_new(self.0, dataType) }
-    }
-    fn new(&mut self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_points_new(sself: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_points_new(self.0) }
     }
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
         unsafe extern "C" {
@@ -17985,14 +7906,14 @@ impl VtkPoints for vtkPoints {
     }
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_points_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-                ext: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
+                ext: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_points_allocate(self.0, sz, ext) }
@@ -18103,15 +8024,6 @@ impl VtkPoints for vtkPoints {
         }
         unsafe { vtk_points_set_data_type_to_double(self.0) }
     }
-    fn get_void_pointer(&mut self, id: core::ffi::c_int) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_points_get_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_int,
-            ) -> *mut ();
-        }
-        unsafe { vtk_points_get_void_pointer(self.0, id) }
-    }
     fn squeeze(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_points_squeeze(sself: *mut core::ffi::c_void);
@@ -18150,56 +8062,17 @@ impl VtkPoints for vtkPoints {
         }
         unsafe { vtk_points_get_actual_memory_size(self.0) }
     }
-    fn get_number_of_points(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_points(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_points_get_number_of_points(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_points_get_number_of_points(self.0) }
     }
-    fn get_point(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_points_get_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_points_get_point(self.0, id) }
-    }
-    fn get_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_points_get_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_points_get_point(self.0, id, x) }
-    }
-    fn set_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_points_set_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_points_set_point(self.0, id, x) }
-    }
-    fn set_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_points_set_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_points_set_point(self.0, id, x) }
-    }
     fn set_point(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
@@ -18207,7 +8080,7 @@ impl VtkPoints for vtkPoints {
         unsafe extern "C" {
             fn vtk_points_set_point(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 x: core::ffi::c_double,
                 y: core::ffi::c_double,
                 z: core::ffi::c_double,
@@ -18215,29 +8088,9 @@ impl VtkPoints for vtkPoints {
         }
         unsafe { vtk_points_set_point(self.0, id, x, y, z) }
     }
-    fn insert_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_points_insert_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_points_insert_point(self.0, id, x) }
-    }
-    fn insert_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_points_insert_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_points_insert_point(self.0, id, x) }
-    }
     fn insert_point(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
@@ -18245,7 +8098,7 @@ impl VtkPoints for vtkPoints {
         unsafe extern "C" {
             fn vtk_points_insert_point(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 x: core::ffi::c_double,
                 y: core::ffi::c_double,
                 z: core::ffi::c_double,
@@ -18269,72 +8122,36 @@ impl VtkPoints for vtkPoints {
         }
         unsafe { vtk_points_insert_points(self.0, dstIds, srcIds, source) }
     }
-    fn insert_points(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_points_insert_points(
-                sself: *mut core::ffi::c_void,
-                dstStart: core::ffi::c_uchar,
-                n: core::ffi::c_uchar,
-                srcStart: core::ffi::c_uchar,
-                source: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_points_insert_points(self.0, dstStart, n, srcStart, source) }
-    }
-    fn insert_next_point(&mut self, x: core::ffi::c_float) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_points_insert_next_point(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_points_insert_next_point(self.0, x) }
-    }
-    fn insert_next_point(&mut self, x: core::ffi::c_double) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_points_insert_next_point(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_points_insert_next_point(self.0, x) }
-    }
     fn insert_next_point(
         &mut self,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
         z: core::ffi::c_double,
-    ) -> core::ffi::c_uchar {
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_points_insert_next_point(
                 sself: *mut core::ffi::c_void,
                 x: core::ffi::c_double,
                 y: core::ffi::c_double,
                 z: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_points_insert_next_point(self.0, x, y, z) }
     }
-    fn set_number_of_points(&mut self, numPoints: core::ffi::c_uchar) -> () {
+    fn set_number_of_points(&mut self, numPoints: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_points_set_number_of_points(
                 sself: *mut core::ffi::c_void,
-                numPoints: core::ffi::c_uchar,
+                numPoints: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_points_set_number_of_points(self.0, numPoints) }
     }
-    fn resize(&mut self, numPoints: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn resize(&mut self, numPoints: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_points_resize(
                 sself: *mut core::ffi::c_void,
-                numPoints: core::ffi::c_uchar,
+                numPoints: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_points_resize(self.0, numPoints) }
@@ -18358,23 +8175,6 @@ impl VtkPoints for vtkPoints {
             fn vtk_points_compute_bounds(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_points_compute_bounds(self.0) }
-    }
-    fn get_bounds(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_points_get_bounds(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_points_get_bounds(self.0) }
-    }
-    fn get_bounds(&mut self, bounds: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_points_get_bounds(
-                sself: *mut core::ffi::c_void,
-                bounds: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_points_get_bounds(self.0, bounds) }
     }
     fn get_m_time(&mut self) -> core::ffi::c_ulong {
         unsafe extern "C" {
@@ -18401,14 +8201,6 @@ impl VtkPoints2D for vtkPoints2D {
         }
         unsafe { vtk_points_2_d_new(self.0, dataType) }
     }
-    fn new(&mut self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_points_2_d_new(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_points_2_d_new(self.0) }
-    }
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void {
         unsafe extern "C" {
             fn vtk_points_2_d_safe_down_cast(
@@ -18428,14 +8220,14 @@ impl VtkPoints2D for vtkPoints2D {
     }
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_points_2_d_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-                ext: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
+                ext: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_points_2_d_allocate(self.0, sz, ext) }
@@ -18554,15 +8346,6 @@ impl VtkPoints2D for vtkPoints2D {
         }
         unsafe { vtk_points_2_d_set_data_type_to_double(self.0) }
     }
-    fn get_void_pointer(&mut self, id: core::ffi::c_int) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_points_2_d_get_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_int,
-            ) -> *mut ();
-        }
-        unsafe { vtk_points_2_d_get_void_pointer(self.0, id) }
-    }
     fn squeeze(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_points_2_d_squeeze(sself: *mut core::ffi::c_void);
@@ -18601,160 +8384,83 @@ impl VtkPoints2D for vtkPoints2D {
         }
         unsafe { vtk_points_2_d_get_actual_memory_size(self.0) }
     }
-    fn get_number_of_points(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_points(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_points_2_d_get_number_of_points(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_points_2_d_get_number_of_points(self.0) }
     }
-    fn get_point(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_points_2_d_get_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_points_2_d_get_point(self.0, id) }
-    }
-    fn get_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_points_2_d_get_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_points_2_d_get_point(self.0, id, x) }
-    }
-    fn set_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_points_2_d_set_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_points_2_d_set_point(self.0, id, x) }
-    }
-    fn set_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_points_2_d_set_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_points_2_d_set_point(self.0, id, x) }
-    }
     fn set_point(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
     ) -> () {
         unsafe extern "C" {
             fn vtk_points_2_d_set_point(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 x: core::ffi::c_double,
                 y: core::ffi::c_double,
             );
         }
         unsafe { vtk_points_2_d_set_point(self.0, id, x, y) }
     }
-    fn insert_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_float) -> () {
-        unsafe extern "C" {
-            fn vtk_points_2_d_insert_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_float,
-            );
-        }
-        unsafe { vtk_points_2_d_insert_point(self.0, id, x) }
-    }
-    fn insert_point(&mut self, id: core::ffi::c_uchar, x: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_points_2_d_insert_point(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                x: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_points_2_d_insert_point(self.0, id, x) }
-    }
     fn insert_point(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
     ) -> () {
         unsafe extern "C" {
             fn vtk_points_2_d_insert_point(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 x: core::ffi::c_double,
                 y: core::ffi::c_double,
             );
         }
         unsafe { vtk_points_2_d_insert_point(self.0, id, x, y) }
     }
-    fn insert_next_point(&mut self, x: core::ffi::c_float) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_points_2_d_insert_next_point(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_float,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_points_2_d_insert_next_point(self.0, x) }
-    }
-    fn insert_next_point(&mut self, x: core::ffi::c_double) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_points_2_d_insert_next_point(
-                sself: *mut core::ffi::c_void,
-                x: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_points_2_d_insert_next_point(self.0, x) }
-    }
     fn insert_next_point(
         &mut self,
         x: core::ffi::c_double,
         y: core::ffi::c_double,
-    ) -> core::ffi::c_uchar {
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_points_2_d_insert_next_point(
                 sself: *mut core::ffi::c_void,
                 x: core::ffi::c_double,
                 y: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_points_2_d_insert_next_point(self.0, x, y) }
     }
-    fn remove_point(&mut self, id: core::ffi::c_uchar) -> () {
+    fn remove_point(&mut self, id: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_points_2_d_remove_point(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_points_2_d_remove_point(self.0, id) }
     }
-    fn set_number_of_points(&mut self, numPoints: core::ffi::c_uchar) -> () {
+    fn set_number_of_points(&mut self, numPoints: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_points_2_d_set_number_of_points(
                 sself: *mut core::ffi::c_void,
-                numPoints: core::ffi::c_uchar,
+                numPoints: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_points_2_d_set_number_of_points(self.0, numPoints) }
     }
-    fn resize(&mut self, numPoints: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn resize(&mut self, numPoints: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_points_2_d_resize(
                 sself: *mut core::ffi::c_void,
-                numPoints: core::ffi::c_uchar,
+                numPoints: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_points_2_d_resize(self.0, numPoints) }
@@ -18778,23 +8484,6 @@ impl VtkPoints2D for vtkPoints2D {
             fn vtk_points_2_d_compute_bounds(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_points_2_d_compute_bounds(self.0) }
-    }
-    fn get_bounds(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_points_2_d_get_bounds(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_points_2_d_get_bounds(self.0) }
-    }
-    fn get_bounds(&mut self, bounds: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_points_2_d_get_bounds(
-                sself: *mut core::ffi::c_void,
-                bounds: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_points_2_d_get_bounds(self.0, bounds) }
     }
 }
 impl VtkPriorityQueue for vtkPriorityQueue {
@@ -18823,95 +8512,81 @@ impl VtkPriorityQueue for vtkPriorityQueue {
         }
         unsafe { vtk_priority_queue_new_instance(self.0) }
     }
-    fn allocate(&mut self, sz: core::ffi::c_uchar, ext: core::ffi::c_uchar) -> () {
+    fn allocate(&mut self, sz: core::ffi::c_longlong, ext: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_priority_queue_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-                ext: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
+                ext: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_priority_queue_allocate(self.0, sz, ext) }
     }
-    fn insert(&mut self, priority: core::ffi::c_double, id: core::ffi::c_uchar) -> () {
+    fn insert(
+        &mut self,
+        priority: core::ffi::c_double,
+        id: core::ffi::c_longlong,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_priority_queue_insert(
                 sself: *mut core::ffi::c_void,
                 priority: core::ffi::c_double,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_priority_queue_insert(self.0, priority, id) }
     }
     fn pop(
         &mut self,
-        location: core::ffi::c_uchar,
-        priority: core::ffi::c_double,
-    ) -> core::ffi::c_uchar {
+        location: core::ffi::c_longlong,
+        priority: &mut core::ffi::c_double,
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_priority_queue_pop(
                 sself: *mut core::ffi::c_void,
-                location: core::ffi::c_uchar,
-                priority: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
+                location: core::ffi::c_longlong,
+                priority: &mut core::ffi::c_double,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_priority_queue_pop(self.0, location, priority) }
     }
-    fn pop(&mut self, location: core::ffi::c_uchar) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_priority_queue_pop(
-                sself: *mut core::ffi::c_void,
-                location: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_priority_queue_pop(self.0, location) }
-    }
     fn peek(
         &mut self,
-        location: core::ffi::c_uchar,
-        priority: core::ffi::c_double,
-    ) -> core::ffi::c_uchar {
+        location: core::ffi::c_longlong,
+        priority: &mut core::ffi::c_double,
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_priority_queue_peek(
                 sself: *mut core::ffi::c_void,
-                location: core::ffi::c_uchar,
-                priority: core::ffi::c_double,
-            ) -> core::ffi::c_uchar;
+                location: core::ffi::c_longlong,
+                priority: &mut core::ffi::c_double,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_priority_queue_peek(self.0, location, priority) }
     }
-    fn peek(&mut self, location: core::ffi::c_uchar) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_priority_queue_peek(
-                sself: *mut core::ffi::c_void,
-                location: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_priority_queue_peek(self.0, location) }
-    }
-    fn delete_id(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_double {
+    fn delete_id(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_double {
         unsafe extern "C" {
             fn vtk_priority_queue_delete_id(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_double;
         }
         unsafe { vtk_priority_queue_delete_id(self.0, id) }
     }
-    fn get_priority(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_double {
+    fn get_priority(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_double {
         unsafe extern "C" {
             fn vtk_priority_queue_get_priority(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_double;
         }
         unsafe { vtk_priority_queue_get_priority(self.0, id) }
     }
-    fn get_number_of_items(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_items(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_priority_queue_get_number_of_items(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_priority_queue_get_number_of_items(self.0) }
     }
@@ -18965,118 +8640,88 @@ impl VtkRandomPool for vtkRandomPool {
         }
         unsafe { vtk_random_pool_get_sequence(self.0) }
     }
-    fn set_size(&mut self, _arg: core::ffi::c_uchar) -> () {
+    fn set_size(&mut self, _arg: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_random_pool_set_size(
                 sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_uchar,
+                _arg: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_random_pool_set_size(self.0, _arg) }
     }
-    fn get_size_min_value(&mut self) -> core::ffi::c_uchar {
+    fn get_size_min_value(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_size_min_value(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_size_min_value(self.0) }
     }
-    fn get_size_max_value(&mut self) -> core::ffi::c_uchar {
+    fn get_size_max_value(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_size_max_value(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_size_max_value(self.0) }
     }
-    fn get_size(&mut self) -> core::ffi::c_uchar {
+    fn get_size(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_size(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_size(self.0) }
     }
-    fn set_number_of_components(&mut self, _arg: core::ffi::c_uchar) -> () {
+    fn set_number_of_components(&mut self, _arg: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_random_pool_set_number_of_components(
                 sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_uchar,
+                _arg: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_random_pool_set_number_of_components(self.0, _arg) }
     }
-    fn get_number_of_components_min_value(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_components_min_value(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_number_of_components_min_value(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_number_of_components_min_value(self.0) }
     }
-    fn get_number_of_components_max_value(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_components_max_value(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_number_of_components_max_value(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_number_of_components_max_value(self.0) }
     }
-    fn get_number_of_components(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_components(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_number_of_components(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_number_of_components(self.0) }
     }
-    fn get_total_size(&mut self) -> core::ffi::c_uchar {
+    fn get_total_size(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_total_size(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_total_size(self.0) }
     }
-    fn generate_pool(&mut self) -> *const core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_random_pool_generate_pool(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_double;
-        }
-        unsafe { vtk_random_pool_generate_pool(self.0) }
-    }
-    fn get_pool(&mut self) -> *const core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_random_pool_get_pool(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_double;
-        }
-        unsafe { vtk_random_pool_get_pool(self.0) }
-    }
-    fn get_value(&mut self, i: core::ffi::c_uchar) -> core::ffi::c_double {
+    fn get_value(&mut self, i: core::ffi::c_longlong) -> core::ffi::c_double {
         unsafe extern "C" {
             fn vtk_random_pool_get_value(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
             ) -> core::ffi::c_double;
         }
         unsafe { vtk_random_pool_get_value(self.0, i) }
-    }
-    fn get_value(
-        &mut self,
-        i: core::ffi::c_uchar,
-        compNum: core::ffi::c_int,
-    ) -> core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_random_pool_get_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                compNum: core::ffi::c_int,
-            ) -> core::ffi::c_double;
-        }
-        unsafe { vtk_random_pool_get_value(self.0, i, compNum) }
     }
     fn populate_data_array(
         &mut self,
@@ -19094,62 +8739,36 @@ impl VtkRandomPool for vtkRandomPool {
         }
         unsafe { vtk_random_pool_populate_data_array(self.0, da, minRange, maxRange) }
     }
-    fn populate_data_array(
-        &mut self,
-        da: *mut core::ffi::c_void,
-        compNumber: core::ffi::c_int,
-        minRange: core::ffi::c_double,
-        maxRange: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_random_pool_populate_data_array(
-                sself: *mut core::ffi::c_void,
-                da: *mut core::ffi::c_void,
-                compNumber: core::ffi::c_int,
-                minRange: core::ffi::c_double,
-                maxRange: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_random_pool_populate_data_array(
-                self.0,
-                da,
-                compNumber,
-                minRange,
-                maxRange,
-            )
-        }
-    }
-    fn set_chunk_size(&mut self, _arg: core::ffi::c_uchar) -> () {
+    fn set_chunk_size(&mut self, _arg: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_random_pool_set_chunk_size(
                 sself: *mut core::ffi::c_void,
-                _arg: core::ffi::c_uchar,
+                _arg: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_random_pool_set_chunk_size(self.0, _arg) }
     }
-    fn get_chunk_size_min_value(&mut self) -> core::ffi::c_uchar {
+    fn get_chunk_size_min_value(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_chunk_size_min_value(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_chunk_size_min_value(self.0) }
     }
-    fn get_chunk_size_max_value(&mut self) -> core::ffi::c_uchar {
+    fn get_chunk_size_max_value(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_chunk_size_max_value(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_chunk_size_max_value(self.0) }
     }
-    fn get_chunk_size(&mut self) -> core::ffi::c_uchar {
+    fn get_chunk_size(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_random_pool_get_chunk_size(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_random_pool_get_chunk_size(self.0) }
     }
@@ -19215,35 +8834,11 @@ impl VtkScalarsToColors for vtkScalarsToColors {
         }
         unsafe { vtk_scalars_to_colors_is_opaque(self.0) }
     }
-    fn is_opaque(
-        &mut self,
-        scalars: *mut core::ffi::c_void,
-        colorMode: core::ffi::c_int,
-        component: core::ffi::c_int,
-    ) -> core::ffi::c_int {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_is_opaque(
-                sself: *mut core::ffi::c_void,
-                scalars: *mut core::ffi::c_void,
-                colorMode: core::ffi::c_int,
-                component: core::ffi::c_int,
-            ) -> core::ffi::c_int;
-        }
-        unsafe { vtk_scalars_to_colors_is_opaque(self.0, scalars, colorMode, component) }
-    }
     fn build(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_scalars_to_colors_build(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_scalars_to_colors_build(self.0) }
-    }
-    fn get_range(&mut self) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_scalars_to_colors_get_range(self.0) }
     }
     fn set_range(&mut self, min: core::ffi::c_double, max: core::ffi::c_double) -> () {
         unsafe extern "C" {
@@ -19254,43 +8849,6 @@ impl VtkScalarsToColors for vtkScalarsToColors {
             );
         }
         unsafe { vtk_scalars_to_colors_set_range(self.0, min, max) }
-    }
-    fn set_range(&mut self, rng: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_set_range(
-                sself: *mut core::ffi::c_void,
-                rng: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_scalars_to_colors_set_range(self.0, rng) }
-    }
-    fn map_value(&mut self, v: core::ffi::c_double) -> *const core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_map_value(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            ) -> *const core::ffi::c_uchar;
-        }
-        unsafe { vtk_scalars_to_colors_map_value(self.0, v) }
-    }
-    fn get_color(&mut self, v: core::ffi::c_double, rgb: core::ffi::c_double) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_color(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-                rgb: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_scalars_to_colors_get_color(self.0, v, rgb) }
-    }
-    fn get_color(&mut self, v: core::ffi::c_double) -> *mut core::ffi::c_double {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_color(
-                sself: *mut core::ffi::c_void,
-                v: core::ffi::c_double,
-            ) -> *mut core::ffi::c_double;
-        }
-        unsafe { vtk_scalars_to_colors_get_color(self.0, v) }
     }
     fn get_opacity(&mut self, v: core::ffi::c_double) -> core::ffi::c_double {
         unsafe extern "C" {
@@ -19326,32 +8884,6 @@ impl VtkScalarsToColors for vtkScalarsToColors {
             ) -> core::ffi::c_double;
         }
         unsafe { vtk_scalars_to_colors_get_alpha(self.0) }
-    }
-    fn map_scalars(
-        &mut self,
-        scalars: *mut core::ffi::c_void,
-        colorMode: core::ffi::c_int,
-        component: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_map_scalars(
-                sself: *mut core::ffi::c_void,
-                scalars: *mut core::ffi::c_void,
-                colorMode: core::ffi::c_int,
-                component: core::ffi::c_int,
-                outputFormat: core::ffi::c_int,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe {
-            vtk_scalars_to_colors_map_scalars(
-                self.0,
-                scalars,
-                colorMode,
-                component,
-                outputFormat,
-            )
-        }
     }
     fn map_scalars(
         &mut self,
@@ -19454,179 +8986,6 @@ impl VtkScalarsToColors for vtkScalarsToColors {
         }
         unsafe { vtk_scalars_to_colors_get_vector_size(self.0) }
     }
-    fn map_vectors_through_table(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-        vectorComponent: core::ffi::c_int,
-        vectorSize: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_map_vectors_through_table(
-                sself: *mut core::ffi::c_void,
-                input: (),
-                output: core::ffi::c_uchar,
-                inputDataType: core::ffi::c_int,
-                numberOfValues: core::ffi::c_int,
-                inputIncrement: core::ffi::c_int,
-                outputFormat: core::ffi::c_int,
-                vectorComponent: core::ffi::c_int,
-                vectorSize: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_scalars_to_colors_map_vectors_through_table(
-                self.0,
-                input,
-                output,
-                inputDataType,
-                numberOfValues,
-                inputIncrement,
-                outputFormat,
-                vectorComponent,
-                vectorSize,
-            )
-        }
-    }
-    fn map_vectors_through_table(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_map_vectors_through_table(
-                sself: *mut core::ffi::c_void,
-                input: (),
-                output: core::ffi::c_uchar,
-                inputDataType: core::ffi::c_int,
-                numberOfValues: core::ffi::c_int,
-                inputIncrement: core::ffi::c_int,
-                outputFormat: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_scalars_to_colors_map_vectors_through_table(
-                self.0,
-                input,
-                output,
-                inputDataType,
-                numberOfValues,
-                inputIncrement,
-                outputFormat,
-            )
-        }
-    }
-    fn map_scalars_through_table(
-        &mut self,
-        scalars: *mut core::ffi::c_void,
-        output: core::ffi::c_uchar,
-        outputFormat: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_map_scalars_through_table(
-                sself: *mut core::ffi::c_void,
-                scalars: *mut core::ffi::c_void,
-                output: core::ffi::c_uchar,
-                outputFormat: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_scalars_to_colors_map_scalars_through_table(
-                self.0,
-                scalars,
-                output,
-                outputFormat,
-            )
-        }
-    }
-    fn map_scalars_through_table(
-        &mut self,
-        scalars: *mut core::ffi::c_void,
-        output: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_map_scalars_through_table(
-                sself: *mut core::ffi::c_void,
-                scalars: *mut core::ffi::c_void,
-                output: core::ffi::c_uchar,
-            );
-        }
-        unsafe {
-            vtk_scalars_to_colors_map_scalars_through_table(self.0, scalars, output)
-        }
-    }
-    fn map_scalars_through_table(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_map_scalars_through_table(
-                sself: *mut core::ffi::c_void,
-                input: (),
-                output: core::ffi::c_uchar,
-                inputDataType: core::ffi::c_int,
-                numberOfValues: core::ffi::c_int,
-                inputIncrement: core::ffi::c_int,
-                outputFormat: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_scalars_to_colors_map_scalars_through_table(
-                self.0,
-                input,
-                output,
-                inputDataType,
-                numberOfValues,
-                inputIncrement,
-                outputFormat,
-            )
-        }
-    }
-    fn map_scalars_through_table_2(
-        &mut self,
-        input: (),
-        output: core::ffi::c_uchar,
-        inputDataType: core::ffi::c_int,
-        numberOfValues: core::ffi::c_int,
-        inputIncrement: core::ffi::c_int,
-        outputFormat: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_map_scalars_through_table_2(
-                sself: *mut core::ffi::c_void,
-                input: (),
-                output: core::ffi::c_uchar,
-                inputDataType: core::ffi::c_int,
-                numberOfValues: core::ffi::c_int,
-                inputIncrement: core::ffi::c_int,
-                outputFormat: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_scalars_to_colors_map_scalars_through_table_2(
-                self.0,
-                input,
-                output,
-                inputDataType,
-                numberOfValues,
-                inputIncrement,
-                outputFormat,
-            )
-        }
-    }
     fn deep_copy(&mut self, o: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
             fn vtk_scalars_to_colors_deep_copy(
@@ -19644,11 +9003,11 @@ impl VtkScalarsToColors for vtkScalarsToColors {
         }
         unsafe { vtk_scalars_to_colors_using_log_scale(self.0) }
     }
-    fn get_number_of_available_colors(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_available_colors(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_scalars_to_colors_get_number_of_available_colors(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_scalars_to_colors_get_number_of_available_colors(self.0) }
     }
@@ -19682,123 +9041,13 @@ impl VtkScalarsToColors for vtkScalarsToColors {
         }
         unsafe { vtk_scalars_to_colors_get_annotations(self.0) }
     }
-    fn set_annotation(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        annotation: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_set_annotation(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-                annotation: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_scalars_to_colors_set_annotation(self.0, value, annotation) }
-    }
-    fn set_annotation(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        annotation: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_set_annotation(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-                annotation: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_scalars_to_colors_set_annotation(self.0, value, annotation) }
-    }
-    fn get_number_of_annotated_values(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_annotated_values(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_scalars_to_colors_get_number_of_annotated_values(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_scalars_to_colors_get_number_of_annotated_values(self.0) }
-    }
-    fn get_annotated_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_annotated_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_scalars_to_colors_get_annotated_value(self.0, idx) }
-    }
-    fn get_annotation(&mut self, idx: core::ffi::c_uchar) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_annotation(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_scalars_to_colors_get_annotation(self.0, idx) }
-    }
-    fn get_annotation_color(
-        &mut self,
-        val: vtkVariant,
-        rgba: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_annotation_color(
-                sself: *mut core::ffi::c_void,
-                val: vtkVariant,
-                rgba: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_scalars_to_colors_get_annotation_color(self.0, val, rgba) }
-    }
-    fn get_annotated_value_index(
-        &mut self,
-        val: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_annotated_value_index(
-                sself: *mut core::ffi::c_void,
-                val: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_scalars_to_colors_get_annotated_value_index(self.0, val) }
-    }
-    fn get_annotated_value_index_internal(
-        &mut self,
-        val: vtkVariant,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_annotated_value_index_internal(
-                sself: *mut core::ffi::c_void,
-                val: vtkVariant,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_scalars_to_colors_get_annotated_value_index_internal(self.0, val) }
-    }
-    fn get_indexed_color(
-        &mut self,
-        i: core::ffi::c_uchar,
-        rgba: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_get_indexed_color(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                rgba: core::ffi::c_double,
-            );
-        }
-        unsafe { vtk_scalars_to_colors_get_indexed_color(self.0, i, rgba) }
-    }
-    fn remove_annotation(&mut self, value: *mut core::ffi::c_void) -> bool {
-        unsafe extern "C" {
-            fn vtk_scalars_to_colors_remove_annotation(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            ) -> bool;
-        }
-        unsafe { vtk_scalars_to_colors_remove_annotation(self.0, value) }
     }
     fn reset_annotations(&mut self) -> () {
         unsafe extern "C" {
@@ -19878,180 +9127,52 @@ impl VtkShortArray for vtkShortArray {
         }
         unsafe { vtk_short_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_short,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_short_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_short,
-            );
-        }
-        unsafe { vtk_short_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_short,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_short_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_short,
-            );
-        }
-        unsafe { vtk_short_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_short,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_short_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_short,
-            );
-        }
-        unsafe { vtk_short_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_short,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_short_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_short,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_short_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_short {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_short {
         unsafe extern "C" {
             fn vtk_short_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_short;
         }
         unsafe { vtk_short_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_short) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_short) -> () {
         unsafe extern "C" {
             fn vtk_short_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_short,
             );
         }
         unsafe { vtk_short_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_short_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_short_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_short) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_short) -> () {
         unsafe extern "C" {
             fn vtk_short_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_short,
             );
         }
         unsafe { vtk_short_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_short) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_short) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_short_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_short,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_short_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_short {
-        unsafe extern "C" {
-            fn vtk_short_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_short;
-        }
-        unsafe { vtk_short_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_short {
-        unsafe extern "C" {
-            fn vtk_short_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_short;
-        }
-        unsafe { vtk_short_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_short {
-        unsafe extern "C" {
-            fn vtk_short_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_short;
-        }
-        unsafe { vtk_short_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_short {
-        unsafe extern "C" {
-            fn vtk_short_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_short;
-        }
-        unsafe { vtk_short_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_short,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_short_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_short,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_short_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_short,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_short_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_short,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_short_array_set_array(self.0, array, size, save, deleteMethod) }
     }
     fn fast_down_cast(
         &mut self,
@@ -20124,182 +9245,52 @@ impl VtkSignedCharArray for vtkSignedCharArray {
         }
         unsafe { vtk_signed_char_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_char,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_signed_char_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_char,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_signed_char_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_char,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_signed_char_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_char,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_char,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_signed_char_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_char {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_schar {
         unsafe extern "C" {
             fn vtk_signed_char_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> core::ffi::c_char;
+                id: core::ffi::c_longlong,
+            ) -> core::ffi::c_schar;
         }
         unsafe { vtk_signed_char_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_char) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_schar) -> () {
         unsafe extern "C" {
             fn vtk_signed_char_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                value: core::ffi::c_char,
+                id: core::ffi::c_longlong,
+                value: core::ffi::c_schar,
             );
         }
         unsafe { vtk_signed_char_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_signed_char_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_signed_char_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_char) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_schar) -> () {
         unsafe extern "C" {
             fn vtk_signed_char_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                f: core::ffi::c_char,
+                id: core::ffi::c_longlong,
+                f: core::ffi::c_schar,
             );
         }
         unsafe { vtk_signed_char_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_char) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_schar) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_signed_char_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
-                f: core::ffi::c_char,
-            ) -> core::ffi::c_uchar;
+                f: core::ffi::c_schar,
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_signed_char_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_signed_char_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_signed_char_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_signed_char_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_char;
-        }
-        unsafe { vtk_signed_char_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_char,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_char,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_signed_char_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_char,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_signed_char_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_char,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_signed_char_array_set_array(self.0, array, size, save, deleteMethod)
-        }
     }
     fn fast_down_cast(
         &mut self,
@@ -20313,19 +9304,19 @@ impl VtkSignedCharArray for vtkSignedCharArray {
         }
         unsafe { vtk_signed_char_array_fast_down_cast(self.0, source) }
     }
-    fn get_data_type_value_min(&mut self) -> core::ffi::c_char {
+    fn get_data_type_value_min(&mut self) -> core::ffi::c_schar {
         unsafe extern "C" {
             fn vtk_signed_char_array_get_data_type_value_min(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_char;
+            ) -> core::ffi::c_schar;
         }
         unsafe { vtk_signed_char_array_get_data_type_value_min(self.0) }
     }
-    fn get_data_type_value_max(&mut self) -> core::ffi::c_char {
+    fn get_data_type_value_max(&mut self) -> core::ffi::c_schar {
         unsafe extern "C" {
             fn vtk_signed_char_array_get_data_type_value_max(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_char;
+            ) -> core::ffi::c_schar;
         }
         unsafe { vtk_signed_char_array_get_data_type_value_max(self.0) }
     }
@@ -20365,95 +9356,6 @@ impl VtkSortDataArray for vtkSortDataArray {
         }
         unsafe { vtk_sort_data_array_sort(self.0, keys) }
     }
-    fn sort(&mut self, keys: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_sort(
-                sself: *mut core::ffi::c_void,
-                keys: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_sort_data_array_sort(self.0, keys) }
-    }
-    fn sort(&mut self, keys: *mut core::ffi::c_void, dir: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_sort(
-                sself: *mut core::ffi::c_void,
-                keys: *mut core::ffi::c_void,
-                dir: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_sort_data_array_sort(self.0, keys, dir) }
-    }
-    fn sort(&mut self, keys: *mut core::ffi::c_void, dir: core::ffi::c_int) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_sort(
-                sself: *mut core::ffi::c_void,
-                keys: *mut core::ffi::c_void,
-                dir: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_sort_data_array_sort(self.0, keys, dir) }
-    }
-    fn sort(
-        &mut self,
-        keys: *mut core::ffi::c_void,
-        values: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_sort(
-                sself: *mut core::ffi::c_void,
-                keys: *mut core::ffi::c_void,
-                values: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_sort_data_array_sort(self.0, keys, values) }
-    }
-    fn sort(
-        &mut self,
-        keys: *mut core::ffi::c_void,
-        values: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_sort(
-                sself: *mut core::ffi::c_void,
-                keys: *mut core::ffi::c_void,
-                values: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_sort_data_array_sort(self.0, keys, values) }
-    }
-    fn sort(
-        &mut self,
-        keys: *mut core::ffi::c_void,
-        values: *mut core::ffi::c_void,
-        dir: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_sort(
-                sself: *mut core::ffi::c_void,
-                keys: *mut core::ffi::c_void,
-                values: *mut core::ffi::c_void,
-                dir: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_sort_data_array_sort(self.0, keys, values, dir) }
-    }
-    fn sort(
-        &mut self,
-        keys: *mut core::ffi::c_void,
-        values: *mut core::ffi::c_void,
-        dir: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_sort(
-                sself: *mut core::ffi::c_void,
-                keys: *mut core::ffi::c_void,
-                values: *mut core::ffi::c_void,
-                dir: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_sort_data_array_sort(self.0, keys, values, dir) }
-    }
     fn sort_array_by_component(
         &mut self,
         arr: *mut core::ffi::c_void,
@@ -20467,123 +9369,6 @@ impl VtkSortDataArray for vtkSortDataArray {
             );
         }
         unsafe { vtk_sort_data_array_sort_array_by_component(self.0, arr, k) }
-    }
-    fn sort_array_by_component(
-        &mut self,
-        arr: *mut core::ffi::c_void,
-        k: core::ffi::c_int,
-        dir: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_sort_array_by_component(
-                sself: *mut core::ffi::c_void,
-                arr: *mut core::ffi::c_void,
-                k: core::ffi::c_int,
-                dir: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_sort_data_array_sort_array_by_component(self.0, arr, k, dir) }
-    }
-    fn initialize_sort_indices(
-        &mut self,
-        numKeys: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_initialize_sort_indices(
-                sself: *mut core::ffi::c_void,
-                numKeys: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_sort_data_array_initialize_sort_indices(self.0, numKeys) }
-    }
-    fn generate_sort_indices(
-        &mut self,
-        dataType: core::ffi::c_int,
-        dataIn: (),
-        numKeys: core::ffi::c_uchar,
-        numComp: core::ffi::c_int,
-        k: core::ffi::c_int,
-        idx: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_generate_sort_indices(
-                sself: *mut core::ffi::c_void,
-                dataType: core::ffi::c_int,
-                dataIn: (),
-                numKeys: core::ffi::c_uchar,
-                numComp: core::ffi::c_int,
-                k: core::ffi::c_int,
-                idx: core::ffi::c_uchar,
-            );
-        }
-        unsafe {
-            vtk_sort_data_array_generate_sort_indices(
-                self.0,
-                dataType,
-                dataIn,
-                numKeys,
-                numComp,
-                k,
-                idx,
-            )
-        }
-    }
-    fn shuffle_array(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        dataType: core::ffi::c_int,
-        numKeys: core::ffi::c_uchar,
-        numComp: core::ffi::c_int,
-        arr: *mut core::ffi::c_void,
-        dataIn: (),
-        dir: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_shuffle_array(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                dataType: core::ffi::c_int,
-                numKeys: core::ffi::c_uchar,
-                numComp: core::ffi::c_int,
-                arr: *mut core::ffi::c_void,
-                dataIn: (),
-                dir: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_sort_data_array_shuffle_array(
-                self.0,
-                idx,
-                dataType,
-                numKeys,
-                numComp,
-                arr,
-                dataIn,
-                dir,
-            )
-        }
-    }
-    fn shuffle_id_list(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        sze: core::ffi::c_uchar,
-        arrayIn: *mut core::ffi::c_void,
-        dataIn: core::ffi::c_uchar,
-        dir: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_sort_data_array_shuffle_id_list(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                sze: core::ffi::c_uchar,
-                arrayIn: *mut core::ffi::c_void,
-                dataIn: core::ffi::c_uchar,
-                dir: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_sort_data_array_shuffle_id_list(self.0, idx, sze, arrayIn, dataIn, dir)
-        }
     }
 }
 impl VtkStringArray for vtkStringArray {
@@ -20656,26 +9441,26 @@ impl VtkStringArray for vtkStringArray {
         }
         unsafe { vtk_string_array_squeeze(self.0) }
     }
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_string_array_resize(
                 sself: *mut core::ffi::c_void,
-                numTuples: core::ffi::c_uchar,
+                numTuples: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_string_array_resize(self.0, numTuples) }
     }
     fn set_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> () {
         unsafe extern "C" {
             fn vtk_string_array_set_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                j: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
             );
         }
@@ -20683,15 +9468,15 @@ impl VtkStringArray for vtkStringArray {
     }
     fn insert_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> () {
         unsafe extern "C" {
             fn vtk_string_array_insert_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                j: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
             );
         }
@@ -20713,81 +9498,19 @@ impl VtkStringArray for vtkStringArray {
         }
         unsafe { vtk_string_array_insert_tuples(self.0, dstIds, srcIds, source) }
     }
-    fn insert_tuples(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_insert_tuples(
-                sself: *mut core::ffi::c_void,
-                dstStart: core::ffi::c_uchar,
-                n: core::ffi::c_uchar,
-                srcStart: core::ffi::c_uchar,
-                source: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_insert_tuples(self.0, dstStart, n, srcStart, source) }
-    }
     fn insert_next_tuple(
         &mut self,
-        j: core::ffi::c_uchar,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar {
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_string_array_insert_next_tuple(
                 sself: *mut core::ffi::c_void,
-                j: core::ffi::c_uchar,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_string_array_insert_next_tuple(self.0, j, source) }
-    }
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_interpolate_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                ptIndices: *mut core::ffi::c_void,
-                source: *mut core::ffi::c_void,
-                weights: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_string_array_interpolate_tuple(self.0, i, ptIndices, source, weights)
-        }
-    }
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        id1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        id2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_interpolate_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                id1: core::ffi::c_uchar,
-                source1: *mut core::ffi::c_void,
-                id2: core::ffi::c_uchar,
-                source2: *mut core::ffi::c_void,
-                t: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_string_array_interpolate_tuple(self.0, i, id1, source1, id2, source2, t)
-        }
     }
     fn get_tuples(
         &mut self,
@@ -20803,92 +9526,34 @@ impl VtkStringArray for vtkStringArray {
         }
         unsafe { vtk_string_array_get_tuples(self.0, ptIds, output) }
     }
-    fn get_tuples(
-        &mut self,
-        p1: core::ffi::c_uchar,
-        p2: core::ffi::c_uchar,
-        output: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_get_tuples(
-                sself: *mut core::ffi::c_void,
-                p1: core::ffi::c_uchar,
-                p2: core::ffi::c_uchar,
-                output: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_get_tuples(self.0, p1, p2, output) }
-    }
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_string_array_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-                ext: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
+                ext: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_string_array_allocate(self.0, sz, ext) }
     }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> vtkStdString {
-        unsafe extern "C" {
-            fn vtk_string_array_get_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> vtkStdString;
-        }
-        unsafe { vtk_string_array_get_value(self.0, id) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_string_array_get_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_string_array_get_value(self.0, id) }
-    }
-    fn set_value(
-        &mut self,
-        id: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_set_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_set_value(self.0, id, value) }
-    }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_set_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                value: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_string_array_set_value(self.0, id, value) }
-    }
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> () {
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_string_array_set_number_of_tuples(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_string_array_set_number_of_tuples(self.0, number) }
     }
-    fn get_number_of_values(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_values(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_string_array_get_number_of_values(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_string_array_get_number_of_values(self.0) }
     }
@@ -20908,103 +9573,28 @@ impl VtkStringArray for vtkStringArray {
         }
         unsafe { vtk_string_array_get_element_component_size(self.0) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_insert_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                f: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_insert_value(self.0, id, f) }
-    }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, val: core::ffi::c_char) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_insert_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                val: core::ffi::c_char,
-            );
-        }
-        unsafe { vtk_string_array_insert_value(self.0, id, val) }
-    }
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_set_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_set_variant_value(self.0, idx, value) }
-    }
-    fn insert_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_insert_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_insert_variant_value(self.0, idx, value) }
-    }
-    fn insert_next_value(&mut self, f: *mut core::ffi::c_void) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_string_array_insert_next_value(
-                sself: *mut core::ffi::c_void,
-                f: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_string_array_insert_next_value(self.0, f) }
-    }
-    fn insert_next_value(&mut self, f: core::ffi::c_char) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_string_array_insert_next_value(
-                sself: *mut core::ffi::c_void,
-                f: core::ffi::c_char,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_string_array_insert_next_value(self.0, f) }
-    }
     fn write_pointer(
         &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
+        number: core::ffi::c_longlong,
     ) -> *mut core::ffi::c_void {
         unsafe extern "C" {
             fn vtk_string_array_write_pointer(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
+                number: core::ffi::c_longlong,
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_string_array_write_pointer(self.0, id, number) }
     }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void {
+    fn get_pointer(&mut self, id: core::ffi::c_longlong) -> *mut core::ffi::c_void {
         unsafe extern "C" {
             fn vtk_string_array_get_pointer(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_string_array_get_pointer(self.0, id) }
-    }
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_string_array_get_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut ();
-        }
-        unsafe { vtk_string_array_get_void_pointer(self.0, id) }
     }
     fn deep_copy(&mut self, aa: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -21018,7 +9608,7 @@ impl VtkStringArray for vtkStringArray {
     fn set_array(
         &mut self,
         array: *mut core::ffi::c_void,
-        size: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
         save: core::ffi::c_int,
         deleteMethod: core::ffi::c_int,
     ) -> () {
@@ -21026,28 +9616,12 @@ impl VtkStringArray for vtkStringArray {
             fn vtk_string_array_set_array(
                 sself: *mut core::ffi::c_void,
                 array: *mut core::ffi::c_void,
-                size: core::ffi::c_uchar,
+                size: core::ffi::c_longlong,
                 save: core::ffi::c_int,
                 deleteMethod: core::ffi::c_int,
             );
         }
         unsafe { vtk_string_array_set_array(self.0, array, size, save, deleteMethod) }
-    }
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_set_void_array(
-                sself: *mut core::ffi::c_void,
-                array: (),
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_string_array_set_void_array(self.0, array, size, save) }
     }
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -21074,78 +9648,13 @@ impl VtkStringArray for vtkStringArray {
         }
         unsafe { vtk_string_array_new_iterator(self.0) }
     }
-    fn get_data_size(&mut self) -> core::ffi::c_uchar {
+    fn get_data_size(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_string_array_get_data_size(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_string_array_get_data_size(self.0) }
-    }
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_string_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_string_array_lookup_value(self.0, value) }
-    }
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-                ids: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_lookup_value(self.0, value, ids) }
-    }
-    fn lookup_value(&mut self, value: vtkStdString) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_string_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: vtkStdString,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_string_array_lookup_value(self.0, value) }
-    }
-    fn lookup_value(&mut self, value: vtkStdString, ids: *mut core::ffi::c_void) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: vtkStdString,
-                ids: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_lookup_value(self.0, value, ids) }
-    }
-    fn lookup_value(&mut self, value: core::ffi::c_char) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_string_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: core::ffi::c_char,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_string_array_lookup_value(self.0, value) }
-    }
-    fn lookup_value(
-        &mut self,
-        value: core::ffi::c_char,
-        ids: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_string_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: core::ffi::c_char,
-                ids: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_string_array_lookup_value(self.0, value, ids) }
     }
     fn data_changed(&mut self) -> () {
         unsafe extern "C" {
@@ -21153,11 +9662,11 @@ impl VtkStringArray for vtkStringArray {
         }
         unsafe { vtk_string_array_data_changed(self.0) }
     }
-    fn data_element_changed(&mut self, id: core::ffi::c_uchar) -> () {
+    fn data_element_changed(&mut self, id: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_string_array_data_element_changed(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_string_array_data_element_changed(self.0, id) }
@@ -21195,26 +9704,15 @@ impl VtkStringOutputWindow for vtkStringOutputWindow {
         }
         unsafe { vtk_string_output_window_new(self.0) }
     }
-    fn display_text(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_text(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_string_output_window_display_text(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_string_output_window_display_text(self.0, p0) }
-    }
-    fn get_output(&mut self) -> &str {
-        unsafe extern "C" {
-            fn vtk_string_output_window_get_output(
-                sself: *mut core::ffi::c_void,
-            ) -> *const core::ffi::c_char;
-        }
-        let ptr = unsafe { vtk_string_output_window_get_output(self.0) };
-        if ptr.is_null() {
-            return "";
-        }
-        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
+        unsafe { vtk_string_output_window_display_text(self.0, c_p0.as_ptr()) }
     }
 }
 impl VtkTimePointUtility for vtkTimePointUtility {
@@ -21323,17 +9821,17 @@ impl VtkTimePointUtility for vtkTimePointUtility {
     fn get_date(
         &mut self,
         time: core::ffi::c_ulonglong,
-        year: core::ffi::c_int,
-        month: core::ffi::c_int,
-        day: core::ffi::c_int,
+        year: &mut core::ffi::c_int,
+        month: &mut core::ffi::c_int,
+        day: &mut core::ffi::c_int,
     ) -> () {
         unsafe extern "C" {
             fn vtk_time_point_utility_get_date(
                 sself: *mut core::ffi::c_void,
                 time: core::ffi::c_ulonglong,
-                year: core::ffi::c_int,
-                month: core::ffi::c_int,
-                day: core::ffi::c_int,
+                year: &mut core::ffi::c_int,
+                month: &mut core::ffi::c_int,
+                day: &mut core::ffi::c_int,
             );
         }
         unsafe { vtk_time_point_utility_get_date(self.0, time, year, month, day) }
@@ -21341,19 +9839,19 @@ impl VtkTimePointUtility for vtkTimePointUtility {
     fn get_time(
         &mut self,
         time: core::ffi::c_ulonglong,
-        hour: core::ffi::c_int,
-        minute: core::ffi::c_int,
-        second: core::ffi::c_int,
-        millis: core::ffi::c_int,
+        hour: &mut core::ffi::c_int,
+        minute: &mut core::ffi::c_int,
+        second: &mut core::ffi::c_int,
+        millis: &mut core::ffi::c_int,
     ) -> () {
         unsafe extern "C" {
             fn vtk_time_point_utility_get_time(
                 sself: *mut core::ffi::c_void,
                 time: core::ffi::c_ulonglong,
-                hour: core::ffi::c_int,
-                minute: core::ffi::c_int,
-                second: core::ffi::c_int,
-                millis: core::ffi::c_int,
+                hour: &mut core::ffi::c_int,
+                minute: &mut core::ffi::c_int,
+                second: &mut core::ffi::c_int,
+                millis: &mut core::ffi::c_int,
             );
         }
         unsafe {
@@ -21363,25 +9861,25 @@ impl VtkTimePointUtility for vtkTimePointUtility {
     fn get_date_time(
         &mut self,
         time: core::ffi::c_ulonglong,
-        year: core::ffi::c_int,
-        month: core::ffi::c_int,
-        day: core::ffi::c_int,
-        hour: core::ffi::c_int,
-        minute: core::ffi::c_int,
-        second: core::ffi::c_int,
-        millis: core::ffi::c_int,
+        year: &mut core::ffi::c_int,
+        month: &mut core::ffi::c_int,
+        day: &mut core::ffi::c_int,
+        hour: &mut core::ffi::c_int,
+        minute: &mut core::ffi::c_int,
+        second: &mut core::ffi::c_int,
+        millis: &mut core::ffi::c_int,
     ) -> () {
         unsafe extern "C" {
             fn vtk_time_point_utility_get_date_time(
                 sself: *mut core::ffi::c_void,
                 time: core::ffi::c_ulonglong,
-                year: core::ffi::c_int,
-                month: core::ffi::c_int,
-                day: core::ffi::c_int,
-                hour: core::ffi::c_int,
-                minute: core::ffi::c_int,
-                second: core::ffi::c_int,
-                millis: core::ffi::c_int,
+                year: &mut core::ffi::c_int,
+                month: &mut core::ffi::c_int,
+                day: &mut core::ffi::c_int,
+                hour: &mut core::ffi::c_int,
+                minute: &mut core::ffi::c_int,
+                second: &mut core::ffi::c_int,
+                millis: &mut core::ffi::c_int,
             );
         }
         unsafe {
@@ -21461,25 +9959,11 @@ impl VtkTimePointUtility for vtkTimePointUtility {
         }
         unsafe { vtk_time_point_utility_get_millisecond(self.0, time) }
     }
-    fn iso_8601_to_time_point(
-        &mut self,
-        str: core::ffi::c_char,
-        ok: bool,
-    ) -> core::ffi::c_ulonglong {
-        unsafe extern "C" {
-            fn vtk_time_point_utility_iso_8601_to_time_point(
-                sself: *mut core::ffi::c_void,
-                str: core::ffi::c_char,
-                ok: bool,
-            ) -> core::ffi::c_ulonglong;
-        }
-        unsafe { vtk_time_point_utility_iso_8601_to_time_point(self.0, str, ok) }
-    }
     fn time_point_to_iso_8601(
         &mut self,
         p0: core::ffi::c_ulonglong,
         format: core::ffi::c_int,
-    ) -> *const core::ffi::c_char {
+    ) -> &str {
         unsafe extern "C" {
             fn vtk_time_point_utility_time_point_to_iso_8601(
                 sself: *mut core::ffi::c_void,
@@ -21487,7 +9971,13 @@ impl VtkTimePointUtility for vtkTimePointUtility {
                 format: core::ffi::c_int,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_time_point_utility_time_point_to_iso_8601(self.0, p0, format) }
+        let ptr = unsafe {
+            vtk_time_point_utility_time_point_to_iso_8601(self.0, p0, format)
+        };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
 }
 impl VtkTypeFloat32Array for vtkTypeFloat32Array {
@@ -21916,14 +10406,14 @@ impl VtkUnicodeStringArray for vtkUnicodeStringArray {
     }
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_unicode_string_array_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-                ext: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
+                ext: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_unicode_string_array_allocate(self.0, sz, ext) }
@@ -21958,26 +10448,26 @@ impl VtkUnicodeStringArray for vtkUnicodeStringArray {
         }
         unsafe { vtk_unicode_string_array_get_element_component_size(self.0) }
     }
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> () {
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_unicode_string_array_set_number_of_tuples(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_unicode_string_array_set_number_of_tuples(self.0, number) }
     }
     fn set_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> () {
         unsafe extern "C" {
             fn vtk_unicode_string_array_set_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                j: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
             );
         }
@@ -21985,15 +10475,15 @@ impl VtkUnicodeStringArray for vtkUnicodeStringArray {
     }
     fn insert_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> () {
         unsafe extern "C" {
             fn vtk_unicode_string_array_insert_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                j: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
             );
         }
@@ -22015,106 +10505,19 @@ impl VtkUnicodeStringArray for vtkUnicodeStringArray {
         }
         unsafe { vtk_unicode_string_array_insert_tuples(self.0, dstIds, srcIds, source) }
     }
-    fn insert_tuples(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_insert_tuples(
-                sself: *mut core::ffi::c_void,
-                dstStart: core::ffi::c_uchar,
-                n: core::ffi::c_uchar,
-                srcStart: core::ffi::c_uchar,
-                source: *mut core::ffi::c_void,
-            );
-        }
-        unsafe {
-            vtk_unicode_string_array_insert_tuples(self.0, dstStart, n, srcStart, source)
-        }
-    }
     fn insert_next_tuple(
         &mut self,
-        j: core::ffi::c_uchar,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar {
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_unicode_string_array_insert_next_tuple(
                 sself: *mut core::ffi::c_void,
-                j: core::ffi::c_uchar,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_unicode_string_array_insert_next_tuple(self.0, j, source) }
-    }
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_get_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut ();
-        }
-        unsafe { vtk_unicode_string_array_get_void_pointer(self.0, id) }
-    }
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_interpolate_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                ptIndices: *mut core::ffi::c_void,
-                source: *mut core::ffi::c_void,
-                weights: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_unicode_string_array_interpolate_tuple(
-                self.0,
-                i,
-                ptIndices,
-                source,
-                weights,
-            )
-        }
-    }
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        id1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        id2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_interpolate_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                id1: core::ffi::c_uchar,
-                source1: *mut core::ffi::c_void,
-                id2: core::ffi::c_uchar,
-                source2: *mut core::ffi::c_void,
-                t: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_unicode_string_array_interpolate_tuple(
-                self.0,
-                i,
-                id1,
-                source1,
-                id2,
-                source2,
-                t,
-            )
-        }
     }
     fn squeeze(&mut self) -> () {
         unsafe extern "C" {
@@ -22122,30 +10525,14 @@ impl VtkUnicodeStringArray for vtkUnicodeStringArray {
         }
         unsafe { vtk_unicode_string_array_squeeze(self.0) }
     }
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_unicode_string_array_resize(
                 sself: *mut core::ffi::c_void,
-                numTuples: core::ffi::c_uchar,
+                numTuples: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_unicode_string_array_resize(self.0, numTuples) }
-    }
-    fn set_void_array(
-        &mut self,
-        array: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_set_void_array(
-                sself: *mut core::ffi::c_void,
-                array: (),
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_unicode_string_array_set_void_array(self.0, array, size, save) }
     }
     fn set_array_free_function(&mut self, callback: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -22180,66 +10567,6 @@ impl VtkUnicodeStringArray for vtkUnicodeStringArray {
         }
         unsafe { vtk_unicode_string_array_new_iterator(self.0) }
     }
-    fn get_variant_value(&mut self, idx: core::ffi::c_uchar) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_get_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_unicode_string_array_get_variant_value(self.0, idx) }
-    }
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_unicode_string_array_lookup_value(self.0, value) }
-    }
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-                ids: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_unicode_string_array_lookup_value(self.0, value, ids) }
-    }
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_set_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_unicode_string_array_set_variant_value(self.0, idx, value) }
-    }
-    fn insert_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_insert_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_unicode_string_array_insert_variant_value(self.0, idx, value) }
-    }
     fn data_changed(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_unicode_string_array_data_changed(sself: *mut core::ffi::c_void);
@@ -22252,71 +10579,41 @@ impl VtkUnicodeStringArray for vtkUnicodeStringArray {
         }
         unsafe { vtk_unicode_string_array_clear_lookup(self.0) }
     }
-    fn insert_next_value(&mut self, p0: vtkUnicodeString) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_insert_next_value(
-                sself: *mut core::ffi::c_void,
-                p0: vtkUnicodeString,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_unicode_string_array_insert_next_value(self.0, p0) }
-    }
-    fn insert_value(&mut self, idx: core::ffi::c_uchar, p1: vtkUnicodeString) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_insert_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                p1: vtkUnicodeString,
-            );
-        }
-        unsafe { vtk_unicode_string_array_insert_value(self.0, idx, p1) }
-    }
-    fn set_value(&mut self, i: core::ffi::c_uchar, p1: vtkUnicodeString) -> () {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_set_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                p1: vtkUnicodeString,
-            );
-        }
-        unsafe { vtk_unicode_string_array_set_value(self.0, i, p1) }
-    }
-    fn get_value(&mut self, i: core::ffi::c_uchar) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_unicode_string_array_get_value(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_unicode_string_array_get_value(self.0, i) }
-    }
-    fn insert_next_utf_8_value(&mut self, p0: core::ffi::c_char) -> () {
+    fn insert_next_utf_8_value(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_unicode_string_array_insert_next_utf_8_value(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_unicode_string_array_insert_next_utf_8_value(self.0, p0) }
+        unsafe {
+            vtk_unicode_string_array_insert_next_utf_8_value(self.0, c_p0.as_ptr())
+        }
     }
-    fn set_utf_8_value(&mut self, i: core::ffi::c_uchar, p1: core::ffi::c_char) -> () {
+    fn set_utf_8_value(&mut self, i: core::ffi::c_longlong, p1: &str) -> () {
+        let c_p1 = std::ffi::CString::new(p1).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_unicode_string_array_set_utf_8_value(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                p1: core::ffi::c_char,
+                i: core::ffi::c_longlong,
+                p1: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_unicode_string_array_set_utf_8_value(self.0, i, p1) }
+        unsafe { vtk_unicode_string_array_set_utf_8_value(self.0, i, c_p1.as_ptr()) }
     }
-    fn get_utf_8_value(&mut self, i: core::ffi::c_uchar) -> *const core::ffi::c_char {
+    fn get_utf_8_value(&mut self, i: core::ffi::c_longlong) -> &str {
         unsafe extern "C" {
             fn vtk_unicode_string_array_get_utf_8_value(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_unicode_string_array_get_utf_8_value(self.0, i) }
+        let ptr = unsafe { vtk_unicode_string_array_get_utf_8_value(self.0, i) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
 }
 impl VtkUnsignedCharArray for vtkUnsignedCharArray {
@@ -22361,182 +10658,52 @@ impl VtkUnsignedCharArray for vtkUnsignedCharArray {
         }
         unsafe { vtk_unsigned_char_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_unsigned_char_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_unsigned_char_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uchar,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uchar,
-            );
-        }
-        unsafe { vtk_unsigned_char_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_uchar,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_char_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_uchar {
         unsafe extern "C" {
             fn vtk_unsigned_char_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_uchar;
         }
         unsafe { vtk_unsigned_char_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_uchar) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_uchar) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_char_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_uchar,
             );
         }
         unsafe { vtk_unsigned_char_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_unsigned_char_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_unsigned_char_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_uchar) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_uchar) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_char_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_uchar,
             );
         }
         unsafe { vtk_unsigned_char_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_uchar) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_uchar) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_unsigned_char_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_uchar,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_unsigned_char_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_char_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_char_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_char_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_char_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uchar,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_unsigned_char_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uchar,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_char_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uchar,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_unsigned_char_array_set_array(self.0, array, size, save, deleteMethod)
-        }
     }
     fn fast_down_cast(
         &mut self,
@@ -22609,182 +10776,52 @@ impl VtkUnsignedIntArray for vtkUnsignedIntArray {
         }
         unsafe { vtk_unsigned_int_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uint,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uint,
-            );
-        }
-        unsafe { vtk_unsigned_int_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uint,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uint,
-            );
-        }
-        unsafe { vtk_unsigned_int_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_uint,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_uint,
-            );
-        }
-        unsafe { vtk_unsigned_int_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_uint,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_uint,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_int_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_uint {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_uint {
         unsafe extern "C" {
             fn vtk_unsigned_int_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_uint;
         }
         unsafe { vtk_unsigned_int_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_uint) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_uint) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_int_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_uint,
             );
         }
         unsafe { vtk_unsigned_int_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_unsigned_int_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_unsigned_int_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_uint) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_uint) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_int_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_uint,
             );
         }
         unsafe { vtk_unsigned_int_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_uint) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_uint) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_unsigned_int_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_uint,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_unsigned_int_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_uint {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_uint;
-        }
-        unsafe { vtk_unsigned_int_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_uint {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_uint;
-        }
-        unsafe { vtk_unsigned_int_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_uint {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uint;
-        }
-        unsafe { vtk_unsigned_int_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_uint {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_uint;
-        }
-        unsafe { vtk_unsigned_int_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uint,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uint,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_unsigned_int_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_uint,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_int_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_uint,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_unsigned_int_array_set_array(self.0, array, size, save, deleteMethod)
-        }
     }
     fn fast_down_cast(
         &mut self,
@@ -22857,182 +10894,52 @@ impl VtkUnsignedLongArray for vtkUnsignedLongArray {
         }
         unsafe { vtk_unsigned_long_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulong,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ulong,
-            );
-        }
-        unsafe { vtk_unsigned_long_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulong,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ulong,
-            );
-        }
-        unsafe { vtk_unsigned_long_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulong,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ulong,
-            );
-        }
-        unsafe { vtk_unsigned_long_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_ulong,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_ulong,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_long_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_ulong {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_ulong {
         unsafe extern "C" {
             fn vtk_unsigned_long_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_ulong;
         }
         unsafe { vtk_unsigned_long_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_ulong) -> () {
+    fn set_value(&mut self, id: core::ffi::c_longlong, value: core::ffi::c_ulong) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_long_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_ulong,
             );
         }
         unsafe { vtk_unsigned_long_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_unsigned_long_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_unsigned_long_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_ulong) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_ulong) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_long_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_ulong,
             );
         }
         unsafe { vtk_unsigned_long_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_ulong) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_ulong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_unsigned_long_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_ulong,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_unsigned_long_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_ulong {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_ulong;
-        }
-        unsafe { vtk_unsigned_long_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_ulong {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_ulong;
-        }
-        unsafe { vtk_unsigned_long_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_ulong {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_ulong;
-        }
-        unsafe { vtk_unsigned_long_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_ulong {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_ulong;
-        }
-        unsafe { vtk_unsigned_long_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ulong,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_ulong,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_unsigned_long_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ulong,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_ulong,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_unsigned_long_array_set_array(self.0, array, size, save, deleteMethod)
-        }
     }
     fn fast_down_cast(
         &mut self,
@@ -23105,195 +11012,60 @@ impl VtkUnsignedLongLongArray for vtkUnsignedLongLongArray {
         }
         unsafe { vtk_unsigned_long_long_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulonglong,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ulonglong,
-            );
-        }
-        unsafe { vtk_unsigned_long_long_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulonglong,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ulonglong,
-            );
-        }
-        unsafe { vtk_unsigned_long_long_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ulonglong,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ulonglong,
-            );
-        }
-        unsafe { vtk_unsigned_long_long_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_ulonglong,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_ulonglong,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_long_long_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_ulonglong {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_ulonglong {
         unsafe extern "C" {
             fn vtk_unsigned_long_long_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_ulonglong;
         }
         unsafe { vtk_unsigned_long_long_array_get_value(self.0, id) }
     }
     fn set_value(
         &mut self,
-        id: core::ffi::c_uchar,
+        id: core::ffi::c_longlong,
         value: core::ffi::c_ulonglong,
     ) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_long_long_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_ulonglong,
             );
         }
         unsafe { vtk_unsigned_long_long_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_unsigned_long_long_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_unsigned_long_long_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_ulonglong) -> () {
+    fn insert_value(
+        &mut self,
+        id: core::ffi::c_longlong,
+        f: core::ffi::c_ulonglong,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_long_long_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_ulonglong,
             );
         }
         unsafe { vtk_unsigned_long_long_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_ulonglong) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_ulonglong) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_unsigned_long_long_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_ulonglong,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_unsigned_long_long_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(
-        &mut self,
-        comp: core::ffi::c_int,
-    ) -> *mut core::ffi::c_ulonglong {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_ulonglong;
-        }
-        unsafe { vtk_unsigned_long_long_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_ulonglong {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_ulonglong;
-        }
-        unsafe { vtk_unsigned_long_long_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_ulonglong {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_ulonglong;
-        }
-        unsafe { vtk_unsigned_long_long_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_ulonglong {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_ulonglong;
-        }
-        unsafe { vtk_unsigned_long_long_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ulonglong,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_ulonglong,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_unsigned_long_long_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ulonglong,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_long_long_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_ulonglong,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_unsigned_long_long_array_set_array(
-                self.0,
-                array,
-                size,
-                save,
-                deleteMethod,
-            )
-        }
     }
     fn fast_down_cast(
         &mut self,
@@ -23366,182 +11138,56 @@ impl VtkUnsignedShortArray for vtkUnsignedShortArray {
         }
         unsafe { vtk_unsigned_short_array_get_data_type(self.0) }
     }
-    fn get_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ushort,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_get_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ushort,
-            );
-        }
-        unsafe { vtk_unsigned_short_array_get_typed_tuple(self.0, i, tuple) }
-    }
-    fn set_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ushort,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_set_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ushort,
-            );
-        }
-        unsafe { vtk_unsigned_short_array_set_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_typed_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        tuple: core::ffi::c_ushort,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_insert_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                tuple: core::ffi::c_ushort,
-            );
-        }
-        unsafe { vtk_unsigned_short_array_insert_typed_tuple(self.0, i, tuple) }
-    }
-    fn insert_next_typed_tuple(
-        &mut self,
-        tuple: core::ffi::c_ushort,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_insert_next_typed_tuple(
-                sself: *mut core::ffi::c_void,
-                tuple: core::ffi::c_ushort,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_unsigned_short_array_insert_next_typed_tuple(self.0, tuple) }
-    }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> core::ffi::c_ushort {
+    fn get_value(&mut self, id: core::ffi::c_longlong) -> core::ffi::c_ushort {
         unsafe extern "C" {
             fn vtk_unsigned_short_array_get_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> core::ffi::c_ushort;
         }
         unsafe { vtk_unsigned_short_array_get_value(self.0, id) }
     }
-    fn set_value(&mut self, id: core::ffi::c_uchar, value: core::ffi::c_ushort) -> () {
+    fn set_value(
+        &mut self,
+        id: core::ffi::c_longlong,
+        value: core::ffi::c_ushort,
+    ) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_short_array_set_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 value: core::ffi::c_ushort,
             );
         }
         unsafe { vtk_unsigned_short_array_set_value(self.0, id, value) }
     }
-    fn set_number_of_values(&mut self, number: core::ffi::c_uchar) -> bool {
+    fn set_number_of_values(&mut self, number: core::ffi::c_longlong) -> bool {
         unsafe extern "C" {
             fn vtk_unsigned_short_array_set_number_of_values(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             ) -> bool;
         }
         unsafe { vtk_unsigned_short_array_set_number_of_values(self.0, number) }
     }
-    fn insert_value(&mut self, id: core::ffi::c_uchar, f: core::ffi::c_ushort) -> () {
+    fn insert_value(&mut self, id: core::ffi::c_longlong, f: core::ffi::c_ushort) -> () {
         unsafe extern "C" {
             fn vtk_unsigned_short_array_insert_value(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
                 f: core::ffi::c_ushort,
             );
         }
         unsafe { vtk_unsigned_short_array_insert_value(self.0, id, f) }
     }
-    fn insert_next_value(&mut self, f: core::ffi::c_ushort) -> core::ffi::c_uchar {
+    fn insert_next_value(&mut self, f: core::ffi::c_ushort) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_unsigned_short_array_insert_next_value(
                 sself: *mut core::ffi::c_void,
                 f: core::ffi::c_ushort,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_unsigned_short_array_insert_next_value(self.0, f) }
-    }
-    fn get_value_range(&mut self, comp: core::ffi::c_int) -> *mut core::ffi::c_ushort {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-                comp: core::ffi::c_int,
-            ) -> *mut core::ffi::c_ushort;
-        }
-        unsafe { vtk_unsigned_short_array_get_value_range(self.0, comp) }
-    }
-    fn get_value_range(&mut self) -> *mut core::ffi::c_ushort {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_get_value_range(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_ushort;
-        }
-        unsafe { vtk_unsigned_short_array_get_value_range(self.0) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut core::ffi::c_ushort {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_ushort;
-        }
-        unsafe { vtk_unsigned_short_array_write_pointer(self.0, id, number) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_ushort {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_ushort;
-        }
-        unsafe { vtk_unsigned_short_array_get_pointer(self.0, id) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ushort,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_ushort,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_unsigned_short_array_set_array(self.0, array, size, save) }
-    }
-    fn set_array(
-        &mut self,
-        array: core::ffi::c_ushort,
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteMethod: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_unsigned_short_array_set_array(
-                sself: *mut core::ffi::c_void,
-                array: core::ffi::c_ushort,
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteMethod: core::ffi::c_int,
-            );
-        }
-        unsafe {
-            vtk_unsigned_short_array_set_array(self.0, array, size, save, deleteMethod)
-        }
     }
     fn fast_down_cast(
         &mut self,
@@ -23608,14 +11254,14 @@ impl VtkVariantArray for vtkVariantArray {
     }
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_variant_array_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-                ext: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
+                ext: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_variant_array_allocate(self.0, sz, ext) }
@@ -23650,26 +11296,26 @@ impl VtkVariantArray for vtkVariantArray {
         }
         unsafe { vtk_variant_array_get_element_component_size(self.0) }
     }
-    fn set_number_of_tuples(&mut self, number: core::ffi::c_uchar) -> () {
+    fn set_number_of_tuples(&mut self, number: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_variant_array_set_number_of_tuples(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_variant_array_set_number_of_tuples(self.0, number) }
     }
     fn set_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> () {
         unsafe extern "C" {
             fn vtk_variant_array_set_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                j: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
             );
         }
@@ -23677,15 +11323,15 @@ impl VtkVariantArray for vtkVariantArray {
     }
     fn insert_tuple(
         &mut self,
-        i: core::ffi::c_uchar,
-        j: core::ffi::c_uchar,
+        i: core::ffi::c_longlong,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
     ) -> () {
         unsafe extern "C" {
             fn vtk_variant_array_insert_tuple(
                 sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                j: core::ffi::c_uchar,
+                i: core::ffi::c_longlong,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
             );
         }
@@ -23707,46 +11353,19 @@ impl VtkVariantArray for vtkVariantArray {
         }
         unsafe { vtk_variant_array_insert_tuples(self.0, dstIds, srcIds, source) }
     }
-    fn insert_tuples(
-        &mut self,
-        dstStart: core::ffi::c_uchar,
-        n: core::ffi::c_uchar,
-        srcStart: core::ffi::c_uchar,
-        source: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_insert_tuples(
-                sself: *mut core::ffi::c_void,
-                dstStart: core::ffi::c_uchar,
-                n: core::ffi::c_uchar,
-                srcStart: core::ffi::c_uchar,
-                source: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_variant_array_insert_tuples(self.0, dstStart, n, srcStart, source) }
-    }
     fn insert_next_tuple(
         &mut self,
-        j: core::ffi::c_uchar,
+        j: core::ffi::c_longlong,
         source: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar {
+    ) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_variant_array_insert_next_tuple(
                 sself: *mut core::ffi::c_void,
-                j: core::ffi::c_uchar,
+                j: core::ffi::c_longlong,
                 source: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_variant_array_insert_next_tuple(self.0, j, source) }
-    }
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_variant_array_get_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut ();
-        }
-        unsafe { vtk_variant_array_get_void_pointer(self.0, id) }
     }
     fn deep_copy(&mut self, da: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -23757,98 +11376,20 @@ impl VtkVariantArray for vtkVariantArray {
         }
         unsafe { vtk_variant_array_deep_copy(self.0, da) }
     }
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        ptIndices: *mut core::ffi::c_void,
-        source: *mut core::ffi::c_void,
-        weights: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_interpolate_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                ptIndices: *mut core::ffi::c_void,
-                source: *mut core::ffi::c_void,
-                weights: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_variant_array_interpolate_tuple(self.0, i, ptIndices, source, weights)
-        }
-    }
-    fn interpolate_tuple(
-        &mut self,
-        i: core::ffi::c_uchar,
-        id1: core::ffi::c_uchar,
-        source1: *mut core::ffi::c_void,
-        id2: core::ffi::c_uchar,
-        source2: *mut core::ffi::c_void,
-        t: core::ffi::c_double,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_interpolate_tuple(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                id1: core::ffi::c_uchar,
-                source1: *mut core::ffi::c_void,
-                id2: core::ffi::c_uchar,
-                source2: *mut core::ffi::c_void,
-                t: core::ffi::c_double,
-            );
-        }
-        unsafe {
-            vtk_variant_array_interpolate_tuple(self.0, i, id1, source1, id2, source2, t)
-        }
-    }
     fn squeeze(&mut self) -> () {
         unsafe extern "C" {
             fn vtk_variant_array_squeeze(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_variant_array_squeeze(self.0) }
     }
-    fn resize(&mut self, numTuples: core::ffi::c_uchar) -> core::ffi::c_int {
+    fn resize(&mut self, numTuples: core::ffi::c_longlong) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_variant_array_resize(
                 sself: *mut core::ffi::c_void,
-                numTuples: core::ffi::c_uchar,
+                numTuples: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_variant_array_resize(self.0, numTuples) }
-    }
-    fn set_void_array(
-        &mut self,
-        arr: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_set_void_array(
-                sself: *mut core::ffi::c_void,
-                arr: (),
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_variant_array_set_void_array(self.0, arr, size, save) }
-    }
-    fn set_void_array(
-        &mut self,
-        arr: (),
-        size: core::ffi::c_uchar,
-        save: core::ffi::c_int,
-        deleteM: core::ffi::c_int,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_set_void_array(
-                sself: *mut core::ffi::c_void,
-                arr: (),
-                size: core::ffi::c_uchar,
-                save: core::ffi::c_int,
-                deleteM: core::ffi::c_int,
-            );
-        }
-        unsafe { vtk_variant_array_set_void_array(self.0, arr, size, save, deleteM) }
     }
     fn get_actual_memory_size(&mut self) -> core::ffi::c_ulong {
         unsafe extern "C" {
@@ -23874,88 +11415,11 @@ impl VtkVariantArray for vtkVariantArray {
         }
         unsafe { vtk_variant_array_new_iterator(self.0) }
     }
-    fn get_value(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_variant_array_get_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtk_variant_array_get_value(self.0, id) }
-    }
-    fn set_value(
-        &mut self,
-        id: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_set_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_variant_array_set_value(self.0, id, value) }
-    }
-    fn insert_value(
-        &mut self,
-        id: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_insert_value(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_variant_array_insert_value(self.0, id, value) }
-    }
-    fn set_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_set_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_variant_array_set_variant_value(self.0, idx, value) }
-    }
-    fn insert_variant_value(
-        &mut self,
-        idx: core::ffi::c_uchar,
-        value: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_insert_variant_value(
-                sself: *mut core::ffi::c_void,
-                idx: core::ffi::c_uchar,
-                value: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_variant_array_insert_variant_value(self.0, idx, value) }
-    }
-    fn insert_next_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-    ) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_variant_array_insert_next_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_variant_array_insert_next_value(self.0, value) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut core::ffi::c_void {
+    fn get_pointer(&mut self, id: core::ffi::c_longlong) -> *mut core::ffi::c_void {
         unsafe extern "C" {
             fn vtk_variant_array_get_pointer(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             ) -> *mut core::ffi::c_void;
         }
         unsafe { vtk_variant_array_get_pointer(self.0, id) }
@@ -23963,7 +11427,7 @@ impl VtkVariantArray for vtkVariantArray {
     fn set_array(
         &mut self,
         arr: *mut core::ffi::c_void,
-        size: core::ffi::c_uchar,
+        size: core::ffi::c_longlong,
         save: core::ffi::c_int,
         deleteMethod: core::ffi::c_int,
     ) -> () {
@@ -23971,7 +11435,7 @@ impl VtkVariantArray for vtkVariantArray {
             fn vtk_variant_array_set_array(
                 sself: *mut core::ffi::c_void,
                 arr: *mut core::ffi::c_void,
-                size: core::ffi::c_uchar,
+                size: core::ffi::c_longlong,
                 save: core::ffi::c_int,
                 deleteMethod: core::ffi::c_int,
             );
@@ -23987,36 +11451,13 @@ impl VtkVariantArray for vtkVariantArray {
         }
         unsafe { vtk_variant_array_set_array_free_function(self.0, callback) }
     }
-    fn get_number_of_values(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_values(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_variant_array_get_number_of_values(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_variant_array_get_number_of_values(self.0) }
-    }
-    fn lookup_value(&mut self, value: *mut core::ffi::c_void) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_variant_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_variant_array_lookup_value(self.0, value) }
-    }
-    fn lookup_value(
-        &mut self,
-        value: *mut core::ffi::c_void,
-        ids: *mut core::ffi::c_void,
-    ) -> () {
-        unsafe extern "C" {
-            fn vtk_variant_array_lookup_value(
-                sself: *mut core::ffi::c_void,
-                value: *mut core::ffi::c_void,
-                ids: *mut core::ffi::c_void,
-            );
-        }
-        unsafe { vtk_variant_array_lookup_value(self.0, value, ids) }
     }
     fn data_changed(&mut self) -> () {
         unsafe extern "C" {
@@ -24024,11 +11465,11 @@ impl VtkVariantArray for vtkVariantArray {
         }
         unsafe { vtk_variant_array_data_changed(self.0) }
     }
-    fn data_element_changed(&mut self, id: core::ffi::c_uchar) -> () {
+    fn data_element_changed(&mut self, id: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_variant_array_data_element_changed(
                 sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
+                id: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_variant_array_data_element_changed(self.0, id) }
@@ -24064,21 +11505,29 @@ impl VtkVersion for vtkVersion {
         }
         unsafe { vtk_version_new_instance(self.0) }
     }
-    fn get_vtk_version(&mut self) -> *const core::ffi::c_char {
+    fn get_vtk_version(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_version_get_vtk_version(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_version_get_vtk_version(self.0) }
+        let ptr = unsafe { vtk_version_get_vtk_version(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn get_vtk_version_full(&mut self) -> *const core::ffi::c_char {
+    fn get_vtk_version_full(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_version_get_vtk_version_full(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_version_get_vtk_version_full(self.0) }
+        let ptr = unsafe { vtk_version_get_vtk_version_full(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
     fn get_vtk_major_version(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
@@ -24104,13 +11553,17 @@ impl VtkVersion for vtkVersion {
         }
         unsafe { vtk_version_get_vtk_build_version(self.0) }
     }
-    fn get_vtk_source_version(&mut self) -> *const core::ffi::c_char {
+    fn get_vtk_source_version(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_version_get_vtk_source_version(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_version_get_vtk_source_version(self.0) }
+        let ptr = unsafe { vtk_version_get_vtk_source_version(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
 }
 impl VtkVoidArray for vtkVoidArray {
@@ -24149,14 +11602,14 @@ impl VtkVoidArray for vtkVoidArray {
     }
     fn allocate(
         &mut self,
-        sz: core::ffi::c_uchar,
-        ext: core::ffi::c_uchar,
+        sz: core::ffi::c_longlong,
+        ext: core::ffi::c_longlong,
     ) -> core::ffi::c_int {
         unsafe extern "C" {
             fn vtk_void_array_allocate(
                 sself: *mut core::ffi::c_void,
-                sz: core::ffi::c_uchar,
-                ext: core::ffi::c_uchar,
+                sz: core::ffi::c_longlong,
+                ext: core::ffi::c_longlong,
             ) -> core::ffi::c_int;
         }
         unsafe { vtk_void_array_allocate(self.0, sz, ext) }
@@ -24183,60 +11636,22 @@ impl VtkVoidArray for vtkVoidArray {
         }
         unsafe { vtk_void_array_get_data_type_size(self.0) }
     }
-    fn set_number_of_pointers(&mut self, number: core::ffi::c_uchar) -> () {
+    fn set_number_of_pointers(&mut self, number: core::ffi::c_longlong) -> () {
         unsafe extern "C" {
             fn vtk_void_array_set_number_of_pointers(
                 sself: *mut core::ffi::c_void,
-                number: core::ffi::c_uchar,
+                number: core::ffi::c_longlong,
             );
         }
         unsafe { vtk_void_array_set_number_of_pointers(self.0, number) }
     }
-    fn get_number_of_pointers(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_pointers(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_void_array_get_number_of_pointers(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_void_array_get_number_of_pointers(self.0) }
-    }
-    fn get_void_pointer(&mut self, id: core::ffi::c_uchar) -> *mut () {
-        unsafe extern "C" {
-            fn vtk_void_array_get_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut ();
-        }
-        unsafe { vtk_void_array_get_void_pointer(self.0, id) }
-    }
-    fn set_void_pointer(&mut self, id: core::ffi::c_uchar, ptr: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_void_array_set_void_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                ptr: (),
-            );
-        }
-        unsafe { vtk_void_array_set_void_pointer(self.0, id, ptr) }
-    }
-    fn insert_void_pointer(&mut self, i: core::ffi::c_uchar, ptr: ()) -> () {
-        unsafe extern "C" {
-            fn vtk_void_array_insert_void_pointer(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_uchar,
-                ptr: (),
-            );
-        }
-        unsafe { vtk_void_array_insert_void_pointer(self.0, i, ptr) }
-    }
-    fn insert_next_void_pointer(&mut self, tuple: ()) -> core::ffi::c_uchar {
-        unsafe extern "C" {
-            fn vtk_void_array_insert_next_void_pointer(
-                sself: *mut core::ffi::c_void,
-                tuple: (),
-            ) -> core::ffi::c_uchar;
-        }
-        unsafe { vtk_void_array_insert_next_void_pointer(self.0, tuple) }
     }
     fn reset(&mut self) -> () {
         unsafe extern "C" {
@@ -24249,29 +11664,6 @@ impl VtkVoidArray for vtkVoidArray {
             fn vtk_void_array_squeeze(sself: *mut core::ffi::c_void);
         }
         unsafe { vtk_void_array_squeeze(self.0) }
-    }
-    fn get_pointer(&mut self, id: core::ffi::c_uchar) -> *mut &mut () {
-        unsafe extern "C" {
-            fn vtk_void_array_get_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-            ) -> *mut &mut ();
-        }
-        unsafe { vtk_void_array_get_pointer(self.0, id) }
-    }
-    fn write_pointer(
-        &mut self,
-        id: core::ffi::c_uchar,
-        number: core::ffi::c_uchar,
-    ) -> *mut &mut () {
-        unsafe extern "C" {
-            fn vtk_void_array_write_pointer(
-                sself: *mut core::ffi::c_void,
-                id: core::ffi::c_uchar,
-                number: core::ffi::c_uchar,
-            ) -> *mut &mut ();
-        }
-        unsafe { vtk_void_array_write_pointer(self.0, id, number) }
     }
     fn deep_copy(&mut self, va: *mut core::ffi::c_void) -> () {
         unsafe extern "C" {
@@ -24353,23 +11745,25 @@ impl VtkXMLFileOutputWindow for vtkXMLFileOutputWindow {
         }
         unsafe { vtk_xml_file_output_window_new(self.0) }
     }
-    fn display_text(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_text(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_xml_file_output_window_display_text(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_xml_file_output_window_display_text(self.0, p0) }
+        unsafe { vtk_xml_file_output_window_display_text(self.0, c_p0.as_ptr()) }
     }
-    fn display_tag(&mut self, p0: core::ffi::c_char) -> () {
+    fn display_tag(&mut self, p0: &str) -> () {
+        let c_p0 = std::ffi::CString::new(p0).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_xml_file_output_window_display_tag(
                 sself: *mut core::ffi::c_void,
-                p0: core::ffi::c_char,
+                p0: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_xml_file_output_window_display_tag(self.0, p0) }
+        unsafe { vtk_xml_file_output_window_display_tag(self.0, c_p0.as_ptr()) }
     }
 }
 /// a seqin an animation.
@@ -24395,22 +11789,13 @@ impl VtkXMLFileOutputWindow for vtkXMLFileOutputWindow {
 #[allow(non_camel_case_types)]
 pub struct vtkAnimationCue(*mut core::ffi::c_void);
 impl vtkAnimationCue {
-    /// Creates a new [vtkAnimationCue] wrapped inside `vtkNew`
+    /// Creates a new [vtkAnimationCue] via `vtkAnimationCue::New()`
     #[doc(alias = "vtkAnimationCue")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkAnimationCue_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkAnimationCue_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkAnimationCue_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkAnimationCue_get_ptr(self.0) }
+        Self(unsafe { vtkAnimationCue_new() })
     }
 }
 impl std::default::Default for vtkAnimationCue {
@@ -24430,12 +11815,8 @@ impl Drop for vtkAnimationCue {
 #[test]
 fn test_vtkAnimationCue_create_drop() {
     let obj = vtkAnimationCue::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkAnimationCue(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Writes an archive
 ///
@@ -24449,22 +11830,13 @@ fn test_vtkAnimationCue_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkArchiver(*mut core::ffi::c_void);
 impl vtkArchiver {
-    /// Creates a new [vtkArchiver] wrapped inside `vtkNew`
+    /// Creates a new [vtkArchiver] via `vtkArchiver::New()`
     #[doc(alias = "vtkArchiver")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkArchiver_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkArchiver_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkArchiver_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkArchiver_get_ptr(self.0) }
+        Self(unsafe { vtkArchiver_new() })
     }
 }
 impl std::default::Default for vtkArchiver {
@@ -24484,12 +11856,8 @@ impl Drop for vtkArchiver {
 #[test]
 fn test_vtkArchiver_create_drop() {
     let obj = vtkArchiver::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkArchiver(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of bits
 ///
@@ -24501,22 +11869,13 @@ fn test_vtkArchiver_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkBitArray(*mut core::ffi::c_void);
 impl vtkBitArray {
-    /// Creates a new [vtkBitArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkBitArray] via `vtkBitArray::New()`
     #[doc(alias = "vtkBitArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkBitArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkBitArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkBitArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkBitArray_get_ptr(self.0) }
+        Self(unsafe { vtkBitArray_new() })
     }
 }
 impl std::default::Default for vtkBitArray {
@@ -24536,12 +11895,8 @@ impl Drop for vtkBitArray {
 #[test]
 fn test_vtkBitArray_create_drop() {
     let obj = vtkBitArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkBitArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Iterator for vtkBitArray.
 ///
@@ -24550,22 +11905,13 @@ fn test_vtkBitArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkBitArrayIterator(*mut core::ffi::c_void);
 impl vtkBitArrayIterator {
-    /// Creates a new [vtkBitArrayIterator] wrapped inside `vtkNew`
+    /// Creates a new [vtkBitArrayIterator] via `vtkBitArrayIterator::New()`
     #[doc(alias = "vtkBitArrayIterator")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkBitArrayIterator_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkBitArrayIterator_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkBitArrayIterator_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkBitArrayIterator_get_ptr(self.0) }
+        Self(unsafe { vtkBitArrayIterator_new() })
     }
 }
 impl std::default::Default for vtkBitArrayIterator {
@@ -24585,12 +11931,8 @@ impl Drop for vtkBitArrayIterator {
 #[test]
 fn test_vtkBitArrayIterator_create_drop() {
     let obj = vtkBitArrayIterator::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkBitArrayIterator(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Gaussian sequence of pseudo random numbers implemented with the Box-Mueller transform
 ///
@@ -24604,22 +11946,13 @@ fn test_vtkBitArrayIterator_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkBoxMuellerRandomSequence(*mut core::ffi::c_void);
 impl vtkBoxMuellerRandomSequence {
-    /// Creates a new [vtkBoxMuellerRandomSequence] wrapped inside `vtkNew`
+    /// Creates a new [vtkBoxMuellerRandomSequence] via `vtkBoxMuellerRandomSequence::New()`
     #[doc(alias = "vtkBoxMuellerRandomSequence")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkBoxMuellerRandomSequence_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkBoxMuellerRandomSequence_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkBoxMuellerRandomSequence_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkBoxMuellerRandomSequence_get_ptr(self.0) }
+        Self(unsafe { vtkBoxMuellerRandomSequence_new() })
     }
 }
 impl std::default::Default for vtkBoxMuellerRandomSequence {
@@ -24639,12 +11972,8 @@ impl Drop for vtkBoxMuellerRandomSequence {
 #[test]
 fn test_vtkBoxMuellerRandomSequence_create_drop() {
     let obj = vtkBoxMuellerRandomSequence::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkBoxMuellerRandomSequence(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// perform machine dependent byte swapping
 ///
@@ -24655,22 +11984,13 @@ fn test_vtkBoxMuellerRandomSequence_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkByteSwap(*mut core::ffi::c_void);
 impl vtkByteSwap {
-    /// Creates a new [vtkByteSwap] wrapped inside `vtkNew`
+    /// Creates a new [vtkByteSwap] via `vtkByteSwap::New()`
     #[doc(alias = "vtkByteSwap")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkByteSwap_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkByteSwap_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkByteSwap_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkByteSwap_get_ptr(self.0) }
+        Self(unsafe { vtkByteSwap_new() })
     }
 }
 impl std::default::Default for vtkByteSwap {
@@ -24690,12 +12010,8 @@ impl Drop for vtkByteSwap {
 #[test]
 fn test_vtkByteSwap_create_drop() {
     let obj = vtkByteSwap::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkByteSwap(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// supports function callbacks
 ///
@@ -24720,22 +12036,13 @@ fn test_vtkByteSwap_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkCallbackCommand(*mut core::ffi::c_void);
 impl vtkCallbackCommand {
-    /// Creates a new [vtkCallbackCommand] wrapped inside `vtkNew`
+    /// Creates a new [vtkCallbackCommand] via `vtkCallbackCommand::New()`
     #[doc(alias = "vtkCallbackCommand")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkCallbackCommand_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkCallbackCommand_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkCallbackCommand_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkCallbackCommand_get_ptr(self.0) }
+        Self(unsafe { vtkCallbackCommand_new() })
     }
 }
 impl std::default::Default for vtkCallbackCommand {
@@ -24755,12 +12062,8 @@ impl Drop for vtkCallbackCommand {
 #[test]
 fn test_vtkCallbackCommand_create_drop() {
     let obj = vtkCallbackCommand::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkCallbackCommand(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of char
 ///
@@ -24784,22 +12087,13 @@ fn test_vtkCallbackCommand_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkCharArray(*mut core::ffi::c_void);
 impl vtkCharArray {
-    /// Creates a new [vtkCharArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkCharArray] via `vtkCharArray::New()`
     #[doc(alias = "vtkCharArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkCharArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkCharArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkCharArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkCharArray_get_ptr(self.0) }
+        Self(unsafe { vtkCharArray_new() })
     }
 }
 impl std::default::Default for vtkCharArray {
@@ -24819,12 +12113,8 @@ impl Drop for vtkCharArray {
 #[test]
 fn test_vtkCharArray_create_drop() {
     let obj = vtkCharArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkCharArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// create and manipulate ordered lists of objects
 ///
@@ -24842,22 +12132,13 @@ fn test_vtkCharArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkCollection(*mut core::ffi::c_void);
 impl vtkCollection {
-    /// Creates a new [vtkCollection] wrapped inside `vtkNew`
+    /// Creates a new [vtkCollection] via `vtkCollection::New()`
     #[doc(alias = "vtkCollection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkCollection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkCollection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkCollection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkCollection_get_ptr(self.0) }
+        Self(unsafe { vtkCollection_new() })
     }
 }
 impl std::default::Default for vtkCollection {
@@ -24877,12 +12158,8 @@ impl Drop for vtkCollection {
 #[test]
 fn test_vtkCollection_create_drop() {
     let obj = vtkCollection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkCollection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// iterator through a vtkCollection.
 ///
@@ -24897,22 +12174,13 @@ fn test_vtkCollection_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkCollectionIterator(*mut core::ffi::c_void);
 impl vtkCollectionIterator {
-    /// Creates a new [vtkCollectionIterator] wrapped inside `vtkNew`
+    /// Creates a new [vtkCollectionIterator] via `vtkCollectionIterator::New()`
     #[doc(alias = "vtkCollectionIterator")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkCollectionIterator_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkCollectionIterator_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkCollectionIterator_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkCollectionIterator_get_ptr(self.0) }
+        Self(unsafe { vtkCollectionIterator_new() })
     }
 }
 impl std::default::Default for vtkCollectionIterator {
@@ -24932,12 +12200,8 @@ impl Drop for vtkCollectionIterator {
 #[test]
 fn test_vtkCollectionIterator_create_drop() {
     let obj = vtkCollectionIterator::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkCollectionIterator(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Critical section locking class
 ///
@@ -24960,22 +12224,13 @@ fn test_vtkCollectionIterator_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkCriticalSection(*mut core::ffi::c_void);
 impl vtkCriticalSection {
-    /// Creates a new [vtkCriticalSection] wrapped inside `vtkNew`
+    /// Creates a new [vtkCriticalSection] via `vtkCriticalSection::New()`
     #[doc(alias = "vtkCriticalSection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkCriticalSection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkCriticalSection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkCriticalSection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkCriticalSection_get_ptr(self.0) }
+        Self(unsafe { vtkCriticalSection_new() })
     }
 }
 impl std::default::Default for vtkCriticalSection {
@@ -24995,12 +12250,8 @@ impl Drop for vtkCriticalSection {
 #[test]
 fn test_vtkCriticalSection_create_drop() {
     let obj = vtkCriticalSection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkCriticalSection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// maintain an ordered list of dataarray objects
 ///
@@ -25010,22 +12261,13 @@ fn test_vtkCriticalSection_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkDataArrayCollection(*mut core::ffi::c_void);
 impl vtkDataArrayCollection {
-    /// Creates a new [vtkDataArrayCollection] wrapped inside `vtkNew`
+    /// Creates a new [vtkDataArrayCollection] via `vtkDataArrayCollection::New()`
     #[doc(alias = "vtkDataArrayCollection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkDataArrayCollection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkDataArrayCollection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkDataArrayCollection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkDataArrayCollection_get_ptr(self.0) }
+        Self(unsafe { vtkDataArrayCollection_new() })
     }
 }
 impl std::default::Default for vtkDataArrayCollection {
@@ -25045,12 +12287,8 @@ impl Drop for vtkDataArrayCollection {
 #[test]
 fn test_vtkDataArrayCollection_create_drop() {
     let obj = vtkDataArrayCollection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkDataArrayCollection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// iterator through a vtkDataArrayCollection.
 ///
@@ -25061,22 +12299,13 @@ fn test_vtkDataArrayCollection_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkDataArrayCollectionIterator(*mut core::ffi::c_void);
 impl vtkDataArrayCollectionIterator {
-    /// Creates a new [vtkDataArrayCollectionIterator] wrapped inside `vtkNew`
+    /// Creates a new [vtkDataArrayCollectionIterator] via `vtkDataArrayCollectionIterator::New()`
     #[doc(alias = "vtkDataArrayCollectionIterator")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkDataArrayCollectionIterator_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkDataArrayCollectionIterator_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkDataArrayCollectionIterator_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkDataArrayCollectionIterator_get_ptr(self.0) }
+        Self(unsafe { vtkDataArrayCollectionIterator_new() })
     }
 }
 impl std::default::Default for vtkDataArrayCollectionIterator {
@@ -25096,12 +12325,8 @@ impl Drop for vtkDataArrayCollectionIterator {
 #[test]
 fn test_vtkDataArrayCollectionIterator_create_drop() {
     let obj = vtkDataArrayCollectionIterator::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkDataArrayCollectionIterator(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Store on/off settings for data arrays for a vtkSource.
 ///
@@ -25114,22 +12339,13 @@ fn test_vtkDataArrayCollectionIterator_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkDataArraySelection(*mut core::ffi::c_void);
 impl vtkDataArraySelection {
-    /// Creates a new [vtkDataArraySelection] wrapped inside `vtkNew`
+    /// Creates a new [vtkDataArraySelection] via `vtkDataArraySelection::New()`
     #[doc(alias = "vtkDataArraySelection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkDataArraySelection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkDataArraySelection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkDataArraySelection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkDataArraySelection_get_ptr(self.0) }
+        Self(unsafe { vtkDataArraySelection_new() })
     }
 }
 impl std::default::Default for vtkDataArraySelection {
@@ -25149,12 +12365,8 @@ impl Drop for vtkDataArraySelection {
 #[test]
 fn test_vtkDataArraySelection_create_drop() {
     let obj = vtkDataArraySelection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkDataArraySelection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// identify memory leaks at program termination
 ///
@@ -25190,22 +12402,13 @@ fn test_vtkDataArraySelection_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkDebugLeaks(*mut core::ffi::c_void);
 impl vtkDebugLeaks {
-    /// Creates a new [vtkDebugLeaks] wrapped inside `vtkNew`
+    /// Creates a new [vtkDebugLeaks] via `vtkDebugLeaks::New()`
     #[doc(alias = "vtkDebugLeaks")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkDebugLeaks_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkDebugLeaks_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkDebugLeaks_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkDebugLeaks_get_ptr(self.0) }
+        Self(unsafe { vtkDebugLeaks_new() })
     }
 }
 impl std::default::Default for vtkDebugLeaks {
@@ -25225,12 +12428,8 @@ impl Drop for vtkDebugLeaks {
 #[test]
 fn test_vtkDebugLeaks_create_drop() {
     let obj = vtkDebugLeaks::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkDebugLeaks(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of double
 ///
@@ -25241,22 +12440,13 @@ fn test_vtkDebugLeaks_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkDoubleArray(*mut core::ffi::c_void);
 impl vtkDoubleArray {
-    /// Creates a new [vtkDoubleArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkDoubleArray] via `vtkDoubleArray::New()`
     #[doc(alias = "vtkDoubleArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkDoubleArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkDoubleArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkDoubleArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkDoubleArray_get_ptr(self.0) }
+        Self(unsafe { vtkDoubleArray_new() })
     }
 }
 impl std::default::Default for vtkDoubleArray {
@@ -25276,12 +12466,8 @@ impl Drop for vtkDoubleArray {
 #[test]
 fn test_vtkDoubleArray_create_drop() {
     let obj = vtkDoubleArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkDoubleArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// class interface to system dynamic libraries
 ///
@@ -25293,22 +12479,13 @@ fn test_vtkDoubleArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkDynamicLoader(*mut core::ffi::c_void);
 impl vtkDynamicLoader {
-    /// Creates a new [vtkDynamicLoader] wrapped inside `vtkNew`
+    /// Creates a new [vtkDynamicLoader] via `vtkDynamicLoader::New()`
     #[doc(alias = "vtkDynamicLoader")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkDynamicLoader_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkDynamicLoader_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkDynamicLoader_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkDynamicLoader_get_ptr(self.0) }
+        Self(unsafe { vtkDynamicLoader_new() })
     }
 }
 impl std::default::Default for vtkDynamicLoader {
@@ -25328,33 +12505,20 @@ impl Drop for vtkDynamicLoader {
 #[test]
 fn test_vtkDynamicLoader_create_drop() {
     let obj = vtkDynamicLoader::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkDynamicLoader(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkEventDataDevice3D(*mut core::ffi::c_void);
 impl vtkEventDataDevice3D {
-    /// Creates a new [vtkEventDataDevice3D] wrapped inside `vtkNew`
+    /// Creates a new [vtkEventDataDevice3D] via `vtkEventDataDevice3D::New()`
     #[doc(alias = "vtkEventDataDevice3D")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkEventDataDevice3D_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkEventDataDevice3D_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkEventDataDevice3D_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkEventDataDevice3D_get_ptr(self.0) }
+        Self(unsafe { vtkEventDataDevice3D_new() })
     }
 }
 impl std::default::Default for vtkEventDataDevice3D {
@@ -25374,33 +12538,20 @@ impl Drop for vtkEventDataDevice3D {
 #[test]
 fn test_vtkEventDataDevice3D_create_drop() {
     let obj = vtkEventDataDevice3D::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkEventDataDevice3D(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkEventDataForDevice(*mut core::ffi::c_void);
 impl vtkEventDataForDevice {
-    /// Creates a new [vtkEventDataForDevice] wrapped inside `vtkNew`
+    /// Creates a new [vtkEventDataForDevice] via `vtkEventDataForDevice::New()`
     #[doc(alias = "vtkEventDataForDevice")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkEventDataForDevice_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkEventDataForDevice_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkEventDataForDevice_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkEventDataForDevice_get_ptr(self.0) }
+        Self(unsafe { vtkEventDataForDevice_new() })
     }
 }
 impl std::default::Default for vtkEventDataForDevice {
@@ -25420,12 +12571,8 @@ impl Drop for vtkEventDataForDevice {
 #[test]
 fn test_vtkEventDataForDevice_create_drop() {
     let obj = vtkEventDataForDevice::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkEventDataForDevice(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// a simple event forwarder command
 ///
@@ -25440,22 +12587,13 @@ fn test_vtkEventDataForDevice_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkEventForwarderCommand(*mut core::ffi::c_void);
 impl vtkEventForwarderCommand {
-    /// Creates a new [vtkEventForwarderCommand] wrapped inside `vtkNew`
+    /// Creates a new [vtkEventForwarderCommand] via `vtkEventForwarderCommand::New()`
     #[doc(alias = "vtkEventForwarderCommand")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkEventForwarderCommand_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkEventForwarderCommand_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkEventForwarderCommand_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkEventForwarderCommand_get_ptr(self.0) }
+        Self(unsafe { vtkEventForwarderCommand_new() })
     }
 }
 impl std::default::Default for vtkEventForwarderCommand {
@@ -25475,12 +12613,8 @@ impl Drop for vtkEventForwarderCommand {
 #[test]
 fn test_vtkEventForwarderCommand_create_drop() {
     let obj = vtkEventForwarderCommand::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkEventForwarderCommand(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// File Specific output window class
 ///
@@ -25490,22 +12624,13 @@ fn test_vtkEventForwarderCommand_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkFileOutputWindow(*mut core::ffi::c_void);
 impl vtkFileOutputWindow {
-    /// Creates a new [vtkFileOutputWindow] wrapped inside `vtkNew`
+    /// Creates a new [vtkFileOutputWindow] via `vtkFileOutputWindow::New()`
     #[doc(alias = "vtkFileOutputWindow")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkFileOutputWindow_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkFileOutputWindow_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkFileOutputWindow_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkFileOutputWindow_get_ptr(self.0) }
+        Self(unsafe { vtkFileOutputWindow_new() })
     }
 }
 impl std::default::Default for vtkFileOutputWindow {
@@ -25525,12 +12650,8 @@ impl Drop for vtkFileOutputWindow {
 #[test]
 fn test_vtkFileOutputWindow_create_drop() {
     let obj = vtkFileOutputWindow::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkFileOutputWindow(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of float
 ///
@@ -25541,22 +12662,13 @@ fn test_vtkFileOutputWindow_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkFloatArray(*mut core::ffi::c_void);
 impl vtkFloatArray {
-    /// Creates a new [vtkFloatArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkFloatArray] via `vtkFloatArray::New()`
     #[doc(alias = "vtkFloatArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkFloatArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkFloatArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkFloatArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkFloatArray_get_ptr(self.0) }
+        Self(unsafe { vtkFloatArray_new() })
     }
 }
 impl std::default::Default for vtkFloatArray {
@@ -25576,12 +12688,8 @@ impl Drop for vtkFloatArray {
 #[test]
 fn test_vtkFloatArray_create_drop() {
     let obj = vtkFloatArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkFloatArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Detect and break reference loops
 ///
@@ -25647,22 +12755,13 @@ fn test_vtkFloatArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkGarbageCollector(*mut core::ffi::c_void);
 impl vtkGarbageCollector {
-    /// Creates a new [vtkGarbageCollector] wrapped inside `vtkNew`
+    /// Creates a new [vtkGarbageCollector] via `vtkGarbageCollector::New()`
     #[doc(alias = "vtkGarbageCollector")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkGarbageCollector_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkGarbageCollector_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkGarbageCollector_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkGarbageCollector_get_ptr(self.0) }
+        Self(unsafe { vtkGarbageCollector_new() })
     }
 }
 impl std::default::Default for vtkGarbageCollector {
@@ -25682,12 +12781,8 @@ impl Drop for vtkGarbageCollector {
 #[test]
 fn test_vtkGarbageCollector_create_drop() {
     let obj = vtkGarbageCollector::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkGarbageCollector(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// list of point or cell ids
 ///
@@ -25698,22 +12793,13 @@ fn test_vtkGarbageCollector_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkIdList(*mut core::ffi::c_void);
 impl vtkIdList {
-    /// Creates a new [vtkIdList] wrapped inside `vtkNew`
+    /// Creates a new [vtkIdList] via `vtkIdList::New()`
     #[doc(alias = "vtkIdList")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkIdList_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkIdList_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkIdList_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkIdList_get_ptr(self.0) }
+        Self(unsafe { vtkIdList_new() })
     }
 }
 impl std::default::Default for vtkIdList {
@@ -25733,12 +12819,8 @@ impl Drop for vtkIdList {
 #[test]
 fn test_vtkIdList_create_drop() {
     let obj = vtkIdList::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkIdList(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// maintain an ordered list of IdList objects
 ///
@@ -25748,22 +12830,13 @@ fn test_vtkIdList_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkIdListCollection(*mut core::ffi::c_void);
 impl vtkIdListCollection {
-    /// Creates a new [vtkIdListCollection] wrapped inside `vtkNew`
+    /// Creates a new [vtkIdListCollection] via `vtkIdListCollection::New()`
     #[doc(alias = "vtkIdListCollection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkIdListCollection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkIdListCollection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkIdListCollection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkIdListCollection_get_ptr(self.0) }
+        Self(unsafe { vtkIdListCollection_new() })
     }
 }
 impl std::default::Default for vtkIdListCollection {
@@ -25783,12 +12856,8 @@ impl Drop for vtkIdListCollection {
 #[test]
 fn test_vtkIdListCollection_create_drop() {
     let obj = vtkIdListCollection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkIdListCollection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of vtkIdType
 ///
@@ -25799,22 +12868,13 @@ fn test_vtkIdListCollection_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkIdTypeArray(*mut core::ffi::c_void);
 impl vtkIdTypeArray {
-    /// Creates a new [vtkIdTypeArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkIdTypeArray] via `vtkIdTypeArray::New()`
     #[doc(alias = "vtkIdTypeArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkIdTypeArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkIdTypeArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkIdTypeArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkIdTypeArray_get_ptr(self.0) }
+        Self(unsafe { vtkIdTypeArray_new() })
     }
 }
 impl std::default::Default for vtkIdTypeArray {
@@ -25834,12 +12894,8 @@ impl Drop for vtkIdTypeArray {
 #[test]
 fn test_vtkIdTypeArray_create_drop() {
     let obj = vtkIdTypeArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkIdTypeArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Store vtkAlgorithm input/output information.
 ///
@@ -25854,22 +12910,13 @@ fn test_vtkIdTypeArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkInformation(*mut core::ffi::c_void);
 impl vtkInformation {
-    /// Creates a new [vtkInformation] wrapped inside `vtkNew`
+    /// Creates a new [vtkInformation] via `vtkInformation::New()`
     #[doc(alias = "vtkInformation")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkInformation_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkInformation_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkInformation_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkInformation_get_ptr(self.0) }
+        Self(unsafe { vtkInformation_new() })
     }
 }
 impl std::default::Default for vtkInformation {
@@ -25889,12 +12936,8 @@ impl Drop for vtkInformation {
 #[test]
 fn test_vtkInformation_create_drop() {
     let obj = vtkInformation::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkInformation(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Iterates over keys of an information object
 ///
@@ -25908,22 +12951,13 @@ fn test_vtkInformation_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkInformationIterator(*mut core::ffi::c_void);
 impl vtkInformationIterator {
-    /// Creates a new [vtkInformationIterator] wrapped inside `vtkNew`
+    /// Creates a new [vtkInformationIterator] via `vtkInformationIterator::New()`
     #[doc(alias = "vtkInformationIterator")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkInformationIterator_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkInformationIterator_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkInformationIterator_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkInformationIterator_get_ptr(self.0) }
+        Self(unsafe { vtkInformationIterator_new() })
     }
 }
 impl std::default::Default for vtkInformationIterator {
@@ -25943,12 +12977,8 @@ impl Drop for vtkInformationIterator {
 #[test]
 fn test_vtkInformationIterator_create_drop() {
     let obj = vtkInformationIterator::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkInformationIterator(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Find vtkInformationKeys from name and
 ///
@@ -25956,22 +12986,13 @@ fn test_vtkInformationIterator_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkInformationKeyLookup(*mut core::ffi::c_void);
 impl vtkInformationKeyLookup {
-    /// Creates a new [vtkInformationKeyLookup] wrapped inside `vtkNew`
+    /// Creates a new [vtkInformationKeyLookup] via `vtkInformationKeyLookup::New()`
     #[doc(alias = "vtkInformationKeyLookup")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkInformationKeyLookup_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkInformationKeyLookup_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkInformationKeyLookup_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkInformationKeyLookup_get_ptr(self.0) }
+        Self(unsafe { vtkInformationKeyLookup_new() })
     }
 }
 impl std::default::Default for vtkInformationKeyLookup {
@@ -25991,12 +13012,8 @@ impl Drop for vtkInformationKeyLookup {
 #[test]
 fn test_vtkInformationKeyLookup_create_drop() {
     let obj = vtkInformationKeyLookup::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkInformationKeyLookup(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Store zero or more vtkInformation instances.
 ///
@@ -26009,22 +13026,13 @@ fn test_vtkInformationKeyLookup_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkInformationVector(*mut core::ffi::c_void);
 impl vtkInformationVector {
-    /// Creates a new [vtkInformationVector] wrapped inside `vtkNew`
+    /// Creates a new [vtkInformationVector] via `vtkInformationVector::New()`
     #[doc(alias = "vtkInformationVector")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkInformationVector_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkInformationVector_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkInformationVector_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkInformationVector_get_ptr(self.0) }
+        Self(unsafe { vtkInformationVector_new() })
     }
 }
 impl std::default::Default for vtkInformationVector {
@@ -26044,12 +13052,8 @@ impl Drop for vtkInformationVector {
 #[test]
 fn test_vtkInformationVector_create_drop() {
     let obj = vtkInformationVector::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkInformationVector(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of int
 ///
@@ -26064,22 +13068,13 @@ fn test_vtkInformationVector_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkIntArray(*mut core::ffi::c_void);
 impl vtkIntArray {
-    /// Creates a new [vtkIntArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkIntArray] via `vtkIntArray::New()`
     #[doc(alias = "vtkIntArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkIntArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkIntArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkIntArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkIntArray_get_ptr(self.0) }
+        Self(unsafe { vtkIntArray_new() })
     }
 }
 impl std::default::Default for vtkIntArray {
@@ -26099,12 +13094,8 @@ impl Drop for vtkIntArray {
 #[test]
 fn test_vtkIntArray_create_drop() {
     let obj = vtkIntArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkIntArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of long
 ///
@@ -26120,22 +13111,13 @@ fn test_vtkIntArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkLongArray(*mut core::ffi::c_void);
 impl vtkLongArray {
-    /// Creates a new [vtkLongArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkLongArray] via `vtkLongArray::New()`
     #[doc(alias = "vtkLongArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkLongArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkLongArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkLongArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkLongArray_get_ptr(self.0) }
+        Self(unsafe { vtkLongArray_new() })
     }
 }
 impl std::default::Default for vtkLongArray {
@@ -26155,12 +13137,8 @@ impl Drop for vtkLongArray {
 #[test]
 fn test_vtkLongArray_create_drop() {
     let obj = vtkLongArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkLongArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of long long
 ///
@@ -26175,22 +13153,13 @@ fn test_vtkLongArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkLongLongArray(*mut core::ffi::c_void);
 impl vtkLongLongArray {
-    /// Creates a new [vtkLongLongArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkLongLongArray] via `vtkLongLongArray::New()`
     #[doc(alias = "vtkLongLongArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkLongLongArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkLongLongArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkLongLongArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkLongLongArray_get_ptr(self.0) }
+        Self(unsafe { vtkLongLongArray_new() })
     }
 }
 impl std::default::Default for vtkLongLongArray {
@@ -26210,12 +13179,8 @@ impl Drop for vtkLongLongArray {
 #[test]
 fn test_vtkLongLongArray_create_drop() {
     let obj = vtkLongLongArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkLongLongArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// map scalar values into colors via a lookup table
 ///
@@ -26256,22 +13221,13 @@ fn test_vtkLongLongArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkLookupTable(*mut core::ffi::c_void);
 impl vtkLookupTable {
-    /// Creates a new [vtkLookupTable] wrapped inside `vtkNew`
+    /// Creates a new [vtkLookupTable] via `vtkLookupTable::New()`
     #[doc(alias = "vtkLookupTable")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkLookupTable_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkLookupTable_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkLookupTable_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkLookupTable_get_ptr(self.0) }
+        Self(unsafe { vtkLookupTable_new() })
     }
 }
 impl std::default::Default for vtkLookupTable {
@@ -26291,12 +13247,8 @@ impl Drop for vtkLookupTable {
 #[test]
 fn test_vtkLookupTable_create_drop() {
     let obj = vtkLookupTable::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkLookupTable(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// performs common math operations
 ///
@@ -26312,20 +13264,13 @@ fn test_vtkLookupTable_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkMath(*mut core::ffi::c_void);
 impl vtkMath {
-    /// Creates a new [vtkMath] wrapped inside `vtkNew`
+    /// Creates a new [vtkMath] via `vtkMath::New()`
     #[doc(alias = "vtkMath")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkMath_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkMath_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkMath_get_ptr(sself: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkMath_get_ptr(self.0) }
+        Self(unsafe { vtkMath_new() })
     }
 }
 impl std::default::Default for vtkMath {
@@ -26345,12 +13290,8 @@ impl Drop for vtkMath {
 #[test]
 fn test_vtkMath_create_drop() {
     let obj = vtkMath::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkMath(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Generator for Mersenne Twister pseudorandom numbers
 ///
@@ -26376,22 +13317,13 @@ fn test_vtkMath_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkMersenneTwister(*mut core::ffi::c_void);
 impl vtkMersenneTwister {
-    /// Creates a new [vtkMersenneTwister] wrapped inside `vtkNew`
+    /// Creates a new [vtkMersenneTwister] via `vtkMersenneTwister::New()`
     #[doc(alias = "vtkMersenneTwister")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkMersenneTwister_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkMersenneTwister_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkMersenneTwister_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkMersenneTwister_get_ptr(self.0) }
+        Self(unsafe { vtkMersenneTwister_new() })
     }
 }
 impl std::default::Default for vtkMersenneTwister {
@@ -26411,12 +13343,8 @@ impl Drop for vtkMersenneTwister {
 #[test]
 fn test_vtkMersenneTwister_create_drop() {
     let obj = vtkMersenneTwister::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkMersenneTwister(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Park and Miller Sequence of pseudo random numbers
 ///
@@ -26439,22 +13367,13 @@ fn test_vtkMersenneTwister_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkMinimalStandardRandomSequence(*mut core::ffi::c_void);
 impl vtkMinimalStandardRandomSequence {
-    /// Creates a new [vtkMinimalStandardRandomSequence] wrapped inside `vtkNew`
+    /// Creates a new [vtkMinimalStandardRandomSequence] via `vtkMinimalStandardRandomSequence::New()`
     #[doc(alias = "vtkMinimalStandardRandomSequence")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkMinimalStandardRandomSequence_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkMinimalStandardRandomSequence_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkMinimalStandardRandomSequence_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkMinimalStandardRandomSequence_get_ptr(self.0) }
+        Self(unsafe { vtkMinimalStandardRandomSequence_new() })
     }
 }
 impl std::default::Default for vtkMinimalStandardRandomSequence {
@@ -26476,12 +13395,8 @@ impl Drop for vtkMinimalStandardRandomSequence {
 #[test]
 fn test_vtkMinimalStandardRandomSequence_create_drop() {
     let obj = vtkMinimalStandardRandomSequence::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkMinimalStandardRandomSequence(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// A class for performing multithreaded execution
 ///
@@ -26493,22 +13408,13 @@ fn test_vtkMinimalStandardRandomSequence_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkMultiThreader(*mut core::ffi::c_void);
 impl vtkMultiThreader {
-    /// Creates a new [vtkMultiThreader] wrapped inside `vtkNew`
+    /// Creates a new [vtkMultiThreader] via `vtkMultiThreader::New()`
     #[doc(alias = "vtkMultiThreader")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkMultiThreader_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkMultiThreader_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkMultiThreader_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkMultiThreader_get_ptr(self.0) }
+        Self(unsafe { vtkMultiThreader_new() })
     }
 }
 impl std::default::Default for vtkMultiThreader {
@@ -26528,12 +13434,8 @@ impl Drop for vtkMultiThreader {
 #[test]
 fn test_vtkMultiThreader_create_drop() {
     let obj = vtkMultiThreader::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkMultiThreader(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// abstract base class for most VTK objects
 ///
@@ -26561,22 +13463,13 @@ fn test_vtkMultiThreader_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkObject(*mut core::ffi::c_void);
 impl vtkObject {
-    /// Creates a new [vtkObject] wrapped inside `vtkNew`
+    /// Creates a new [vtkObject] via `vtkObject::New()`
     #[doc(alias = "vtkObject")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkObject_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkObject_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkObject_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkObject_get_ptr(self.0) }
+        Self(unsafe { vtkObject_new() })
     }
 }
 impl std::default::Default for vtkObject {
@@ -26596,12 +13489,8 @@ impl Drop for vtkObject {
 #[test]
 fn test_vtkObject_create_drop() {
     let obj = vtkObject::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkObject(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// maintain a list of object factories
 ///
@@ -26614,22 +13503,13 @@ fn test_vtkObject_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkObjectFactoryCollection(*mut core::ffi::c_void);
 impl vtkObjectFactoryCollection {
-    /// Creates a new [vtkObjectFactoryCollection] wrapped inside `vtkNew`
+    /// Creates a new [vtkObjectFactoryCollection] via `vtkObjectFactoryCollection::New()`
     #[doc(alias = "vtkObjectFactoryCollection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkObjectFactoryCollection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkObjectFactoryCollection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkObjectFactoryCollection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkObjectFactoryCollection_get_ptr(self.0) }
+        Self(unsafe { vtkObjectFactoryCollection_new() })
     }
 }
 impl std::default::Default for vtkObjectFactoryCollection {
@@ -26649,12 +13529,8 @@ impl Drop for vtkObjectFactoryCollection {
 #[test]
 fn test_vtkObjectFactoryCollection_create_drop() {
     let obj = vtkObjectFactoryCollection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkObjectFactoryCollection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// supports legacy function callbacks for VTK
 ///
@@ -26675,22 +13551,13 @@ fn test_vtkObjectFactoryCollection_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkOldStyleCallbackCommand(*mut core::ffi::c_void);
 impl vtkOldStyleCallbackCommand {
-    /// Creates a new [vtkOldStyleCallbackCommand] wrapped inside `vtkNew`
+    /// Creates a new [vtkOldStyleCallbackCommand] via `vtkOldStyleCallbackCommand::New()`
     #[doc(alias = "vtkOldStyleCallbackCommand")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkOldStyleCallbackCommand_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkOldStyleCallbackCommand_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkOldStyleCallbackCommand_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkOldStyleCallbackCommand_get_ptr(self.0) }
+        Self(unsafe { vtkOldStyleCallbackCommand_new() })
     }
 }
 impl std::default::Default for vtkOldStyleCallbackCommand {
@@ -26710,12 +13577,8 @@ impl Drop for vtkOldStyleCallbackCommand {
 #[test]
 fn test_vtkOldStyleCallbackCommand_create_drop() {
     let obj = vtkOldStyleCallbackCommand::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkOldStyleCallbackCommand(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// base class for writing debug output to a console
 ///
@@ -26727,22 +13590,13 @@ fn test_vtkOldStyleCallbackCommand_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkOutputWindow(*mut core::ffi::c_void);
 impl vtkOutputWindow {
-    /// Creates a new [vtkOutputWindow] wrapped inside `vtkNew`
+    /// Creates a new [vtkOutputWindow] via `vtkOutputWindow::New()`
     #[doc(alias = "vtkOutputWindow")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkOutputWindow_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkOutputWindow_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkOutputWindow_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkOutputWindow_get_ptr(self.0) }
+        Self(unsafe { vtkOutputWindow_new() })
     }
 }
 impl std::default::Default for vtkOutputWindow {
@@ -26762,12 +13616,8 @@ impl Drop for vtkOutputWindow {
 #[test]
 fn test_vtkOutputWindow_create_drop() {
     let obj = vtkOutputWindow::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkOutputWindow(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// maintain a list of override information objects
 ///
@@ -26779,22 +13629,13 @@ fn test_vtkOutputWindow_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkOverrideInformationCollection(*mut core::ffi::c_void);
 impl vtkOverrideInformationCollection {
-    /// Creates a new [vtkOverrideInformationCollection] wrapped inside `vtkNew`
+    /// Creates a new [vtkOverrideInformationCollection] via `vtkOverrideInformationCollection::New()`
     #[doc(alias = "vtkOverrideInformationCollection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkOverrideInformationCollection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkOverrideInformationCollection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkOverrideInformationCollection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkOverrideInformationCollection_get_ptr(self.0) }
+        Self(unsafe { vtkOverrideInformationCollection_new() })
     }
 }
 impl std::default::Default for vtkOverrideInformationCollection {
@@ -26816,12 +13657,8 @@ impl Drop for vtkOverrideInformationCollection {
 #[test]
 fn test_vtkOverrideInformationCollection_create_drop() {
     let obj = vtkOverrideInformationCollection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkOverrideInformationCollection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// represent and manipulate 3D points
 ///
@@ -26831,22 +13668,13 @@ fn test_vtkOverrideInformationCollection_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkPoints(*mut core::ffi::c_void);
 impl vtkPoints {
-    /// Creates a new [vtkPoints] wrapped inside `vtkNew`
+    /// Creates a new [vtkPoints] via `vtkPoints::New()`
     #[doc(alias = "vtkPoints")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkPoints_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkPoints_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkPoints_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkPoints_get_ptr(self.0) }
+        Self(unsafe { vtkPoints_new() })
     }
 }
 impl std::default::Default for vtkPoints {
@@ -26866,12 +13694,8 @@ impl Drop for vtkPoints {
 #[test]
 fn test_vtkPoints_create_drop() {
     let obj = vtkPoints::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkPoints(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// represent and manipulate 2D points
 ///
@@ -26881,22 +13705,13 @@ fn test_vtkPoints_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkPoints2D(*mut core::ffi::c_void);
 impl vtkPoints2D {
-    /// Creates a new [vtkPoints2D] wrapped inside `vtkNew`
+    /// Creates a new [vtkPoints2D] via `vtkPoints2D::New()`
     #[doc(alias = "vtkPoints2D")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkPoints2D_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkPoints2D_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkPoints2D_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkPoints2D_get_ptr(self.0) }
+        Self(unsafe { vtkPoints2D_new() })
     }
 }
 impl std::default::Default for vtkPoints2D {
@@ -26916,12 +13731,8 @@ impl Drop for vtkPoints2D {
 #[test]
 fn test_vtkPoints2D_create_drop() {
     let obj = vtkPoints2D::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkPoints2D(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// a list of ids arranged in priority order
 ///
@@ -26946,22 +13757,13 @@ fn test_vtkPoints2D_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkPriorityQueue(*mut core::ffi::c_void);
 impl vtkPriorityQueue {
-    /// Creates a new [vtkPriorityQueue] wrapped inside `vtkNew`
+    /// Creates a new [vtkPriorityQueue] via `vtkPriorityQueue::New()`
     #[doc(alias = "vtkPriorityQueue")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkPriorityQueue_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkPriorityQueue_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkPriorityQueue_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkPriorityQueue_get_ptr(self.0) }
+        Self(unsafe { vtkPriorityQueue_new() })
     }
 }
 impl std::default::Default for vtkPriorityQueue {
@@ -26981,12 +13783,8 @@ impl Drop for vtkPriorityQueue {
 #[test]
 fn test_vtkPriorityQueue_create_drop() {
     let obj = vtkPriorityQueue::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkPriorityQueue(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// convenience class to quickly generate a pool of random numbers
 ///
@@ -27012,22 +13810,13 @@ fn test_vtkPriorityQueue_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkRandomPool(*mut core::ffi::c_void);
 impl vtkRandomPool {
-    /// Creates a new [vtkRandomPool] wrapped inside `vtkNew`
+    /// Creates a new [vtkRandomPool] via `vtkRandomPool::New()`
     #[doc(alias = "vtkRandomPool")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkRandomPool_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkRandomPool_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkRandomPool_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkRandomPool_get_ptr(self.0) }
+        Self(unsafe { vtkRandomPool_new() })
     }
 }
 impl std::default::Default for vtkRandomPool {
@@ -27047,12 +13836,8 @@ impl Drop for vtkRandomPool {
 #[test]
 fn test_vtkRandomPool_create_drop() {
     let obj = vtkRandomPool::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkRandomPool(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Obsolete / empty subclass of object.
 ///
@@ -27063,22 +13848,13 @@ fn test_vtkRandomPool_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkReferenceCount(*mut core::ffi::c_void);
 impl vtkReferenceCount {
-    /// Creates a new [vtkReferenceCount] wrapped inside `vtkNew`
+    /// Creates a new [vtkReferenceCount] via `vtkReferenceCount::New()`
     #[doc(alias = "vtkReferenceCount")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkReferenceCount_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkReferenceCount_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkReferenceCount_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkReferenceCount_get_ptr(self.0) }
+        Self(unsafe { vtkReferenceCount_new() })
     }
 }
 impl std::default::Default for vtkReferenceCount {
@@ -27098,12 +13874,8 @@ impl Drop for vtkReferenceCount {
 #[test]
 fn test_vtkReferenceCount_create_drop() {
     let obj = vtkReferenceCount::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkReferenceCount(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Superclass for mapping scalar values to colors
 ///
@@ -27136,22 +13908,13 @@ fn test_vtkReferenceCount_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkScalarsToColors(*mut core::ffi::c_void);
 impl vtkScalarsToColors {
-    /// Creates a new [vtkScalarsToColors] wrapped inside `vtkNew`
+    /// Creates a new [vtkScalarsToColors] via `vtkScalarsToColors::New()`
     #[doc(alias = "vtkScalarsToColors")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkScalarsToColors_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkScalarsToColors_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkScalarsToColors_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkScalarsToColors_get_ptr(self.0) }
+        Self(unsafe { vtkScalarsToColors_new() })
     }
 }
 impl std::default::Default for vtkScalarsToColors {
@@ -27171,12 +13934,8 @@ impl Drop for vtkScalarsToColors {
 #[test]
 fn test_vtkScalarsToColors_create_drop() {
     let obj = vtkScalarsToColors::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkScalarsToColors(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of short
 ///
@@ -27191,22 +13950,13 @@ fn test_vtkScalarsToColors_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkShortArray(*mut core::ffi::c_void);
 impl vtkShortArray {
-    /// Creates a new [vtkShortArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkShortArray] via `vtkShortArray::New()`
     #[doc(alias = "vtkShortArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkShortArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkShortArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkShortArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkShortArray_get_ptr(self.0) }
+        Self(unsafe { vtkShortArray_new() })
     }
 }
 impl std::default::Default for vtkShortArray {
@@ -27226,12 +13976,8 @@ impl Drop for vtkShortArray {
 #[test]
 fn test_vtkShortArray_create_drop() {
     let obj = vtkShortArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkShortArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of signed char
 ///
@@ -27242,22 +13988,13 @@ fn test_vtkShortArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkSignedCharArray(*mut core::ffi::c_void);
 impl vtkSignedCharArray {
-    /// Creates a new [vtkSignedCharArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkSignedCharArray] via `vtkSignedCharArray::New()`
     #[doc(alias = "vtkSignedCharArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkSignedCharArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkSignedCharArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkSignedCharArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkSignedCharArray_get_ptr(self.0) }
+        Self(unsafe { vtkSignedCharArray_new() })
     }
 }
 impl std::default::Default for vtkSignedCharArray {
@@ -27277,12 +14014,8 @@ impl Drop for vtkSignedCharArray {
 #[test]
 fn test_vtkSignedCharArray_create_drop() {
     let obj = vtkSignedCharArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkSignedCharArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// provides several methods for sorting VTK arrays.
 ///
@@ -27325,22 +14058,13 @@ fn test_vtkSignedCharArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkSortDataArray(*mut core::ffi::c_void);
 impl vtkSortDataArray {
-    /// Creates a new [vtkSortDataArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkSortDataArray] via `vtkSortDataArray::New()`
     #[doc(alias = "vtkSortDataArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkSortDataArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkSortDataArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkSortDataArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkSortDataArray_get_ptr(self.0) }
+        Self(unsafe { vtkSortDataArray_new() })
     }
 }
 impl std::default::Default for vtkSortDataArray {
@@ -27360,12 +14084,8 @@ impl Drop for vtkSortDataArray {
 #[test]
 fn test_vtkSortDataArray_create_drop() {
     let obj = vtkSortDataArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkSortDataArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// a vtkAbstractArray subclass for strings
 ///
@@ -27378,22 +14098,13 @@ fn test_vtkSortDataArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkStringArray(*mut core::ffi::c_void);
 impl vtkStringArray {
-    /// Creates a new [vtkStringArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkStringArray] via `vtkStringArray::New()`
     #[doc(alias = "vtkStringArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkStringArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkStringArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkStringArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkStringArray_get_ptr(self.0) }
+        Self(unsafe { vtkStringArray_new() })
     }
 }
 impl std::default::Default for vtkStringArray {
@@ -27413,12 +14124,8 @@ impl Drop for vtkStringArray {
 #[test]
 fn test_vtkStringArray_create_drop() {
     let obj = vtkStringArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkStringArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// File Specific output window class
 ///
@@ -27428,22 +14135,13 @@ fn test_vtkStringArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkStringOutputWindow(*mut core::ffi::c_void);
 impl vtkStringOutputWindow {
-    /// Creates a new [vtkStringOutputWindow] wrapped inside `vtkNew`
+    /// Creates a new [vtkStringOutputWindow] via `vtkStringOutputWindow::New()`
     #[doc(alias = "vtkStringOutputWindow")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkStringOutputWindow_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkStringOutputWindow_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkStringOutputWindow_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkStringOutputWindow_get_ptr(self.0) }
+        Self(unsafe { vtkStringOutputWindow_new() })
     }
 }
 impl std::default::Default for vtkStringOutputWindow {
@@ -27463,12 +14161,8 @@ impl Drop for vtkStringOutputWindow {
 #[test]
 fn test_vtkStringOutputWindow_create_drop() {
     let obj = vtkStringOutputWindow::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkStringOutputWindow(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// performs common time operations
 ///
@@ -27478,22 +14172,13 @@ fn test_vtkStringOutputWindow_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkTimePointUtility(*mut core::ffi::c_void);
 impl vtkTimePointUtility {
-    /// Creates a new [vtkTimePointUtility] wrapped inside `vtkNew`
+    /// Creates a new [vtkTimePointUtility] via `vtkTimePointUtility::New()`
     #[doc(alias = "vtkTimePointUtility")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTimePointUtility_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTimePointUtility_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTimePointUtility_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTimePointUtility_get_ptr(self.0) }
+        Self(unsafe { vtkTimePointUtility_new() })
     }
 }
 impl std::default::Default for vtkTimePointUtility {
@@ -27513,33 +14198,20 @@ impl Drop for vtkTimePointUtility {
 #[test]
 fn test_vtkTimePointUtility_create_drop() {
     let obj = vtkTimePointUtility::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTimePointUtility(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeFloat32Array(*mut core::ffi::c_void);
 impl vtkTypeFloat32Array {
-    /// Creates a new [vtkTypeFloat32Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeFloat32Array] via `vtkTypeFloat32Array::New()`
     #[doc(alias = "vtkTypeFloat32Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeFloat32Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeFloat32Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeFloat32Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeFloat32Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeFloat32Array_new() })
     }
 }
 impl std::default::Default for vtkTypeFloat32Array {
@@ -27559,33 +14231,20 @@ impl Drop for vtkTypeFloat32Array {
 #[test]
 fn test_vtkTypeFloat32Array_create_drop() {
     let obj = vtkTypeFloat32Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeFloat32Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeFloat64Array(*mut core::ffi::c_void);
 impl vtkTypeFloat64Array {
-    /// Creates a new [vtkTypeFloat64Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeFloat64Array] via `vtkTypeFloat64Array::New()`
     #[doc(alias = "vtkTypeFloat64Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeFloat64Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeFloat64Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeFloat64Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeFloat64Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeFloat64Array_new() })
     }
 }
 impl std::default::Default for vtkTypeFloat64Array {
@@ -27605,33 +14264,20 @@ impl Drop for vtkTypeFloat64Array {
 #[test]
 fn test_vtkTypeFloat64Array_create_drop() {
     let obj = vtkTypeFloat64Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeFloat64Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeInt16Array(*mut core::ffi::c_void);
 impl vtkTypeInt16Array {
-    /// Creates a new [vtkTypeInt16Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeInt16Array] via `vtkTypeInt16Array::New()`
     #[doc(alias = "vtkTypeInt16Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeInt16Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeInt16Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeInt16Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeInt16Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeInt16Array_new() })
     }
 }
 impl std::default::Default for vtkTypeInt16Array {
@@ -27651,33 +14297,20 @@ impl Drop for vtkTypeInt16Array {
 #[test]
 fn test_vtkTypeInt16Array_create_drop() {
     let obj = vtkTypeInt16Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeInt16Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeInt32Array(*mut core::ffi::c_void);
 impl vtkTypeInt32Array {
-    /// Creates a new [vtkTypeInt32Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeInt32Array] via `vtkTypeInt32Array::New()`
     #[doc(alias = "vtkTypeInt32Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeInt32Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeInt32Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeInt32Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeInt32Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeInt32Array_new() })
     }
 }
 impl std::default::Default for vtkTypeInt32Array {
@@ -27697,33 +14330,20 @@ impl Drop for vtkTypeInt32Array {
 #[test]
 fn test_vtkTypeInt32Array_create_drop() {
     let obj = vtkTypeInt32Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeInt32Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeInt64Array(*mut core::ffi::c_void);
 impl vtkTypeInt64Array {
-    /// Creates a new [vtkTypeInt64Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeInt64Array] via `vtkTypeInt64Array::New()`
     #[doc(alias = "vtkTypeInt64Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeInt64Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeInt64Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeInt64Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeInt64Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeInt64Array_new() })
     }
 }
 impl std::default::Default for vtkTypeInt64Array {
@@ -27743,33 +14363,20 @@ impl Drop for vtkTypeInt64Array {
 #[test]
 fn test_vtkTypeInt64Array_create_drop() {
     let obj = vtkTypeInt64Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeInt64Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeInt8Array(*mut core::ffi::c_void);
 impl vtkTypeInt8Array {
-    /// Creates a new [vtkTypeInt8Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeInt8Array] via `vtkTypeInt8Array::New()`
     #[doc(alias = "vtkTypeInt8Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeInt8Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeInt8Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeInt8Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeInt8Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeInt8Array_new() })
     }
 }
 impl std::default::Default for vtkTypeInt8Array {
@@ -27789,33 +14396,20 @@ impl Drop for vtkTypeInt8Array {
 #[test]
 fn test_vtkTypeInt8Array_create_drop() {
     let obj = vtkTypeInt8Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeInt8Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeUInt16Array(*mut core::ffi::c_void);
 impl vtkTypeUInt16Array {
-    /// Creates a new [vtkTypeUInt16Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeUInt16Array] via `vtkTypeUInt16Array::New()`
     #[doc(alias = "vtkTypeUInt16Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeUInt16Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeUInt16Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeUInt16Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeUInt16Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeUInt16Array_new() })
     }
 }
 impl std::default::Default for vtkTypeUInt16Array {
@@ -27835,33 +14429,20 @@ impl Drop for vtkTypeUInt16Array {
 #[test]
 fn test_vtkTypeUInt16Array_create_drop() {
     let obj = vtkTypeUInt16Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeUInt16Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeUInt32Array(*mut core::ffi::c_void);
 impl vtkTypeUInt32Array {
-    /// Creates a new [vtkTypeUInt32Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeUInt32Array] via `vtkTypeUInt32Array::New()`
     #[doc(alias = "vtkTypeUInt32Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeUInt32Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeUInt32Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeUInt32Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeUInt32Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeUInt32Array_new() })
     }
 }
 impl std::default::Default for vtkTypeUInt32Array {
@@ -27881,33 +14462,20 @@ impl Drop for vtkTypeUInt32Array {
 #[test]
 fn test_vtkTypeUInt32Array_create_drop() {
     let obj = vtkTypeUInt32Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeUInt32Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeUInt64Array(*mut core::ffi::c_void);
 impl vtkTypeUInt64Array {
-    /// Creates a new [vtkTypeUInt64Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeUInt64Array] via `vtkTypeUInt64Array::New()`
     #[doc(alias = "vtkTypeUInt64Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeUInt64Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeUInt64Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeUInt64Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeUInt64Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeUInt64Array_new() })
     }
 }
 impl std::default::Default for vtkTypeUInt64Array {
@@ -27927,33 +14495,20 @@ impl Drop for vtkTypeUInt64Array {
 #[test]
 fn test_vtkTypeUInt64Array_create_drop() {
     let obj = vtkTypeUInt64Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeUInt64Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkTypeUInt8Array(*mut core::ffi::c_void);
 impl vtkTypeUInt8Array {
-    /// Creates a new [vtkTypeUInt8Array] wrapped inside `vtkNew`
+    /// Creates a new [vtkTypeUInt8Array] via `vtkTypeUInt8Array::New()`
     #[doc(alias = "vtkTypeUInt8Array")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTypeUInt8Array_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTypeUInt8Array_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTypeUInt8Array_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTypeUInt8Array_get_ptr(self.0) }
+        Self(unsafe { vtkTypeUInt8Array_new() })
     }
 }
 impl std::default::Default for vtkTypeUInt8Array {
@@ -27973,12 +14528,8 @@ impl Drop for vtkTypeUInt8Array {
 #[test]
 fn test_vtkTypeUInt8Array_create_drop() {
     let obj = vtkTypeUInt8Array::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTypeUInt8Array(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Subclass of vtkAbstractArray that holds vtkUnicodeStrings
 ///
@@ -27990,22 +14541,13 @@ fn test_vtkTypeUInt8Array_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkUnicodeStringArray(*mut core::ffi::c_void);
 impl vtkUnicodeStringArray {
-    /// Creates a new [vtkUnicodeStringArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkUnicodeStringArray] via `vtkUnicodeStringArray::New()`
     #[doc(alias = "vtkUnicodeStringArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkUnicodeStringArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkUnicodeStringArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkUnicodeStringArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkUnicodeStringArray_get_ptr(self.0) }
+        Self(unsafe { vtkUnicodeStringArray_new() })
     }
 }
 impl std::default::Default for vtkUnicodeStringArray {
@@ -28025,12 +14567,8 @@ impl Drop for vtkUnicodeStringArray {
 #[test]
 fn test_vtkUnicodeStringArray_create_drop() {
     let obj = vtkUnicodeStringArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkUnicodeStringArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of unsigned char
 ///
@@ -28041,22 +14579,13 @@ fn test_vtkUnicodeStringArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkUnsignedCharArray(*mut core::ffi::c_void);
 impl vtkUnsignedCharArray {
-    /// Creates a new [vtkUnsignedCharArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkUnsignedCharArray] via `vtkUnsignedCharArray::New()`
     #[doc(alias = "vtkUnsignedCharArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkUnsignedCharArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkUnsignedCharArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkUnsignedCharArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkUnsignedCharArray_get_ptr(self.0) }
+        Self(unsafe { vtkUnsignedCharArray_new() })
     }
 }
 impl std::default::Default for vtkUnsignedCharArray {
@@ -28076,12 +14605,8 @@ impl Drop for vtkUnsignedCharArray {
 #[test]
 fn test_vtkUnsignedCharArray_create_drop() {
     let obj = vtkUnsignedCharArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkUnsignedCharArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of unsigned int
 ///
@@ -28096,22 +14621,13 @@ fn test_vtkUnsignedCharArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkUnsignedIntArray(*mut core::ffi::c_void);
 impl vtkUnsignedIntArray {
-    /// Creates a new [vtkUnsignedIntArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkUnsignedIntArray] via `vtkUnsignedIntArray::New()`
     #[doc(alias = "vtkUnsignedIntArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkUnsignedIntArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkUnsignedIntArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkUnsignedIntArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkUnsignedIntArray_get_ptr(self.0) }
+        Self(unsafe { vtkUnsignedIntArray_new() })
     }
 }
 impl std::default::Default for vtkUnsignedIntArray {
@@ -28131,12 +14647,8 @@ impl Drop for vtkUnsignedIntArray {
 #[test]
 fn test_vtkUnsignedIntArray_create_drop() {
     let obj = vtkUnsignedIntArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkUnsignedIntArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of unsigned long
 ///
@@ -28153,22 +14665,13 @@ fn test_vtkUnsignedIntArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkUnsignedLongArray(*mut core::ffi::c_void);
 impl vtkUnsignedLongArray {
-    /// Creates a new [vtkUnsignedLongArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkUnsignedLongArray] via `vtkUnsignedLongArray::New()`
     #[doc(alias = "vtkUnsignedLongArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkUnsignedLongArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkUnsignedLongArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkUnsignedLongArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkUnsignedLongArray_get_ptr(self.0) }
+        Self(unsafe { vtkUnsignedLongArray_new() })
     }
 }
 impl std::default::Default for vtkUnsignedLongArray {
@@ -28188,12 +14691,8 @@ impl Drop for vtkUnsignedLongArray {
 #[test]
 fn test_vtkUnsignedLongArray_create_drop() {
     let obj = vtkUnsignedLongArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkUnsignedLongArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of unsigned long long
 ///
@@ -28208,22 +14707,13 @@ fn test_vtkUnsignedLongArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkUnsignedLongLongArray(*mut core::ffi::c_void);
 impl vtkUnsignedLongLongArray {
-    /// Creates a new [vtkUnsignedLongLongArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkUnsignedLongLongArray] via `vtkUnsignedLongLongArray::New()`
     #[doc(alias = "vtkUnsignedLongLongArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkUnsignedLongLongArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkUnsignedLongLongArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkUnsignedLongLongArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkUnsignedLongLongArray_get_ptr(self.0) }
+        Self(unsafe { vtkUnsignedLongLongArray_new() })
     }
 }
 impl std::default::Default for vtkUnsignedLongLongArray {
@@ -28243,12 +14733,8 @@ impl Drop for vtkUnsignedLongLongArray {
 #[test]
 fn test_vtkUnsignedLongLongArray_create_drop() {
     let obj = vtkUnsignedLongLongArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkUnsignedLongLongArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of unsigned short
 ///
@@ -28263,22 +14749,13 @@ fn test_vtkUnsignedLongLongArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkUnsignedShortArray(*mut core::ffi::c_void);
 impl vtkUnsignedShortArray {
-    /// Creates a new [vtkUnsignedShortArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkUnsignedShortArray] via `vtkUnsignedShortArray::New()`
     #[doc(alias = "vtkUnsignedShortArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkUnsignedShortArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkUnsignedShortArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkUnsignedShortArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkUnsignedShortArray_get_ptr(self.0) }
+        Self(unsafe { vtkUnsignedShortArray_new() })
     }
 }
 impl std::default::Default for vtkUnsignedShortArray {
@@ -28298,12 +14775,8 @@ impl Drop for vtkUnsignedShortArray {
 #[test]
 fn test_vtkUnsignedShortArray_create_drop() {
     let obj = vtkUnsignedShortArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkUnsignedShortArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// An array holding vtkVariants.
 ///
@@ -28316,22 +14789,13 @@ fn test_vtkUnsignedShortArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkVariantArray(*mut core::ffi::c_void);
 impl vtkVariantArray {
-    /// Creates a new [vtkVariantArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkVariantArray] via `vtkVariantArray::New()`
     #[doc(alias = "vtkVariantArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkVariantArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkVariantArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkVariantArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkVariantArray_get_ptr(self.0) }
+        Self(unsafe { vtkVariantArray_new() })
     }
 }
 impl std::default::Default for vtkVariantArray {
@@ -28351,12 +14815,8 @@ impl Drop for vtkVariantArray {
 #[test]
 fn test_vtkVariantArray_create_drop() {
     let obj = vtkVariantArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkVariantArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Versioning class for vtk
 ///
@@ -28370,22 +14830,13 @@ fn test_vtkVariantArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkVersion(*mut core::ffi::c_void);
 impl vtkVersion {
-    /// Creates a new [vtkVersion] wrapped inside `vtkNew`
+    /// Creates a new [vtkVersion] via `vtkVersion::New()`
     #[doc(alias = "vtkVersion")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkVersion_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkVersion_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkVersion_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkVersion_get_ptr(self.0) }
+        Self(unsafe { vtkVersion_new() })
     }
 }
 impl std::default::Default for vtkVersion {
@@ -28405,12 +14856,8 @@ impl Drop for vtkVersion {
 #[test]
 fn test_vtkVersion_create_drop() {
     let obj = vtkVersion::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkVersion(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// dynamic, self-adjusting array of void* pointers
 ///
@@ -28421,22 +14868,13 @@ fn test_vtkVersion_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkVoidArray(*mut core::ffi::c_void);
 impl vtkVoidArray {
-    /// Creates a new [vtkVoidArray] wrapped inside `vtkNew`
+    /// Creates a new [vtkVoidArray] via `vtkVoidArray::New()`
     #[doc(alias = "vtkVoidArray")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkVoidArray_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkVoidArray_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkVoidArray_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkVoidArray_get_ptr(self.0) }
+        Self(unsafe { vtkVoidArray_new() })
     }
 }
 impl std::default::Default for vtkVoidArray {
@@ -28456,12 +14894,8 @@ impl Drop for vtkVoidArray {
 #[test]
 fn test_vtkVoidArray_create_drop() {
     let obj = vtkVoidArray::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkVoidArray(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Utility class to hold a weak reference to a vtkObject.
 ///
@@ -28471,22 +14905,13 @@ fn test_vtkVoidArray_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkWeakReference(*mut core::ffi::c_void);
 impl vtkWeakReference {
-    /// Creates a new [vtkWeakReference] wrapped inside `vtkNew`
+    /// Creates a new [vtkWeakReference] via `vtkWeakReference::New()`
     #[doc(alias = "vtkWeakReference")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkWeakReference_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkWeakReference_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkWeakReference_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkWeakReference_get_ptr(self.0) }
+        Self(unsafe { vtkWeakReference_new() })
     }
 }
 impl std::default::Default for vtkWeakReference {
@@ -28506,12 +14931,8 @@ impl Drop for vtkWeakReference {
 #[test]
 fn test_vtkWeakReference_create_drop() {
     let obj = vtkWeakReference::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkWeakReference(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// XML File Specific output window class
 ///
@@ -28535,22 +14956,13 @@ fn test_vtkWeakReference_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkXMLFileOutputWindow(*mut core::ffi::c_void);
 impl vtkXMLFileOutputWindow {
-    /// Creates a new [vtkXMLFileOutputWindow] wrapped inside `vtkNew`
+    /// Creates a new [vtkXMLFileOutputWindow] via `vtkXMLFileOutputWindow::New()`
     #[doc(alias = "vtkXMLFileOutputWindow")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkXMLFileOutputWindow_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkXMLFileOutputWindow_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkXMLFileOutputWindow_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkXMLFileOutputWindow_get_ptr(self.0) }
+        Self(unsafe { vtkXMLFileOutputWindow_new() })
     }
 }
 impl std::default::Default for vtkXMLFileOutputWindow {
@@ -28570,10 +14982,6 @@ impl Drop for vtkXMLFileOutputWindow {
 #[test]
 fn test_vtkXMLFileOutputWindow_create_drop() {
     let obj = vtkXMLFileOutputWindow::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkXMLFileOutputWindow(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }

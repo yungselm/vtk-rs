@@ -1,10 +1,10 @@
-pub trait VtkClientSocket: VtkSocket {
+pub trait VtkClientSocket {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn connect_to_server(
         &mut self,
-        hostname: core::ffi::c_char,
+        hostname: &str,
         port: core::ffi::c_int,
     ) -> core::ffi::c_int;
     fn get_connecting_side(&mut self) -> bool;
@@ -13,23 +13,14 @@ pub trait VtkDirectory {
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn new(&mut self) -> *mut core::ffi::c_void;
-    fn open(&mut self, dir: core::ffi::c_char) -> core::ffi::c_int;
-    fn get_number_of_files(&mut self) -> core::ffi::c_uchar;
-    fn get_file(&mut self, index: core::ffi::c_uchar) -> *const core::ffi::c_char;
-    fn file_is_directory(&mut self, name: core::ffi::c_char) -> core::ffi::c_int;
+    fn open(&mut self, dir: &str) -> core::ffi::c_int;
+    fn get_number_of_files(&mut self) -> core::ffi::c_longlong;
+    fn get_file(&mut self, index: core::ffi::c_longlong) -> &str;
+    fn file_is_directory(&mut self, name: &str) -> core::ffi::c_int;
     fn get_files(&mut self) -> *mut core::ffi::c_void;
-    fn get_current_working_directory(
-        &mut self,
-        buf: core::ffi::c_char,
-        len: core::ffi::c_uint,
-    ) -> *const core::ffi::c_char;
-    fn make_directory(&mut self, dir: core::ffi::c_char) -> core::ffi::c_int;
-    fn delete_directory(&mut self, dir: core::ffi::c_char) -> core::ffi::c_int;
-    fn rename(
-        &mut self,
-        oldname: core::ffi::c_char,
-        newname: core::ffi::c_char,
-    ) -> core::ffi::c_int;
+    fn make_directory(&mut self, dir: &str) -> core::ffi::c_int;
+    fn delete_directory(&mut self, dir: &str) -> core::ffi::c_int;
+    fn rename(&mut self, oldname: &str, newname: &str) -> core::ffi::c_int;
 }
 pub trait VtkExecutableRunner {
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -42,13 +33,13 @@ pub trait VtkExecutableRunner {
     fn get_right_trim_result(&mut self) -> bool;
     fn right_trim_result_on(&mut self) -> ();
     fn right_trim_result_off(&mut self) -> ();
-    fn get_command(&mut self) -> *const core::ffi::c_char;
-    fn set_command(&mut self, arg: core::ffi::c_char) -> ();
-    fn get_std_out(&mut self) -> *const core::ffi::c_char;
-    fn get_std_err(&mut self) -> *const core::ffi::c_char;
+    fn get_command(&mut self) -> &str;
+    fn set_command(&mut self, arg: &str) -> ();
+    fn get_std_out(&mut self) -> &str;
+    fn get_std_err(&mut self) -> &str;
     fn get_return_value(&mut self) -> core::ffi::c_int;
 }
-pub trait VtkServerSocket: VtkSocket {
+pub trait VtkServerSocket {
     fn new(&mut self) -> *mut core::ffi::c_void;
     fn safe_down_cast(&mut self, o: *mut core::ffi::c_void) -> *mut core::ffi::c_void;
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
@@ -64,21 +55,7 @@ pub trait VtkSocket {
     fn new_instance(&mut self) -> *mut core::ffi::c_void;
     fn get_connected(&mut self) -> core::ffi::c_int;
     fn close_socket(&mut self) -> ();
-    fn send(&mut self, data: (), length: core::ffi::c_int) -> core::ffi::c_int;
-    fn receive(
-        &mut self,
-        data: (),
-        length: core::ffi::c_int,
-        readFully: core::ffi::c_int,
-    ) -> core::ffi::c_int;
     fn get_socket_descriptor(&mut self) -> core::ffi::c_int;
-    fn select_sockets(
-        &mut self,
-        sockets_to_select: core::ffi::c_int,
-        size: core::ffi::c_int,
-        msec: core::ffi::c_ulong,
-        selected_index: core::ffi::c_int,
-    ) -> core::ffi::c_int;
 }
 pub trait VtkSocketCollection {
     fn new(&mut self) -> *mut core::ffi::c_void;
@@ -109,21 +86,20 @@ pub trait VtkTimerLog {
     fn logging_off(&mut self) -> ();
     fn set_max_entries(&mut self, a: core::ffi::c_int) -> ();
     fn get_max_entries(&mut self) -> core::ffi::c_int;
-    fn dump_log(&mut self, filename: core::ffi::c_char) -> ();
-    fn mark_start_event(&mut self, EventString: core::ffi::c_char) -> ();
-    fn mark_end_event(&mut self, EventString: core::ffi::c_char) -> ();
+    fn dump_log(&mut self, filename: &str) -> ();
+    fn mark_start_event(&mut self, EventString: &str) -> ();
+    fn mark_end_event(&mut self, EventString: &str) -> ();
     fn insert_timed_event(
         &mut self,
-        EventString: core::ffi::c_char,
+        EventString: &str,
         time: core::ffi::c_double,
         cpuTicks: core::ffi::c_int,
     ) -> ();
     fn get_number_of_events(&mut self) -> core::ffi::c_int;
     fn get_event_indent(&mut self, i: core::ffi::c_int) -> core::ffi::c_int;
     fn get_event_wall_time(&mut self, i: core::ffi::c_int) -> core::ffi::c_double;
-    fn get_event_string(&mut self, i: core::ffi::c_int) -> *const core::ffi::c_char;
-    fn get_event_type(&mut self, i: core::ffi::c_int) -> *mut core::ffi::c_void;
-    fn mark_event(&mut self, EventString: core::ffi::c_char) -> ();
+    fn get_event_string(&mut self, i: core::ffi::c_int) -> &str;
+    fn mark_event(&mut self, EventString: &str) -> ();
     fn reset_log(&mut self) -> ();
     fn cleanup_log(&mut self) -> ();
     fn get_universal_time(&mut self) -> core::ffi::c_double;
@@ -160,17 +136,18 @@ impl VtkClientSocket for vtkClientSocket {
     }
     fn connect_to_server(
         &mut self,
-        hostname: core::ffi::c_char,
+        hostname: &str,
         port: core::ffi::c_int,
     ) -> core::ffi::c_int {
+        let c_hostname = std::ffi::CString::new(hostname).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_client_socket_connect_to_server(
                 sself: *mut core::ffi::c_void,
-                hostname: core::ffi::c_char,
+                hostname: *const core::ffi::c_char,
                 port: core::ffi::c_int,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_client_socket_connect_to_server(self.0, hostname, port) }
+        unsafe { vtk_client_socket_connect_to_server(self.0, c_hostname.as_ptr(), port) }
     }
     fn get_connecting_side(&mut self) -> bool {
         unsafe extern "C" {
@@ -207,40 +184,46 @@ impl VtkDirectory for vtkDirectory {
         }
         unsafe { vtk_directory_new(self.0) }
     }
-    fn open(&mut self, dir: core::ffi::c_char) -> core::ffi::c_int {
+    fn open(&mut self, dir: &str) -> core::ffi::c_int {
+        let c_dir = std::ffi::CString::new(dir).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_directory_open(
                 sself: *mut core::ffi::c_void,
-                dir: core::ffi::c_char,
+                dir: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_directory_open(self.0, dir) }
+        unsafe { vtk_directory_open(self.0, c_dir.as_ptr()) }
     }
-    fn get_number_of_files(&mut self) -> core::ffi::c_uchar {
+    fn get_number_of_files(&mut self) -> core::ffi::c_longlong {
         unsafe extern "C" {
             fn vtk_directory_get_number_of_files(
                 sself: *mut core::ffi::c_void,
-            ) -> core::ffi::c_uchar;
+            ) -> core::ffi::c_longlong;
         }
         unsafe { vtk_directory_get_number_of_files(self.0) }
     }
-    fn get_file(&mut self, index: core::ffi::c_uchar) -> *const core::ffi::c_char {
+    fn get_file(&mut self, index: core::ffi::c_longlong) -> &str {
         unsafe extern "C" {
             fn vtk_directory_get_file(
                 sself: *mut core::ffi::c_void,
-                index: core::ffi::c_uchar,
+                index: core::ffi::c_longlong,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_directory_get_file(self.0, index) }
+        let ptr = unsafe { vtk_directory_get_file(self.0, index) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn file_is_directory(&mut self, name: core::ffi::c_char) -> core::ffi::c_int {
+    fn file_is_directory(&mut self, name: &str) -> core::ffi::c_int {
+        let c_name = std::ffi::CString::new(name).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_directory_file_is_directory(
                 sself: *mut core::ffi::c_void,
-                name: core::ffi::c_char,
+                name: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_directory_file_is_directory(self.0, name) }
+        unsafe { vtk_directory_file_is_directory(self.0, c_name.as_ptr()) }
     }
     fn get_files(&mut self) -> *mut core::ffi::c_void {
         unsafe extern "C" {
@@ -250,51 +233,37 @@ impl VtkDirectory for vtkDirectory {
         }
         unsafe { vtk_directory_get_files(self.0) }
     }
-    fn get_current_working_directory(
-        &mut self,
-        buf: core::ffi::c_char,
-        len: core::ffi::c_uint,
-    ) -> *const core::ffi::c_char {
-        unsafe extern "C" {
-            fn vtk_directory_get_current_working_directory(
-                sself: *mut core::ffi::c_void,
-                buf: core::ffi::c_char,
-                len: core::ffi::c_uint,
-            ) -> *const core::ffi::c_char;
-        }
-        unsafe { vtk_directory_get_current_working_directory(self.0, buf, len) }
-    }
-    fn make_directory(&mut self, dir: core::ffi::c_char) -> core::ffi::c_int {
+    fn make_directory(&mut self, dir: &str) -> core::ffi::c_int {
+        let c_dir = std::ffi::CString::new(dir).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_directory_make_directory(
                 sself: *mut core::ffi::c_void,
-                dir: core::ffi::c_char,
+                dir: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_directory_make_directory(self.0, dir) }
+        unsafe { vtk_directory_make_directory(self.0, c_dir.as_ptr()) }
     }
-    fn delete_directory(&mut self, dir: core::ffi::c_char) -> core::ffi::c_int {
+    fn delete_directory(&mut self, dir: &str) -> core::ffi::c_int {
+        let c_dir = std::ffi::CString::new(dir).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_directory_delete_directory(
                 sself: *mut core::ffi::c_void,
-                dir: core::ffi::c_char,
+                dir: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_directory_delete_directory(self.0, dir) }
+        unsafe { vtk_directory_delete_directory(self.0, c_dir.as_ptr()) }
     }
-    fn rename(
-        &mut self,
-        oldname: core::ffi::c_char,
-        newname: core::ffi::c_char,
-    ) -> core::ffi::c_int {
+    fn rename(&mut self, oldname: &str, newname: &str) -> core::ffi::c_int {
+        let c_oldname = std::ffi::CString::new(oldname).expect("CString::new failed");
+        let c_newname = std::ffi::CString::new(newname).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_directory_rename(
                 sself: *mut core::ffi::c_void,
-                oldname: core::ffi::c_char,
-                newname: core::ffi::c_char,
+                oldname: *const core::ffi::c_char,
+                newname: *const core::ffi::c_char,
             ) -> core::ffi::c_int;
         }
-        unsafe { vtk_directory_rename(self.0, oldname, newname) }
+        unsafe { vtk_directory_rename(self.0, c_oldname.as_ptr(), c_newname.as_ptr()) }
     }
 }
 impl VtkExecutableRunner for vtkExecutableRunner {
@@ -377,38 +346,51 @@ impl VtkExecutableRunner for vtkExecutableRunner {
         }
         unsafe { vtk_executable_runner_right_trim_result_off(self.0) }
     }
-    fn get_command(&mut self) -> *const core::ffi::c_char {
+    fn get_command(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_executable_runner_get_command(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_executable_runner_get_command(self.0) }
+        let ptr = unsafe { vtk_executable_runner_get_command(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn set_command(&mut self, arg: core::ffi::c_char) -> () {
+    fn set_command(&mut self, arg: &str) -> () {
+        let c_arg = std::ffi::CString::new(arg).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_executable_runner_set_command(
                 sself: *mut core::ffi::c_void,
-                arg: core::ffi::c_char,
+                arg: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_executable_runner_set_command(self.0, arg) }
+        unsafe { vtk_executable_runner_set_command(self.0, c_arg.as_ptr()) }
     }
-    fn get_std_out(&mut self) -> *const core::ffi::c_char {
+    fn get_std_out(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_executable_runner_get_std_out(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_executable_runner_get_std_out(self.0) }
+        let ptr = unsafe { vtk_executable_runner_get_std_out(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn get_std_err(&mut self) -> *const core::ffi::c_char {
+    fn get_std_err(&mut self) -> &str {
         unsafe extern "C" {
             fn vtk_executable_runner_get_std_err(
                 sself: *mut core::ffi::c_void,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_executable_runner_get_std_err(self.0) }
+        let ptr = unsafe { vtk_executable_runner_get_std_err(self.0) };
+        if ptr.is_null() {
+            return "";
+        }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
     fn get_return_value(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
@@ -671,48 +653,62 @@ impl VtkTimerLog for vtkTimerLog {
         }
         unsafe { vtk_timer_log_get_max_entries(self.0) }
     }
-    fn dump_log(&mut self, filename: core::ffi::c_char) -> () {
+    fn dump_log(&mut self, filename: &str) -> () {
+        let c_filename = std::ffi::CString::new(filename).expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_timer_log_dump_log(
                 sself: *mut core::ffi::c_void,
-                filename: core::ffi::c_char,
+                filename: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_timer_log_dump_log(self.0, filename) }
+        unsafe { vtk_timer_log_dump_log(self.0, c_filename.as_ptr()) }
     }
-    fn mark_start_event(&mut self, EventString: core::ffi::c_char) -> () {
+    fn mark_start_event(&mut self, EventString: &str) -> () {
+        let c_EventString = std::ffi::CString::new(EventString)
+            .expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_timer_log_mark_start_event(
                 sself: *mut core::ffi::c_void,
-                EventString: core::ffi::c_char,
+                EventString: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_timer_log_mark_start_event(self.0, EventString) }
+        unsafe { vtk_timer_log_mark_start_event(self.0, c_EventString.as_ptr()) }
     }
-    fn mark_end_event(&mut self, EventString: core::ffi::c_char) -> () {
+    fn mark_end_event(&mut self, EventString: &str) -> () {
+        let c_EventString = std::ffi::CString::new(EventString)
+            .expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_timer_log_mark_end_event(
                 sself: *mut core::ffi::c_void,
-                EventString: core::ffi::c_char,
+                EventString: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_timer_log_mark_end_event(self.0, EventString) }
+        unsafe { vtk_timer_log_mark_end_event(self.0, c_EventString.as_ptr()) }
     }
     fn insert_timed_event(
         &mut self,
-        EventString: core::ffi::c_char,
+        EventString: &str,
         time: core::ffi::c_double,
         cpuTicks: core::ffi::c_int,
     ) -> () {
+        let c_EventString = std::ffi::CString::new(EventString)
+            .expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_timer_log_insert_timed_event(
                 sself: *mut core::ffi::c_void,
-                EventString: core::ffi::c_char,
+                EventString: *const core::ffi::c_char,
                 time: core::ffi::c_double,
                 cpuTicks: core::ffi::c_int,
             );
         }
-        unsafe { vtk_timer_log_insert_timed_event(self.0, EventString, time, cpuTicks) }
+        unsafe {
+            vtk_timer_log_insert_timed_event(
+                self.0,
+                c_EventString.as_ptr(),
+                time,
+                cpuTicks,
+            )
+        }
     }
     fn get_number_of_events(&mut self) -> core::ffi::c_int {
         unsafe extern "C" {
@@ -740,32 +736,29 @@ impl VtkTimerLog for vtkTimerLog {
         }
         unsafe { vtk_timer_log_get_event_wall_time(self.0, i) }
     }
-    fn get_event_string(&mut self, i: core::ffi::c_int) -> *const core::ffi::c_char {
+    fn get_event_string(&mut self, i: core::ffi::c_int) -> &str {
         unsafe extern "C" {
             fn vtk_timer_log_get_event_string(
                 sself: *mut core::ffi::c_void,
                 i: core::ffi::c_int,
             ) -> *const core::ffi::c_char;
         }
-        unsafe { vtk_timer_log_get_event_string(self.0, i) }
-    }
-    fn get_event_type(&mut self, i: core::ffi::c_int) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtk_timer_log_get_event_type(
-                sself: *mut core::ffi::c_void,
-                i: core::ffi::c_int,
-            ) -> *mut core::ffi::c_void;
+        let ptr = unsafe { vtk_timer_log_get_event_string(self.0, i) };
+        if ptr.is_null() {
+            return "";
         }
-        unsafe { vtk_timer_log_get_event_type(self.0, i) }
+        unsafe { std::ffi::CStr::from_ptr(ptr).to_str().unwrap_or("") }
     }
-    fn mark_event(&mut self, EventString: core::ffi::c_char) -> () {
+    fn mark_event(&mut self, EventString: &str) -> () {
+        let c_EventString = std::ffi::CString::new(EventString)
+            .expect("CString::new failed");
         unsafe extern "C" {
             fn vtk_timer_log_mark_event(
                 sself: *mut core::ffi::c_void,
-                EventString: core::ffi::c_char,
+                EventString: *const core::ffi::c_char,
             );
         }
-        unsafe { vtk_timer_log_mark_event(self.0, EventString) }
+        unsafe { vtk_timer_log_mark_event(self.0, c_EventString.as_ptr()) }
     }
     fn reset_log(&mut self) -> () {
         unsafe extern "C" {
@@ -821,22 +814,13 @@ impl VtkTimerLog for vtkTimerLog {
 #[allow(non_camel_case_types)]
 pub struct vtkClientSocket(*mut core::ffi::c_void);
 impl vtkClientSocket {
-    /// Creates a new [vtkClientSocket] wrapped inside `vtkNew`
+    /// Creates a new [vtkClientSocket] via `vtkClientSocket::New()`
     #[doc(alias = "vtkClientSocket")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkClientSocket_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkClientSocket_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkClientSocket_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkClientSocket_get_ptr(self.0) }
+        Self(unsafe { vtkClientSocket_new() })
     }
 }
 impl std::default::Default for vtkClientSocket {
@@ -856,12 +840,8 @@ impl Drop for vtkClientSocket {
 #[test]
 fn test_vtkClientSocket_create_drop() {
     let obj = vtkClientSocket::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkClientSocket(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// OS independent class for access and manipulation of system directories
 ///
@@ -874,22 +854,13 @@ fn test_vtkClientSocket_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkDirectory(*mut core::ffi::c_void);
 impl vtkDirectory {
-    /// Creates a new [vtkDirectory] wrapped inside `vtkNew`
+    /// Creates a new [vtkDirectory] via `vtkDirectory::New()`
     #[doc(alias = "vtkDirectory")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkDirectory_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkDirectory_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkDirectory_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkDirectory_get_ptr(self.0) }
+        Self(unsafe { vtkDirectory_new() })
     }
 }
 impl std::default::Default for vtkDirectory {
@@ -909,12 +880,8 @@ impl Drop for vtkDirectory {
 #[test]
 fn test_vtkDirectory_create_drop() {
     let obj = vtkDirectory::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkDirectory(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Launch a process on the current machine and get its output
 ///
@@ -924,22 +891,13 @@ fn test_vtkDirectory_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkExecutableRunner(*mut core::ffi::c_void);
 impl vtkExecutableRunner {
-    /// Creates a new [vtkExecutableRunner] wrapped inside `vtkNew`
+    /// Creates a new [vtkExecutableRunner] via `vtkExecutableRunner::New()`
     #[doc(alias = "vtkExecutableRunner")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkExecutableRunner_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkExecutableRunner_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkExecutableRunner_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkExecutableRunner_get_ptr(self.0) }
+        Self(unsafe { vtkExecutableRunner_new() })
     }
 }
 impl std::default::Default for vtkExecutableRunner {
@@ -959,34 +917,21 @@ impl Drop for vtkExecutableRunner {
 #[test]
 fn test_vtkExecutableRunner_create_drop() {
     let obj = vtkExecutableRunner::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkExecutableRunner(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Encapsulate a socket that accepts connections.
 ///
 #[allow(non_camel_case_types)]
 pub struct vtkServerSocket(*mut core::ffi::c_void);
 impl vtkServerSocket {
-    /// Creates a new [vtkServerSocket] wrapped inside `vtkNew`
+    /// Creates a new [vtkServerSocket] via `vtkServerSocket::New()`
     #[doc(alias = "vtkServerSocket")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkServerSocket_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkServerSocket_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkServerSocket_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkServerSocket_get_ptr(self.0) }
+        Self(unsafe { vtkServerSocket_new() })
     }
 }
 impl std::default::Default for vtkServerSocket {
@@ -1006,12 +951,8 @@ impl Drop for vtkServerSocket {
 #[test]
 fn test_vtkServerSocket_create_drop() {
     let obj = vtkServerSocket::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkServerSocket(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// a collection for sockets.
 ///
@@ -1022,22 +963,13 @@ fn test_vtkServerSocket_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkSocketCollection(*mut core::ffi::c_void);
 impl vtkSocketCollection {
-    /// Creates a new [vtkSocketCollection] wrapped inside `vtkNew`
+    /// Creates a new [vtkSocketCollection] via `vtkSocketCollection::New()`
     #[doc(alias = "vtkSocketCollection")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkSocketCollection_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkSocketCollection_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkSocketCollection_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkSocketCollection_get_ptr(self.0) }
+        Self(unsafe { vtkSocketCollection_new() })
     }
 }
 impl std::default::Default for vtkSocketCollection {
@@ -1057,12 +989,8 @@ impl Drop for vtkSocketCollection {
 #[test]
 fn test_vtkSocketCollection_create_drop() {
     let obj = vtkSocketCollection::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkSocketCollection(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// A class for performing inter-thread messaging
 ///
@@ -1072,22 +1000,13 @@ fn test_vtkSocketCollection_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkThreadMessager(*mut core::ffi::c_void);
 impl vtkThreadMessager {
-    /// Creates a new [vtkThreadMessager] wrapped inside `vtkNew`
+    /// Creates a new [vtkThreadMessager] via `vtkThreadMessager::New()`
     #[doc(alias = "vtkThreadMessager")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkThreadMessager_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkThreadMessager_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkThreadMessager_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkThreadMessager_get_ptr(self.0) }
+        Self(unsafe { vtkThreadMessager_new() })
     }
 }
 impl std::default::Default for vtkThreadMessager {
@@ -1107,12 +1026,8 @@ impl Drop for vtkThreadMessager {
 #[test]
 fn test_vtkThreadMessager_create_drop() {
     let obj = vtkThreadMessager::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkThreadMessager(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
 /// Timer support and logging
 ///
@@ -1127,22 +1042,13 @@ fn test_vtkThreadMessager_create_drop() {
 #[allow(non_camel_case_types)]
 pub struct vtkTimerLog(*mut core::ffi::c_void);
 impl vtkTimerLog {
-    /// Creates a new [vtkTimerLog] wrapped inside `vtkNew`
+    /// Creates a new [vtkTimerLog] via `vtkTimerLog::New()`
     #[doc(alias = "vtkTimerLog")]
     pub fn new() -> Self {
         unsafe extern "C" {
             fn vtkTimerLog_new() -> *mut core::ffi::c_void;
         }
-        Self(unsafe { &mut *vtkTimerLog_new() })
-    }
-    #[cfg(test)]
-    unsafe fn _get_ptr(&self) -> *mut core::ffi::c_void {
-        unsafe extern "C" {
-            fn vtkTimerLog_get_ptr(
-                sself: *mut core::ffi::c_void,
-            ) -> *mut core::ffi::c_void;
-        }
-        unsafe { vtkTimerLog_get_ptr(self.0) }
+        Self(unsafe { vtkTimerLog_new() })
     }
 }
 impl std::default::Default for vtkTimerLog {
@@ -1162,10 +1068,6 @@ impl Drop for vtkTimerLog {
 #[test]
 fn test_vtkTimerLog_create_drop() {
     let obj = vtkTimerLog::new();
-    let ptr = obj.0;
-    assert!(!ptr.is_null());
-    assert!(unsafe { !obj._get_ptr().is_null() });
+    assert!(!obj.0.is_null());
     drop(obj);
-    let new_obj = vtkTimerLog(ptr);
-    assert!(unsafe { new_obj._get_ptr().is_null() });
 }
