@@ -269,3 +269,104 @@ impl IRModule {
         })
     }
 }
+
+// test helpers (available to all test modules in this crate)
+#[cfg(test)]
+impl IRMethod {
+    pub(crate) fn test_new(
+        name: &str,
+        vtk_name: &str,
+        return_type: IRType,
+        args: Vec<(IRIdent, IRType)>,
+    ) -> Self {
+        IRMethod {
+            name: name.to_string(),
+            vtk_name: vtk_name.to_string(),
+            return_type,
+            args,
+        }
+    }
+}
+
+#[cfg(test)]
+impl IRStruct {
+    pub(crate) fn test_new(name: &str, parents: Vec<&str>, methods: Vec<IRMethod>) -> Self {
+        use crate::parse_wrap_vtk_xml::{Access, Constructor, Destructor};
+        IRStruct {
+            name: name.to_string(),
+            description: vec![],
+            parents: parents.iter().map(|s| s.to_string()).collect(),
+            exposable_methods: methods,
+            is_abstract: false,
+            is_template: false,
+            filename: format!("{}.h", name),
+            constructors: vec![Constructor {
+                access: Access::Public,
+                signature: String::new(),
+            }],
+            destructors: vec![Destructor {
+                access: Access::Public,
+                signature: String::new(),
+            }],
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_short_name_strips_class_prefix() {
+        let m = IRMethod::test_new(
+            "vtk_sphere_source_set_radius",
+            "SetRadius",
+            IRType::Unit,
+            vec![],
+        );
+        assert_eq!(m.short_name("vtkSphereSource"), "set_radius");
+    }
+
+    #[test]
+    fn test_short_name_multi_word_class() {
+        let m = IRMethod::test_new(
+            "vtk_object_base_get_class_name",
+            "GetClassName",
+            IRType::Unit,
+            vec![],
+        );
+        assert_eq!(m.short_name("vtkObjectBase"), "get_class_name");
+    }
+
+    #[test]
+    fn test_short_name_no_matching_prefix_returns_full() {
+        let m = IRMethod::test_new("vtk_foo_bar", "FooBar", IRType::Unit, vec![]);
+        assert_eq!(m.short_name("vtkOther"), "vtk_foo_bar");
+    }
+
+    #[test]
+    fn test_is_constructable_happy_path() {
+        let s = IRStruct::test_new(
+            "vtkFoo",
+            vec!["vtkObjectBase"],
+            vec![IRMethod::test_new("vtk_foo_update", "Update", IRType::Unit, vec![])],
+        );
+        assert!(s.is_constructable());
+    }
+
+    #[test]
+    fn test_is_constructable_requires_objectbase_ancestor() {
+        let s = IRStruct::test_new(
+            "vtkFoo",
+            vec!["vtkOther"],
+            vec![IRMethod::test_new("vtk_foo_update", "Update", IRType::Unit, vec![])],
+        );
+        assert!(!s.is_constructable());
+    }
+
+    #[test]
+    fn test_is_constructable_requires_methods() {
+        let s = IRStruct::test_new("vtkFoo", vec!["vtkObjectBase"], vec![]);
+        assert!(!s.is_constructable());
+    }
+}
