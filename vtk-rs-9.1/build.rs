@@ -1,17 +1,12 @@
 use cmake::Config;
-use vtk_rs_link::{Result, WARN, log, find_vtk_info};
+use vtk_rs_link::{Result, WARN, log};
 
 fn build_cmake() {
     println!("cargo:rerun-if-changed=libvtkrs");
-    println!("cargo:rerun-if-env-changed=VTK_DIR");
-    println!("cargo:rerun-if-env-changed=VTK_VERSION");
     let mut config = Config::new("libvtkrs");
-
+    
     if let Ok(vtk_dir) = std::env::var("VTK_DIR") {
         config.define("VTK_DIR", &vtk_dir);
-        // Also add the lib subdirectory to the linker search path so that
-        // source-built VTK libraries (e.g. ~/VTK/build/lib) are found.
-        println!("cargo:rustc-link-search=native={}/lib", vtk_dir);
     }
 
     let dst = config.build();
@@ -30,12 +25,8 @@ fn main() -> Result<()> {
         }
     }
     build_cmake();
-
-    let info = find_vtk_info()?;
-    let v = &info.version_suffix;
-
-    // VTK modules
-    let modules = [
+    let modules = vec![
+        "vtksys",
         // "vtktoken",
         "vtkCommonArchive",
         "vtkCommonColor",
@@ -49,30 +40,6 @@ fn main() -> Result<()> {
         "vtkCommonSystem",
         "vtkCommonTransforms",
     ];
-
-    // Bundled third-party libs that VTK modules depend on
-    let third_party = [
-        "vtkpugixml",
-        "vtkkissfft",
-        "vtkloguru",
-        "vtksys",
-        "vtkdoubleconversion",
-    ];
-
-    // Build a single -Wl,--start-group,...,--end-group argument so the linker
-    // makes multiple passes and resolves out-of-order static dependencies.
-    // -lm is included inside the group so it is available when VTK libs need it.
-    let libs: Vec<String> = modules
-        .iter()
-        .map(|m| format!("-l{}{}", m, v))
-        .chain(third_party.iter().map(|m| format!("-l{}{}", m, v)))
-        .chain(["-lm".to_string(), "-lstdc++".to_string(), "-larchive".to_string(), "-lc".to_string()])
-        .collect();
-
-    println!(
-        "cargo:rustc-link-arg=-Wl,--start-group,{},--end-group",
-        libs.join(",")
-    );
-
+    vtk_rs_link::link_cmake_project(modules)?;
     Ok(())
 }
