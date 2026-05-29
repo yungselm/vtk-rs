@@ -216,6 +216,8 @@ pub struct Parameter {
     #[serde(default = "Default::default")]
     #[serde(deserialize_with = "option_one_to_bool")]
     pub reference: bool,
+    #[serde(rename = "@pointer")]
+    pub pointer: Option<Pointer>,
 }
 
 #[derive(Deserialize, PartialEq, Debug, Clone)]
@@ -300,6 +302,13 @@ pub enum Pointer {
     Star,
     #[serde(rename = "**")]
     StarStar,
+    /// `** const` in C++ — const outer pointer, double indirection.
+    /// Treated the same as `**` for binding purposes.
+    #[serde(rename = "**const")]
+    StarStarConst,
+    /// Triple indirection — not bridgeable, causes the method to be skipped.
+    #[serde(rename = "***")]
+    StarStarStar,
 }
 
 #[derive(Deserialize, PartialEq, Debug, Clone)]
@@ -550,11 +559,13 @@ mod test_parsing {
                     name: Some("os".into()),
                     r#type: "ostream".into(),
                     reference: true,
+                    pointer: None,
                 },
                 Parameter {
                     name: Some("indent".into()),
                     r#type: "vtkIndent".into(),
                     reference: false,
+                    pointer: None,
                 }
             ]
         );

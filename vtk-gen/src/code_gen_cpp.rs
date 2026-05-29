@@ -74,6 +74,7 @@ impl FormatCppStr for IRType {
             c_ulong => Ok("unsigned long"),
             c_ulonglong => Ok("unsigned long long"),
             c_char => Ok("char"),
+            c_signed_char => Ok("signed char"),
             c_short => Ok("short"),
             c_int => Ok("int"),
             c_long => Ok("long"),
@@ -88,6 +89,30 @@ impl FormatCppStr for IRType {
     }
 }
 
+fn is_numeric_primitive(ty: &IRType) -> bool {
+    use IRType::*;
+    // c_char is excluded: char* is a C string, not an array.
+    // c_signed_char IS included: signed char* is a typed data buffer (e.g. vtkSignedCharArray),
+    // and char* ↔ signed char* is an error in C++ so we must not emit a pointer to it.
+    matches!(
+        ty,
+        c_signed_char
+            | c_uchar
+            | c_short
+            | c_ushort
+            | c_int
+            | c_uint
+            | c_long
+            | c_ulong
+            | c_longlong
+            | c_ulonglong
+            | float
+            | double
+            | usize
+            | bool
+    )
+}
+
 fn ir_type_to_cpp_string(irtype: &IRType) -> Result<String> {
     use IRType::*;
     match irtype {
@@ -98,6 +123,7 @@ fn ir_type_to_cpp_string(irtype: &IRType) -> Result<String> {
         c_ulong => Ok("unsigned long".to_string()),
         c_ulonglong => Ok("unsigned long long".to_string()),
         c_char => Ok("char".to_string()),
+        c_signed_char => Ok("signed char".to_string()),
         c_short => Ok("short".to_string()),
         c_int => Ok("int".to_string()),
         c_long => Ok("long".to_string()),
@@ -111,7 +137,22 @@ fn ir_type_to_cpp_string(irtype: &IRType) -> Result<String> {
             String => Ok("const char*".to_string()),
             other => Ok(format!("const {}", ir_type_to_cpp_string(other)?)),
         },
-        Pointer(inner) => Ok(format!("{}*", ir_type_to_cpp_string(inner)?)),
+        Pointer(inner) => {
+            // Strip one layer of Const to check the core element type
+            let core = match inner.as_ref() {
+                Const(x) => x.as_ref(),
+                x => x,
+            };
+            if is_numeric_primitive(core) {
+                anyhow::bail!("pointer-to-numeric-primitive (array arg) not bridgeable")
+            }
+            // Mutable char* is not bridgeable: VTK may expect signed char* (data arrays),
+            // and C++ rejects implicit conversion between char* and signed char*.
+            if matches!(inner.as_ref(), c_char) {
+                anyhow::bail!("mutable char* not bridgeable (may conflict with signed char*)")
+            }
+            Ok(format!("{}*", ir_type_to_cpp_string(inner)?))
+        }
         Ref(inner) => Ok(format!("{}&", ir_type_to_cpp_string(inner)?)),
         _ => anyhow::bail!("C++ type not supported: skipping method"),
     }
@@ -190,6 +231,9 @@ impl IRModule {
 
 impl IRStruct {
     fn method_to_cpp(&self, method: &IRMethod, writer: &mut impl std::io::Write) -> Result<()> {
+        if matches!(method.return_type, IRType::String) {
+            anyhow::bail!("std::string return type cannot be bridged to const char*");
+        }
         let ret_str = ir_type_to_cpp_string(&method.return_type)?;
         let is_void = matches!(method.return_type, IRType::Unit);
 
@@ -221,6 +265,9 @@ impl IRStruct {
         method: &IRMethod,
         writer: &mut impl std::io::Write,
     ) -> Result<()> {
+        if matches!(method.return_type, IRType::String) {
+            anyhow::bail!("std::string return type cannot be bridged to const char*");
+        }
         let ret_str = ir_type_to_cpp_string(&method.return_type)?;
         let mut param_strs: Vec<String> = vec![format!("vtkNew<{}> sself", self.name)];
         for (ident, irtype) in &method.args {

@@ -9,7 +9,10 @@ use crate::parse_wrap_vtk_xml::{Access, Module};
 pub enum IRType {
     /// Type `()` or `void` in C++
     Unit,
+    /// Plain C `char` (used for C strings / VTK_FILEPATH parameters)
     c_char,
+    /// Explicitly `signed char` (used for VTK typed-data arrays, e.g. vtkSignedCharArray)
+    c_signed_char,
     c_short,
     c_int,
     c_long,
@@ -44,7 +47,8 @@ impl TryFrom<&CppType> for IRType {
         use IRType::*;
         let res = match value {
             Void => Unit,
-            SignedChar => c_char,
+            PlainChar => c_char,
+            SignedChar => c_signed_char,
             UnsignedChar => c_uchar,
             ShortInt => c_short,
             UnsignedShortInt => c_ushort,
@@ -126,7 +130,22 @@ impl IRMethod {
                 Some(crate::Pointer::Ref) => CppType::Ref(Box::new(inner_ty)),
                 Some(crate::Pointer::Star) => CppType::Pointer(Box::new(inner_ty)),
                 Some(crate::Pointer::StarStar) => {
-                    CppType::Pointer(Box::new(CppType::Ref(Box::new(inner_ty))))
+                    // WrapVTK encodes `const char*` VTK_FILEPATH return types as
+                    // type="const char" pointer="**". Recover the intended single pointer.
+                    match &inner_ty {
+                        CppType::Const(inner)
+                            if matches!(inner.as_ref(), CppType::SignedChar) =>
+                        {
+                            CppType::Pointer(Box::new(inner_ty))
+                        }
+                        _ => anyhow::bail!("double pointer not bridgeable"),
+                    }
+                }
+                Some(crate::Pointer::StarStarConst) => {
+                    anyhow::bail!("const double pointer not bridgeable")
+                }
+                Some(crate::Pointer::StarStarStar) => {
+                    anyhow::bail!("triple pointer not bridgeable")
                 }
                 None => inner_ty,
             }
@@ -146,7 +165,34 @@ impl IRMethod {
                 };
                 let name = crate::parse_cpp::Ident::parse(&name)?;
                 let name = IRIdent::from(name);
-                let cpp_ty = CppType::parse(&param.r#type)?;
+                let inner_ty = CppType::parse(&param.r#type)?;
+                // WrapVTK stores pointer/reference qualifiers separately from the type string,
+                // just like it does for return types.
+                let cpp_ty = match &param.pointer {
+                    Some(crate::Pointer::Ref) => CppType::Ref(Box::new(inner_ty)),
+                    Some(crate::Pointer::Star) => CppType::Pointer(Box::new(inner_ty)),
+                    Some(crate::Pointer::StarStar) => {
+                        // WrapVTK encodes `const char*` VTK_FILEPATH params as
+                        // type="const char" pointer="**". Recover the intended single pointer.
+                        // Any other ** (including mutable char** output params) is not bridgeable.
+                        match &inner_ty {
+                            CppType::Const(inner)
+                                if matches!(inner.as_ref(), CppType::SignedChar) =>
+                            {
+                                CppType::Pointer(Box::new(inner_ty))
+                            }
+                            _ => anyhow::bail!("double pointer not bridgeable"),
+                        }
+                    }
+                    Some(crate::Pointer::StarStarConst) => {
+                        anyhow::bail!("const double pointer not bridgeable")
+                    }
+                    Some(crate::Pointer::StarStarStar) => {
+                        anyhow::bail!("triple pointer not bridgeable")
+                    }
+                    None if param.reference => CppType::Ref(Box::new(inner_ty)),
+                    None => inner_ty,
+                };
                 Ok((name, IRType::try_from(&cpp_ty)?))
             })
             .collect::<Result<Vec<_>>>()?;
@@ -254,6 +300,21 @@ impl IRModule {
                                     }
                                 }
                             })
+                            // C doesn't support overloading: drop duplicate binding names,
+                            // keeping only the first overload seen for each name.
+                            .scan(std::collections::HashSet::new(), |seen, m| {
+                                if seen.insert(m.name.clone()) {
+                                    Some(Some(m))
+                                } else {
+                                    log::warn!(
+                                        "[IR] Skipping overloaded duplicate binding \"{}\" of class \"{}\"",
+                                        m.name,
+                                        class.name,
+                                    );
+                                    Some(None)
+                                }
+                            })
+                            .flatten()
                             .collect::<Vec<_>>(),
                         is_abstract: class.is_abstract,
                         is_template: class.is_template,

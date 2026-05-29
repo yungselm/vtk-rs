@@ -65,18 +65,31 @@ fn is_rust_keyword(s: &str) -> bool {
 fn ir_type_is_supported(irtype: &crate::IRType) -> bool {
     use crate::IRType::*;
     match irtype {
-        FileMode | File => false,
-        Ref(inner) | Pointer(inner) | Const(inner) | Vec(inner) | LinkedList(inner) => {
-            ir_type_is_supported(inner)
+        // Path types (VTK object names) are only bridgeable as opaque pointers.
+        // Passing VTK objects by value or reference (e.g. `const vtkStdString&`) is not bridgeable.
+        FileMode | File | Path(_) => false,
+        Pointer(inner) => {
+            // Mutable char* (Pointer(c_char)) is not safely bridgeable: it may be a signed
+            // char data buffer rather than a C string, causing char*/signed char* type errors.
+            // Only Pointer(Const(c_char)) (= const char*, C string) and VTK object pointers are ok.
+            if matches!(inner.as_ref(), c_char) {
+                return false;
+            }
+            is_string_type(irtype) || matches!(inner.as_ref(), Path(_))
         }
+        // Heap-allocated collection types cannot cross the FFI boundary safely.
+        Vec(_) | LinkedList(_) | Map(_, _) => false,
+        Ref(inner) | Const(inner) => ir_type_is_supported(inner),
         Array(inner, _) => ir_type_is_supported(inner),
-        Map(k, v) => ir_type_is_supported(k) && ir_type_is_supported(v),
         _ => true,
     }
 }
 
 fn method_is_supported(method: &crate::IRMethod) -> bool {
-    ir_type_is_supported(&method.return_type)
+    // std::string return types can't be bridged: the C++ callee returns by value and the
+    // resulting const char* would dangle immediately. String *parameters* are fine.
+    !matches!(method.return_type, crate::IRType::String)
+        && ir_type_is_supported(&method.return_type)
         && method.args.iter().all(|(_, irtype)| ir_type_is_supported(irtype))
 }
 
@@ -100,7 +113,7 @@ fn capitalize_first(s: &str) -> String {
 fn is_string_type(irtype: &crate::IRType) -> bool {
     use crate::IRType::*;
     match irtype {
-        String => true,
+        String | c_char => true,
         Const(inner) | Ref(inner) | Pointer(inner) => is_string_type(inner),
         _ => false,
     }
@@ -218,6 +231,7 @@ impl ToTokens for crate::IRType {
         let ty = match self {
             Unit => quote::quote!(()),
             c_char => quote!(core::ffi::c_char),
+            c_signed_char => quote!(core::ffi::c_schar),
             c_short => quote!(core::ffi::c_short),
             c_int => quote!(core::ffi::c_int),
             c_long => quote!(core::ffi::c_long),
@@ -303,20 +317,9 @@ impl crate::IRModule {
             }
             let trait_ident = quote::format_ident!("{}", capitalize_first(class_name));
 
-            // Supertrait bounds: parents in this same module that also have traits
-            let parent_bounds: Vec<TokenStream> = ir_struct
-                .parents
-                .iter()
-                .filter(|p| {
-                    self.classes
-                        .get(*p)
-                        .map_or(false, |c| !c.exposable_methods.is_empty())
-                })
-                .map(|p| {
-                    let pident = quote::format_ident!("{}", capitalize_first(p));
-                    quote::quote!(#pident)
-                })
-                .collect();
+            // Supertrait bounds would require implementing every ancestor trait for each
+            // concrete struct across module boundaries, which the generator doesn't yet support.
+            let parent_bounds: Vec<TokenStream> = vec![];
 
             let method_sigs: Vec<TokenStream> = ir_struct
                 .exposable_methods

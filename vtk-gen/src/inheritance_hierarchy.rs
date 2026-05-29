@@ -151,6 +151,10 @@ impl ClassHierarchy {
             .filter(|x| !parent_methods.contains(&x))
             .filter(|x| x.signature.trim().chars().take(8).collect::<String>() != "template")
             .filter(|x| !x.signature.contains("typename"))
+            // C-style array parameters (e.g. `double pts[3]`) decay to pointers but WrapVTK
+            // records no pointer attribute for them. We can't bridge array parameters safely
+            // without explicit length info, so skip any method whose signature contains `[`.
+            .filter(|x| !x.signature.contains('['))
             .collect();
 
         Ok(unique_methods)
