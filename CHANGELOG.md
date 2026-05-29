@@ -22,6 +22,7 @@
 - `write_build_rs` in `vtk-gen/src/main.rs` no longer hardcodes `vtktoken` in the link list (VTK 9.1 system packages do not ship `libvtktoken`).
 
 ### Fixed
+- **`vtkNew<T>` ABI mismatch in generated C++ wrappers**: `vtkNew<T>` has a non-trivial destructor, so passing or returning it by value in `extern "C"` functions violates the x86-64 SysV ABI and causes the wrapped VTK object to be destroyed on every method call. Constructor, destructor, get-ptr, and all method wrappers now use raw `T*` (`T::New()` / `sself->Delete()` / `return sself`) instead of `vtkNew<T>`.
 - **`std::string` return types** (`IRType::String`): bridging `std::string` as `const char*` is illegal (dangling pointer). These methods are now skipped on both the Rust and C++ sides.
 - **`const char*` vs `const char* const*`**: `StarStarConst` now always bails instead of incorrectly reducing to a single pointer.
 - **Mutable `char**` output parameters**: `StarStar + non-const char` now bails; only `StarStar + const char` (VTK_FILEPATH encoding) is reduced to a single pointer.

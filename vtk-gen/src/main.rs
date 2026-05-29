@@ -254,6 +254,7 @@ fn write_build_rs(writer: &mut impl std::io::Write, ir_modules: &[IRModule]) -> 
                 #(#module_names),*
             ];
             vtk_rs_link::link_cmake_project(modules)?;
+            println!("cargo:rustc-link-lib=tbb");
 
             Ok(())
         }

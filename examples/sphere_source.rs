@@ -13,6 +13,8 @@ fn main() {
     sphere_source.set_phi_resolution(100);
     sphere_source.set_theta_resolution(100);
 
+    println!("sphere source: {sphere_source:?}")
+
     /* let mut mapper = vtk::PolyDataMapper::new();
     mapper.set_input_connection(sphere_source.get_output_port());
     let mut mapper = vtkPolyDataMapper::New();

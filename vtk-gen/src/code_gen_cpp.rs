@@ -237,7 +237,7 @@ impl IRStruct {
         let ret_str = ir_type_to_cpp_string(&method.return_type)?;
         let is_void = matches!(method.return_type, IRType::Unit);
 
-        let mut param_strs: Vec<String> = vec![format!("vtkNew<{}> sself", self.name)];
+        let mut param_strs: Vec<String> = vec![format!("{}* sself", self.name)];
         let mut call_args: Vec<String> = vec![];
         for (ident, irtype) in &method.args {
             param_strs.push(format!("{} {}", ir_type_to_cpp_string(irtype)?, ident.0));
@@ -269,7 +269,7 @@ impl IRStruct {
             anyhow::bail!("std::string return type cannot be bridged to const char*");
         }
         let ret_str = ir_type_to_cpp_string(&method.return_type)?;
-        let mut param_strs: Vec<String> = vec![format!("vtkNew<{}> sself", self.name)];
+        let mut param_strs: Vec<String> = vec![format!("{}* sself", self.name)];
         for (ident, irtype) in &method.args {
             param_strs.push(format!("{} {}", ir_type_to_cpp_string(irtype)?, ident.0));
         }
@@ -285,17 +285,17 @@ impl IRStruct {
     fn build_constructor(&self, writer: &mut impl std::io::Write) -> Result<()> {
         let ty = &self.name;
         let constructor = self.constructor_binding_name();
-        let func1 = cpp!(extern "C" vtkNew<#ty> #constructor() {return vtkNew<#ty>();})?;
+        let func1 = cpp!(extern "C" #ty* #constructor() {return #ty::New();})?;
 
         let destructor = self.destructor_binding_name();
-        let func2 = cpp!(extern "C" void #destructor(vtkNew<#ty> sself) {
-            sself.Reset();
+        let func2 = cpp!(extern "C" void #destructor(#ty* sself) {
+            sself->Delete();
             return;
         })?;
 
         let get_ptr = self.get_ptr_binding_name();
-        let func3 = cpp!(extern "C" void* #get_ptr(vtkNew<#ty> sself) {
-            return sself.GetPointer();
+        let func3 = cpp!(extern "C" void* #get_ptr(#ty* sself) {
+            return sself;
         })?;
 
         writeln!(writer, "{func1}")?;
@@ -307,13 +307,13 @@ impl IRStruct {
     fn build_constructor_headers(&self, writer: &mut impl std::io::Write) -> Result<()> {
         let ty = &self.name;
         let constructor = self.constructor_binding_name();
-        let func1 = cpp!(extern "C" vtkNew<#ty> #constructor();)?;
+        let func1 = cpp!(extern "C" #ty* #constructor();)?;
 
         let destructor = self.destructor_binding_name();
-        let func2 = cpp!(extern "C" void #destructor(vtkNew<#ty> sself);)?;
+        let func2 = cpp!(extern "C" void #destructor(#ty* sself);)?;
 
         let get_ptr = self.get_ptr_binding_name();
-        let func3 = cpp!(extern "C" void* #get_ptr(vtkNew<#ty> sself);)?;
+        let func3 = cpp!(extern "C" void* #get_ptr(#ty* sself);)?;
 
         writeln!(writer, "{func1}")?;
         writeln!(writer, "{func2}")?;
