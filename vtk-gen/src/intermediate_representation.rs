@@ -97,12 +97,26 @@ impl From<crate::parse_cpp::Ident> for IRIdent {
 }
 
 pub struct IRMethod {
+    /// Full snake_case binding name, e.g. `vtk_sphere_source_set_radius`
     pub name: String,
+    /// Original PascalCase VTK method name, e.g. `SetRadius` (used in C++ call)
+    pub vtk_name: String,
     pub return_type: IRType,
     pub args: Vec<(IRIdent, IRType)>,
 }
 
 impl IRMethod {
+    /// Strip the class snake_case prefix to get the short method name.
+    /// e.g. `vtk_sphere_source_set_radius` → `set_radius` (for `vtkSphereSource`)
+    pub fn short_name(&self, class_name: &str) -> String {
+        use convert_case::Casing;
+        let prefix = format!("{}_", class_name.to_case(convert_case::Case::Snake));
+        self.name
+            .strip_prefix(&prefix)
+            .unwrap_or(&self.name)
+            .to_string()
+    }
+
     fn convert_from_class(class: &crate::Class, value: &crate::Method) -> Result<Self> {
         use crate::parse_cpp::Parse;
         let return_type = if let Some(crate::ReturnType { ret_type, pointer }) = &value.return_type
@@ -128,7 +142,6 @@ impl IRMethod {
             .map(|(n, param)| {
                 let name = match &param.name {
                     Some(name) => name.clone(),
-                    // TODO make this better
                     None => format!("p{n}"),
                 };
                 let name = crate::parse_cpp::Ident::parse(&name)?;
@@ -141,6 +154,7 @@ impl IRMethod {
         use convert_case::*;
         Ok(IRMethod {
             name: format!("{}_{}", class.name, value.name).to_case(Case::Snake),
+            vtk_name: value.name.clone(),
             return_type,
             args,
         })

@@ -77,6 +77,7 @@ impl ToTokens for crate::IRMethod {
             name,
             return_type,
             args,
+            ..
         } = &self;
 
         let name = quote::format_ident!("{name}");
