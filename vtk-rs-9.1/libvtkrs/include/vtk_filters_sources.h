@@ -49,7 +49,6 @@
 // Declare exported functions
 extern "C" vtkArcSource * vtkArcSource_new () ;
 extern "C" void vtkArcSource_destructor (vtkArcSource * sself) ;
-extern "C" void * vtkArcSource_get_ptr (vtkArcSource * sself) ;
 extern "C" void vtk_arc_source_set_point_1(vtkArcSource* sself, double _arg1, double _arg2, double _arg3);
 extern "C" void vtk_arc_source_set_point_2(vtkArcSource* sself, double _arg1, double _arg2, double _arg3);
 extern "C" void vtk_arc_source_set_center(vtkArcSource* sself, double _arg1, double _arg2, double _arg3);
@@ -75,7 +74,6 @@ extern "C" void vtk_arc_source_set_output_points_precision(vtkArcSource* sself, 
 extern "C" int vtk_arc_source_get_output_points_precision(vtkArcSource* sself);
 extern "C" vtkArrowSource * vtkArrowSource_new () ;
 extern "C" void vtkArrowSource_destructor (vtkArrowSource * sself) ;
-extern "C" void * vtkArrowSource_get_ptr (vtkArrowSource * sself) ;
 extern "C" void vtk_arrow_source_set_tip_length(vtkArrowSource* sself, double _arg);
 extern "C" double vtk_arrow_source_get_tip_length_min_value(vtkArrowSource* sself);
 extern "C" double vtk_arrow_source_get_tip_length_max_value(vtkArrowSource* sself);
@@ -104,7 +102,6 @@ extern "C" void vtk_arrow_source_set_arrow_origin_to_default(vtkArrowSource* sse
 extern "C" void vtk_arrow_source_set_arrow_origin_to_center(vtkArrowSource* sself);
 extern "C" vtkCapsuleSource * vtkCapsuleSource_new () ;
 extern "C" void vtkCapsuleSource_destructor (vtkCapsuleSource * sself) ;
-extern "C" void * vtkCapsuleSource_get_ptr (vtkCapsuleSource * sself) ;
 extern "C" void vtk_capsule_source_set_radius(vtkCapsuleSource* sself, double _arg);
 extern "C" double vtk_capsule_source_get_radius_min_value(vtkCapsuleSource* sself);
 extern "C" double vtk_capsule_source_get_radius_max_value(vtkCapsuleSource* sself);
@@ -130,7 +127,6 @@ extern "C" void vtk_capsule_source_set_output_points_precision(vtkCapsuleSource*
 extern "C" int vtk_capsule_source_get_output_points_precision(vtkCapsuleSource* sself);
 extern "C" vtkCellTypeSource * vtkCellTypeSource_new () ;
 extern "C" void vtkCellTypeSource_destructor (vtkCellTypeSource * sself) ;
-extern "C" void * vtkCellTypeSource_get_ptr (vtkCellTypeSource * sself) ;
 extern "C" void vtk_cell_type_source_set_cell_type(vtkCellTypeSource* sself, int cellType);
 extern "C" int vtk_cell_type_source_get_cell_type(vtkCellTypeSource* sself);
 extern "C" void vtk_cell_type_source_set_cell_order(vtkCellTypeSource* sself, int _arg);
@@ -150,7 +146,6 @@ extern "C" int vtk_cell_type_source_get_output_precision_max_value(vtkCellTypeSo
 extern "C" int vtk_cell_type_source_get_output_precision(vtkCellTypeSource* sself);
 extern "C" vtkConeSource * vtkConeSource_new () ;
 extern "C" void vtkConeSource_destructor (vtkConeSource * sself) ;
-extern "C" void * vtkConeSource_get_ptr (vtkConeSource * sself) ;
 extern "C" void vtk_cone_source_set_height(vtkConeSource* sself, double _arg);
 extern "C" double vtk_cone_source_get_height_min_value(vtkConeSource* sself);
 extern "C" double vtk_cone_source_get_height_max_value(vtkConeSource* sself);
@@ -175,7 +170,6 @@ extern "C" void vtk_cone_source_set_output_points_precision(vtkConeSource* sself
 extern "C" int vtk_cone_source_get_output_points_precision(vtkConeSource* sself);
 extern "C" vtkCubeSource * vtkCubeSource_new () ;
 extern "C" void vtkCubeSource_destructor (vtkCubeSource * sself) ;
-extern "C" void * vtkCubeSource_get_ptr (vtkCubeSource * sself) ;
 extern "C" void vtk_cube_source_set_x_length(vtkCubeSource* sself, double _arg);
 extern "C" double vtk_cube_source_get_x_length_min_value(vtkCubeSource* sself);
 extern "C" double vtk_cube_source_get_x_length_max_value(vtkCubeSource* sself);
@@ -194,7 +188,6 @@ extern "C" void vtk_cube_source_set_output_points_precision(vtkCubeSource* sself
 extern "C" int vtk_cube_source_get_output_points_precision(vtkCubeSource* sself);
 extern "C" vtkCylinderSource * vtkCylinderSource_new () ;
 extern "C" void vtkCylinderSource_destructor (vtkCylinderSource * sself) ;
-extern "C" void * vtkCylinderSource_get_ptr (vtkCylinderSource * sself) ;
 extern "C" void vtk_cylinder_source_set_height(vtkCylinderSource* sself, double _arg);
 extern "C" double vtk_cylinder_source_get_height_min_value(vtkCylinderSource* sself);
 extern "C" double vtk_cylinder_source_get_height_max_value(vtkCylinderSource* sself);
@@ -216,7 +209,6 @@ extern "C" void vtk_cylinder_source_set_output_points_precision(vtkCylinderSourc
 extern "C" int vtk_cylinder_source_get_output_points_precision(vtkCylinderSource* sself);
 extern "C" vtkDiagonalMatrixSource * vtkDiagonalMatrixSource_new () ;
 extern "C" void vtkDiagonalMatrixSource_destructor (vtkDiagonalMatrixSource * sself) ;
-extern "C" void * vtkDiagonalMatrixSource_get_ptr (vtkDiagonalMatrixSource * sself) ;
 extern "C" int vtk_diagonal_matrix_source_get_array_type(vtkDiagonalMatrixSource* sself);
 extern "C" void vtk_diagonal_matrix_source_set_array_type(vtkDiagonalMatrixSource* sself, int _arg);
 extern "C" long long vtk_diagonal_matrix_source_get_extents(vtkDiagonalMatrixSource* sself);
@@ -231,7 +223,6 @@ extern "C" void vtk_diagonal_matrix_source_set_row_label(vtkDiagonalMatrixSource
 extern "C" void vtk_diagonal_matrix_source_set_column_label(vtkDiagonalMatrixSource* sself, const char* _arg);
 extern "C" vtkDiskSource * vtkDiskSource_new () ;
 extern "C" void vtkDiskSource_destructor (vtkDiskSource * sself) ;
-extern "C" void * vtkDiskSource_get_ptr (vtkDiskSource * sself) ;
 extern "C" void vtk_disk_source_set_inner_radius(vtkDiskSource* sself, double _arg);
 extern "C" double vtk_disk_source_get_inner_radius_min_value(vtkDiskSource* sself);
 extern "C" double vtk_disk_source_get_inner_radius_max_value(vtkDiskSource* sself);
@@ -252,7 +243,6 @@ extern "C" void vtk_disk_source_set_output_points_precision(vtkDiskSource* sself
 extern "C" int vtk_disk_source_get_output_points_precision(vtkDiskSource* sself);
 extern "C" vtkEllipseArcSource * vtkEllipseArcSource_new () ;
 extern "C" void vtkEllipseArcSource_destructor (vtkEllipseArcSource * sself) ;
-extern "C" void * vtkEllipseArcSource_get_ptr (vtkEllipseArcSource * sself) ;
 extern "C" void vtk_ellipse_arc_source_set_center(vtkEllipseArcSource* sself, double _arg1, double _arg2, double _arg3);
 extern "C" void vtk_ellipse_arc_source_set_normal(vtkEllipseArcSource* sself, double _arg1, double _arg2, double _arg3);
 extern "C" void vtk_ellipse_arc_source_set_major_radius_vector(vtkEllipseArcSource* sself, double _arg1, double _arg2, double _arg3);
@@ -280,7 +270,6 @@ extern "C" double vtk_ellipse_arc_source_get_ratio_max_value(vtkEllipseArcSource
 extern "C" double vtk_ellipse_arc_source_get_ratio(vtkEllipseArcSource* sself);
 extern "C" vtkEllipticalButtonSource * vtkEllipticalButtonSource_new () ;
 extern "C" void vtkEllipticalButtonSource_destructor (vtkEllipticalButtonSource * sself) ;
-extern "C" void * vtkEllipticalButtonSource_get_ptr (vtkEllipticalButtonSource * sself) ;
 extern "C" void vtk_elliptical_button_source_set_width(vtkEllipticalButtonSource* sself, double _arg);
 extern "C" double vtk_elliptical_button_source_get_width_min_value(vtkEllipticalButtonSource* sself);
 extern "C" double vtk_elliptical_button_source_get_width_max_value(vtkEllipticalButtonSource* sself);
@@ -313,7 +302,6 @@ extern "C" void vtk_elliptical_button_source_set_output_points_precision(vtkElli
 extern "C" int vtk_elliptical_button_source_get_output_points_precision(vtkEllipticalButtonSource* sself);
 extern "C" vtkFrustumSource * vtkFrustumSource_new () ;
 extern "C" void vtkFrustumSource_destructor (vtkFrustumSource * sself) ;
-extern "C" void * vtkFrustumSource_get_ptr (vtkFrustumSource * sself) ;
 extern "C" bool vtk_frustum_source_get_show_lines(vtkFrustumSource* sself);
 extern "C" void vtk_frustum_source_set_show_lines(vtkFrustumSource* sself, bool _arg);
 extern "C" void vtk_frustum_source_show_lines_on(vtkFrustumSource* sself);
@@ -325,7 +313,6 @@ extern "C" void vtk_frustum_source_set_output_points_precision(vtkFrustumSource*
 extern "C" int vtk_frustum_source_get_output_points_precision(vtkFrustumSource* sself);
 extern "C" vtkGlyphSource2D * vtkGlyphSource2D_new () ;
 extern "C" void vtkGlyphSource2D_destructor (vtkGlyphSource2D * sself) ;
-extern "C" void * vtkGlyphSource2D_get_ptr (vtkGlyphSource2D * sself) ;
 extern "C" void vtk_glyph_source_2_d_set_center(vtkGlyphSource2D* sself, double _arg1, double _arg2, double _arg3);
 extern "C" void vtk_glyph_source_2_d_set_scale(vtkGlyphSource2D* sself, double _arg);
 extern "C" double vtk_glyph_source_2_d_get_scale_min_value(vtkGlyphSource2D* sself);
@@ -375,7 +362,6 @@ extern "C" void vtk_glyph_source_2_d_set_output_points_precision(vtkGlyphSource2
 extern "C" int vtk_glyph_source_2_d_get_output_points_precision(vtkGlyphSource2D* sself);
 extern "C" vtkGraphToPolyData * vtkGraphToPolyData_new () ;
 extern "C" void vtkGraphToPolyData_destructor (vtkGraphToPolyData * sself) ;
-extern "C" void * vtkGraphToPolyData_get_ptr (vtkGraphToPolyData * sself) ;
 extern "C" void vtk_graph_to_poly_data_set_edge_glyph_output(vtkGraphToPolyData* sself, bool _arg);
 extern "C" bool vtk_graph_to_poly_data_get_edge_glyph_output(vtkGraphToPolyData* sself);
 extern "C" void vtk_graph_to_poly_data_edge_glyph_output_on(vtkGraphToPolyData* sself);
@@ -384,7 +370,6 @@ extern "C" void vtk_graph_to_poly_data_set_edge_glyph_position(vtkGraphToPolyDat
 extern "C" double vtk_graph_to_poly_data_get_edge_glyph_position(vtkGraphToPolyData* sself);
 extern "C" vtkHyperTreeGridSource * vtkHyperTreeGridSource_new () ;
 extern "C" void vtkHyperTreeGridSource_destructor (vtkHyperTreeGridSource * sself) ;
-extern "C" void * vtkHyperTreeGridSource_get_ptr (vtkHyperTreeGridSource * sself) ;
 extern "C" unsigned int vtk_hyper_tree_grid_source_get_maximum_level(vtkHyperTreeGridSource* sself);
 extern "C" void vtk_hyper_tree_grid_source_set_maximum_level(vtkHyperTreeGridSource* sself, unsigned int levels);
 extern "C" unsigned int vtk_hyper_tree_grid_source_get_max_depth(vtkHyperTreeGridSource* sself);
@@ -417,7 +402,6 @@ extern "C" void vtk_hyper_tree_grid_source_set_mask(vtkHyperTreeGridSource* ssel
 extern "C" unsigned long vtk_hyper_tree_grid_source_get_m_time(vtkHyperTreeGridSource* sself);
 extern "C" vtkLineSource * vtkLineSource_new () ;
 extern "C" void vtkLineSource_destructor (vtkLineSource * sself) ;
-extern "C" void * vtkLineSource_get_ptr (vtkLineSource * sself) ;
 extern "C" void vtk_line_source_set_point_1(vtkLineSource* sself, double _arg1, double _arg2, double _arg3);
 extern "C" void vtk_line_source_set_point_2(vtkLineSource* sself, double _arg1, double _arg2, double _arg3);
 extern "C" void vtk_line_source_set_use_regular_refinement(vtkLineSource* sself, bool _arg);
@@ -436,21 +420,18 @@ extern "C" void vtk_line_source_set_output_points_precision(vtkLineSource* sself
 extern "C" int vtk_line_source_get_output_points_precision(vtkLineSource* sself);
 extern "C" vtkOutlineCornerFilter * vtkOutlineCornerFilter_new () ;
 extern "C" void vtkOutlineCornerFilter_destructor (vtkOutlineCornerFilter * sself) ;
-extern "C" void * vtkOutlineCornerFilter_get_ptr (vtkOutlineCornerFilter * sself) ;
 extern "C" void vtk_outline_corner_filter_set_corner_factor(vtkOutlineCornerFilter* sself, double _arg);
 extern "C" double vtk_outline_corner_filter_get_corner_factor_min_value(vtkOutlineCornerFilter* sself);
 extern "C" double vtk_outline_corner_filter_get_corner_factor_max_value(vtkOutlineCornerFilter* sself);
 extern "C" double vtk_outline_corner_filter_get_corner_factor(vtkOutlineCornerFilter* sself);
 extern "C" vtkOutlineCornerSource * vtkOutlineCornerSource_new () ;
 extern "C" void vtkOutlineCornerSource_destructor (vtkOutlineCornerSource * sself) ;
-extern "C" void * vtkOutlineCornerSource_get_ptr (vtkOutlineCornerSource * sself) ;
 extern "C" void vtk_outline_corner_source_set_corner_factor(vtkOutlineCornerSource* sself, double _arg);
 extern "C" double vtk_outline_corner_source_get_corner_factor_min_value(vtkOutlineCornerSource* sself);
 extern "C" double vtk_outline_corner_source_get_corner_factor_max_value(vtkOutlineCornerSource* sself);
 extern "C" double vtk_outline_corner_source_get_corner_factor(vtkOutlineCornerSource* sself);
 extern "C" vtkOutlineSource * vtkOutlineSource_new () ;
 extern "C" void vtkOutlineSource_destructor (vtkOutlineSource * sself) ;
-extern "C" void * vtkOutlineSource_get_ptr (vtkOutlineSource * sself) ;
 extern "C" void vtk_outline_source_set_box_type(vtkOutlineSource* sself, int _arg);
 extern "C" int vtk_outline_source_get_box_type(vtkOutlineSource* sself);
 extern "C" void vtk_outline_source_set_box_type_to_axis_aligned(vtkOutlineSource* sself);
@@ -464,7 +445,6 @@ extern "C" void vtk_outline_source_set_output_points_precision(vtkOutlineSource*
 extern "C" int vtk_outline_source_get_output_points_precision(vtkOutlineSource* sself);
 extern "C" vtkParametricFunctionSource * vtkParametricFunctionSource_new () ;
 extern "C" void vtkParametricFunctionSource_destructor (vtkParametricFunctionSource * sself) ;
-extern "C" void * vtkParametricFunctionSource_get_ptr (vtkParametricFunctionSource * sself) ;
 extern "C" void vtk_parametric_function_source_set_u_resolution(vtkParametricFunctionSource* sself, int _arg);
 extern "C" int vtk_parametric_function_source_get_u_resolution_min_value(vtkParametricFunctionSource* sself);
 extern "C" int vtk_parametric_function_source_get_u_resolution_max_value(vtkParametricFunctionSource* sself);
@@ -512,14 +492,12 @@ extern "C" void vtk_parametric_function_source_set_output_points_precision(vtkPa
 extern "C" int vtk_parametric_function_source_get_output_points_precision(vtkParametricFunctionSource* sself);
 extern "C" vtkPartitionedDataSetCollectionSource * vtkPartitionedDataSetCollectionSource_new () ;
 extern "C" void vtkPartitionedDataSetCollectionSource_destructor (vtkPartitionedDataSetCollectionSource * sself) ;
-extern "C" void * vtkPartitionedDataSetCollectionSource_get_ptr (vtkPartitionedDataSetCollectionSource * sself) ;
 extern "C" void vtk_partitioned_data_set_collection_source_set_number_of_shapes(vtkPartitionedDataSetCollectionSource* sself, int _arg);
 extern "C" int vtk_partitioned_data_set_collection_source_get_number_of_shapes_min_value(vtkPartitionedDataSetCollectionSource* sself);
 extern "C" int vtk_partitioned_data_set_collection_source_get_number_of_shapes_max_value(vtkPartitionedDataSetCollectionSource* sself);
 extern "C" int vtk_partitioned_data_set_collection_source_get_number_of_shapes(vtkPartitionedDataSetCollectionSource* sself);
 extern "C" vtkPartitionedDataSetSource * vtkPartitionedDataSetSource_new () ;
 extern "C" void vtkPartitionedDataSetSource_destructor (vtkPartitionedDataSetSource * sself) ;
-extern "C" void * vtkPartitionedDataSetSource_get_ptr (vtkPartitionedDataSetSource * sself) ;
 extern "C" void vtk_partitioned_data_set_source_enable_rank(vtkPartitionedDataSetSource* sself, int rank);
 extern "C" void vtk_partitioned_data_set_source_enable_all_ranks(vtkPartitionedDataSetSource* sself);
 extern "C" void vtk_partitioned_data_set_source_disable_rank(vtkPartitionedDataSetSource* sself, int rank);
@@ -531,7 +509,6 @@ extern "C" int vtk_partitioned_data_set_source_get_number_of_partitions_max_valu
 extern "C" int vtk_partitioned_data_set_source_get_number_of_partitions(vtkPartitionedDataSetSource* sself);
 extern "C" vtkPlaneSource * vtkPlaneSource_new () ;
 extern "C" void vtkPlaneSource_destructor (vtkPlaneSource * sself) ;
-extern "C" void * vtkPlaneSource_get_ptr (vtkPlaneSource * sself) ;
 extern "C" void vtk_plane_source_set_x_resolution(vtkPlaneSource* sself, int _arg);
 extern "C" int vtk_plane_source_get_x_resolution(vtkPlaneSource* sself);
 extern "C" void vtk_plane_source_set_y_resolution(vtkPlaneSource* sself, int _arg);
@@ -548,7 +525,6 @@ extern "C" void vtk_plane_source_set_output_points_precision(vtkPlaneSource* sse
 extern "C" int vtk_plane_source_get_output_points_precision(vtkPlaneSource* sself);
 extern "C" vtkPlatonicSolidSource * vtkPlatonicSolidSource_new () ;
 extern "C" void vtkPlatonicSolidSource_destructor (vtkPlatonicSolidSource * sself) ;
-extern "C" void * vtkPlatonicSolidSource_get_ptr (vtkPlatonicSolidSource * sself) ;
 extern "C" void vtk_platonic_solid_source_set_solid_type(vtkPlatonicSolidSource* sself, int _arg);
 extern "C" int vtk_platonic_solid_source_get_solid_type_min_value(vtkPlatonicSolidSource* sself);
 extern "C" int vtk_platonic_solid_source_get_solid_type_max_value(vtkPlatonicSolidSource* sself);
@@ -562,12 +538,10 @@ extern "C" void vtk_platonic_solid_source_set_output_points_precision(vtkPlatoni
 extern "C" int vtk_platonic_solid_source_get_output_points_precision(vtkPlatonicSolidSource* sself);
 extern "C" vtkPointHandleSource * vtkPointHandleSource_new () ;
 extern "C" void vtkPointHandleSource_destructor (vtkPointHandleSource * sself) ;
-extern "C" void * vtkPointHandleSource_get_ptr (vtkPointHandleSource * sself) ;
 extern "C" void vtk_point_handle_source_set_position(vtkPointHandleSource* sself, double xPos, double yPos, double zPos);
 extern "C" void vtk_point_handle_source_set_direction(vtkPointHandleSource* sself, double xDir, double yDir, double zDir);
 extern "C" vtkPointSource * vtkPointSource_new () ;
 extern "C" void vtkPointSource_destructor (vtkPointSource * sself) ;
-extern "C" void * vtkPointSource_get_ptr (vtkPointSource * sself) ;
 extern "C" void vtk_point_source_set_number_of_points(vtkPointSource* sself, long long _arg);
 extern "C" long long vtk_point_source_get_number_of_points_min_value(vtkPointSource* sself);
 extern "C" long long vtk_point_source_get_number_of_points_max_value(vtkPointSource* sself);
@@ -585,14 +559,12 @@ extern "C" void vtk_point_source_set_output_points_precision(vtkPointSource* sse
 extern "C" int vtk_point_source_get_output_points_precision(vtkPointSource* sself);
 extern "C" vtkPolyLineSource * vtkPolyLineSource_new () ;
 extern "C" void vtkPolyLineSource_destructor (vtkPolyLineSource * sself) ;
-extern "C" void * vtkPolyLineSource_get_ptr (vtkPolyLineSource * sself) ;
 extern "C" void vtk_poly_line_source_set_closed(vtkPolyLineSource* sself, int _arg);
 extern "C" int vtk_poly_line_source_get_closed(vtkPolyLineSource* sself);
 extern "C" void vtk_poly_line_source_closed_on(vtkPolyLineSource* sself);
 extern "C" void vtk_poly_line_source_closed_off(vtkPolyLineSource* sself);
 extern "C" vtkPolyPointSource * vtkPolyPointSource_new () ;
 extern "C" void vtkPolyPointSource_destructor (vtkPolyPointSource * sself) ;
-extern "C" void * vtkPolyPointSource_get_ptr (vtkPolyPointSource * sself) ;
 extern "C" void vtk_poly_point_source_set_number_of_points(vtkPolyPointSource* sself, long long numPoints);
 extern "C" long long vtk_poly_point_source_get_number_of_points(vtkPolyPointSource* sself);
 extern "C" void vtk_poly_point_source_resize(vtkPolyPointSource* sself, long long numPoints);
@@ -600,13 +572,10 @@ extern "C" void vtk_poly_point_source_set_point(vtkPolyPointSource* sself, long 
 extern "C" unsigned long vtk_poly_point_source_get_m_time(vtkPolyPointSource* sself);
 extern "C" vtkProgrammableDataObjectSource * vtkProgrammableDataObjectSource_new () ;
 extern "C" void vtkProgrammableDataObjectSource_destructor (vtkProgrammableDataObjectSource * sself) ;
-extern "C" void * vtkProgrammableDataObjectSource_get_ptr (vtkProgrammableDataObjectSource * sself) ;
 extern "C" vtkProgrammableSource * vtkProgrammableSource_new () ;
 extern "C" void vtkProgrammableSource_destructor (vtkProgrammableSource * sself) ;
-extern "C" void * vtkProgrammableSource_get_ptr (vtkProgrammableSource * sself) ;
 extern "C" vtkRandomHyperTreeGridSource * vtkRandomHyperTreeGridSource_new () ;
 extern "C" void vtkRandomHyperTreeGridSource_destructor (vtkRandomHyperTreeGridSource * sself) ;
-extern "C" void * vtkRandomHyperTreeGridSource_get_ptr (vtkRandomHyperTreeGridSource * sself) ;
 extern "C" void vtk_random_hyper_tree_grid_source_set_dimensions(vtkRandomHyperTreeGridSource* sself, unsigned int _arg1, unsigned int _arg2, unsigned int _arg3);
 extern "C" void vtk_random_hyper_tree_grid_source_set_output_bounds(vtkRandomHyperTreeGridSource* sself, double _arg1, double _arg2, double _arg3, double _arg4, double _arg5, double _arg6);
 extern "C" unsigned int vtk_random_hyper_tree_grid_source_get_seed(vtkRandomHyperTreeGridSource* sself);
@@ -621,7 +590,6 @@ extern "C" double vtk_random_hyper_tree_grid_source_get_split_fraction_min_value
 extern "C" double vtk_random_hyper_tree_grid_source_get_split_fraction_max_value(vtkRandomHyperTreeGridSource* sself);
 extern "C" vtkRectangularButtonSource * vtkRectangularButtonSource_new () ;
 extern "C" void vtkRectangularButtonSource_destructor (vtkRectangularButtonSource * sself) ;
-extern "C" void * vtkRectangularButtonSource_get_ptr (vtkRectangularButtonSource * sself) ;
 extern "C" void vtk_rectangular_button_source_set_width(vtkRectangularButtonSource* sself, double _arg);
 extern "C" double vtk_rectangular_button_source_get_width_min_value(vtkRectangularButtonSource* sself);
 extern "C" double vtk_rectangular_button_source_get_width_max_value(vtkRectangularButtonSource* sself);
@@ -650,7 +618,6 @@ extern "C" void vtk_rectangular_button_source_set_output_points_precision(vtkRec
 extern "C" int vtk_rectangular_button_source_get_output_points_precision(vtkRectangularButtonSource* sself);
 extern "C" vtkRegularPolygonSource * vtkRegularPolygonSource_new () ;
 extern "C" void vtkRegularPolygonSource_destructor (vtkRegularPolygonSource * sself) ;
-extern "C" void * vtkRegularPolygonSource_get_ptr (vtkRegularPolygonSource * sself) ;
 extern "C" void vtk_regular_polygon_source_set_number_of_sides(vtkRegularPolygonSource* sself, int _arg);
 extern "C" int vtk_regular_polygon_source_get_number_of_sides_min_value(vtkRegularPolygonSource* sself);
 extern "C" int vtk_regular_polygon_source_get_number_of_sides_max_value(vtkRegularPolygonSource* sself);
@@ -671,7 +638,6 @@ extern "C" void vtk_regular_polygon_source_set_output_points_precision(vtkRegula
 extern "C" int vtk_regular_polygon_source_get_output_points_precision(vtkRegularPolygonSource* sself);
 extern "C" vtkSelectionSource * vtkSelectionSource_new () ;
 extern "C" void vtkSelectionSource_destructor (vtkSelectionSource * sself) ;
-extern "C" void * vtkSelectionSource_get_ptr (vtkSelectionSource * sself) ;
 extern "C" void vtk_selection_source_add_id(vtkSelectionSource* sself, long long piece, long long id);
 extern "C" void vtk_selection_source_add_string_id(vtkSelectionSource* sself, long long piece, const char* id);
 extern "C" void vtk_selection_source_add_location(vtkSelectionSource* sself, double x, double y, double z);
@@ -711,7 +677,6 @@ extern "C" void vtk_selection_source_remove_all_selectors(vtkSelectionSource* ss
 extern "C" void vtk_selection_source_set_query_string(vtkSelectionSource* sself, const char* _arg);
 extern "C" vtkSphereSource * vtkSphereSource_new () ;
 extern "C" void vtkSphereSource_destructor (vtkSphereSource * sself) ;
-extern "C" void * vtkSphereSource_get_ptr (vtkSphereSource * sself) ;
 extern "C" void vtk_sphere_source_set_radius(vtkSphereSource* sself, double _arg);
 extern "C" double vtk_sphere_source_get_radius_min_value(vtkSphereSource* sself);
 extern "C" double vtk_sphere_source_get_radius_max_value(vtkSphereSource* sself);
@@ -753,7 +718,6 @@ extern "C" void vtk_sphere_source_generate_normals_on(vtkSphereSource* sself);
 extern "C" void vtk_sphere_source_generate_normals_off(vtkSphereSource* sself);
 extern "C" vtkSuperquadricSource * vtkSuperquadricSource_new () ;
 extern "C" void vtkSuperquadricSource_destructor (vtkSuperquadricSource * sself) ;
-extern "C" void * vtkSuperquadricSource_get_ptr (vtkSuperquadricSource * sself) ;
 extern "C" void vtk_superquadric_source_set_center(vtkSuperquadricSource* sself, double _arg1, double _arg2, double _arg3);
 extern "C" void vtk_superquadric_source_set_scale(vtkSuperquadricSource* sself, double _arg1, double _arg2, double _arg3);
 extern "C" int vtk_superquadric_source_get_theta_resolution(vtkSuperquadricSource* sself);
@@ -783,7 +747,6 @@ extern "C" void vtk_superquadric_source_set_output_points_precision(vtkSuperquad
 extern "C" int vtk_superquadric_source_get_output_points_precision(vtkSuperquadricSource* sself);
 extern "C" vtkTessellatedBoxSource * vtkTessellatedBoxSource_new () ;
 extern "C" void vtkTessellatedBoxSource_destructor (vtkTessellatedBoxSource * sself) ;
-extern "C" void * vtkTessellatedBoxSource_get_ptr (vtkTessellatedBoxSource * sself) ;
 extern "C" void vtk_tessellated_box_source_set_bounds(vtkTessellatedBoxSource* sself, double _arg1, double _arg2, double _arg3, double _arg4, double _arg5, double _arg6);
 extern "C" void vtk_tessellated_box_source_set_level(vtkTessellatedBoxSource* sself, int _arg);
 extern "C" int vtk_tessellated_box_source_get_level(vtkTessellatedBoxSource* sself);
@@ -799,7 +762,6 @@ extern "C" void vtk_tessellated_box_source_set_output_points_precision(vtkTessel
 extern "C" int vtk_tessellated_box_source_get_output_points_precision(vtkTessellatedBoxSource* sself);
 extern "C" vtkTextSource * vtkTextSource_new () ;
 extern "C" void vtkTextSource_destructor (vtkTextSource * sself) ;
-extern "C" void * vtkTextSource_get_ptr (vtkTextSource * sself) ;
 extern "C" void vtk_text_source_set_text(vtkTextSource* sself, const char* _arg);
 extern "C" void vtk_text_source_set_backing(vtkTextSource* sself, int _arg);
 extern "C" int vtk_text_source_get_backing(vtkTextSource* sself);
@@ -811,7 +773,6 @@ extern "C" void vtk_text_source_set_output_points_precision(vtkTextSource* sself
 extern "C" int vtk_text_source_get_output_points_precision(vtkTextSource* sself);
 extern "C" vtkTexturedSphereSource * vtkTexturedSphereSource_new () ;
 extern "C" void vtkTexturedSphereSource_destructor (vtkTexturedSphereSource * sself) ;
-extern "C" void * vtkTexturedSphereSource_get_ptr (vtkTexturedSphereSource * sself) ;
 extern "C" void vtk_textured_sphere_source_set_radius(vtkTexturedSphereSource* sself, double _arg);
 extern "C" double vtk_textured_sphere_source_get_radius_min_value(vtkTexturedSphereSource* sself);
 extern "C" double vtk_textured_sphere_source_get_radius_max_value(vtkTexturedSphereSource* sself);
@@ -836,4 +797,3 @@ extern "C" void vtk_textured_sphere_source_set_output_points_precision(vtkTextur
 extern "C" int vtk_textured_sphere_source_get_output_points_precision(vtkTexturedSphereSource* sself);
 extern "C" vtkUniformHyperTreeGridSource * vtkUniformHyperTreeGridSource_new () ;
 extern "C" void vtkUniformHyperTreeGridSource_destructor (vtkUniformHyperTreeGridSource * sself) ;
-extern "C" void * vtkUniformHyperTreeGridSource_get_ptr (vtkUniformHyperTreeGridSource * sself) ;

@@ -167,7 +167,6 @@
 // Implement declared functions
 extern "C" vtkAnimationCue * vtkAnimationCue_new () {return vtkAnimationCue :: New () ;}
 extern "C" void vtkAnimationCue_destructor (vtkAnimationCue * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAnimationCue_get_ptr (vtkAnimationCue * sself) {return sself ;}
 extern "C" void vtk_animation_cue_set_time_mode(vtkAnimationCue* sself, int mode) { sself->SetTimeMode(mode); }
 extern "C" int vtk_animation_cue_get_time_mode(vtkAnimationCue* sself) { return sself->GetTimeMode(); }
 extern "C" void vtk_animation_cue_set_time_mode_to_relative(vtkAnimationCue* sself) { sself->SetTimeModeToRelative(); }
@@ -184,7 +183,6 @@ extern "C" double vtk_animation_cue_get_delta_time(vtkAnimationCue* sself) { ret
 extern "C" double vtk_animation_cue_get_clock_time(vtkAnimationCue* sself) { return sself->GetClockTime(); }
 extern "C" vtkArchiver * vtkArchiver_new () {return vtkArchiver :: New () ;}
 extern "C" void vtkArchiver_destructor (vtkArchiver * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkArchiver_get_ptr (vtkArchiver * sself) {return sself ;}
 extern "C" void vtk_archiver_set_archive_name(vtkArchiver* sself, const char* _arg) { sself->SetArchiveName(_arg); }
 extern "C" void vtk_archiver_open_archive(vtkArchiver* sself) { sself->OpenArchive(); }
 extern "C" void vtk_archiver_close_archive(vtkArchiver* sself) { sself->CloseArchive(); }
@@ -192,7 +190,6 @@ extern "C" void vtk_archiver_insert_into_archive(vtkArchiver* sself, const char*
 extern "C" bool vtk_archiver_contains(vtkArchiver* sself, const char*& relativePath) { return sself->Contains(relativePath); }
 extern "C" vtkBitArray * vtkBitArray_new () {return vtkBitArray :: New () ;}
 extern "C" void vtkBitArray_destructor (vtkBitArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBitArray_get_ptr (vtkBitArray * sself) {return sself ;}
 extern "C" int vtk_bit_array_allocate(vtkBitArray* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_bit_array_initialize(vtkBitArray* sself) { sself->Initialize(); }
 extern "C" int vtk_bit_array_get_data_type(vtkBitArray* sself) { return sself->GetDataType(); }
@@ -215,7 +212,6 @@ extern "C" void vtk_bit_array_data_changed(vtkBitArray* sself) { sself->DataChan
 extern "C" void vtk_bit_array_clear_lookup(vtkBitArray* sself) { sself->ClearLookup(); }
 extern "C" vtkBitArrayIterator * vtkBitArrayIterator_new () {return vtkBitArrayIterator :: New () ;}
 extern "C" void vtkBitArrayIterator_destructor (vtkBitArrayIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBitArrayIterator_get_ptr (vtkBitArrayIterator * sself) {return sself ;}
 extern "C" int vtk_bit_array_iterator_get_value(vtkBitArrayIterator* sself, long long id) { return sself->GetValue(id); }
 extern "C" long long vtk_bit_array_iterator_get_number_of_tuples(vtkBitArrayIterator* sself) { return sself->GetNumberOfTuples(); }
 extern "C" long long vtk_bit_array_iterator_get_number_of_values(vtkBitArrayIterator* sself) { return sself->GetNumberOfValues(); }
@@ -225,13 +221,11 @@ extern "C" int vtk_bit_array_iterator_get_data_type_size(vtkBitArrayIterator* ss
 extern "C" void vtk_bit_array_iterator_set_value(vtkBitArrayIterator* sself, long long id, int value) { sself->SetValue(id, value); }
 extern "C" vtkBoxMuellerRandomSequence * vtkBoxMuellerRandomSequence_new () {return vtkBoxMuellerRandomSequence :: New () ;}
 extern "C" void vtkBoxMuellerRandomSequence_destructor (vtkBoxMuellerRandomSequence * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBoxMuellerRandomSequence_get_ptr (vtkBoxMuellerRandomSequence * sself) {return sself ;}
 extern "C" void vtk_box_mueller_random_sequence_initialize(vtkBoxMuellerRandomSequence* sself, unsigned int seed) { sself->Initialize(seed); }
 extern "C" double vtk_box_mueller_random_sequence_get_value(vtkBoxMuellerRandomSequence* sself) { return sself->GetValue(); }
 extern "C" void vtk_box_mueller_random_sequence_next(vtkBoxMuellerRandomSequence* sself) { sself->Next(); }
 extern "C" vtkByteSwap * vtkByteSwap_new () {return vtkByteSwap :: New () ;}
 extern "C" void vtkByteSwap_destructor (vtkByteSwap * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkByteSwap_get_ptr (vtkByteSwap * sself) {return sself ;}
 extern "C" void vtk_byte_swap_swap_2_le(vtkByteSwap* sself, void* p) { sself->Swap2LE(p); }
 extern "C" void vtk_byte_swap_swap_4_le(vtkByteSwap* sself, void* p) { sself->Swap4LE(p); }
 extern "C" void vtk_byte_swap_swap_8_le(vtkByteSwap* sself, void* p) { sself->Swap8LE(p); }
@@ -247,7 +241,6 @@ extern "C" void vtk_byte_swap_swap_8_be_range(vtkByteSwap* sself, void* p, size_
 extern "C" void vtk_byte_swap_swap_void_range(vtkByteSwap* sself, void* buffer, size_t numWords, size_t wordSize) { sself->SwapVoidRange(buffer, numWords, wordSize); }
 extern "C" vtkCallbackCommand * vtkCallbackCommand_new () {return vtkCallbackCommand :: New () ;}
 extern "C" void vtkCallbackCommand_destructor (vtkCallbackCommand * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCallbackCommand_get_ptr (vtkCallbackCommand * sself) {return sself ;}
 extern "C" void vtk_callback_command_set_client_data(vtkCallbackCommand* sself, void* cd) { sself->SetClientData(cd); }
 extern "C" void* vtk_callback_command_get_client_data(vtkCallbackCommand* sself) { return sself->GetClientData(); }
 extern "C" void vtk_callback_command_set_abort_flag_on_execute(vtkCallbackCommand* sself, int f) { sself->SetAbortFlagOnExecute(f); }
@@ -256,7 +249,6 @@ extern "C" void vtk_callback_command_abort_flag_on_execute_on(vtkCallbackCommand
 extern "C" void vtk_callback_command_abort_flag_on_execute_off(vtkCallbackCommand* sself) { sself->AbortFlagOnExecuteOff(); }
 extern "C" vtkCharArray * vtkCharArray_new () {return vtkCharArray :: New () ;}
 extern "C" void vtkCharArray_destructor (vtkCharArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCharArray_get_ptr (vtkCharArray * sself) {return sself ;}
 extern "C" int vtk_char_array_get_data_type(vtkCharArray* sself) { return sself->GetDataType(); }
 extern "C" void vtk_char_array_set_typed_tuple(vtkCharArray* sself, long long i, const char* tuple) { sself->SetTypedTuple(i, tuple); }
 extern "C" void vtk_char_array_insert_typed_tuple(vtkCharArray* sself, long long i, const char* tuple) { sself->InsertTypedTuple(i, tuple); }
@@ -270,33 +262,27 @@ extern "C" char vtk_char_array_get_data_type_value_min(vtkCharArray* sself) { re
 extern "C" char vtk_char_array_get_data_type_value_max(vtkCharArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkCollection * vtkCollection_new () {return vtkCollection :: New () ;}
 extern "C" void vtkCollection_destructor (vtkCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCollection_get_ptr (vtkCollection * sself) {return sself ;}
 extern "C" void vtk_collection_remove_item(vtkCollection* sself, int i) { sself->RemoveItem(i); }
 extern "C" void vtk_collection_remove_all_items(vtkCollection* sself) { sself->RemoveAllItems(); }
 extern "C" int vtk_collection_get_number_of_items(vtkCollection* sself) { return sself->GetNumberOfItems(); }
 extern "C" void vtk_collection_init_traversal(vtkCollection* sself) { sself->InitTraversal(); }
 extern "C" vtkCollectionIterator * vtkCollectionIterator_new () {return vtkCollectionIterator :: New () ;}
 extern "C" void vtkCollectionIterator_destructor (vtkCollectionIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCollectionIterator_get_ptr (vtkCollectionIterator * sself) {return sself ;}
 extern "C" void vtk_collection_iterator_init_traversal(vtkCollectionIterator* sself) { sself->InitTraversal(); }
 extern "C" void vtk_collection_iterator_go_to_first_item(vtkCollectionIterator* sself) { sself->GoToFirstItem(); }
 extern "C" void vtk_collection_iterator_go_to_next_item(vtkCollectionIterator* sself) { sself->GoToNextItem(); }
 extern "C" int vtk_collection_iterator_is_done_with_traversal(vtkCollectionIterator* sself) { return sself->IsDoneWithTraversal(); }
 extern "C" vtkCriticalSection * vtkCriticalSection_new () {return vtkCriticalSection :: New () ;}
 extern "C" void vtkCriticalSection_destructor (vtkCriticalSection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCriticalSection_get_ptr (vtkCriticalSection * sself) {return sself ;}
 extern "C" void vtk_critical_section_lock(vtkCriticalSection* sself) { sself->Lock(); }
 extern "C" void vtk_critical_section_unlock(vtkCriticalSection* sself) { sself->Unlock(); }
 extern "C" vtkDataArrayCollection * vtkDataArrayCollection_new () {return vtkDataArrayCollection :: New () ;}
 extern "C" void vtkDataArrayCollection_destructor (vtkDataArrayCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataArrayCollection_get_ptr (vtkDataArrayCollection * sself) {return sself ;}
 extern "C" int vtk_data_array_collection_get_number_of_items(vtkDataArrayCollection* sself) { return sself->GetNumberOfItems(); }
 extern "C" vtkDataArrayCollectionIterator * vtkDataArrayCollectionIterator_new () {return vtkDataArrayCollectionIterator :: New () ;}
 extern "C" void vtkDataArrayCollectionIterator_destructor (vtkDataArrayCollectionIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataArrayCollectionIterator_get_ptr (vtkDataArrayCollectionIterator * sself) {return sself ;}
 extern "C" vtkDataArraySelection * vtkDataArraySelection_new () {return vtkDataArraySelection :: New () ;}
 extern "C" void vtkDataArraySelection_destructor (vtkDataArraySelection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataArraySelection_get_ptr (vtkDataArraySelection * sself) {return sself ;}
 extern "C" void vtk_data_array_selection_enable_array(vtkDataArraySelection* sself, const char* name) { sself->EnableArray(name); }
 extern "C" void vtk_data_array_selection_disable_array(vtkDataArraySelection* sself, const char* name) { sself->DisableArray(name); }
 extern "C" int vtk_data_array_selection_array_is_enabled(vtkDataArraySelection* sself, const char* name) { return sself->ArrayIsEnabled(name); }
@@ -318,13 +304,11 @@ extern "C" void vtk_data_array_selection_set_unknown_array_setting(vtkDataArrayS
 extern "C" int vtk_data_array_selection_get_unknown_array_setting(vtkDataArraySelection* sself) { return sself->GetUnknownArraySetting(); }
 extern "C" vtkDebugLeaks * vtkDebugLeaks_new () {return vtkDebugLeaks :: New () ;}
 extern "C" void vtkDebugLeaks_destructor (vtkDebugLeaks * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDebugLeaks_get_ptr (vtkDebugLeaks * sself) {return sself ;}
 extern "C" int vtk_debug_leaks_print_current_leaks(vtkDebugLeaks* sself) { return sself->PrintCurrentLeaks(); }
 extern "C" int vtk_debug_leaks_get_exit_error(vtkDebugLeaks* sself) { return sself->GetExitError(); }
 extern "C" void vtk_debug_leaks_set_exit_error(vtkDebugLeaks* sself, int p0) { sself->SetExitError(p0); }
 extern "C" vtkDoubleArray * vtkDoubleArray_new () {return vtkDoubleArray :: New () ;}
 extern "C" void vtkDoubleArray_destructor (vtkDoubleArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDoubleArray_get_ptr (vtkDoubleArray * sself) {return sself ;}
 extern "C" int vtk_double_array_get_data_type(vtkDoubleArray* sself) { return sself->GetDataType(); }
 extern "C" double vtk_double_array_get_value(vtkDoubleArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_double_array_set_value(vtkDoubleArray* sself, long long id, double value) { sself->SetValue(id, value); }
@@ -335,24 +319,19 @@ extern "C" double vtk_double_array_get_data_type_value_min(vtkDoubleArray* sself
 extern "C" double vtk_double_array_get_data_type_value_max(vtkDoubleArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkDynamicLoader * vtkDynamicLoader_new () {return vtkDynamicLoader :: New () ;}
 extern "C" void vtkDynamicLoader_destructor (vtkDynamicLoader * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDynamicLoader_get_ptr (vtkDynamicLoader * sself) {return sself ;}
 extern "C" const char* vtk_dynamic_loader_lib_prefix(vtkDynamicLoader* sself) { return sself->LibPrefix(); }
 extern "C" const char* vtk_dynamic_loader_lib_extension(vtkDynamicLoader* sself) { return sself->LibExtension(); }
 extern "C" const char* vtk_dynamic_loader_last_error(vtkDynamicLoader* sself) { return sself->LastError(); }
 extern "C" vtkEventDataDevice3D * vtkEventDataDevice3D_new () {return vtkEventDataDevice3D :: New () ;}
 extern "C" void vtkEventDataDevice3D_destructor (vtkEventDataDevice3D * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkEventDataDevice3D_get_ptr (vtkEventDataDevice3D * sself) {return sself ;}
 extern "C" void vtk_event_data_device_3_d_set_track_pad_position(vtkEventDataDevice3D* sself, double x, double y) { sself->SetTrackPadPosition(x, y); }
 extern "C" vtkEventDataForDevice * vtkEventDataForDevice_new () {return vtkEventDataForDevice :: New () ;}
 extern "C" void vtkEventDataForDevice_destructor (vtkEventDataForDevice * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkEventDataForDevice_get_ptr (vtkEventDataForDevice * sself) {return sself ;}
 extern "C" vtkEventForwarderCommand * vtkEventForwarderCommand_new () {return vtkEventForwarderCommand :: New () ;}
 extern "C" void vtkEventForwarderCommand_destructor (vtkEventForwarderCommand * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkEventForwarderCommand_get_ptr (vtkEventForwarderCommand * sself) {return sself ;}
 extern "C" void* vtk_event_forwarder_command_get_target(vtkEventForwarderCommand* sself) { return sself->GetTarget(); }
 extern "C" vtkFileOutputWindow * vtkFileOutputWindow_new () {return vtkFileOutputWindow :: New () ;}
 extern "C" void vtkFileOutputWindow_destructor (vtkFileOutputWindow * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkFileOutputWindow_get_ptr (vtkFileOutputWindow * sself) {return sself ;}
 extern "C" void vtk_file_output_window_display_text(vtkFileOutputWindow* sself, const char* p0) { sself->DisplayText(p0); }
 extern "C" void vtk_file_output_window_set_file_name(vtkFileOutputWindow* sself, const char* _arg) { sself->SetFileName(_arg); }
 extern "C" void vtk_file_output_window_set_flush(vtkFileOutputWindow* sself, int _arg) { sself->SetFlush(_arg); }
@@ -365,7 +344,6 @@ extern "C" void vtk_file_output_window_append_on(vtkFileOutputWindow* sself) { s
 extern "C" void vtk_file_output_window_append_off(vtkFileOutputWindow* sself) { sself->AppendOff(); }
 extern "C" vtkFloatArray * vtkFloatArray_new () {return vtkFloatArray :: New () ;}
 extern "C" void vtkFloatArray_destructor (vtkFloatArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkFloatArray_get_ptr (vtkFloatArray * sself) {return sself ;}
 extern "C" int vtk_float_array_get_data_type(vtkFloatArray* sself) { return sself->GetDataType(); }
 extern "C" float vtk_float_array_get_value(vtkFloatArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_float_array_set_value(vtkFloatArray* sself, long long id, float value) { sself->SetValue(id, value); }
@@ -376,7 +354,6 @@ extern "C" float vtk_float_array_get_data_type_value_min(vtkFloatArray* sself) {
 extern "C" float vtk_float_array_get_data_type_value_max(vtkFloatArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkGarbageCollector * vtkGarbageCollector_new () {return vtkGarbageCollector :: New () ;}
 extern "C" void vtkGarbageCollector_destructor (vtkGarbageCollector * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGarbageCollector_get_ptr (vtkGarbageCollector * sself) {return sself ;}
 extern "C" void vtk_garbage_collector_collect(vtkGarbageCollector* sself) { sself->Collect(); }
 extern "C" void vtk_garbage_collector_deferred_collection_push(vtkGarbageCollector* sself) { sself->DeferredCollectionPush(); }
 extern "C" void vtk_garbage_collector_deferred_collection_pop(vtkGarbageCollector* sself) { sself->DeferredCollectionPop(); }
@@ -384,7 +361,6 @@ extern "C" void vtk_garbage_collector_set_global_debug_flag(vtkGarbageCollector*
 extern "C" bool vtk_garbage_collector_get_global_debug_flag(vtkGarbageCollector* sself) { return sself->GetGlobalDebugFlag(); }
 extern "C" vtkIdList * vtkIdList_new () {return vtkIdList :: New () ;}
 extern "C" void vtkIdList_destructor (vtkIdList * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkIdList_get_ptr (vtkIdList * sself) {return sself ;}
 extern "C" void vtk_id_list_initialize(vtkIdList* sself) { sself->Initialize(); }
 extern "C" int vtk_id_list_allocate(vtkIdList* sself, const long long sz, const int strategy) { return sself->Allocate(sz, strategy); }
 extern "C" long long vtk_id_list_get_number_of_ids(vtkIdList* sself) { return sself->GetNumberOfIds(); }
@@ -403,11 +379,9 @@ extern "C" void vtk_id_list_delete_id(vtkIdList* sself, long long vtkid) { sself
 extern "C" long long vtk_id_list_is_id(vtkIdList* sself, long long vtkid) { return sself->IsId(vtkid); }
 extern "C" vtkIdListCollection * vtkIdListCollection_new () {return vtkIdListCollection :: New () ;}
 extern "C" void vtkIdListCollection_destructor (vtkIdListCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkIdListCollection_get_ptr (vtkIdListCollection * sself) {return sself ;}
 extern "C" int vtk_id_list_collection_get_number_of_items(vtkIdListCollection* sself) { return sself->GetNumberOfItems(); }
 extern "C" vtkIdTypeArray * vtkIdTypeArray_new () {return vtkIdTypeArray :: New () ;}
 extern "C" void vtkIdTypeArray_destructor (vtkIdTypeArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkIdTypeArray_get_ptr (vtkIdTypeArray * sself) {return sself ;}
 extern "C" int vtk_id_type_array_get_data_type(vtkIdTypeArray* sself) { return sself->GetDataType(); }
 extern "C" long long vtk_id_type_array_get_value(vtkIdTypeArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_id_type_array_set_value(vtkIdTypeArray* sself, long long id, long long value) { sself->SetValue(id, value); }
@@ -418,28 +392,23 @@ extern "C" long long vtk_id_type_array_get_data_type_value_min(vtkIdTypeArray* s
 extern "C" long long vtk_id_type_array_get_data_type_value_max(vtkIdTypeArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkInformation * vtkInformation_new () {return vtkInformation :: New () ;}
 extern "C" void vtkInformation_destructor (vtkInformation * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkInformation_get_ptr (vtkInformation * sself) {return sself ;}
 extern "C" void vtk_information_modified(vtkInformation* sself) { sself->Modified(); }
 extern "C" void vtk_information_clear(vtkInformation* sself) { sself->Clear(); }
 extern "C" int vtk_information_get_number_of_keys(vtkInformation* sself) { return sself->GetNumberOfKeys(); }
 extern "C" vtkInformationIterator * vtkInformationIterator_new () {return vtkInformationIterator :: New () ;}
 extern "C" void vtkInformationIterator_destructor (vtkInformationIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkInformationIterator_get_ptr (vtkInformationIterator * sself) {return sself ;}
 extern "C" void vtk_information_iterator_init_traversal(vtkInformationIterator* sself) { sself->InitTraversal(); }
 extern "C" void vtk_information_iterator_go_to_first_item(vtkInformationIterator* sself) { sself->GoToFirstItem(); }
 extern "C" void vtk_information_iterator_go_to_next_item(vtkInformationIterator* sself) { sself->GoToNextItem(); }
 extern "C" int vtk_information_iterator_is_done_with_traversal(vtkInformationIterator* sself) { return sself->IsDoneWithTraversal(); }
 extern "C" vtkInformationKeyLookup * vtkInformationKeyLookup_new () {return vtkInformationKeyLookup :: New () ;}
 extern "C" void vtkInformationKeyLookup_destructor (vtkInformationKeyLookup * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkInformationKeyLookup_get_ptr (vtkInformationKeyLookup * sself) {return sself ;}
 extern "C" vtkInformationVector * vtkInformationVector_new () {return vtkInformationVector :: New () ;}
 extern "C" void vtkInformationVector_destructor (vtkInformationVector * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkInformationVector_get_ptr (vtkInformationVector * sself) {return sself ;}
 extern "C" int vtk_information_vector_get_number_of_information_objects(vtkInformationVector* sself) { return sself->GetNumberOfInformationObjects(); }
 extern "C" void vtk_information_vector_set_number_of_information_objects(vtkInformationVector* sself, int n) { sself->SetNumberOfInformationObjects(n); }
 extern "C" vtkIntArray * vtkIntArray_new () {return vtkIntArray :: New () ;}
 extern "C" void vtkIntArray_destructor (vtkIntArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkIntArray_get_ptr (vtkIntArray * sself) {return sself ;}
 extern "C" int vtk_int_array_get_data_type(vtkIntArray* sself) { return sself->GetDataType(); }
 extern "C" int vtk_int_array_get_value(vtkIntArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_int_array_set_value(vtkIntArray* sself, long long id, int value) { sself->SetValue(id, value); }
@@ -450,7 +419,6 @@ extern "C" int vtk_int_array_get_data_type_value_min(vtkIntArray* sself) { retur
 extern "C" int vtk_int_array_get_data_type_value_max(vtkIntArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkLongArray * vtkLongArray_new () {return vtkLongArray :: New () ;}
 extern "C" void vtkLongArray_destructor (vtkLongArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLongArray_get_ptr (vtkLongArray * sself) {return sself ;}
 extern "C" int vtk_long_array_get_data_type(vtkLongArray* sself) { return sself->GetDataType(); }
 extern "C" long vtk_long_array_get_value(vtkLongArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_long_array_set_value(vtkLongArray* sself, long long id, long value) { sself->SetValue(id, value); }
@@ -461,7 +429,6 @@ extern "C" long vtk_long_array_get_data_type_value_min(vtkLongArray* sself) { re
 extern "C" long vtk_long_array_get_data_type_value_max(vtkLongArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkLongLongArray * vtkLongLongArray_new () {return vtkLongLongArray :: New () ;}
 extern "C" void vtkLongLongArray_destructor (vtkLongLongArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLongLongArray_get_ptr (vtkLongLongArray * sself) {return sself ;}
 extern "C" int vtk_long_long_array_get_data_type(vtkLongLongArray* sself) { return sself->GetDataType(); }
 extern "C" long long vtk_long_long_array_get_value(vtkLongLongArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_long_long_array_set_value(vtkLongLongArray* sself, long long id, long long value) { sself->SetValue(id, value); }
@@ -472,7 +439,6 @@ extern "C" long long vtk_long_long_array_get_data_type_value_min(vtkLongLongArra
 extern "C" long long vtk_long_long_array_get_data_type_value_max(vtkLongLongArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkLookupTable * vtkLookupTable_new () {return vtkLookupTable :: New () ;}
 extern "C" void vtkLookupTable_destructor (vtkLookupTable * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLookupTable_get_ptr (vtkLookupTable * sself) {return sself ;}
 extern "C" int vtk_lookup_table_is_opaque(vtkLookupTable* sself) { return sself->IsOpaque(); }
 extern "C" int vtk_lookup_table_allocate(vtkLookupTable* sself, int sz, int ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_lookup_table_build(vtkLookupTable* sself) { sself->Build(); }
@@ -515,7 +481,6 @@ extern "C" long long vtk_lookup_table_get_number_of_colors(vtkLookupTable* sself
 extern "C" int vtk_lookup_table_using_log_scale(vtkLookupTable* sself) { return sself->UsingLogScale(); }
 extern "C" vtkMath * vtkMath_new () {return vtkMath :: New () ;}
 extern "C" void vtkMath_destructor (vtkMath * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMath_get_ptr (vtkMath * sself) {return sself ;}
 extern "C" double vtk_math_pi(vtkMath* sself) { return sself->Pi(); }
 extern "C" float vtk_math_radians_from_degrees(vtkMath* sself, float degrees) { return sself->RadiansFromDegrees(degrees); }
 extern "C" float vtk_math_degrees_from_radians(vtkMath* sself, float radians) { return sself->DegreesFromRadians(radians); }
@@ -545,7 +510,6 @@ extern "C" int vtk_math_is_nan(vtkMath* sself, double x) { return sself->IsNan(x
 extern "C" bool vtk_math_is_finite(vtkMath* sself, double x) { return sself->IsFinite(x); }
 extern "C" vtkMersenneTwister * vtkMersenneTwister_new () {return vtkMersenneTwister :: New () ;}
 extern "C" void vtkMersenneTwister_destructor (vtkMersenneTwister * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMersenneTwister_get_ptr (vtkMersenneTwister * sself) {return sself ;}
 extern "C" void vtk_mersenne_twister_initialize(vtkMersenneTwister* sself, unsigned int seed) { sself->Initialize(seed); }
 extern "C" unsigned int vtk_mersenne_twister_initialize_new_sequence(vtkMersenneTwister* sself, unsigned int seed, int p) { return sself->InitializeNewSequence(seed, p); }
 extern "C" void vtk_mersenne_twister_initialize_sequence(vtkMersenneTwister* sself, unsigned int id, unsigned int seed, int p) { sself->InitializeSequence(id, seed, p); }
@@ -553,7 +517,6 @@ extern "C" double vtk_mersenne_twister_get_value(vtkMersenneTwister* sself, unsi
 extern "C" void vtk_mersenne_twister_next(vtkMersenneTwister* sself, unsigned int id) { sself->Next(id); }
 extern "C" vtkMinimalStandardRandomSequence * vtkMinimalStandardRandomSequence_new () {return vtkMinimalStandardRandomSequence :: New () ;}
 extern "C" void vtkMinimalStandardRandomSequence_destructor (vtkMinimalStandardRandomSequence * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMinimalStandardRandomSequence_get_ptr (vtkMinimalStandardRandomSequence * sself) {return sself ;}
 extern "C" void vtk_minimal_standard_random_sequence_initialize(vtkMinimalStandardRandomSequence* sself, unsigned int seed) { sself->Initialize(seed); }
 extern "C" void vtk_minimal_standard_random_sequence_set_seed(vtkMinimalStandardRandomSequence* sself, int value) { sself->SetSeed(value); }
 extern "C" void vtk_minimal_standard_random_sequence_set_seed_only(vtkMinimalStandardRandomSequence* sself, int value) { sself->SetSeedOnly(value); }
@@ -564,7 +527,6 @@ extern "C" double vtk_minimal_standard_random_sequence_get_range_value(vtkMinima
 extern "C" double vtk_minimal_standard_random_sequence_get_next_range_value(vtkMinimalStandardRandomSequence* sself, double rangeMin, double rangeMax) { return sself->GetNextRangeValue(rangeMin, rangeMax); }
 extern "C" vtkMultiThreader * vtkMultiThreader_new () {return vtkMultiThreader :: New () ;}
 extern "C" void vtkMultiThreader_destructor (vtkMultiThreader * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMultiThreader_get_ptr (vtkMultiThreader * sself) {return sself ;}
 extern "C" void vtk_multi_threader_set_number_of_threads(vtkMultiThreader* sself, int _arg) { sself->SetNumberOfThreads(_arg); }
 extern "C" int vtk_multi_threader_get_number_of_threads_min_value(vtkMultiThreader* sself) { return sself->GetNumberOfThreadsMinValue(); }
 extern "C" int vtk_multi_threader_get_number_of_threads_max_value(vtkMultiThreader* sself) { return sself->GetNumberOfThreadsMaxValue(); }
@@ -580,7 +542,6 @@ extern "C" void vtk_multi_threader_terminate_thread(vtkMultiThreader* sself, int
 extern "C" int vtk_multi_threader_is_thread_active(vtkMultiThreader* sself, int threadId) { return sself->IsThreadActive(threadId); }
 extern "C" vtkObject * vtkObject_new () {return vtkObject :: New () ;}
 extern "C" void vtkObject_destructor (vtkObject * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkObject_get_ptr (vtkObject * sself) {return sself ;}
 extern "C" int vtk_object_is_type_of(vtkObject* sself, const char* type) { return sself->IsTypeOf(type); }
 extern "C" int vtk_object_is_a(vtkObject* sself, const char* type) { return sself->IsA(type); }
 extern "C" long long vtk_object_get_number_of_generations_from_base_type(vtkObject* sself, const char* type) { return sself->GetNumberOfGenerationsFromBaseType(type); }
@@ -600,14 +561,11 @@ extern "C" void vtk_object_remove_all_observers(vtkObject* sself) { sself->Remov
 extern "C" int vtk_object_invoke_event(vtkObject* sself, unsigned long event, void* callData) { return sself->InvokeEvent(event, callData); }
 extern "C" vtkObjectFactoryCollection * vtkObjectFactoryCollection_new () {return vtkObjectFactoryCollection :: New () ;}
 extern "C" void vtkObjectFactoryCollection_destructor (vtkObjectFactoryCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkObjectFactoryCollection_get_ptr (vtkObjectFactoryCollection * sself) {return sself ;}
 extern "C" vtkOldStyleCallbackCommand * vtkOldStyleCallbackCommand_new () {return vtkOldStyleCallbackCommand :: New () ;}
 extern "C" void vtkOldStyleCallbackCommand_destructor (vtkOldStyleCallbackCommand * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOldStyleCallbackCommand_get_ptr (vtkOldStyleCallbackCommand * sself) {return sself ;}
 extern "C" void vtk_old_style_callback_command_set_client_data(vtkOldStyleCallbackCommand* sself, void* cd) { sself->SetClientData(cd); }
 extern "C" vtkOutputWindow * vtkOutputWindow_new () {return vtkOutputWindow :: New () ;}
 extern "C" void vtkOutputWindow_destructor (vtkOutputWindow * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOutputWindow_get_ptr (vtkOutputWindow * sself) {return sself ;}
 extern "C" void vtk_output_window_display_text(vtkOutputWindow* sself, const char* p0) { sself->DisplayText(p0); }
 extern "C" void vtk_output_window_display_error_text(vtkOutputWindow* sself, const char* p0) { sself->DisplayErrorText(p0); }
 extern "C" void vtk_output_window_display_warning_text(vtkOutputWindow* sself, const char* p0) { sself->DisplayWarningText(p0); }
@@ -630,10 +588,8 @@ extern "C" void vtk_output_window_set_display_mode_to_always(vtkOutputWindow* ss
 extern "C" void vtk_output_window_set_display_mode_to_always_std_err(vtkOutputWindow* sself) { sself->SetDisplayModeToAlwaysStdErr(); }
 extern "C" vtkOverrideInformationCollection * vtkOverrideInformationCollection_new () {return vtkOverrideInformationCollection :: New () ;}
 extern "C" void vtkOverrideInformationCollection_destructor (vtkOverrideInformationCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOverrideInformationCollection_get_ptr (vtkOverrideInformationCollection * sself) {return sself ;}
 extern "C" vtkPoints * vtkPoints_new () {return vtkPoints :: New () ;}
 extern "C" void vtkPoints_destructor (vtkPoints * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPoints_get_ptr (vtkPoints * sself) {return sself ;}
 extern "C" int vtk_points_allocate(vtkPoints* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_points_initialize(vtkPoints* sself) { sself->Initialize(); }
 extern "C" int vtk_points_get_data_type(vtkPoints* sself) { return sself->GetDataType(); }
@@ -664,7 +620,6 @@ extern "C" unsigned long vtk_points_get_m_time(vtkPoints* sself) { return sself-
 extern "C" void vtk_points_modified(vtkPoints* sself) { sself->Modified(); }
 extern "C" vtkPoints2D * vtkPoints2D_new () {return vtkPoints2D :: New () ;}
 extern "C" void vtkPoints2D_destructor (vtkPoints2D * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPoints2D_get_ptr (vtkPoints2D * sself) {return sself ;}
 extern "C" int vtk_points_2_d_allocate(vtkPoints2D* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_points_2_d_initialize(vtkPoints2D* sself) { sself->Initialize(); }
 extern "C" int vtk_points_2_d_get_data_type(vtkPoints2D* sself) { return sself->GetDataType(); }
@@ -694,7 +649,6 @@ extern "C" int vtk_points_2_d_resize(vtkPoints2D* sself, long long numPoints) { 
 extern "C" void vtk_points_2_d_compute_bounds(vtkPoints2D* sself) { sself->ComputeBounds(); }
 extern "C" vtkPriorityQueue * vtkPriorityQueue_new () {return vtkPriorityQueue :: New () ;}
 extern "C" void vtkPriorityQueue_destructor (vtkPriorityQueue * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPriorityQueue_get_ptr (vtkPriorityQueue * sself) {return sself ;}
 extern "C" void vtk_priority_queue_allocate(vtkPriorityQueue* sself, long long sz, long long ext) { sself->Allocate(sz, ext); }
 extern "C" void vtk_priority_queue_insert(vtkPriorityQueue* sself, double priority, long long id) { sself->Insert(priority, id); }
 extern "C" long long vtk_priority_queue_pop(vtkPriorityQueue* sself, long long location, double& priority) { return sself->Pop(location, priority); }
@@ -705,7 +659,6 @@ extern "C" long long vtk_priority_queue_get_number_of_items(vtkPriorityQueue* ss
 extern "C" void vtk_priority_queue_reset(vtkPriorityQueue* sself) { sself->Reset(); }
 extern "C" vtkRandomPool * vtkRandomPool_new () {return vtkRandomPool :: New () ;}
 extern "C" void vtkRandomPool_destructor (vtkRandomPool * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkRandomPool_get_ptr (vtkRandomPool * sself) {return sself ;}
 extern "C" void vtk_random_pool_set_size(vtkRandomPool* sself, long long _arg) { sself->SetSize(_arg); }
 extern "C" long long vtk_random_pool_get_size_min_value(vtkRandomPool* sself) { return sself->GetSizeMinValue(); }
 extern "C" long long vtk_random_pool_get_size_max_value(vtkRandomPool* sself) { return sself->GetSizeMaxValue(); }
@@ -722,10 +675,8 @@ extern "C" long long vtk_random_pool_get_chunk_size_max_value(vtkRandomPool* sse
 extern "C" long long vtk_random_pool_get_chunk_size(vtkRandomPool* sself) { return sself->GetChunkSize(); }
 extern "C" vtkReferenceCount * vtkReferenceCount_new () {return vtkReferenceCount :: New () ;}
 extern "C" void vtkReferenceCount_destructor (vtkReferenceCount * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkReferenceCount_get_ptr (vtkReferenceCount * sself) {return sself ;}
 extern "C" vtkScalarsToColors * vtkScalarsToColors_new () {return vtkScalarsToColors :: New () ;}
 extern "C" void vtkScalarsToColors_destructor (vtkScalarsToColors * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkScalarsToColors_get_ptr (vtkScalarsToColors * sself) {return sself ;}
 extern "C" int vtk_scalars_to_colors_is_opaque(vtkScalarsToColors* sself) { return sself->IsOpaque(); }
 extern "C" void vtk_scalars_to_colors_build(vtkScalarsToColors* sself) { sself->Build(); }
 extern "C" void vtk_scalars_to_colors_set_range(vtkScalarsToColors* sself, double min, double max) { sself->SetRange(min, max); }
@@ -752,7 +703,6 @@ extern "C" void vtk_scalars_to_colors_indexed_lookup_on(vtkScalarsToColors* ssel
 extern "C" void vtk_scalars_to_colors_indexed_lookup_off(vtkScalarsToColors* sself) { sself->IndexedLookupOff(); }
 extern "C" vtkShortArray * vtkShortArray_new () {return vtkShortArray :: New () ;}
 extern "C" void vtkShortArray_destructor (vtkShortArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkShortArray_get_ptr (vtkShortArray * sself) {return sself ;}
 extern "C" int vtk_short_array_get_data_type(vtkShortArray* sself) { return sself->GetDataType(); }
 extern "C" short vtk_short_array_get_value(vtkShortArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_short_array_set_value(vtkShortArray* sself, long long id, short value) { sself->SetValue(id, value); }
@@ -763,7 +713,6 @@ extern "C" short vtk_short_array_get_data_type_value_min(vtkShortArray* sself) {
 extern "C" short vtk_short_array_get_data_type_value_max(vtkShortArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkSignedCharArray * vtkSignedCharArray_new () {return vtkSignedCharArray :: New () ;}
 extern "C" void vtkSignedCharArray_destructor (vtkSignedCharArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSignedCharArray_get_ptr (vtkSignedCharArray * sself) {return sself ;}
 extern "C" int vtk_signed_char_array_get_data_type(vtkSignedCharArray* sself) { return sself->GetDataType(); }
 extern "C" signed char vtk_signed_char_array_get_value(vtkSignedCharArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_signed_char_array_set_value(vtkSignedCharArray* sself, long long id, signed char value) { sself->SetValue(id, value); }
@@ -774,10 +723,8 @@ extern "C" signed char vtk_signed_char_array_get_data_type_value_min(vtkSignedCh
 extern "C" signed char vtk_signed_char_array_get_data_type_value_max(vtkSignedCharArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkSortDataArray * vtkSortDataArray_new () {return vtkSortDataArray :: New () ;}
 extern "C" void vtkSortDataArray_destructor (vtkSortDataArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSortDataArray_get_ptr (vtkSortDataArray * sself) {return sself ;}
 extern "C" vtkStringArray * vtkStringArray_new () {return vtkStringArray :: New () ;}
 extern "C" void vtkStringArray_destructor (vtkStringArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStringArray_get_ptr (vtkStringArray * sself) {return sself ;}
 extern "C" int vtk_string_array_get_data_type(vtkStringArray* sself) { return sself->GetDataType(); }
 extern "C" int vtk_string_array_is_numeric(vtkStringArray* sself) { return sself->IsNumeric(); }
 extern "C" void vtk_string_array_initialize(vtkStringArray* sself) { sself->Initialize(); }
@@ -798,11 +745,9 @@ extern "C" void vtk_string_array_data_element_changed(vtkStringArray* sself, lon
 extern "C" void vtk_string_array_clear_lookup(vtkStringArray* sself) { sself->ClearLookup(); }
 extern "C" vtkStringOutputWindow * vtkStringOutputWindow_new () {return vtkStringOutputWindow :: New () ;}
 extern "C" void vtkStringOutputWindow_destructor (vtkStringOutputWindow * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStringOutputWindow_get_ptr (vtkStringOutputWindow * sself) {return sself ;}
 extern "C" void vtk_string_output_window_display_text(vtkStringOutputWindow* sself, const char* p0) { sself->DisplayText(p0); }
 extern "C" vtkTimePointUtility * vtkTimePointUtility_new () {return vtkTimePointUtility :: New () ;}
 extern "C" void vtkTimePointUtility_destructor (vtkTimePointUtility * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTimePointUtility_get_ptr (vtkTimePointUtility * sself) {return sself ;}
 extern "C" unsigned long long vtk_time_point_utility_date_to_time_point(vtkTimePointUtility* sself, int year, int month, int day) { return sself->DateToTimePoint(year, month, day); }
 extern "C" unsigned long long vtk_time_point_utility_time_to_time_point(vtkTimePointUtility* sself, int hour, int minute, int second, int millis) { return sself->TimeToTimePoint(hour, minute, second, millis); }
 extern "C" unsigned long long vtk_time_point_utility_date_time_to_time_point(vtkTimePointUtility* sself, int year, int month, int day, int hour, int minute, int sec, int millis) { return sself->DateTimeToTimePoint(year, month, day, hour, minute, sec, millis); }
@@ -819,37 +764,26 @@ extern "C" int vtk_time_point_utility_get_millisecond(vtkTimePointUtility* sself
 extern "C" const char* vtk_time_point_utility_time_point_to_iso_8601(vtkTimePointUtility* sself, unsigned long long p0, int format) { return sself->TimePointToISO8601(p0, format); }
 extern "C" vtkTypeFloat32Array * vtkTypeFloat32Array_new () {return vtkTypeFloat32Array :: New () ;}
 extern "C" void vtkTypeFloat32Array_destructor (vtkTypeFloat32Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeFloat32Array_get_ptr (vtkTypeFloat32Array * sself) {return sself ;}
 extern "C" vtkTypeFloat64Array * vtkTypeFloat64Array_new () {return vtkTypeFloat64Array :: New () ;}
 extern "C" void vtkTypeFloat64Array_destructor (vtkTypeFloat64Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeFloat64Array_get_ptr (vtkTypeFloat64Array * sself) {return sself ;}
 extern "C" vtkTypeInt16Array * vtkTypeInt16Array_new () {return vtkTypeInt16Array :: New () ;}
 extern "C" void vtkTypeInt16Array_destructor (vtkTypeInt16Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeInt16Array_get_ptr (vtkTypeInt16Array * sself) {return sself ;}
 extern "C" vtkTypeInt32Array * vtkTypeInt32Array_new () {return vtkTypeInt32Array :: New () ;}
 extern "C" void vtkTypeInt32Array_destructor (vtkTypeInt32Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeInt32Array_get_ptr (vtkTypeInt32Array * sself) {return sself ;}
 extern "C" vtkTypeInt64Array * vtkTypeInt64Array_new () {return vtkTypeInt64Array :: New () ;}
 extern "C" void vtkTypeInt64Array_destructor (vtkTypeInt64Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeInt64Array_get_ptr (vtkTypeInt64Array * sself) {return sself ;}
 extern "C" vtkTypeInt8Array * vtkTypeInt8Array_new () {return vtkTypeInt8Array :: New () ;}
 extern "C" void vtkTypeInt8Array_destructor (vtkTypeInt8Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeInt8Array_get_ptr (vtkTypeInt8Array * sself) {return sself ;}
 extern "C" vtkTypeUInt16Array * vtkTypeUInt16Array_new () {return vtkTypeUInt16Array :: New () ;}
 extern "C" void vtkTypeUInt16Array_destructor (vtkTypeUInt16Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeUInt16Array_get_ptr (vtkTypeUInt16Array * sself) {return sself ;}
 extern "C" vtkTypeUInt32Array * vtkTypeUInt32Array_new () {return vtkTypeUInt32Array :: New () ;}
 extern "C" void vtkTypeUInt32Array_destructor (vtkTypeUInt32Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeUInt32Array_get_ptr (vtkTypeUInt32Array * sself) {return sself ;}
 extern "C" vtkTypeUInt64Array * vtkTypeUInt64Array_new () {return vtkTypeUInt64Array :: New () ;}
 extern "C" void vtkTypeUInt64Array_destructor (vtkTypeUInt64Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeUInt64Array_get_ptr (vtkTypeUInt64Array * sself) {return sself ;}
 extern "C" vtkTypeUInt8Array * vtkTypeUInt8Array_new () {return vtkTypeUInt8Array :: New () ;}
 extern "C" void vtkTypeUInt8Array_destructor (vtkTypeUInt8Array * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTypeUInt8Array_get_ptr (vtkTypeUInt8Array * sself) {return sself ;}
 extern "C" vtkUnicodeStringArray * vtkUnicodeStringArray_new () {return vtkUnicodeStringArray :: New () ;}
 extern "C" void vtkUnicodeStringArray_destructor (vtkUnicodeStringArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnicodeStringArray_get_ptr (vtkUnicodeStringArray * sself) {return sself ;}
 extern "C" int vtk_unicode_string_array_allocate(vtkUnicodeStringArray* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_unicode_string_array_initialize(vtkUnicodeStringArray* sself) { sself->Initialize(); }
 extern "C" int vtk_unicode_string_array_get_data_type(vtkUnicodeStringArray* sself) { return sself->GetDataType(); }
@@ -869,7 +803,6 @@ extern "C" void vtk_unicode_string_array_set_utf_8_value(vtkUnicodeStringArray* 
 extern "C" const char* vtk_unicode_string_array_get_utf_8_value(vtkUnicodeStringArray* sself, long long i) { return sself->GetUTF8Value(i); }
 extern "C" vtkUnsignedCharArray * vtkUnsignedCharArray_new () {return vtkUnsignedCharArray :: New () ;}
 extern "C" void vtkUnsignedCharArray_destructor (vtkUnsignedCharArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnsignedCharArray_get_ptr (vtkUnsignedCharArray * sself) {return sself ;}
 extern "C" int vtk_unsigned_char_array_get_data_type(vtkUnsignedCharArray* sself) { return sself->GetDataType(); }
 extern "C" unsigned char vtk_unsigned_char_array_get_value(vtkUnsignedCharArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_unsigned_char_array_set_value(vtkUnsignedCharArray* sself, long long id, unsigned char value) { sself->SetValue(id, value); }
@@ -880,7 +813,6 @@ extern "C" unsigned char vtk_unsigned_char_array_get_data_type_value_min(vtkUnsi
 extern "C" unsigned char vtk_unsigned_char_array_get_data_type_value_max(vtkUnsignedCharArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkUnsignedIntArray * vtkUnsignedIntArray_new () {return vtkUnsignedIntArray :: New () ;}
 extern "C" void vtkUnsignedIntArray_destructor (vtkUnsignedIntArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnsignedIntArray_get_ptr (vtkUnsignedIntArray * sself) {return sself ;}
 extern "C" int vtk_unsigned_int_array_get_data_type(vtkUnsignedIntArray* sself) { return sself->GetDataType(); }
 extern "C" unsigned int vtk_unsigned_int_array_get_value(vtkUnsignedIntArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_unsigned_int_array_set_value(vtkUnsignedIntArray* sself, long long id, unsigned int value) { sself->SetValue(id, value); }
@@ -891,7 +823,6 @@ extern "C" unsigned int vtk_unsigned_int_array_get_data_type_value_min(vtkUnsign
 extern "C" unsigned int vtk_unsigned_int_array_get_data_type_value_max(vtkUnsignedIntArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkUnsignedLongArray * vtkUnsignedLongArray_new () {return vtkUnsignedLongArray :: New () ;}
 extern "C" void vtkUnsignedLongArray_destructor (vtkUnsignedLongArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnsignedLongArray_get_ptr (vtkUnsignedLongArray * sself) {return sself ;}
 extern "C" int vtk_unsigned_long_array_get_data_type(vtkUnsignedLongArray* sself) { return sself->GetDataType(); }
 extern "C" unsigned long vtk_unsigned_long_array_get_value(vtkUnsignedLongArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_unsigned_long_array_set_value(vtkUnsignedLongArray* sself, long long id, unsigned long value) { sself->SetValue(id, value); }
@@ -902,7 +833,6 @@ extern "C" unsigned long vtk_unsigned_long_array_get_data_type_value_min(vtkUnsi
 extern "C" unsigned long vtk_unsigned_long_array_get_data_type_value_max(vtkUnsignedLongArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkUnsignedLongLongArray * vtkUnsignedLongLongArray_new () {return vtkUnsignedLongLongArray :: New () ;}
 extern "C" void vtkUnsignedLongLongArray_destructor (vtkUnsignedLongLongArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnsignedLongLongArray_get_ptr (vtkUnsignedLongLongArray * sself) {return sself ;}
 extern "C" int vtk_unsigned_long_long_array_get_data_type(vtkUnsignedLongLongArray* sself) { return sself->GetDataType(); }
 extern "C" unsigned long long vtk_unsigned_long_long_array_get_value(vtkUnsignedLongLongArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_unsigned_long_long_array_set_value(vtkUnsignedLongLongArray* sself, long long id, unsigned long long value) { sself->SetValue(id, value); }
@@ -913,7 +843,6 @@ extern "C" unsigned long long vtk_unsigned_long_long_array_get_data_type_value_m
 extern "C" unsigned long long vtk_unsigned_long_long_array_get_data_type_value_max(vtkUnsignedLongLongArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkUnsignedShortArray * vtkUnsignedShortArray_new () {return vtkUnsignedShortArray :: New () ;}
 extern "C" void vtkUnsignedShortArray_destructor (vtkUnsignedShortArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnsignedShortArray_get_ptr (vtkUnsignedShortArray * sself) {return sself ;}
 extern "C" int vtk_unsigned_short_array_get_data_type(vtkUnsignedShortArray* sself) { return sself->GetDataType(); }
 extern "C" unsigned short vtk_unsigned_short_array_get_value(vtkUnsignedShortArray* sself, long long id) { return sself->GetValue(id); }
 extern "C" void vtk_unsigned_short_array_set_value(vtkUnsignedShortArray* sself, long long id, unsigned short value) { sself->SetValue(id, value); }
@@ -924,7 +853,6 @@ extern "C" unsigned short vtk_unsigned_short_array_get_data_type_value_min(vtkUn
 extern "C" unsigned short vtk_unsigned_short_array_get_data_type_value_max(vtkUnsignedShortArray* sself) { return sself->GetDataTypeValueMax(); }
 extern "C" vtkVariantArray * vtkVariantArray_new () {return vtkVariantArray :: New () ;}
 extern "C" void vtkVariantArray_destructor (vtkVariantArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkVariantArray_get_ptr (vtkVariantArray * sself) {return sself ;}
 extern "C" int vtk_variant_array_allocate(vtkVariantArray* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_variant_array_initialize(vtkVariantArray* sself) { sself->Initialize(); }
 extern "C" int vtk_variant_array_get_data_type(vtkVariantArray* sself) { return sself->GetDataType(); }
@@ -943,7 +871,6 @@ extern "C" void vtk_variant_array_data_element_changed(vtkVariantArray* sself, l
 extern "C" void vtk_variant_array_clear_lookup(vtkVariantArray* sself) { sself->ClearLookup(); }
 extern "C" vtkVersion * vtkVersion_new () {return vtkVersion :: New () ;}
 extern "C" void vtkVersion_destructor (vtkVersion * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkVersion_get_ptr (vtkVersion * sself) {return sself ;}
 extern "C" const char* vtk_version_get_vtk_version(vtkVersion* sself) { return sself->GetVTKVersion(); }
 extern "C" const char* vtk_version_get_vtk_version_full(vtkVersion* sself) { return sself->GetVTKVersionFull(); }
 extern "C" int vtk_version_get_vtk_major_version(vtkVersion* sself) { return sself->GetVTKMajorVersion(); }
@@ -952,7 +879,6 @@ extern "C" int vtk_version_get_vtk_build_version(vtkVersion* sself) { return sse
 extern "C" const char* vtk_version_get_vtk_source_version(vtkVersion* sself) { return sself->GetVTKSourceVersion(); }
 extern "C" vtkVoidArray * vtkVoidArray_new () {return vtkVoidArray :: New () ;}
 extern "C" void vtkVoidArray_destructor (vtkVoidArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkVoidArray_get_ptr (vtkVoidArray * sself) {return sself ;}
 extern "C" int vtk_void_array_allocate(vtkVoidArray* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_void_array_initialize(vtkVoidArray* sself) { sself->Initialize(); }
 extern "C" int vtk_void_array_get_data_type(vtkVoidArray* sself) { return sself->GetDataType(); }
@@ -967,9 +893,7 @@ extern "C" void vtk_void_array_reset(vtkVoidArray* sself) { sself->Reset(); }
 extern "C" void vtk_void_array_squeeze(vtkVoidArray* sself) { sself->Squeeze(); }
 extern "C" vtkWeakReference * vtkWeakReference_new () {return vtkWeakReference :: New () ;}
 extern "C" void vtkWeakReference_destructor (vtkWeakReference * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkWeakReference_get_ptr (vtkWeakReference * sself) {return sself ;}
 extern "C" vtkXMLFileOutputWindow * vtkXMLFileOutputWindow_new () {return vtkXMLFileOutputWindow :: New () ;}
 extern "C" void vtkXMLFileOutputWindow_destructor (vtkXMLFileOutputWindow * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkXMLFileOutputWindow_get_ptr (vtkXMLFileOutputWindow * sself) {return sself ;}
 extern "C" void vtk_xml_file_output_window_display_text(vtkXMLFileOutputWindow* sself, const char* p0) { sself->DisplayText(p0); }
 extern "C" void vtk_xml_file_output_window_display_tag(vtkXMLFileOutputWindow* sself, const char* p0) { sself->DisplayTag(p0); }

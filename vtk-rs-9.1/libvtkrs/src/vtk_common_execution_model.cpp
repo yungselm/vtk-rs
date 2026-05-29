@@ -79,7 +79,6 @@
 // Implement declared functions
 extern "C" vtkAlgorithm * vtkAlgorithm_new () {return vtkAlgorithm :: New () ;}
 extern "C" void vtkAlgorithm_destructor (vtkAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAlgorithm_get_ptr (vtkAlgorithm * sself) {return sself ;}
 extern "C" int vtk_algorithm_has_executive(vtkAlgorithm* sself) { return sself->HasExecutive(); }
 extern "C" int vtk_algorithm_get_number_of_input_ports(vtkAlgorithm* sself) { return sself->GetNumberOfInputPorts(); }
 extern "C" int vtk_algorithm_get_number_of_output_ports(vtkAlgorithm* sself) { return sself->GetNumberOfOutputPorts(); }
@@ -115,38 +114,28 @@ extern "C" int vtk_algorithm_get_update_number_of_pieces(vtkAlgorithm* sself) { 
 extern "C" int vtk_algorithm_get_update_ghost_level(vtkAlgorithm* sself) { return sself->GetUpdateGhostLevel(); }
 extern "C" vtkAlgorithmOutput * vtkAlgorithmOutput_new () {return vtkAlgorithmOutput :: New () ;}
 extern "C" void vtkAlgorithmOutput_destructor (vtkAlgorithmOutput * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAlgorithmOutput_get_ptr (vtkAlgorithmOutput * sself) {return sself ;}
 extern "C" void vtk_algorithm_output_set_index(vtkAlgorithmOutput* sself, int index) { sself->SetIndex(index); }
 extern "C" int vtk_algorithm_output_get_index(vtkAlgorithmOutput* sself) { return sself->GetIndex(); }
 extern "C" vtkAnnotationLayersAlgorithm * vtkAnnotationLayersAlgorithm_new () {return vtkAnnotationLayersAlgorithm :: New () ;}
 extern "C" void vtkAnnotationLayersAlgorithm_destructor (vtkAnnotationLayersAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAnnotationLayersAlgorithm_get_ptr (vtkAnnotationLayersAlgorithm * sself) {return sself ;}
 extern "C" vtkArrayDataAlgorithm * vtkArrayDataAlgorithm_new () {return vtkArrayDataAlgorithm :: New () ;}
 extern "C" void vtkArrayDataAlgorithm_destructor (vtkArrayDataAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkArrayDataAlgorithm_get_ptr (vtkArrayDataAlgorithm * sself) {return sself ;}
 extern "C" vtkCachedStreamingDemandDrivenPipeline * vtkCachedStreamingDemandDrivenPipeline_new () {return vtkCachedStreamingDemandDrivenPipeline :: New () ;}
 extern "C" void vtkCachedStreamingDemandDrivenPipeline_destructor (vtkCachedStreamingDemandDrivenPipeline * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCachedStreamingDemandDrivenPipeline_get_ptr (vtkCachedStreamingDemandDrivenPipeline * sself) {return sself ;}
 extern "C" void vtk_cached_streaming_demand_driven_pipeline_set_cache_size(vtkCachedStreamingDemandDrivenPipeline* sself, int size) { sself->SetCacheSize(size); }
 extern "C" int vtk_cached_streaming_demand_driven_pipeline_get_cache_size(vtkCachedStreamingDemandDrivenPipeline* sself) { return sself->GetCacheSize(); }
 extern "C" vtkCastToConcrete * vtkCastToConcrete_new () {return vtkCastToConcrete :: New () ;}
 extern "C" void vtkCastToConcrete_destructor (vtkCastToConcrete * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCastToConcrete_get_ptr (vtkCastToConcrete * sself) {return sself ;}
 extern "C" vtkCompositeDataPipeline * vtkCompositeDataPipeline_new () {return vtkCompositeDataPipeline :: New () ;}
 extern "C" void vtkCompositeDataPipeline_destructor (vtkCompositeDataPipeline * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCompositeDataPipeline_get_ptr (vtkCompositeDataPipeline * sself) {return sself ;}
 extern "C" vtkCompositeDataSetAlgorithm * vtkCompositeDataSetAlgorithm_new () {return vtkCompositeDataSetAlgorithm :: New () ;}
 extern "C" void vtkCompositeDataSetAlgorithm_destructor (vtkCompositeDataSetAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCompositeDataSetAlgorithm_get_ptr (vtkCompositeDataSetAlgorithm * sself) {return sself ;}
 extern "C" vtkDataObjectAlgorithm * vtkDataObjectAlgorithm_new () {return vtkDataObjectAlgorithm :: New () ;}
 extern "C" void vtkDataObjectAlgorithm_destructor (vtkDataObjectAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataObjectAlgorithm_get_ptr (vtkDataObjectAlgorithm * sself) {return sself ;}
 extern "C" vtkDataSetAlgorithm * vtkDataSetAlgorithm_new () {return vtkDataSetAlgorithm :: New () ;}
 extern "C" void vtkDataSetAlgorithm_destructor (vtkDataSetAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataSetAlgorithm_get_ptr (vtkDataSetAlgorithm * sself) {return sself ;}
 extern "C" vtkDemandDrivenPipeline * vtkDemandDrivenPipeline_new () {return vtkDemandDrivenPipeline :: New () ;}
 extern "C" void vtkDemandDrivenPipeline_destructor (vtkDemandDrivenPipeline * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDemandDrivenPipeline_get_ptr (vtkDemandDrivenPipeline * sself) {return sself ;}
 extern "C" unsigned long vtk_demand_driven_pipeline_get_pipeline_m_time(vtkDemandDrivenPipeline* sself) { return sself->GetPipelineMTime(); }
 extern "C" int vtk_demand_driven_pipeline_set_release_data_flag(vtkDemandDrivenPipeline* sself, int port, int n) { return sself->SetReleaseDataFlag(port, n); }
 extern "C" int vtk_demand_driven_pipeline_get_release_data_flag(vtkDemandDrivenPipeline* sself, int port) { return sself->GetReleaseDataFlag(port); }
@@ -155,20 +144,16 @@ extern "C" int vtk_demand_driven_pipeline_update_data_object(vtkDemandDrivenPipe
 extern "C" int vtk_demand_driven_pipeline_update_data(vtkDemandDrivenPipeline* sself, int outputPort) { return sself->UpdateData(outputPort); }
 extern "C" vtkDirectedGraphAlgorithm * vtkDirectedGraphAlgorithm_new () {return vtkDirectedGraphAlgorithm :: New () ;}
 extern "C" void vtkDirectedGraphAlgorithm_destructor (vtkDirectedGraphAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDirectedGraphAlgorithm_get_ptr (vtkDirectedGraphAlgorithm * sself) {return sself ;}
 extern "C" vtkEnsembleSource * vtkEnsembleSource_new () {return vtkEnsembleSource :: New () ;}
 extern "C" void vtkEnsembleSource_destructor (vtkEnsembleSource * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkEnsembleSource_get_ptr (vtkEnsembleSource * sself) {return sself ;}
 extern "C" void vtk_ensemble_source_remove_all_members(vtkEnsembleSource* sself) { sself->RemoveAllMembers(); }
 extern "C" unsigned int vtk_ensemble_source_get_number_of_members(vtkEnsembleSource* sself) { return sself->GetNumberOfMembers(); }
 extern "C" void vtk_ensemble_source_set_current_member(vtkEnsembleSource* sself, unsigned int _arg) { sself->SetCurrentMember(_arg); }
 extern "C" unsigned int vtk_ensemble_source_get_current_member(vtkEnsembleSource* sself) { return sself->GetCurrentMember(); }
 extern "C" vtkExplicitStructuredGridAlgorithm * vtkExplicitStructuredGridAlgorithm_new () {return vtkExplicitStructuredGridAlgorithm :: New () ;}
 extern "C" void vtkExplicitStructuredGridAlgorithm_destructor (vtkExplicitStructuredGridAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkExplicitStructuredGridAlgorithm_get_ptr (vtkExplicitStructuredGridAlgorithm * sself) {return sself ;}
 extern "C" vtkExtentRCBPartitioner * vtkExtentRCBPartitioner_new () {return vtkExtentRCBPartitioner :: New () ;}
 extern "C" void vtkExtentRCBPartitioner_destructor (vtkExtentRCBPartitioner * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkExtentRCBPartitioner_get_ptr (vtkExtentRCBPartitioner * sself) {return sself ;}
 extern "C" void vtk_extent_rcb_partitioner_set_number_of_partitions(vtkExtentRCBPartitioner* sself, const int N) { sself->SetNumberOfPartitions(N); }
 extern "C" void vtk_extent_rcb_partitioner_set_global_extent(vtkExtentRCBPartitioner* sself, int imin, int imax, int jmin, int jmax, int kmin, int kmax) { sself->SetGlobalExtent(imin, imax, jmin, jmax, kmin, kmax); }
 extern "C" void vtk_extent_rcb_partitioner_set_duplicate_nodes(vtkExtentRCBPartitioner* sself, int _arg) { sself->SetDuplicateNodes(_arg); }
@@ -181,7 +166,6 @@ extern "C" int vtk_extent_rcb_partitioner_get_num_extents(vtkExtentRCBPartitione
 extern "C" void vtk_extent_rcb_partitioner_partition(vtkExtentRCBPartitioner* sself) { sself->Partition(); }
 extern "C" vtkExtentSplitter * vtkExtentSplitter_new () {return vtkExtentSplitter :: New () ;}
 extern "C" void vtkExtentSplitter_destructor (vtkExtentSplitter * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkExtentSplitter_get_ptr (vtkExtentSplitter * sself) {return sself ;}
 extern "C" void vtk_extent_splitter_add_extent_source(vtkExtentSplitter* sself, int id, int priority, int x0, int x1, int y0, int y1, int z0, int z1) { sself->AddExtentSource(id, priority, x0, x1, y0, y1, z0, z1); }
 extern "C" void vtk_extent_splitter_remove_extent_source(vtkExtentSplitter* sself, int id) { sself->RemoveExtentSource(id); }
 extern "C" void vtk_extent_splitter_remove_all_extent_sources(vtkExtentSplitter* sself) { sself->RemoveAllExtentSources(); }
@@ -195,7 +179,6 @@ extern "C" void vtk_extent_splitter_point_mode_on(vtkExtentSplitter* sself) { ss
 extern "C" void vtk_extent_splitter_point_mode_off(vtkExtentSplitter* sself) { sself->PointModeOff(); }
 extern "C" vtkExtentTranslator * vtkExtentTranslator_new () {return vtkExtentTranslator :: New () ;}
 extern "C" void vtkExtentTranslator_destructor (vtkExtentTranslator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkExtentTranslator_get_ptr (vtkExtentTranslator * sself) {return sself ;}
 extern "C" void vtk_extent_translator_set_whole_extent(vtkExtentTranslator* sself, int _arg1, int _arg2, int _arg3, int _arg4, int _arg5, int _arg6) { sself->SetWholeExtent(_arg1, _arg2, _arg3, _arg4, _arg5, _arg6); }
 extern "C" void vtk_extent_translator_set_extent(vtkExtentTranslator* sself, int _arg1, int _arg2, int _arg3, int _arg4, int _arg5, int _arg6) { sself->SetExtent(_arg1, _arg2, _arg3, _arg4, _arg5, _arg6); }
 extern "C" void vtk_extent_translator_set_piece(vtkExtentTranslator* sself, int _arg) { sself->SetPiece(_arg); }
@@ -213,40 +196,28 @@ extern "C" void vtk_extent_translator_set_split_mode_to_z_slab(vtkExtentTranslat
 extern "C" int vtk_extent_translator_get_split_mode(vtkExtentTranslator* sself) { return sself->GetSplitMode(); }
 extern "C" vtkGraphAlgorithm * vtkGraphAlgorithm_new () {return vtkGraphAlgorithm :: New () ;}
 extern "C" void vtkGraphAlgorithm_destructor (vtkGraphAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGraphAlgorithm_get_ptr (vtkGraphAlgorithm * sself) {return sself ;}
 extern "C" vtkHierarchicalBoxDataSetAlgorithm * vtkHierarchicalBoxDataSetAlgorithm_new () {return vtkHierarchicalBoxDataSetAlgorithm :: New () ;}
 extern "C" void vtkHierarchicalBoxDataSetAlgorithm_destructor (vtkHierarchicalBoxDataSetAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHierarchicalBoxDataSetAlgorithm_get_ptr (vtkHierarchicalBoxDataSetAlgorithm * sself) {return sself ;}
 extern "C" vtkImageToStructuredGrid * vtkImageToStructuredGrid_new () {return vtkImageToStructuredGrid :: New () ;}
 extern "C" void vtkImageToStructuredGrid_destructor (vtkImageToStructuredGrid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImageToStructuredGrid_get_ptr (vtkImageToStructuredGrid * sself) {return sself ;}
 extern "C" vtkImageToStructuredPoints * vtkImageToStructuredPoints_new () {return vtkImageToStructuredPoints :: New () ;}
 extern "C" void vtkImageToStructuredPoints_destructor (vtkImageToStructuredPoints * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImageToStructuredPoints_get_ptr (vtkImageToStructuredPoints * sself) {return sself ;}
 extern "C" vtkMoleculeAlgorithm * vtkMoleculeAlgorithm_new () {return vtkMoleculeAlgorithm :: New () ;}
 extern "C" void vtkMoleculeAlgorithm_destructor (vtkMoleculeAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMoleculeAlgorithm_get_ptr (vtkMoleculeAlgorithm * sself) {return sself ;}
 extern "C" vtkMultiBlockDataSetAlgorithm * vtkMultiBlockDataSetAlgorithm_new () {return vtkMultiBlockDataSetAlgorithm :: New () ;}
 extern "C" void vtkMultiBlockDataSetAlgorithm_destructor (vtkMultiBlockDataSetAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMultiBlockDataSetAlgorithm_get_ptr (vtkMultiBlockDataSetAlgorithm * sself) {return sself ;}
 extern "C" vtkMultiTimeStepAlgorithm * vtkMultiTimeStepAlgorithm_new () {return vtkMultiTimeStepAlgorithm :: New () ;}
 extern "C" void vtkMultiTimeStepAlgorithm_destructor (vtkMultiTimeStepAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMultiTimeStepAlgorithm_get_ptr (vtkMultiTimeStepAlgorithm * sself) {return sself ;}
 extern "C" vtkNonOverlappingAMRAlgorithm * vtkNonOverlappingAMRAlgorithm_new () {return vtkNonOverlappingAMRAlgorithm :: New () ;}
 extern "C" void vtkNonOverlappingAMRAlgorithm_destructor (vtkNonOverlappingAMRAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkNonOverlappingAMRAlgorithm_get_ptr (vtkNonOverlappingAMRAlgorithm * sself) {return sself ;}
 extern "C" vtkOverlappingAMRAlgorithm * vtkOverlappingAMRAlgorithm_new () {return vtkOverlappingAMRAlgorithm :: New () ;}
 extern "C" void vtkOverlappingAMRAlgorithm_destructor (vtkOverlappingAMRAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOverlappingAMRAlgorithm_get_ptr (vtkOverlappingAMRAlgorithm * sself) {return sself ;}
 extern "C" vtkPassInputTypeAlgorithm * vtkPassInputTypeAlgorithm_new () {return vtkPassInputTypeAlgorithm :: New () ;}
 extern "C" void vtkPassInputTypeAlgorithm_destructor (vtkPassInputTypeAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPassInputTypeAlgorithm_get_ptr (vtkPassInputTypeAlgorithm * sself) {return sself ;}
 extern "C" vtkPiecewiseFunctionAlgorithm * vtkPiecewiseFunctionAlgorithm_new () {return vtkPiecewiseFunctionAlgorithm :: New () ;}
 extern "C" void vtkPiecewiseFunctionAlgorithm_destructor (vtkPiecewiseFunctionAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPiecewiseFunctionAlgorithm_get_ptr (vtkPiecewiseFunctionAlgorithm * sself) {return sself ;}
 extern "C" vtkPiecewiseFunctionShiftScale * vtkPiecewiseFunctionShiftScale_new () {return vtkPiecewiseFunctionShiftScale :: New () ;}
 extern "C" void vtkPiecewiseFunctionShiftScale_destructor (vtkPiecewiseFunctionShiftScale * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPiecewiseFunctionShiftScale_get_ptr (vtkPiecewiseFunctionShiftScale * sself) {return sself ;}
 extern "C" void vtk_piecewise_function_shift_scale_set_position_shift(vtkPiecewiseFunctionShiftScale* sself, double _arg) { sself->SetPositionShift(_arg); }
 extern "C" void vtk_piecewise_function_shift_scale_set_position_scale(vtkPiecewiseFunctionShiftScale* sself, double _arg) { sself->SetPositionScale(_arg); }
 extern "C" void vtk_piecewise_function_shift_scale_set_value_shift(vtkPiecewiseFunctionShiftScale* sself, double _arg) { sself->SetValueShift(_arg); }
@@ -257,31 +228,23 @@ extern "C" double vtk_piecewise_function_shift_scale_get_value_shift(vtkPiecewis
 extern "C" double vtk_piecewise_function_shift_scale_get_value_scale(vtkPiecewiseFunctionShiftScale* sself) { return sself->GetValueScale(); }
 extern "C" vtkPointSetAlgorithm * vtkPointSetAlgorithm_new () {return vtkPointSetAlgorithm :: New () ;}
 extern "C" void vtkPointSetAlgorithm_destructor (vtkPointSetAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPointSetAlgorithm_get_ptr (vtkPointSetAlgorithm * sself) {return sself ;}
 extern "C" vtkPolyDataAlgorithm * vtkPolyDataAlgorithm_new () {return vtkPolyDataAlgorithm :: New () ;}
 extern "C" void vtkPolyDataAlgorithm_destructor (vtkPolyDataAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPolyDataAlgorithm_get_ptr (vtkPolyDataAlgorithm * sself) {return sself ;}
 extern "C" vtkProgressObserver * vtkProgressObserver_new () {return vtkProgressObserver :: New () ;}
 extern "C" void vtkProgressObserver_destructor (vtkProgressObserver * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkProgressObserver_get_ptr (vtkProgressObserver * sself) {return sself ;}
 extern "C" void vtk_progress_observer_update_progress(vtkProgressObserver* sself, double amount) { sself->UpdateProgress(amount); }
 extern "C" double vtk_progress_observer_get_progress(vtkProgressObserver* sself) { return sself->GetProgress(); }
 extern "C" vtkReaderExecutive * vtkReaderExecutive_new () {return vtkReaderExecutive :: New () ;}
 extern "C" void vtkReaderExecutive_destructor (vtkReaderExecutive * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkReaderExecutive_get_ptr (vtkReaderExecutive * sself) {return sself ;}
 extern "C" vtkRectilinearGridAlgorithm * vtkRectilinearGridAlgorithm_new () {return vtkRectilinearGridAlgorithm :: New () ;}
 extern "C" void vtkRectilinearGridAlgorithm_destructor (vtkRectilinearGridAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkRectilinearGridAlgorithm_get_ptr (vtkRectilinearGridAlgorithm * sself) {return sself ;}
 extern "C" vtkSMPProgressObserver * vtkSMPProgressObserver_new () {return vtkSMPProgressObserver :: New () ;}
 extern "C" void vtkSMPProgressObserver_destructor (vtkSMPProgressObserver * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSMPProgressObserver_get_ptr (vtkSMPProgressObserver * sself) {return sself ;}
 extern "C" void vtk_smp_progress_observer_update_progress(vtkSMPProgressObserver* sself, double progress) { sself->UpdateProgress(progress); }
 extern "C" vtkSelectionAlgorithm * vtkSelectionAlgorithm_new () {return vtkSelectionAlgorithm :: New () ;}
 extern "C" void vtkSelectionAlgorithm_destructor (vtkSelectionAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSelectionAlgorithm_get_ptr (vtkSelectionAlgorithm * sself) {return sself ;}
 extern "C" vtkSimpleScalarTree * vtkSimpleScalarTree_new () {return vtkSimpleScalarTree :: New () ;}
 extern "C" void vtkSimpleScalarTree_destructor (vtkSimpleScalarTree * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSimpleScalarTree_get_ptr (vtkSimpleScalarTree * sself) {return sself ;}
 extern "C" void vtk_simple_scalar_tree_set_branching_factor(vtkSimpleScalarTree* sself, int _arg) { sself->SetBranchingFactor(_arg); }
 extern "C" int vtk_simple_scalar_tree_get_branching_factor_min_value(vtkSimpleScalarTree* sself) { return sself->GetBranchingFactorMinValue(); }
 extern "C" int vtk_simple_scalar_tree_get_branching_factor_max_value(vtkSimpleScalarTree* sself) { return sself->GetBranchingFactorMaxValue(); }
@@ -297,7 +260,6 @@ extern "C" void vtk_simple_scalar_tree_init_traversal(vtkSimpleScalarTree* sself
 extern "C" long long vtk_simple_scalar_tree_get_number_of_cell_batches(vtkSimpleScalarTree* sself, double scalarValue) { return sself->GetNumberOfCellBatches(scalarValue); }
 extern "C" vtkSpanSpace * vtkSpanSpace_new () {return vtkSpanSpace :: New () ;}
 extern "C" void vtkSpanSpace_destructor (vtkSpanSpace * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSpanSpace_get_ptr (vtkSpanSpace * sself) {return sself ;}
 extern "C" void vtk_span_space_set_scalar_range(vtkSpanSpace* sself, double _arg1, double _arg2) { sself->SetScalarRange(_arg1, _arg2); }
 extern "C" void vtk_span_space_set_compute_scalar_range(vtkSpanSpace* sself, int _arg) { sself->SetComputeScalarRange(_arg); }
 extern "C" int vtk_span_space_get_compute_scalar_range(vtkSpanSpace* sself) { return sself->GetComputeScalarRange(); }
@@ -325,7 +287,6 @@ extern "C" long long vtk_span_space_get_batch_size_max_value(vtkSpanSpace* sself
 extern "C" long long vtk_span_space_get_batch_size(vtkSpanSpace* sself) { return sself->GetBatchSize(); }
 extern "C" vtkSphereTree * vtkSphereTree_new () {return vtkSphereTree :: New () ;}
 extern "C" void vtkSphereTree_destructor (vtkSphereTree * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSphereTree_get_ptr (vtkSphereTree * sself) {return sself ;}
 extern "C" void vtk_sphere_tree_build(vtkSphereTree* sself) { sself->Build(); }
 extern "C" void vtk_sphere_tree_set_build_hierarchy(vtkSphereTree* sself, bool _arg) { sself->SetBuildHierarchy(_arg); }
 extern "C" bool vtk_sphere_tree_get_build_hierarchy(vtkSphereTree* sself) { return sself->GetBuildHierarchy(); }
@@ -342,7 +303,6 @@ extern "C" int vtk_sphere_tree_get_max_level(vtkSphereTree* sself) { return ssel
 extern "C" int vtk_sphere_tree_get_number_of_levels(vtkSphereTree* sself) { return sself->GetNumberOfLevels(); }
 extern "C" vtkStreamingDemandDrivenPipeline * vtkStreamingDemandDrivenPipeline_new () {return vtkStreamingDemandDrivenPipeline :: New () ;}
 extern "C" void vtkStreamingDemandDrivenPipeline_destructor (vtkStreamingDemandDrivenPipeline * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStreamingDemandDrivenPipeline_get_ptr (vtkStreamingDemandDrivenPipeline * sself) {return sself ;}
 extern "C" int vtk_streaming_demand_driven_pipeline_update(vtkStreamingDemandDrivenPipeline* sself) { return sself->Update(); }
 extern "C" int vtk_streaming_demand_driven_pipeline_update_whole_extent(vtkStreamingDemandDrivenPipeline* sself) { return sself->UpdateWholeExtent(); }
 extern "C" int vtk_streaming_demand_driven_pipeline_propagate_update_extent(vtkStreamingDemandDrivenPipeline* sself, int outputPort) { return sself->PropagateUpdateExtent(outputPort); }
@@ -352,33 +312,24 @@ extern "C" int vtk_streaming_demand_driven_pipeline_set_request_exact_extent(vtk
 extern "C" int vtk_streaming_demand_driven_pipeline_get_request_exact_extent(vtkStreamingDemandDrivenPipeline* sself, int port) { return sself->GetRequestExactExtent(port); }
 extern "C" vtkStructuredGridAlgorithm * vtkStructuredGridAlgorithm_new () {return vtkStructuredGridAlgorithm :: New () ;}
 extern "C" void vtkStructuredGridAlgorithm_destructor (vtkStructuredGridAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStructuredGridAlgorithm_get_ptr (vtkStructuredGridAlgorithm * sself) {return sself ;}
 extern "C" vtkTableAlgorithm * vtkTableAlgorithm_new () {return vtkTableAlgorithm :: New () ;}
 extern "C" void vtkTableAlgorithm_destructor (vtkTableAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTableAlgorithm_get_ptr (vtkTableAlgorithm * sself) {return sself ;}
 extern "C" vtkThreadedCompositeDataPipeline * vtkThreadedCompositeDataPipeline_new () {return vtkThreadedCompositeDataPipeline :: New () ;}
 extern "C" void vtkThreadedCompositeDataPipeline_destructor (vtkThreadedCompositeDataPipeline * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkThreadedCompositeDataPipeline_get_ptr (vtkThreadedCompositeDataPipeline * sself) {return sself ;}
 extern "C" vtkTreeAlgorithm * vtkTreeAlgorithm_new () {return vtkTreeAlgorithm :: New () ;}
 extern "C" void vtkTreeAlgorithm_destructor (vtkTreeAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTreeAlgorithm_get_ptr (vtkTreeAlgorithm * sself) {return sself ;}
 extern "C" vtkTrivialConsumer * vtkTrivialConsumer_new () {return vtkTrivialConsumer :: New () ;}
 extern "C" void vtkTrivialConsumer_destructor (vtkTrivialConsumer * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTrivialConsumer_get_ptr (vtkTrivialConsumer * sself) {return sself ;}
 extern "C" vtkTrivialProducer * vtkTrivialProducer_new () {return vtkTrivialProducer :: New () ;}
 extern "C" void vtkTrivialProducer_destructor (vtkTrivialProducer * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTrivialProducer_get_ptr (vtkTrivialProducer * sself) {return sself ;}
 extern "C" unsigned long vtk_trivial_producer_get_m_time(vtkTrivialProducer* sself) { return sself->GetMTime(); }
 extern "C" void vtk_trivial_producer_set_whole_extent(vtkTrivialProducer* sself, int _arg1, int _arg2, int _arg3, int _arg4, int _arg5, int _arg6) { sself->SetWholeExtent(_arg1, _arg2, _arg3, _arg4, _arg5, _arg6); }
 extern "C" vtkUndirectedGraphAlgorithm * vtkUndirectedGraphAlgorithm_new () {return vtkUndirectedGraphAlgorithm :: New () ;}
 extern "C" void vtkUndirectedGraphAlgorithm_destructor (vtkUndirectedGraphAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUndirectedGraphAlgorithm_get_ptr (vtkUndirectedGraphAlgorithm * sself) {return sself ;}
 extern "C" vtkUniformGridAMRAlgorithm * vtkUniformGridAMRAlgorithm_new () {return vtkUniformGridAMRAlgorithm :: New () ;}
 extern "C" void vtkUniformGridAMRAlgorithm_destructor (vtkUniformGridAMRAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUniformGridAMRAlgorithm_get_ptr (vtkUniformGridAMRAlgorithm * sself) {return sself ;}
 extern "C" vtkUniformGridPartitioner * vtkUniformGridPartitioner_new () {return vtkUniformGridPartitioner :: New () ;}
 extern "C" void vtkUniformGridPartitioner_destructor (vtkUniformGridPartitioner * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUniformGridPartitioner_get_ptr (vtkUniformGridPartitioner * sself) {return sself ;}
 extern "C" int vtk_uniform_grid_partitioner_get_number_of_partitions(vtkUniformGridPartitioner* sself) { return sself->GetNumberOfPartitions(); }
 extern "C" void vtk_uniform_grid_partitioner_set_number_of_partitions(vtkUniformGridPartitioner* sself, int _arg) { sself->SetNumberOfPartitions(_arg); }
 extern "C" int vtk_uniform_grid_partitioner_get_number_of_ghost_layers(vtkUniformGridPartitioner* sself) { return sself->GetNumberOfGhostLayers(); }
@@ -389,7 +340,5 @@ extern "C" void vtk_uniform_grid_partitioner_duplicate_nodes_on(vtkUniformGridPa
 extern "C" void vtk_uniform_grid_partitioner_duplicate_nodes_off(vtkUniformGridPartitioner* sself) { sself->DuplicateNodesOff(); }
 extern "C" vtkUnstructuredGridAlgorithm * vtkUnstructuredGridAlgorithm_new () {return vtkUnstructuredGridAlgorithm :: New () ;}
 extern "C" void vtkUnstructuredGridAlgorithm_destructor (vtkUnstructuredGridAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnstructuredGridAlgorithm_get_ptr (vtkUnstructuredGridAlgorithm * sself) {return sself ;}
 extern "C" vtkUnstructuredGridBaseAlgorithm * vtkUnstructuredGridBaseAlgorithm_new () {return vtkUnstructuredGridBaseAlgorithm :: New () ;}
 extern "C" void vtkUnstructuredGridBaseAlgorithm_destructor (vtkUnstructuredGridBaseAlgorithm * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnstructuredGridBaseAlgorithm_get_ptr (vtkUnstructuredGridBaseAlgorithm * sself) {return sself ;}

@@ -29,10 +29,8 @@
 // Implement declared functions
 extern "C" vtkCylindricalTransform * vtkCylindricalTransform_new () {return vtkCylindricalTransform :: New () ;}
 extern "C" void vtkCylindricalTransform_destructor (vtkCylindricalTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCylindricalTransform_get_ptr (vtkCylindricalTransform * sself) {return sself ;}
 extern "C" vtkGeneralTransform * vtkGeneralTransform_new () {return vtkGeneralTransform :: New () ;}
 extern "C" void vtkGeneralTransform_destructor (vtkGeneralTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGeneralTransform_get_ptr (vtkGeneralTransform * sself) {return sself ;}
 extern "C" void vtk_general_transform_identity(vtkGeneralTransform* sself) { sself->Identity(); }
 extern "C" void vtk_general_transform_inverse(vtkGeneralTransform* sself) { sself->Inverse(); }
 extern "C" void vtk_general_transform_translate(vtkGeneralTransform* sself, double x, double y, double z) { sself->Translate(x, y, z); }
@@ -50,11 +48,9 @@ extern "C" void vtk_general_transform_pop(vtkGeneralTransform* sself) { sself->P
 extern "C" unsigned long vtk_general_transform_get_m_time(vtkGeneralTransform* sself) { return sself->GetMTime(); }
 extern "C" vtkIdentityTransform * vtkIdentityTransform_new () {return vtkIdentityTransform :: New () ;}
 extern "C" void vtkIdentityTransform_destructor (vtkIdentityTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkIdentityTransform_get_ptr (vtkIdentityTransform * sself) {return sself ;}
 extern "C" void vtk_identity_transform_inverse(vtkIdentityTransform* sself) { sself->Inverse(); }
 extern "C" vtkLandmarkTransform * vtkLandmarkTransform_new () {return vtkLandmarkTransform :: New () ;}
 extern "C" void vtkLandmarkTransform_destructor (vtkLandmarkTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLandmarkTransform_get_ptr (vtkLandmarkTransform * sself) {return sself ;}
 extern "C" void vtk_landmark_transform_set_mode(vtkLandmarkTransform* sself, int _arg) { sself->SetMode(_arg); }
 extern "C" void vtk_landmark_transform_set_mode_to_rigid_body(vtkLandmarkTransform* sself) { sself->SetModeToRigidBody(); }
 extern "C" void vtk_landmark_transform_set_mode_to_similarity(vtkLandmarkTransform* sself) { sself->SetModeToSimilarity(); }
@@ -65,17 +61,14 @@ extern "C" void vtk_landmark_transform_inverse(vtkLandmarkTransform* sself) { ss
 extern "C" unsigned long vtk_landmark_transform_get_m_time(vtkLandmarkTransform* sself) { return sself->GetMTime(); }
 extern "C" vtkMatrixToHomogeneousTransform * vtkMatrixToHomogeneousTransform_new () {return vtkMatrixToHomogeneousTransform :: New () ;}
 extern "C" void vtkMatrixToHomogeneousTransform_destructor (vtkMatrixToHomogeneousTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMatrixToHomogeneousTransform_get_ptr (vtkMatrixToHomogeneousTransform * sself) {return sself ;}
 extern "C" void vtk_matrix_to_homogeneous_transform_inverse(vtkMatrixToHomogeneousTransform* sself) { sself->Inverse(); }
 extern "C" unsigned long vtk_matrix_to_homogeneous_transform_get_m_time(vtkMatrixToHomogeneousTransform* sself) { return sself->GetMTime(); }
 extern "C" vtkMatrixToLinearTransform * vtkMatrixToLinearTransform_new () {return vtkMatrixToLinearTransform :: New () ;}
 extern "C" void vtkMatrixToLinearTransform_destructor (vtkMatrixToLinearTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMatrixToLinearTransform_get_ptr (vtkMatrixToLinearTransform * sself) {return sself ;}
 extern "C" void vtk_matrix_to_linear_transform_inverse(vtkMatrixToLinearTransform* sself) { sself->Inverse(); }
 extern "C" unsigned long vtk_matrix_to_linear_transform_get_m_time(vtkMatrixToLinearTransform* sself) { return sself->GetMTime(); }
 extern "C" vtkPerspectiveTransform * vtkPerspectiveTransform_new () {return vtkPerspectiveTransform :: New () ;}
 extern "C" void vtkPerspectiveTransform_destructor (vtkPerspectiveTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPerspectiveTransform_get_ptr (vtkPerspectiveTransform * sself) {return sself ;}
 extern "C" void vtk_perspective_transform_identity(vtkPerspectiveTransform* sself) { sself->Identity(); }
 extern "C" void vtk_perspective_transform_inverse(vtkPerspectiveTransform* sself) { sself->Inverse(); }
 extern "C" void vtk_perspective_transform_adjust_viewport(vtkPerspectiveTransform* sself, double oldXMin, double oldXMax, double oldYMin, double oldYMax, double newXMin, double newXMax, double newYMin, double newYMax) { sself->AdjustViewport(oldXMin, oldXMax, oldYMin, oldYMax, newXMin, newXMax, newYMin, newYMax); }
@@ -101,10 +94,8 @@ extern "C" void vtk_perspective_transform_pop(vtkPerspectiveTransform* sself) { 
 extern "C" unsigned long vtk_perspective_transform_get_m_time(vtkPerspectiveTransform* sself) { return sself->GetMTime(); }
 extern "C" vtkSphericalTransform * vtkSphericalTransform_new () {return vtkSphericalTransform :: New () ;}
 extern "C" void vtkSphericalTransform_destructor (vtkSphericalTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSphericalTransform_get_ptr (vtkSphericalTransform * sself) {return sself ;}
 extern "C" vtkThinPlateSplineTransform * vtkThinPlateSplineTransform_new () {return vtkThinPlateSplineTransform :: New () ;}
 extern "C" void vtkThinPlateSplineTransform_destructor (vtkThinPlateSplineTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkThinPlateSplineTransform_get_ptr (vtkThinPlateSplineTransform * sself) {return sself ;}
 extern "C" double vtk_thin_plate_spline_transform_get_sigma(vtkThinPlateSplineTransform* sself) { return sself->GetSigma(); }
 extern "C" void vtk_thin_plate_spline_transform_set_sigma(vtkThinPlateSplineTransform* sself, double _arg) { sself->SetSigma(_arg); }
 extern "C" void vtk_thin_plate_spline_transform_set_basis(vtkThinPlateSplineTransform* sself, int basis) { sself->SetBasis(basis); }
@@ -119,7 +110,6 @@ extern "C" void vtk_thin_plate_spline_transform_regularize_bulk_transform_on(vtk
 extern "C" void vtk_thin_plate_spline_transform_regularize_bulk_transform_off(vtkThinPlateSplineTransform* sself) { sself->RegularizeBulkTransformOff(); }
 extern "C" vtkTransform * vtkTransform_new () {return vtkTransform :: New () ;}
 extern "C" void vtkTransform_destructor (vtkTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTransform_get_ptr (vtkTransform * sself) {return sself ;}
 extern "C" void vtk_transform_identity(vtkTransform* sself) { sself->Identity(); }
 extern "C" void vtk_transform_inverse(vtkTransform* sself) { sself->Inverse(); }
 extern "C" void vtk_transform_translate(vtkTransform* sself, double x, double y, double z) { sself->Translate(x, y, z); }
@@ -137,7 +127,6 @@ extern "C" void vtk_transform_pop(vtkTransform* sself) { sself->Pop(); }
 extern "C" unsigned long vtk_transform_get_m_time(vtkTransform* sself) { return sself->GetMTime(); }
 extern "C" vtkTransform2D * vtkTransform2D_new () {return vtkTransform2D :: New () ;}
 extern "C" void vtkTransform2D_destructor (vtkTransform2D * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTransform2D_get_ptr (vtkTransform2D * sself) {return sself ;}
 extern "C" void vtk_transform_2_d_identity(vtkTransform2D* sself) { sself->Identity(); }
 extern "C" void vtk_transform_2_d_inverse(vtkTransform2D* sself) { sself->Inverse(); }
 extern "C" void vtk_transform_2_d_translate(vtkTransform2D* sself, double x, double y) { sself->Translate(x, y); }
@@ -146,4 +135,3 @@ extern "C" void vtk_transform_2_d_scale(vtkTransform2D* sself, double x, double 
 extern "C" unsigned long vtk_transform_2_d_get_m_time(vtkTransform2D* sself) { return sself->GetMTime(); }
 extern "C" vtkTransformCollection * vtkTransformCollection_new () {return vtkTransformCollection :: New () ;}
 extern "C" void vtkTransformCollection_destructor (vtkTransformCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTransformCollection_get_ptr (vtkTransformCollection * sself) {return sself ;}

@@ -12,7 +12,6 @@
 // Implement declared functions
 extern "C" vtkColorSeries * vtkColorSeries_new () {return vtkColorSeries :: New () ;}
 extern "C" void vtkColorSeries_destructor (vtkColorSeries * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkColorSeries_get_ptr (vtkColorSeries * sself) {return sself ;}
 extern "C" void vtk_color_series_set_color_scheme(vtkColorSeries* sself, int scheme) { sself->SetColorScheme(scheme); }
 extern "C" int vtk_color_series_get_number_of_color_schemes(vtkColorSeries* sself) { return sself->GetNumberOfColorSchemes(); }
 extern "C" int vtk_color_series_get_color_scheme(vtkColorSeries* sself) { return sself->GetColorScheme(); }
@@ -22,6 +21,5 @@ extern "C" void vtk_color_series_remove_color(vtkColorSeries* sself, int index) 
 extern "C" void vtk_color_series_clear_colors(vtkColorSeries* sself) { sself->ClearColors(); }
 extern "C" vtkNamedColors * vtkNamedColors_new () {return vtkNamedColors :: New () ;}
 extern "C" void vtkNamedColors_destructor (vtkNamedColors * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkNamedColors_get_ptr (vtkNamedColors * sself) {return sself ;}
 extern "C" int vtk_named_colors_get_number_of_colors(vtkNamedColors* sself) { return sself->GetNumberOfColors(); }
 extern "C" void vtk_named_colors_reset_colors(vtkNamedColors* sself) { sself->ResetColors(); }

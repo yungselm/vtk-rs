@@ -17,12 +17,10 @@
 // Declare exported functions
 extern "C" vtkClientSocket * vtkClientSocket_new () ;
 extern "C" void vtkClientSocket_destructor (vtkClientSocket * sself) ;
-extern "C" void * vtkClientSocket_get_ptr (vtkClientSocket * sself) ;
 extern "C" int vtk_client_socket_connect_to_server(vtkClientSocket* sself, const char* hostname, int port);
 extern "C" bool vtk_client_socket_get_connecting_side(vtkClientSocket* sself);
 extern "C" vtkDirectory * vtkDirectory_new () ;
 extern "C" void vtkDirectory_destructor (vtkDirectory * sself) ;
-extern "C" void * vtkDirectory_get_ptr (vtkDirectory * sself) ;
 extern "C" int vtk_directory_open(vtkDirectory* sself, const char* dir);
 extern "C" long long vtk_directory_get_number_of_files(vtkDirectory* sself);
 extern "C" const char* vtk_directory_get_file(vtkDirectory* sself, long long index);
@@ -32,7 +30,6 @@ extern "C" int vtk_directory_delete_directory(vtkDirectory* sself, const char* d
 extern "C" int vtk_directory_rename(vtkDirectory* sself, const char* oldname, const char* newname);
 extern "C" vtkExecutableRunner * vtkExecutableRunner_new () ;
 extern "C" void vtkExecutableRunner_destructor (vtkExecutableRunner * sself) ;
-extern "C" void * vtkExecutableRunner_get_ptr (vtkExecutableRunner * sself) ;
 extern "C" void vtk_executable_runner_execute(vtkExecutableRunner* sself);
 extern "C" void vtk_executable_runner_set_timeout(vtkExecutableRunner* sself, double _arg);
 extern "C" double vtk_executable_runner_get_timeout(vtkExecutableRunner* sself);
@@ -47,16 +44,13 @@ extern "C" const char* vtk_executable_runner_get_std_err(vtkExecutableRunner* ss
 extern "C" int vtk_executable_runner_get_return_value(vtkExecutableRunner* sself);
 extern "C" vtkServerSocket * vtkServerSocket_new () ;
 extern "C" void vtkServerSocket_destructor (vtkServerSocket * sself) ;
-extern "C" void * vtkServerSocket_get_ptr (vtkServerSocket * sself) ;
 extern "C" int vtk_server_socket_create_server(vtkServerSocket* sself, int port);
 extern "C" int vtk_server_socket_get_server_port(vtkServerSocket* sself);
 extern "C" vtkSocketCollection * vtkSocketCollection_new () ;
 extern "C" void vtkSocketCollection_destructor (vtkSocketCollection * sself) ;
-extern "C" void * vtkSocketCollection_get_ptr (vtkSocketCollection * sself) ;
 extern "C" int vtk_socket_collection_select_sockets(vtkSocketCollection* sself, unsigned long msec);
 extern "C" vtkThreadMessager * vtkThreadMessager_new () ;
 extern "C" void vtkThreadMessager_destructor (vtkThreadMessager * sself) ;
-extern "C" void * vtkThreadMessager_get_ptr (vtkThreadMessager * sself) ;
 extern "C" void vtk_thread_messager_wait_for_message(vtkThreadMessager* sself);
 extern "C" void vtk_thread_messager_send_wake_message(vtkThreadMessager* sself);
 extern "C" void vtk_thread_messager_enable_wait_for_receiver(vtkThreadMessager* sself);
@@ -64,7 +58,6 @@ extern "C" void vtk_thread_messager_disable_wait_for_receiver(vtkThreadMessager*
 extern "C" void vtk_thread_messager_wait_for_receiver(vtkThreadMessager* sself);
 extern "C" vtkTimerLog * vtkTimerLog_new () ;
 extern "C" void vtkTimerLog_destructor (vtkTimerLog * sself) ;
-extern "C" void * vtkTimerLog_get_ptr (vtkTimerLog * sself) ;
 extern "C" void vtk_timer_log_set_logging(vtkTimerLog* sself, int v);
 extern "C" int vtk_timer_log_get_logging(vtkTimerLog* sself);
 extern "C" void vtk_timer_log_logging_on(vtkTimerLog* sself);

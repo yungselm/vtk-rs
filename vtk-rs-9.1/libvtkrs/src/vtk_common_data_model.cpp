@@ -284,19 +284,16 @@
 // Implement declared functions
 extern "C" vtkAMRDataInternals * vtkAMRDataInternals_new () {return vtkAMRDataInternals :: New () ;}
 extern "C" void vtkAMRDataInternals_destructor (vtkAMRDataInternals * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAMRDataInternals_get_ptr (vtkAMRDataInternals * sself) {return sself ;}
 extern "C" void vtk_amr_data_internals_initialize(vtkAMRDataInternals* sself) { sself->Initialize(); }
 extern "C" bool vtk_amr_data_internals_empty(vtkAMRDataInternals* sself) { return sself->Empty(); }
 extern "C" unsigned int vtk_amr_data_internals_get_number_of_blocks(vtkAMRDataInternals* sself) { return sself->GetNumberOfBlocks(); }
 extern "C" vtkAdjacentVertexIterator * vtkAdjacentVertexIterator_new () {return vtkAdjacentVertexIterator :: New () ;}
 extern "C" void vtkAdjacentVertexIterator_destructor (vtkAdjacentVertexIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAdjacentVertexIterator_get_ptr (vtkAdjacentVertexIterator * sself) {return sself ;}
 extern "C" long long vtk_adjacent_vertex_iterator_get_vertex(vtkAdjacentVertexIterator* sself) { return sself->GetVertex(); }
 extern "C" long long vtk_adjacent_vertex_iterator_next(vtkAdjacentVertexIterator* sself) { return sself->Next(); }
 extern "C" bool vtk_adjacent_vertex_iterator_has_next(vtkAdjacentVertexIterator* sself) { return sself->HasNext(); }
 extern "C" vtkAnimationScene * vtkAnimationScene_new () {return vtkAnimationScene :: New () ;}
 extern "C" void vtkAnimationScene_destructor (vtkAnimationScene * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAnimationScene_get_ptr (vtkAnimationScene * sself) {return sself ;}
 extern "C" void vtk_animation_scene_set_play_mode(vtkAnimationScene* sself, int _arg) { sself->SetPlayMode(_arg); }
 extern "C" void vtk_animation_scene_set_mode_to_sequence(vtkAnimationScene* sself) { sself->SetModeToSequence(); }
 extern "C" void vtk_animation_scene_set_mode_to_real_time(vtkAnimationScene* sself) { sself->SetModeToRealTime(); }
@@ -314,40 +311,34 @@ extern "C" void vtk_animation_scene_set_time_mode(vtkAnimationScene* sself, int 
 extern "C" int vtk_animation_scene_is_in_play(vtkAnimationScene* sself) { return sself->IsInPlay(); }
 extern "C" vtkAnnotation * vtkAnnotation_new () {return vtkAnnotation :: New () ;}
 extern "C" void vtkAnnotation_destructor (vtkAnnotation * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAnnotation_get_ptr (vtkAnnotation * sself) {return sself ;}
 extern "C" int vtk_annotation_get_data_object_type(vtkAnnotation* sself) { return sself->GetDataObjectType(); }
 extern "C" void vtk_annotation_initialize(vtkAnnotation* sself) { sself->Initialize(); }
 extern "C" unsigned long vtk_annotation_get_m_time(vtkAnnotation* sself) { return sself->GetMTime(); }
 extern "C" vtkAnnotationLayers * vtkAnnotationLayers_new () {return vtkAnnotationLayers :: New () ;}
 extern "C" void vtkAnnotationLayers_destructor (vtkAnnotationLayers * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAnnotationLayers_get_ptr (vtkAnnotationLayers * sself) {return sself ;}
 extern "C" int vtk_annotation_layers_get_data_object_type(vtkAnnotationLayers* sself) { return sself->GetDataObjectType(); }
 extern "C" unsigned int vtk_annotation_layers_get_number_of_annotations(vtkAnnotationLayers* sself) { return sself->GetNumberOfAnnotations(); }
 extern "C" void vtk_annotation_layers_initialize(vtkAnnotationLayers* sself) { sself->Initialize(); }
 extern "C" unsigned long vtk_annotation_layers_get_m_time(vtkAnnotationLayers* sself) { return sself->GetMTime(); }
 extern "C" vtkArrayData * vtkArrayData_new () {return vtkArrayData :: New () ;}
 extern "C" void vtkArrayData_destructor (vtkArrayData * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkArrayData_get_ptr (vtkArrayData * sself) {return sself ;}
 extern "C" void vtk_array_data_clear_arrays(vtkArrayData* sself) { sself->ClearArrays(); }
 extern "C" long long vtk_array_data_get_number_of_arrays(vtkArrayData* sself) { return sself->GetNumberOfArrays(); }
 extern "C" int vtk_array_data_get_data_object_type(vtkArrayData* sself) { return sself->GetDataObjectType(); }
 extern "C" vtkAttributesErrorMetric * vtkAttributesErrorMetric_new () {return vtkAttributesErrorMetric :: New () ;}
 extern "C" void vtkAttributesErrorMetric_destructor (vtkAttributesErrorMetric * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkAttributesErrorMetric_get_ptr (vtkAttributesErrorMetric * sself) {return sself ;}
 extern "C" double vtk_attributes_error_metric_get_absolute_attribute_tolerance(vtkAttributesErrorMetric* sself) { return sself->GetAbsoluteAttributeTolerance(); }
 extern "C" void vtk_attributes_error_metric_set_absolute_attribute_tolerance(vtkAttributesErrorMetric* sself, double value) { sself->SetAbsoluteAttributeTolerance(value); }
 extern "C" double vtk_attributes_error_metric_get_attribute_tolerance(vtkAttributesErrorMetric* sself) { return sself->GetAttributeTolerance(); }
 extern "C" void vtk_attributes_error_metric_set_attribute_tolerance(vtkAttributesErrorMetric* sself, double value) { sself->SetAttributeTolerance(value); }
 extern "C" vtkBSPCuts * vtkBSPCuts_new () {return vtkBSPCuts :: New () ;}
 extern "C" void vtkBSPCuts_destructor (vtkBSPCuts * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBSPCuts_get_ptr (vtkBSPCuts * sself) {return sself ;}
 extern "C" int vtk_bsp_cuts_get_data_object_type(vtkBSPCuts* sself) { return sself->GetDataObjectType(); }
 extern "C" int vtk_bsp_cuts_get_number_of_cuts(vtkBSPCuts* sself) { return sself->GetNumberOfCuts(); }
 extern "C" void vtk_bsp_cuts_print_tree(vtkBSPCuts* sself) { sself->PrintTree(); }
 extern "C" void vtk_bsp_cuts_print_arrays(vtkBSPCuts* sself) { sself->PrintArrays(); }
 extern "C" vtkBSPIntersections * vtkBSPIntersections_new () {return vtkBSPIntersections :: New () ;}
 extern "C" void vtkBSPIntersections_destructor (vtkBSPIntersections * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBSPIntersections_get_ptr (vtkBSPIntersections * sself) {return sself ;}
 extern "C" int vtk_bsp_intersections_get_number_of_regions(vtkBSPIntersections* sself) { return sself->GetNumberOfRegions(); }
 extern "C" int vtk_bsp_intersections_intersects_sphere_2(vtkBSPIntersections* sself, int regionId, double x, double y, double z, double rSquared) { return sself->IntersectsSphere2(regionId, x, y, z, rSquared); }
 extern "C" int vtk_bsp_intersections_get_compute_intersections_using_data_bounds(vtkBSPIntersections* sself) { return sself->GetComputeIntersectionsUsingDataBounds(); }
@@ -356,62 +347,50 @@ extern "C" void vtk_bsp_intersections_compute_intersections_using_data_bounds_on
 extern "C" void vtk_bsp_intersections_compute_intersections_using_data_bounds_off(vtkBSPIntersections* sself) { sself->ComputeIntersectionsUsingDataBoundsOff(); }
 extern "C" vtkBezierCurve * vtkBezierCurve_new () {return vtkBezierCurve :: New () ;}
 extern "C" void vtkBezierCurve_destructor (vtkBezierCurve * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBezierCurve_get_ptr (vtkBezierCurve * sself) {return sself ;}
 extern "C" int vtk_bezier_curve_get_cell_type(vtkBezierCurve* sself) { return sself->GetCellType(); }
 extern "C" vtkBezierHexahedron * vtkBezierHexahedron_new () {return vtkBezierHexahedron :: New () ;}
 extern "C" void vtkBezierHexahedron_destructor (vtkBezierHexahedron * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBezierHexahedron_get_ptr (vtkBezierHexahedron * sself) {return sself ;}
 extern "C" int vtk_bezier_hexahedron_get_cell_type(vtkBezierHexahedron* sself) { return sself->GetCellType(); }
 extern "C" vtkBezierInterpolation * vtkBezierInterpolation_new () {return vtkBezierInterpolation :: New () ;}
 extern "C" void vtkBezierInterpolation_destructor (vtkBezierInterpolation * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBezierInterpolation_get_ptr (vtkBezierInterpolation * sself) {return sself ;}
 extern "C" vtkBezierQuadrilateral * vtkBezierQuadrilateral_new () {return vtkBezierQuadrilateral :: New () ;}
 extern "C" void vtkBezierQuadrilateral_destructor (vtkBezierQuadrilateral * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBezierQuadrilateral_get_ptr (vtkBezierQuadrilateral * sself) {return sself ;}
 extern "C" int vtk_bezier_quadrilateral_get_cell_type(vtkBezierQuadrilateral* sself) { return sself->GetCellType(); }
 extern "C" vtkBezierTetra * vtkBezierTetra_new () {return vtkBezierTetra :: New () ;}
 extern "C" void vtkBezierTetra_destructor (vtkBezierTetra * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBezierTetra_get_ptr (vtkBezierTetra * sself) {return sself ;}
 extern "C" int vtk_bezier_tetra_get_cell_type(vtkBezierTetra* sself) { return sself->GetCellType(); }
 extern "C" vtkBezierTriangle * vtkBezierTriangle_new () {return vtkBezierTriangle :: New () ;}
 extern "C" void vtkBezierTriangle_destructor (vtkBezierTriangle * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBezierTriangle_get_ptr (vtkBezierTriangle * sself) {return sself ;}
 extern "C" int vtk_bezier_triangle_get_cell_type(vtkBezierTriangle* sself) { return sself->GetCellType(); }
 extern "C" vtkBezierWedge * vtkBezierWedge_new () {return vtkBezierWedge :: New () ;}
 extern "C" void vtkBezierWedge_destructor (vtkBezierWedge * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBezierWedge_get_ptr (vtkBezierWedge * sself) {return sself ;}
 extern "C" int vtk_bezier_wedge_get_cell_type(vtkBezierWedge* sself) { return sself->GetCellType(); }
 extern "C" vtkBiQuadraticQuad * vtkBiQuadraticQuad_new () {return vtkBiQuadraticQuad :: New () ;}
 extern "C" void vtkBiQuadraticQuad_destructor (vtkBiQuadraticQuad * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBiQuadraticQuad_get_ptr (vtkBiQuadraticQuad * sself) {return sself ;}
 extern "C" int vtk_bi_quadratic_quad_get_cell_type(vtkBiQuadraticQuad* sself) { return sself->GetCellType(); }
 extern "C" int vtk_bi_quadratic_quad_get_cell_dimension(vtkBiQuadraticQuad* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_bi_quadratic_quad_get_number_of_edges(vtkBiQuadraticQuad* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_bi_quadratic_quad_get_number_of_faces(vtkBiQuadraticQuad* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkBiQuadraticQuadraticHexahedron * vtkBiQuadraticQuadraticHexahedron_new () {return vtkBiQuadraticQuadraticHexahedron :: New () ;}
 extern "C" void vtkBiQuadraticQuadraticHexahedron_destructor (vtkBiQuadraticQuadraticHexahedron * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBiQuadraticQuadraticHexahedron_get_ptr (vtkBiQuadraticQuadraticHexahedron * sself) {return sself ;}
 extern "C" int vtk_bi_quadratic_quadratic_hexahedron_get_cell_type(vtkBiQuadraticQuadraticHexahedron* sself) { return sself->GetCellType(); }
 extern "C" int vtk_bi_quadratic_quadratic_hexahedron_get_cell_dimension(vtkBiQuadraticQuadraticHexahedron* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_bi_quadratic_quadratic_hexahedron_get_number_of_edges(vtkBiQuadraticQuadraticHexahedron* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_bi_quadratic_quadratic_hexahedron_get_number_of_faces(vtkBiQuadraticQuadraticHexahedron* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkBiQuadraticQuadraticWedge * vtkBiQuadraticQuadraticWedge_new () {return vtkBiQuadraticQuadraticWedge :: New () ;}
 extern "C" void vtkBiQuadraticQuadraticWedge_destructor (vtkBiQuadraticQuadraticWedge * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBiQuadraticQuadraticWedge_get_ptr (vtkBiQuadraticQuadraticWedge * sself) {return sself ;}
 extern "C" int vtk_bi_quadratic_quadratic_wedge_get_cell_type(vtkBiQuadraticQuadraticWedge* sself) { return sself->GetCellType(); }
 extern "C" int vtk_bi_quadratic_quadratic_wedge_get_cell_dimension(vtkBiQuadraticQuadraticWedge* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_bi_quadratic_quadratic_wedge_get_number_of_edges(vtkBiQuadraticQuadraticWedge* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_bi_quadratic_quadratic_wedge_get_number_of_faces(vtkBiQuadraticQuadraticWedge* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkBiQuadraticTriangle * vtkBiQuadraticTriangle_new () {return vtkBiQuadraticTriangle :: New () ;}
 extern "C" void vtkBiQuadraticTriangle_destructor (vtkBiQuadraticTriangle * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBiQuadraticTriangle_get_ptr (vtkBiQuadraticTriangle * sself) {return sself ;}
 extern "C" int vtk_bi_quadratic_triangle_get_cell_type(vtkBiQuadraticTriangle* sself) { return sself->GetCellType(); }
 extern "C" int vtk_bi_quadratic_triangle_get_cell_dimension(vtkBiQuadraticTriangle* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_bi_quadratic_triangle_get_number_of_edges(vtkBiQuadraticTriangle* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_bi_quadratic_triangle_get_number_of_faces(vtkBiQuadraticTriangle* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkBox * vtkBox_new () {return vtkBox :: New () ;}
 extern "C" void vtkBox_destructor (vtkBox * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkBox_get_ptr (vtkBox * sself) {return sself ;}
 extern "C" void vtk_box_set_x_min(vtkBox* sself, double x, double y, double z) { sself->SetXMin(x, y, z); }
 extern "C" void vtk_box_get_x_min(vtkBox* sself, double& x, double& y, double& z) { sself->GetXMin(x, y, z); }
 extern "C" void vtk_box_set_x_max(vtkBox* sself, double x, double y, double z) { sself->SetXMax(x, y, z); }
@@ -420,7 +399,6 @@ extern "C" void vtk_box_set_bounds(vtkBox* sself, double xMin, double xMax, doub
 extern "C" void vtk_box_get_bounds(vtkBox* sself, double& xMin, double& xMax, double& yMin, double& yMax, double& zMin, double& zMax) { sself->GetBounds(xMin, xMax, yMin, yMax, zMin, zMax); }
 extern "C" vtkCellArray * vtkCellArray_new () {return vtkCellArray :: New () ;}
 extern "C" void vtkCellArray_destructor (vtkCellArray * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCellArray_get_ptr (vtkCellArray * sself) {return sself ;}
 extern "C" int vtk_cell_array_allocate(vtkCellArray* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" bool vtk_cell_array_allocate_estimate(vtkCellArray* sself, long long numCells, long long maxCellSize) { return sself->AllocateEstimate(numCells, maxCellSize); }
 extern "C" bool vtk_cell_array_allocate_exact(vtkCellArray* sself, long long numCells, long long connectivitySize) { return sself->AllocateExact(numCells, connectivitySize); }
@@ -464,7 +442,6 @@ extern "C" void vtk_cell_array_set_traversal_location(vtkCellArray* sself, long 
 extern "C" void vtk_cell_array_reverse_cell(vtkCellArray* sself, long long loc) { sself->ReverseCell(loc); }
 extern "C" vtkCellArrayIterator * vtkCellArrayIterator_new () {return vtkCellArrayIterator :: New () ;}
 extern "C" void vtkCellArrayIterator_destructor (vtkCellArrayIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCellArrayIterator_get_ptr (vtkCellArrayIterator * sself) {return sself ;}
 extern "C" void vtk_cell_array_iterator_go_to_cell(vtkCellArrayIterator* sself, long long cellId) { sself->GoToCell(cellId); }
 extern "C" void vtk_cell_array_iterator_go_to_first_cell(vtkCellArrayIterator* sself) { sself->GoToFirstCell(); }
 extern "C" void vtk_cell_array_iterator_go_to_next_cell(vtkCellArrayIterator* sself) { sself->GoToNextCell(); }
@@ -473,10 +450,8 @@ extern "C" long long vtk_cell_array_iterator_get_current_cell_id(vtkCellArrayIte
 extern "C" void vtk_cell_array_iterator_reverse_current_cell(vtkCellArrayIterator* sself) { sself->ReverseCurrentCell(); }
 extern "C" vtkCellData * vtkCellData_new () {return vtkCellData :: New () ;}
 extern "C" void vtkCellData_destructor (vtkCellData * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCellData_get_ptr (vtkCellData * sself) {return sself ;}
 extern "C" vtkCellLinks * vtkCellLinks_new () {return vtkCellLinks :: New () ;}
 extern "C" void vtkCellLinks_destructor (vtkCellLinks * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCellLinks_get_ptr (vtkCellLinks * sself) {return sself ;}
 extern "C" void vtk_cell_links_allocate(vtkCellLinks* sself, long long numLinks, long long ext) { sself->Allocate(numLinks, ext); }
 extern "C" void vtk_cell_links_initialize(vtkCellLinks* sself) { sself->Initialize(); }
 extern "C" long long vtk_cell_links_get_ncells(vtkCellLinks* sself, long long ptId) { return sself->GetNcells(ptId); }
@@ -491,7 +466,6 @@ extern "C" void vtk_cell_links_reset(vtkCellLinks* sself) { sself->Reset(); }
 extern "C" unsigned long vtk_cell_links_get_actual_memory_size(vtkCellLinks* sself) { return sself->GetActualMemorySize(); }
 extern "C" vtkCellLocator * vtkCellLocator_new () {return vtkCellLocator :: New () ;}
 extern "C" void vtkCellLocator_destructor (vtkCellLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCellLocator_get_ptr (vtkCellLocator * sself) {return sself ;}
 extern "C" void vtk_cell_locator_set_number_of_cells_per_bucket(vtkCellLocator* sself, int N) { sself->SetNumberOfCellsPerBucket(N); }
 extern "C" int vtk_cell_locator_get_number_of_cells_per_bucket(vtkCellLocator* sself) { return sself->GetNumberOfCellsPerBucket(); }
 extern "C" int vtk_cell_locator_get_number_of_buckets(vtkCellLocator* sself) { return sself->GetNumberOfBuckets(); }
@@ -502,10 +476,8 @@ extern "C" void vtk_cell_locator_force_build_locator(vtkCellLocator* sself) { ss
 extern "C" void vtk_cell_locator_build_locator_internal(vtkCellLocator* sself) { sself->BuildLocatorInternal(); }
 extern "C" vtkCellLocatorStrategy * vtkCellLocatorStrategy_new () {return vtkCellLocatorStrategy :: New () ;}
 extern "C" void vtkCellLocatorStrategy_destructor (vtkCellLocatorStrategy * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCellLocatorStrategy_get_ptr (vtkCellLocatorStrategy * sself) {return sself ;}
 extern "C" vtkCellTypes * vtkCellTypes_new () {return vtkCellTypes :: New () ;}
 extern "C" void vtkCellTypes_destructor (vtkCellTypes * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCellTypes_get_ptr (vtkCellTypes * sself) {return sself ;}
 extern "C" int vtk_cell_types_allocate(vtkCellTypes* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_cell_types_insert_cell(vtkCellTypes* sself, long long id, unsigned char type, long long loc) { sself->InsertCell(id, type, loc); }
 extern "C" long long vtk_cell_types_insert_next_cell(vtkCellTypes* sself, unsigned char type, long long loc) { return sself->InsertNextCell(type, loc); }
@@ -523,24 +495,20 @@ extern "C" int vtk_cell_types_get_type_id_from_class_name(vtkCellTypes* sself, c
 extern "C" int vtk_cell_types_is_linear(vtkCellTypes* sself, unsigned char type) { return sself->IsLinear(type); }
 extern "C" vtkClosestNPointsStrategy * vtkClosestNPointsStrategy_new () {return vtkClosestNPointsStrategy :: New () ;}
 extern "C" void vtkClosestNPointsStrategy_destructor (vtkClosestNPointsStrategy * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkClosestNPointsStrategy_get_ptr (vtkClosestNPointsStrategy * sself) {return sself ;}
 extern "C" void vtk_closest_n_points_strategy_set_closest_n_points(vtkClosestNPointsStrategy* sself, int _arg) { sself->SetClosestNPoints(_arg); }
 extern "C" int vtk_closest_n_points_strategy_get_closest_n_points_min_value(vtkClosestNPointsStrategy* sself) { return sself->GetClosestNPointsMinValue(); }
 extern "C" int vtk_closest_n_points_strategy_get_closest_n_points_max_value(vtkClosestNPointsStrategy* sself) { return sself->GetClosestNPointsMaxValue(); }
 extern "C" int vtk_closest_n_points_strategy_get_closest_n_points(vtkClosestNPointsStrategy* sself) { return sself->GetClosestNPoints(); }
 extern "C" vtkClosestPointStrategy * vtkClosestPointStrategy_new () {return vtkClosestPointStrategy :: New () ;}
 extern "C" void vtkClosestPointStrategy_destructor (vtkClosestPointStrategy * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkClosestPointStrategy_get_ptr (vtkClosestPointStrategy * sself) {return sself ;}
 extern "C" vtkCone * vtkCone_new () {return vtkCone :: New () ;}
 extern "C" void vtkCone_destructor (vtkCone * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCone_get_ptr (vtkCone * sself) {return sself ;}
 extern "C" void vtk_cone_set_angle(vtkCone* sself, double _arg) { sself->SetAngle(_arg); }
 extern "C" double vtk_cone_get_angle_min_value(vtkCone* sself) { return sself->GetAngleMinValue(); }
 extern "C" double vtk_cone_get_angle_max_value(vtkCone* sself) { return sself->GetAngleMaxValue(); }
 extern "C" double vtk_cone_get_angle(vtkCone* sself) { return sself->GetAngle(); }
 extern "C" vtkConvexPointSet * vtkConvexPointSet_new () {return vtkConvexPointSet :: New () ;}
 extern "C" void vtkConvexPointSet_destructor (vtkConvexPointSet * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkConvexPointSet_get_ptr (vtkConvexPointSet * sself) {return sself ;}
 extern "C" int vtk_convex_point_set_has_fixed_topology(vtkConvexPointSet* sself) { return sself->HasFixedTopology(); }
 extern "C" int vtk_convex_point_set_get_cell_type(vtkConvexPointSet* sself) { return sself->GetCellType(); }
 extern "C" int vtk_convex_point_set_requires_initialization(vtkConvexPointSet* sself) { return sself->RequiresInitialization(); }
@@ -549,21 +517,18 @@ extern "C" int vtk_convex_point_set_get_number_of_faces(vtkConvexPointSet* sself
 extern "C" int vtk_convex_point_set_is_primary_cell(vtkConvexPointSet* sself) { return sself->IsPrimaryCell(); }
 extern "C" vtkCubicLine * vtkCubicLine_new () {return vtkCubicLine :: New () ;}
 extern "C" void vtkCubicLine_destructor (vtkCubicLine * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCubicLine_get_ptr (vtkCubicLine * sself) {return sself ;}
 extern "C" int vtk_cubic_line_get_cell_type(vtkCubicLine* sself) { return sself->GetCellType(); }
 extern "C" int vtk_cubic_line_get_cell_dimension(vtkCubicLine* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_cubic_line_get_number_of_edges(vtkCubicLine* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_cubic_line_get_number_of_faces(vtkCubicLine* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkCylinder * vtkCylinder_new () {return vtkCylinder :: New () ;}
 extern "C" void vtkCylinder_destructor (vtkCylinder * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCylinder_get_ptr (vtkCylinder * sself) {return sself ;}
 extern "C" void vtk_cylinder_set_radius(vtkCylinder* sself, double _arg) { sself->SetRadius(_arg); }
 extern "C" double vtk_cylinder_get_radius(vtkCylinder* sself) { return sself->GetRadius(); }
 extern "C" void vtk_cylinder_set_center(vtkCylinder* sself, double _arg1, double _arg2, double _arg3) { sself->SetCenter(_arg1, _arg2, _arg3); }
 extern "C" void vtk_cylinder_set_axis(vtkCylinder* sself, double ax, double ay, double az) { sself->SetAxis(ax, ay, az); }
 extern "C" vtkDataAssembly * vtkDataAssembly_new () {return vtkDataAssembly :: New () ;}
 extern "C" void vtkDataAssembly_destructor (vtkDataAssembly * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataAssembly_get_ptr (vtkDataAssembly * sself) {return sself ;}
 extern "C" void vtk_data_assembly_initialize(vtkDataAssembly* sself) { sself->Initialize(); }
 extern "C" bool vtk_data_assembly_initialize_from_xml(vtkDataAssembly* sself, const char* xmlcontents) { return sself->InitializeFromXML(xmlcontents); }
 extern "C" int vtk_data_assembly_get_root_node(vtkDataAssembly* sself) { return sself->GetRootNode(); }
@@ -591,11 +556,9 @@ extern "C" bool vtk_data_assembly_is_node_name_valid(vtkDataAssembly* sself, con
 extern "C" bool vtk_data_assembly_is_node_name_reserved(vtkDataAssembly* sself, const char* name) { return sself->IsNodeNameReserved(name); }
 extern "C" vtkDataAssemblyUtilities * vtkDataAssemblyUtilities_new () {return vtkDataAssemblyUtilities :: New () ;}
 extern "C" void vtkDataAssemblyUtilities_destructor (vtkDataAssemblyUtilities * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataAssemblyUtilities_get_ptr (vtkDataAssemblyUtilities * sself) {return sself ;}
 extern "C" const char* vtk_data_assembly_utilities_hierarchy_name(vtkDataAssemblyUtilities* sself) { return sself->HierarchyName(); }
 extern "C" vtkDataObject * vtkDataObject_new () {return vtkDataObject :: New () ;}
 extern "C" void vtkDataObject_destructor (vtkDataObject * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataObject_get_ptr (vtkDataObject * sself) {return sself ;}
 extern "C" unsigned long vtk_data_object_get_m_time(vtkDataObject* sself) { return sself->GetMTime(); }
 extern "C" void vtk_data_object_initialize(vtkDataObject* sself) { sself->Initialize(); }
 extern "C" void vtk_data_object_release_data(vtkDataObject* sself) { sself->ReleaseData(); }
@@ -615,11 +578,9 @@ extern "C" const char* vtk_data_object_get_association_type_as_string(vtkDataObj
 extern "C" int vtk_data_object_get_association_type_from_string(vtkDataObject* sself, const char* associationName) { return sself->GetAssociationTypeFromString(associationName); }
 extern "C" vtkDataObjectCollection * vtkDataObjectCollection_new () {return vtkDataObjectCollection :: New () ;}
 extern "C" void vtkDataObjectCollection_destructor (vtkDataObjectCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataObjectCollection_get_ptr (vtkDataObjectCollection * sself) {return sself ;}
 extern "C" int vtk_data_object_collection_get_number_of_items(vtkDataObjectCollection* sself) { return sself->GetNumberOfItems(); }
 extern "C" vtkDataObjectTreeIterator * vtkDataObjectTreeIterator_new () {return vtkDataObjectTreeIterator :: New () ;}
 extern "C" void vtkDataObjectTreeIterator_destructor (vtkDataObjectTreeIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataObjectTreeIterator_get_ptr (vtkDataObjectTreeIterator * sself) {return sself ;}
 extern "C" void vtk_data_object_tree_iterator_go_to_first_item(vtkDataObjectTreeIterator* sself) { sself->GoToFirstItem(); }
 extern "C" void vtk_data_object_tree_iterator_go_to_next_item(vtkDataObjectTreeIterator* sself) { sself->GoToNextItem(); }
 extern "C" int vtk_data_object_tree_iterator_is_done_with_traversal(vtkDataObjectTreeIterator* sself) { return sself->IsDoneWithTraversal(); }
@@ -635,14 +596,12 @@ extern "C" void vtk_data_object_tree_iterator_traverse_sub_tree_on(vtkDataObject
 extern "C" void vtk_data_object_tree_iterator_traverse_sub_tree_off(vtkDataObjectTreeIterator* sself) { sself->TraverseSubTreeOff(); }
 extern "C" vtkDataObjectTypes * vtkDataObjectTypes_new () {return vtkDataObjectTypes :: New () ;}
 extern "C" void vtkDataObjectTypes_destructor (vtkDataObjectTypes * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataObjectTypes_get_ptr (vtkDataObjectTypes * sself) {return sself ;}
 extern "C" const char* vtk_data_object_types_get_class_name_from_type_id(vtkDataObjectTypes* sself, int typeId) { return sself->GetClassNameFromTypeId(typeId); }
 extern "C" int vtk_data_object_types_get_type_id_from_class_name(vtkDataObjectTypes* sself, const char* classname) { return sself->GetTypeIdFromClassName(classname); }
 extern "C" bool vtk_data_object_types_type_id_is_a(vtkDataObjectTypes* sself, int typeId, int targetTypeId) { return sself->TypeIdIsA(typeId, targetTypeId); }
 extern "C" int vtk_data_object_types_get_common_base_type_id(vtkDataObjectTypes* sself, int typeA, int typeB) { return sself->GetCommonBaseTypeId(typeA, typeB); }
 extern "C" vtkDataSetAttributes * vtkDataSetAttributes_new () {return vtkDataSetAttributes :: New () ;}
 extern "C" void vtkDataSetAttributes_destructor (vtkDataSetAttributes * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataSetAttributes_get_ptr (vtkDataSetAttributes * sself) {return sself ;}
 extern "C" void vtk_data_set_attributes_initialize(vtkDataSetAttributes* sself) { sself->Initialize(); }
 extern "C" void vtk_data_set_attributes_update(vtkDataSetAttributes* sself) { sself->Update(); }
 extern "C" const char* vtk_data_set_attributes_ghost_array_name(vtkDataSetAttributes* sself) { return sself->GhostArrayName(); }
@@ -706,26 +665,20 @@ extern "C" void vtk_data_set_attributes_copy_all_on(vtkDataSetAttributes* sself,
 extern "C" void vtk_data_set_attributes_copy_all_off(vtkDataSetAttributes* sself, int ctype) { sself->CopyAllOff(ctype); }
 extern "C" vtkDataSetCellIterator * vtkDataSetCellIterator_new () {return vtkDataSetCellIterator :: New () ;}
 extern "C" void vtkDataSetCellIterator_destructor (vtkDataSetCellIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataSetCellIterator_get_ptr (vtkDataSetCellIterator * sself) {return sself ;}
 extern "C" bool vtk_data_set_cell_iterator_is_done_with_traversal(vtkDataSetCellIterator* sself) { return sself->IsDoneWithTraversal(); }
 extern "C" long long vtk_data_set_cell_iterator_get_cell_id(vtkDataSetCellIterator* sself) { return sself->GetCellId(); }
 extern "C" vtkDataSetCollection * vtkDataSetCollection_new () {return vtkDataSetCollection :: New () ;}
 extern "C" void vtkDataSetCollection_destructor (vtkDataSetCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDataSetCollection_get_ptr (vtkDataSetCollection * sself) {return sself ;}
 extern "C" int vtk_data_set_collection_get_number_of_items(vtkDataSetCollection* sself) { return sself->GetNumberOfItems(); }
 extern "C" vtkDirectedAcyclicGraph * vtkDirectedAcyclicGraph_new () {return vtkDirectedAcyclicGraph :: New () ;}
 extern "C" void vtkDirectedAcyclicGraph_destructor (vtkDirectedAcyclicGraph * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDirectedAcyclicGraph_get_ptr (vtkDirectedAcyclicGraph * sself) {return sself ;}
 extern "C" vtkDirectedGraph * vtkDirectedGraph_new () {return vtkDirectedGraph :: New () ;}
 extern "C" void vtkDirectedGraph_destructor (vtkDirectedGraph * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkDirectedGraph_get_ptr (vtkDirectedGraph * sself) {return sself ;}
 extern "C" vtkEdgeListIterator * vtkEdgeListIterator_new () {return vtkEdgeListIterator :: New () ;}
 extern "C" void vtkEdgeListIterator_destructor (vtkEdgeListIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkEdgeListIterator_get_ptr (vtkEdgeListIterator * sself) {return sself ;}
 extern "C" bool vtk_edge_list_iterator_has_next(vtkEdgeListIterator* sself) { return sself->HasNext(); }
 extern "C" vtkEdgeTable * vtkEdgeTable_new () {return vtkEdgeTable :: New () ;}
 extern "C" void vtkEdgeTable_destructor (vtkEdgeTable * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkEdgeTable_get_ptr (vtkEdgeTable * sself) {return sself ;}
 extern "C" void vtk_edge_table_initialize(vtkEdgeTable* sself) { sself->Initialize(); }
 extern "C" int vtk_edge_table_init_edge_insertion(vtkEdgeTable* sself, long long numPoints, int storeAttributes) { return sself->InitEdgeInsertion(numPoints, storeAttributes); }
 extern "C" long long vtk_edge_table_insert_edge(vtkEdgeTable* sself, long long p1, long long p2) { return sself->InsertEdge(p1, p2); }
@@ -736,14 +689,12 @@ extern "C" long long vtk_edge_table_get_next_edge(vtkEdgeTable* sself, long long
 extern "C" void vtk_edge_table_reset(vtkEdgeTable* sself) { sself->Reset(); }
 extern "C" vtkEmptyCell * vtkEmptyCell_new () {return vtkEmptyCell :: New () ;}
 extern "C" void vtkEmptyCell_destructor (vtkEmptyCell * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkEmptyCell_get_ptr (vtkEmptyCell * sself) {return sself ;}
 extern "C" int vtk_empty_cell_get_cell_type(vtkEmptyCell* sself) { return sself->GetCellType(); }
 extern "C" int vtk_empty_cell_get_cell_dimension(vtkEmptyCell* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_empty_cell_get_number_of_edges(vtkEmptyCell* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_empty_cell_get_number_of_faces(vtkEmptyCell* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkExplicitStructuredGrid * vtkExplicitStructuredGrid_new () {return vtkExplicitStructuredGrid :: New () ;}
 extern "C" void vtkExplicitStructuredGrid_destructor (vtkExplicitStructuredGrid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkExplicitStructuredGrid_get_ptr (vtkExplicitStructuredGrid * sself) {return sself ;}
 extern "C" int vtk_explicit_structured_grid_get_data_object_type(vtkExplicitStructuredGrid* sself) { return sself->GetDataObjectType(); }
 extern "C" void vtk_explicit_structured_grid_initialize(vtkExplicitStructuredGrid* sself) { sself->Initialize(); }
 extern "C" int vtk_explicit_structured_grid_get_cell_type(vtkExplicitStructuredGrid* sself, long long cellId) { return sself->GetCellType(cellId); }
@@ -766,7 +717,6 @@ extern "C" unsigned long vtk_explicit_structured_grid_get_actual_memory_size(vtk
 extern "C" void vtk_explicit_structured_grid_check_and_reorder_faces(vtkExplicitStructuredGrid* sself) { sself->CheckAndReorderFaces(); }
 extern "C" vtkExtractStructuredGridHelper * vtkExtractStructuredGridHelper_new () {return vtkExtractStructuredGridHelper :: New () ;}
 extern "C" void vtkExtractStructuredGridHelper_destructor (vtkExtractStructuredGridHelper * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkExtractStructuredGridHelper_get_ptr (vtkExtractStructuredGridHelper * sself) {return sself ;}
 extern "C" bool vtk_extract_structured_grid_helper_is_valid(vtkExtractStructuredGridHelper* sself) { return sself->IsValid(); }
 extern "C" int vtk_extract_structured_grid_helper_get_size(vtkExtractStructuredGridHelper* sself, const int dim) { return sself->GetSize(dim); }
 extern "C" int vtk_extract_structured_grid_helper_get_mapped_index(vtkExtractStructuredGridHelper* sself, int dim, int outIdx) { return sself->GetMappedIndex(dim, outIdx); }
@@ -775,7 +725,6 @@ extern "C" int vtk_extract_structured_grid_helper_get_mapped_extent_value(vtkExt
 extern "C" int vtk_extract_structured_grid_helper_get_mapped_extent_value_from_index(vtkExtractStructuredGridHelper* sself, int dim, int outIdx) { return sself->GetMappedExtentValueFromIndex(dim, outIdx); }
 extern "C" vtkFieldData * vtkFieldData_new () {return vtkFieldData :: New () ;}
 extern "C" void vtkFieldData_destructor (vtkFieldData * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkFieldData_get_ptr (vtkFieldData * sself) {return sself ;}
 extern "C" void vtk_field_data_initialize(vtkFieldData* sself) { sself->Initialize(); }
 extern "C" int vtk_field_data_allocate(vtkFieldData* sself, long long sz, long long ext) { return sself->Allocate(sz, ext); }
 extern "C" void vtk_field_data_allocate_arrays(vtkFieldData* sself, int num) { sself->AllocateArrays(num); }
@@ -798,7 +747,6 @@ extern "C" long long vtk_field_data_get_number_of_tuples(vtkFieldData* sself) { 
 extern "C" void vtk_field_data_set_number_of_tuples(vtkFieldData* sself, const long long number) { sself->SetNumberOfTuples(number); }
 extern "C" vtkGenericAttributeCollection * vtkGenericAttributeCollection_new () {return vtkGenericAttributeCollection :: New () ;}
 extern "C" void vtkGenericAttributeCollection_destructor (vtkGenericAttributeCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGenericAttributeCollection_get_ptr (vtkGenericAttributeCollection * sself) {return sself ;}
 extern "C" int vtk_generic_attribute_collection_get_number_of_attributes(vtkGenericAttributeCollection* sself) { return sself->GetNumberOfAttributes(); }
 extern "C" int vtk_generic_attribute_collection_get_number_of_components(vtkGenericAttributeCollection* sself) { return sself->GetNumberOfComponents(); }
 extern "C" int vtk_generic_attribute_collection_get_number_of_point_centered_components(vtkGenericAttributeCollection* sself) { return sself->GetNumberOfPointCenteredComponents(); }
@@ -817,7 +765,6 @@ extern "C" int vtk_generic_attribute_collection_get_number_of_attributes_to_inte
 extern "C" void vtk_generic_attribute_collection_set_attributes_to_interpolate_to_all(vtkGenericAttributeCollection* sself) { sself->SetAttributesToInterpolateToAll(); }
 extern "C" vtkGenericCell * vtkGenericCell_new () {return vtkGenericCell :: New () ;}
 extern "C" void vtkGenericCell_destructor (vtkGenericCell * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGenericCell_get_ptr (vtkGenericCell * sself) {return sself ;}
 extern "C" int vtk_generic_cell_get_cell_type(vtkGenericCell* sself) { return sself->GetCellType(); }
 extern "C" int vtk_generic_cell_get_cell_dimension(vtkGenericCell* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_generic_cell_get_number_of_edges(vtkGenericCell* sself) { return sself->GetNumberOfEdges(); }
@@ -873,7 +820,6 @@ extern "C" void vtk_generic_cell_set_cell_type_to_bezier_hexahedron(vtkGenericCe
 extern "C" void vtk_generic_cell_set_cell_type_to_bezier_wedge(vtkGenericCell* sself) { sself->SetCellTypeToBezierWedge(); }
 extern "C" vtkGenericEdgeTable * vtkGenericEdgeTable_new () {return vtkGenericEdgeTable :: New () ;}
 extern "C" void vtkGenericEdgeTable_destructor (vtkGenericEdgeTable * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGenericEdgeTable_get_ptr (vtkGenericEdgeTable * sself) {return sself ;}
 extern "C" void vtk_generic_edge_table_insert_edge(vtkGenericEdgeTable* sself, long long e1, long long e2, long long cellId, int ref, long long& ptId) { sself->InsertEdge(e1, e2, cellId, ref, ptId); }
 extern "C" int vtk_generic_edge_table_remove_edge(vtkGenericEdgeTable* sself, long long e1, long long e2) { return sself->RemoveEdge(e1, e2); }
 extern "C" int vtk_generic_edge_table_check_edge(vtkGenericEdgeTable* sself, long long e1, long long e2, long long& ptId) { return sself->CheckEdge(e1, e2, ptId); }
@@ -889,7 +835,6 @@ extern "C" void vtk_generic_edge_table_dump_table(vtkGenericEdgeTable* sself) { 
 extern "C" void vtk_generic_edge_table_load_factor(vtkGenericEdgeTable* sself) { sself->LoadFactor(); }
 extern "C" vtkGenericInterpolatedVelocityField * vtkGenericInterpolatedVelocityField_new () {return vtkGenericInterpolatedVelocityField :: New () ;}
 extern "C" void vtkGenericInterpolatedVelocityField_destructor (vtkGenericInterpolatedVelocityField * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGenericInterpolatedVelocityField_get_ptr (vtkGenericInterpolatedVelocityField * sself) {return sself ;}
 extern "C" void vtk_generic_interpolated_velocity_field_clear_last_cell(vtkGenericInterpolatedVelocityField* sself) { sself->ClearLastCell(); }
 extern "C" int vtk_generic_interpolated_velocity_field_get_caching(vtkGenericInterpolatedVelocityField* sself) { return sself->GetCaching(); }
 extern "C" void vtk_generic_interpolated_velocity_field_set_caching(vtkGenericInterpolatedVelocityField* sself, int _arg) { sself->SetCaching(_arg); }
@@ -900,13 +845,11 @@ extern "C" int vtk_generic_interpolated_velocity_field_get_cache_miss(vtkGeneric
 extern "C" void vtk_generic_interpolated_velocity_field_select_vectors(vtkGenericInterpolatedVelocityField* sself, const char* fieldName) { sself->SelectVectors(fieldName); }
 extern "C" vtkGeometricErrorMetric * vtkGeometricErrorMetric_new () {return vtkGeometricErrorMetric :: New () ;}
 extern "C" void vtkGeometricErrorMetric_destructor (vtkGeometricErrorMetric * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGeometricErrorMetric_get_ptr (vtkGeometricErrorMetric * sself) {return sself ;}
 extern "C" double vtk_geometric_error_metric_get_absolute_geometric_tolerance(vtkGeometricErrorMetric* sself) { return sself->GetAbsoluteGeometricTolerance(); }
 extern "C" void vtk_geometric_error_metric_set_absolute_geometric_tolerance(vtkGeometricErrorMetric* sself, double value) { sself->SetAbsoluteGeometricTolerance(value); }
 extern "C" int vtk_geometric_error_metric_get_relative(vtkGeometricErrorMetric* sself) { return sself->GetRelative(); }
 extern "C" vtkGraphEdge * vtkGraphEdge_new () {return vtkGraphEdge :: New () ;}
 extern "C" void vtkGraphEdge_destructor (vtkGraphEdge * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGraphEdge_get_ptr (vtkGraphEdge * sself) {return sself ;}
 extern "C" void vtk_graph_edge_set_source(vtkGraphEdge* sself, long long _arg) { sself->SetSource(_arg); }
 extern "C" long long vtk_graph_edge_get_source(vtkGraphEdge* sself) { return sself->GetSource(); }
 extern "C" void vtk_graph_edge_set_target(vtkGraphEdge* sself, long long _arg) { sself->SetTarget(_arg); }
@@ -915,28 +858,22 @@ extern "C" void vtk_graph_edge_set_id(vtkGraphEdge* sself, long long _arg) { sse
 extern "C" long long vtk_graph_edge_get_id(vtkGraphEdge* sself) { return sself->GetId(); }
 extern "C" vtkGraphInternals * vtkGraphInternals_new () {return vtkGraphInternals :: New () ;}
 extern "C" void vtkGraphInternals_destructor (vtkGraphInternals * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkGraphInternals_get_ptr (vtkGraphInternals * sself) {return sself ;}
 extern "C" vtkHexagonalPrism * vtkHexagonalPrism_new () {return vtkHexagonalPrism :: New () ;}
 extern "C" void vtkHexagonalPrism_destructor (vtkHexagonalPrism * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHexagonalPrism_get_ptr (vtkHexagonalPrism * sself) {return sself ;}
 extern "C" int vtk_hexagonal_prism_get_cell_type(vtkHexagonalPrism* sself) { return sself->GetCellType(); }
 extern "C" int vtk_hexagonal_prism_get_number_of_edges(vtkHexagonalPrism* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_hexagonal_prism_get_number_of_faces(vtkHexagonalPrism* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkHexahedron * vtkHexahedron_new () {return vtkHexahedron :: New () ;}
 extern "C" void vtkHexahedron_destructor (vtkHexahedron * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHexahedron_get_ptr (vtkHexahedron * sself) {return sself ;}
 extern "C" int vtk_hexahedron_get_cell_type(vtkHexahedron* sself) { return sself->GetCellType(); }
 extern "C" int vtk_hexahedron_get_number_of_edges(vtkHexahedron* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_hexahedron_get_number_of_faces(vtkHexahedron* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkHierarchicalBoxDataIterator * vtkHierarchicalBoxDataIterator_new () {return vtkHierarchicalBoxDataIterator :: New () ;}
 extern "C" void vtkHierarchicalBoxDataIterator_destructor (vtkHierarchicalBoxDataIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHierarchicalBoxDataIterator_get_ptr (vtkHierarchicalBoxDataIterator * sself) {return sself ;}
 extern "C" vtkHierarchicalBoxDataSet * vtkHierarchicalBoxDataSet_new () {return vtkHierarchicalBoxDataSet :: New () ;}
 extern "C" void vtkHierarchicalBoxDataSet_destructor (vtkHierarchicalBoxDataSet * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHierarchicalBoxDataSet_get_ptr (vtkHierarchicalBoxDataSet * sself) {return sself ;}
 extern "C" vtkHyperTreeGrid * vtkHyperTreeGrid_new () {return vtkHyperTreeGrid :: New () ;}
 extern "C" void vtkHyperTreeGrid_destructor (vtkHyperTreeGrid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGrid_get_ptr (vtkHyperTreeGrid * sself) {return sself ;}
 extern "C" void vtk_hyper_tree_grid_set_mode_squeeze(vtkHyperTreeGrid* sself, const char* _arg) { sself->SetModeSqueeze(_arg); }
 extern "C" void vtk_hyper_tree_grid_squeeze(vtkHyperTreeGrid* sself) { sself->Squeeze(); }
 extern "C" int vtk_hyper_tree_grid_get_data_object_type(vtkHyperTreeGrid* sself) { return sself->GetDataObjectType(); }
@@ -986,7 +923,6 @@ extern "C" bool vtk_hyper_tree_grid_has_any_ghost_cells(vtkHyperTreeGrid* sself)
 extern "C" long long vtk_hyper_tree_grid_get_number_of_elements(vtkHyperTreeGrid* sself, int type) { return sself->GetNumberOfElements(type); }
 extern "C" vtkHyperTreeGridNonOrientedCursor * vtkHyperTreeGridNonOrientedCursor_new () {return vtkHyperTreeGridNonOrientedCursor :: New () ;}
 extern "C" void vtkHyperTreeGridNonOrientedCursor_destructor (vtkHyperTreeGridNonOrientedCursor * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGridNonOrientedCursor_get_ptr (vtkHyperTreeGridNonOrientedCursor * sself) {return sself ;}
 extern "C" bool vtk_hyper_tree_grid_non_oriented_cursor_has_tree(vtkHyperTreeGridNonOrientedCursor* sself) { return sself->HasTree(); }
 extern "C" long long vtk_hyper_tree_grid_non_oriented_cursor_get_vertex_id(vtkHyperTreeGridNonOrientedCursor* sself) { return sself->GetVertexId(); }
 extern "C" long long vtk_hyper_tree_grid_non_oriented_cursor_get_global_node_index(vtkHyperTreeGridNonOrientedCursor* sself) { return sself->GetGlobalNodeIndex(); }
@@ -1005,7 +941,6 @@ extern "C" void vtk_hyper_tree_grid_non_oriented_cursor_to_root(vtkHyperTreeGrid
 extern "C" void vtk_hyper_tree_grid_non_oriented_cursor_to_parent(vtkHyperTreeGridNonOrientedCursor* sself) { sself->ToParent(); }
 extern "C" vtkHyperTreeGridNonOrientedGeometryCursor * vtkHyperTreeGridNonOrientedGeometryCursor_new () {return vtkHyperTreeGridNonOrientedGeometryCursor :: New () ;}
 extern "C" void vtkHyperTreeGridNonOrientedGeometryCursor_destructor (vtkHyperTreeGridNonOrientedGeometryCursor * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGridNonOrientedGeometryCursor_get_ptr (vtkHyperTreeGridNonOrientedGeometryCursor * sself) {return sself ;}
 extern "C" bool vtk_hyper_tree_grid_non_oriented_geometry_cursor_has_tree(vtkHyperTreeGridNonOrientedGeometryCursor* sself) { return sself->HasTree(); }
 extern "C" long long vtk_hyper_tree_grid_non_oriented_geometry_cursor_get_vertex_id(vtkHyperTreeGridNonOrientedGeometryCursor* sself) { return sself->GetVertexId(); }
 extern "C" long long vtk_hyper_tree_grid_non_oriented_geometry_cursor_get_global_node_index(vtkHyperTreeGridNonOrientedGeometryCursor* sself) { return sself->GetGlobalNodeIndex(); }
@@ -1024,19 +959,14 @@ extern "C" void vtk_hyper_tree_grid_non_oriented_geometry_cursor_to_root(vtkHype
 extern "C" void vtk_hyper_tree_grid_non_oriented_geometry_cursor_to_parent(vtkHyperTreeGridNonOrientedGeometryCursor* sself) { sself->ToParent(); }
 extern "C" vtkHyperTreeGridNonOrientedMooreSuperCursor * vtkHyperTreeGridNonOrientedMooreSuperCursor_new () {return vtkHyperTreeGridNonOrientedMooreSuperCursor :: New () ;}
 extern "C" void vtkHyperTreeGridNonOrientedMooreSuperCursor_destructor (vtkHyperTreeGridNonOrientedMooreSuperCursor * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGridNonOrientedMooreSuperCursor_get_ptr (vtkHyperTreeGridNonOrientedMooreSuperCursor * sself) {return sself ;}
 extern "C" vtkHyperTreeGridNonOrientedMooreSuperCursorLight * vtkHyperTreeGridNonOrientedMooreSuperCursorLight_new () {return vtkHyperTreeGridNonOrientedMooreSuperCursorLight :: New () ;}
 extern "C" void vtkHyperTreeGridNonOrientedMooreSuperCursorLight_destructor (vtkHyperTreeGridNonOrientedMooreSuperCursorLight * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGridNonOrientedMooreSuperCursorLight_get_ptr (vtkHyperTreeGridNonOrientedMooreSuperCursorLight * sself) {return sself ;}
 extern "C" vtkHyperTreeGridNonOrientedVonNeumannSuperCursor * vtkHyperTreeGridNonOrientedVonNeumannSuperCursor_new () {return vtkHyperTreeGridNonOrientedVonNeumannSuperCursor :: New () ;}
 extern "C" void vtkHyperTreeGridNonOrientedVonNeumannSuperCursor_destructor (vtkHyperTreeGridNonOrientedVonNeumannSuperCursor * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGridNonOrientedVonNeumannSuperCursor_get_ptr (vtkHyperTreeGridNonOrientedVonNeumannSuperCursor * sself) {return sself ;}
 extern "C" vtkHyperTreeGridNonOrientedVonNeumannSuperCursorLight * vtkHyperTreeGridNonOrientedVonNeumannSuperCursorLight_new () {return vtkHyperTreeGridNonOrientedVonNeumannSuperCursorLight :: New () ;}
 extern "C" void vtkHyperTreeGridNonOrientedVonNeumannSuperCursorLight_destructor (vtkHyperTreeGridNonOrientedVonNeumannSuperCursorLight * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGridNonOrientedVonNeumannSuperCursorLight_get_ptr (vtkHyperTreeGridNonOrientedVonNeumannSuperCursorLight * sself) {return sself ;}
 extern "C" vtkHyperTreeGridOrientedCursor * vtkHyperTreeGridOrientedCursor_new () {return vtkHyperTreeGridOrientedCursor :: New () ;}
 extern "C" void vtkHyperTreeGridOrientedCursor_destructor (vtkHyperTreeGridOrientedCursor * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGridOrientedCursor_get_ptr (vtkHyperTreeGridOrientedCursor * sself) {return sself ;}
 extern "C" bool vtk_hyper_tree_grid_oriented_cursor_has_tree(vtkHyperTreeGridOrientedCursor* sself) { return sself->HasTree(); }
 extern "C" long long vtk_hyper_tree_grid_oriented_cursor_get_vertex_id(vtkHyperTreeGridOrientedCursor* sself) { return sself->GetVertexId(); }
 extern "C" long long vtk_hyper_tree_grid_oriented_cursor_get_global_node_index(vtkHyperTreeGridOrientedCursor* sself) { return sself->GetGlobalNodeIndex(); }
@@ -1053,7 +983,6 @@ extern "C" unsigned int vtk_hyper_tree_grid_oriented_cursor_get_level(vtkHyperTr
 extern "C" void vtk_hyper_tree_grid_oriented_cursor_to_child(vtkHyperTreeGridOrientedCursor* sself, unsigned char ichild) { sself->ToChild(ichild); }
 extern "C" vtkHyperTreeGridOrientedGeometryCursor * vtkHyperTreeGridOrientedGeometryCursor_new () {return vtkHyperTreeGridOrientedGeometryCursor :: New () ;}
 extern "C" void vtkHyperTreeGridOrientedGeometryCursor_destructor (vtkHyperTreeGridOrientedGeometryCursor * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHyperTreeGridOrientedGeometryCursor_get_ptr (vtkHyperTreeGridOrientedGeometryCursor * sself) {return sself ;}
 extern "C" bool vtk_hyper_tree_grid_oriented_geometry_cursor_has_tree(vtkHyperTreeGridOrientedGeometryCursor* sself) { return sself->HasTree(); }
 extern "C" long long vtk_hyper_tree_grid_oriented_geometry_cursor_get_vertex_id(vtkHyperTreeGridOrientedGeometryCursor* sself) { return sself->GetVertexId(); }
 extern "C" long long vtk_hyper_tree_grid_oriented_geometry_cursor_get_global_node_index(vtkHyperTreeGridOrientedGeometryCursor* sself) { return sself->GetGlobalNodeIndex(); }
@@ -1070,7 +999,6 @@ extern "C" unsigned int vtk_hyper_tree_grid_oriented_geometry_cursor_get_level(v
 extern "C" void vtk_hyper_tree_grid_oriented_geometry_cursor_to_child(vtkHyperTreeGridOrientedGeometryCursor* sself, unsigned char ichild) { sself->ToChild(ichild); }
 extern "C" vtkImageData * vtkImageData_new () {return vtkImageData :: New () ;}
 extern "C" void vtkImageData_destructor (vtkImageData * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImageData_get_ptr (vtkImageData * sself) {return sself ;}
 extern "C" int vtk_image_data_get_data_object_type(vtkImageData* sself) { return sself->GetDataObjectType(); }
 extern "C" long long vtk_image_data_get_number_of_cells(vtkImageData* sself) { return sself->GetNumberOfCells(); }
 extern "C" long long vtk_image_data_get_number_of_points(vtkImageData* sself) { return sself->GetNumberOfPoints(); }
@@ -1099,10 +1027,8 @@ extern "C" void vtk_image_data_prepare_for_new_data(vtkImageData* sself) { sself
 extern "C" int vtk_image_data_get_extent_type(vtkImageData* sself) { return sself->GetExtentType(); }
 extern "C" vtkImageTransform * vtkImageTransform_new () {return vtkImageTransform :: New () ;}
 extern "C" void vtkImageTransform_destructor (vtkImageTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImageTransform_get_ptr (vtkImageTransform * sself) {return sself ;}
 extern "C" vtkImplicitBoolean * vtkImplicitBoolean_new () {return vtkImplicitBoolean :: New () ;}
 extern "C" void vtkImplicitBoolean_destructor (vtkImplicitBoolean * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImplicitBoolean_get_ptr (vtkImplicitBoolean * sself) {return sself ;}
 extern "C" unsigned long vtk_implicit_boolean_get_m_time(vtkImplicitBoolean* sself) { return sself->GetMTime(); }
 extern "C" void vtk_implicit_boolean_set_operation_type(vtkImplicitBoolean* sself, int _arg) { sself->SetOperationType(_arg); }
 extern "C" int vtk_implicit_boolean_get_operation_type_min_value(vtkImplicitBoolean* sself) { return sself->GetOperationTypeMinValue(); }
@@ -1115,17 +1041,14 @@ extern "C" void vtk_implicit_boolean_set_operation_type_to_union_of_magnitudes(v
 extern "C" const char* vtk_implicit_boolean_get_operation_type_as_string(vtkImplicitBoolean* sself) { return sself->GetOperationTypeAsString(); }
 extern "C" vtkImplicitDataSet * vtkImplicitDataSet_new () {return vtkImplicitDataSet :: New () ;}
 extern "C" void vtkImplicitDataSet_destructor (vtkImplicitDataSet * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImplicitDataSet_get_ptr (vtkImplicitDataSet * sself) {return sself ;}
 extern "C" unsigned long vtk_implicit_data_set_get_m_time(vtkImplicitDataSet* sself) { return sself->GetMTime(); }
 extern "C" void vtk_implicit_data_set_set_out_value(vtkImplicitDataSet* sself, double _arg) { sself->SetOutValue(_arg); }
 extern "C" double vtk_implicit_data_set_get_out_value(vtkImplicitDataSet* sself) { return sself->GetOutValue(); }
 extern "C" void vtk_implicit_data_set_set_out_gradient(vtkImplicitDataSet* sself, double _arg1, double _arg2, double _arg3) { sself->SetOutGradient(_arg1, _arg2, _arg3); }
 extern "C" vtkImplicitFunctionCollection * vtkImplicitFunctionCollection_new () {return vtkImplicitFunctionCollection :: New () ;}
 extern "C" void vtkImplicitFunctionCollection_destructor (vtkImplicitFunctionCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImplicitFunctionCollection_get_ptr (vtkImplicitFunctionCollection * sself) {return sself ;}
 extern "C" vtkImplicitHalo * vtkImplicitHalo_new () {return vtkImplicitHalo :: New () ;}
 extern "C" void vtkImplicitHalo_destructor (vtkImplicitHalo * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImplicitHalo_get_ptr (vtkImplicitHalo * sself) {return sself ;}
 extern "C" void vtk_implicit_halo_set_radius(vtkImplicitHalo* sself, double _arg) { sself->SetRadius(_arg); }
 extern "C" double vtk_implicit_halo_get_radius(vtkImplicitHalo* sself) { return sself->GetRadius(); }
 extern "C" void vtk_implicit_halo_set_center(vtkImplicitHalo* sself, double _arg1, double _arg2, double _arg3) { sself->SetCenter(_arg1, _arg2, _arg3); }
@@ -1133,7 +1056,6 @@ extern "C" void vtk_implicit_halo_set_fade_out(vtkImplicitHalo* sself, double _a
 extern "C" double vtk_implicit_halo_get_fade_out(vtkImplicitHalo* sself) { return sself->GetFadeOut(); }
 extern "C" vtkImplicitSelectionLoop * vtkImplicitSelectionLoop_new () {return vtkImplicitSelectionLoop :: New () ;}
 extern "C" void vtkImplicitSelectionLoop_destructor (vtkImplicitSelectionLoop * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImplicitSelectionLoop_get_ptr (vtkImplicitSelectionLoop * sself) {return sself ;}
 extern "C" void vtk_implicit_selection_loop_set_automatic_normal_generation(vtkImplicitSelectionLoop* sself, int _arg) { sself->SetAutomaticNormalGeneration(_arg); }
 extern "C" int vtk_implicit_selection_loop_get_automatic_normal_generation(vtkImplicitSelectionLoop* sself) { return sself->GetAutomaticNormalGeneration(); }
 extern "C" void vtk_implicit_selection_loop_automatic_normal_generation_on(vtkImplicitSelectionLoop* sself) { sself->AutomaticNormalGenerationOn(); }
@@ -1142,7 +1064,6 @@ extern "C" void vtk_implicit_selection_loop_set_normal(vtkImplicitSelectionLoop*
 extern "C" unsigned long vtk_implicit_selection_loop_get_m_time(vtkImplicitSelectionLoop* sself) { return sself->GetMTime(); }
 extern "C" vtkImplicitSum * vtkImplicitSum_new () {return vtkImplicitSum :: New () ;}
 extern "C" void vtkImplicitSum_destructor (vtkImplicitSum * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImplicitSum_get_ptr (vtkImplicitSum * sself) {return sself ;}
 extern "C" unsigned long vtk_implicit_sum_get_m_time(vtkImplicitSum* sself) { return sself->GetMTime(); }
 extern "C" void vtk_implicit_sum_remove_all_functions(vtkImplicitSum* sself) { sself->RemoveAllFunctions(); }
 extern "C" void vtk_implicit_sum_set_normalize_by_weight(vtkImplicitSum* sself, int _arg) { sself->SetNormalizeByWeight(_arg); }
@@ -1151,25 +1072,21 @@ extern "C" void vtk_implicit_sum_normalize_by_weight_on(vtkImplicitSum* sself) {
 extern "C" void vtk_implicit_sum_normalize_by_weight_off(vtkImplicitSum* sself) { sself->NormalizeByWeightOff(); }
 extern "C" vtkImplicitVolume * vtkImplicitVolume_new () {return vtkImplicitVolume :: New () ;}
 extern "C" void vtkImplicitVolume_destructor (vtkImplicitVolume * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImplicitVolume_get_ptr (vtkImplicitVolume * sself) {return sself ;}
 extern "C" unsigned long vtk_implicit_volume_get_m_time(vtkImplicitVolume* sself) { return sself->GetMTime(); }
 extern "C" void vtk_implicit_volume_set_out_value(vtkImplicitVolume* sself, double _arg) { sself->SetOutValue(_arg); }
 extern "C" double vtk_implicit_volume_get_out_value(vtkImplicitVolume* sself) { return sself->GetOutValue(); }
 extern "C" void vtk_implicit_volume_set_out_gradient(vtkImplicitVolume* sself, double _arg1, double _arg2, double _arg3) { sself->SetOutGradient(_arg1, _arg2, _arg3); }
 extern "C" vtkImplicitWindowFunction * vtkImplicitWindowFunction_new () {return vtkImplicitWindowFunction :: New () ;}
 extern "C" void vtkImplicitWindowFunction_destructor (vtkImplicitWindowFunction * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkImplicitWindowFunction_get_ptr (vtkImplicitWindowFunction * sself) {return sself ;}
 extern "C" void vtk_implicit_window_function_set_window_range(vtkImplicitWindowFunction* sself, double _arg1, double _arg2) { sself->SetWindowRange(_arg1, _arg2); }
 extern "C" void vtk_implicit_window_function_set_window_values(vtkImplicitWindowFunction* sself, double _arg1, double _arg2) { sself->SetWindowValues(_arg1, _arg2); }
 extern "C" unsigned long vtk_implicit_window_function_get_m_time(vtkImplicitWindowFunction* sself) { return sself->GetMTime(); }
 extern "C" vtkInEdgeIterator * vtkInEdgeIterator_new () {return vtkInEdgeIterator :: New () ;}
 extern "C" void vtkInEdgeIterator_destructor (vtkInEdgeIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkInEdgeIterator_get_ptr (vtkInEdgeIterator * sself) {return sself ;}
 extern "C" long long vtk_in_edge_iterator_get_vertex(vtkInEdgeIterator* sself) { return sself->GetVertex(); }
 extern "C" bool vtk_in_edge_iterator_has_next(vtkInEdgeIterator* sself) { return sself->HasNext(); }
 extern "C" vtkIncrementalOctreeNode * vtkIncrementalOctreeNode_new () {return vtkIncrementalOctreeNode :: New () ;}
 extern "C" void vtkIncrementalOctreeNode_destructor (vtkIncrementalOctreeNode * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkIncrementalOctreeNode_get_ptr (vtkIncrementalOctreeNode * sself) {return sself ;}
 extern "C" int vtk_incremental_octree_node_get_number_of_points(vtkIncrementalOctreeNode* sself) { return sself->GetNumberOfPoints(); }
 extern "C" void vtk_incremental_octree_node_delete_child_nodes(vtkIncrementalOctreeNode* sself) { sself->DeleteChildNodes(); }
 extern "C" void vtk_incremental_octree_node_set_bounds(vtkIncrementalOctreeNode* sself, double x1, double x2, double y1, double y2, double z1, double z2) { sself->SetBounds(x1, x2, y1, y2, z1, z2); }
@@ -1178,7 +1095,6 @@ extern "C" int vtk_incremental_octree_node_get_number_of_levels(vtkIncrementalOc
 extern "C" int vtk_incremental_octree_node_get_id(vtkIncrementalOctreeNode* sself) { return sself->GetID(); }
 extern "C" vtkIncrementalOctreePointLocator * vtkIncrementalOctreePointLocator_new () {return vtkIncrementalOctreePointLocator :: New () ;}
 extern "C" void vtkIncrementalOctreePointLocator_destructor (vtkIncrementalOctreePointLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkIncrementalOctreePointLocator_get_ptr (vtkIncrementalOctreePointLocator * sself) {return sself ;}
 extern "C" void vtk_incremental_octree_point_locator_set_max_points_per_leaf(vtkIncrementalOctreePointLocator* sself, int _arg) { sself->SetMaxPointsPerLeaf(_arg); }
 extern "C" int vtk_incremental_octree_point_locator_get_max_points_per_leaf_min_value(vtkIncrementalOctreePointLocator* sself) { return sself->GetMaxPointsPerLeafMinValue(); }
 extern "C" int vtk_incremental_octree_point_locator_get_max_points_per_leaf_max_value(vtkIncrementalOctreePointLocator* sself) { return sself->GetMaxPointsPerLeafMaxValue(); }
@@ -1197,7 +1113,6 @@ extern "C" long long vtk_incremental_octree_point_locator_is_inserted_point(vtkI
 extern "C" int vtk_incremental_octree_point_locator_get_number_of_levels(vtkIncrementalOctreePointLocator* sself) { return sself->GetNumberOfLevels(); }
 extern "C" vtkIterativeClosestPointTransform * vtkIterativeClosestPointTransform_new () {return vtkIterativeClosestPointTransform :: New () ;}
 extern "C" void vtkIterativeClosestPointTransform_destructor (vtkIterativeClosestPointTransform * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkIterativeClosestPointTransform_get_ptr (vtkIterativeClosestPointTransform * sself) {return sself ;}
 extern "C" void vtk_iterative_closest_point_transform_set_maximum_number_of_iterations(vtkIterativeClosestPointTransform* sself, int _arg) { sself->SetMaximumNumberOfIterations(_arg); }
 extern "C" int vtk_iterative_closest_point_transform_get_maximum_number_of_iterations(vtkIterativeClosestPointTransform* sself) { return sself->GetMaximumNumberOfIterations(); }
 extern "C" int vtk_iterative_closest_point_transform_get_number_of_iterations(vtkIterativeClosestPointTransform* sself) { return sself->GetNumberOfIterations(); }
@@ -1224,7 +1139,6 @@ extern "C" void vtk_iterative_closest_point_transform_start_by_matching_centroid
 extern "C" void vtk_iterative_closest_point_transform_inverse(vtkIterativeClosestPointTransform* sself) { sself->Inverse(); }
 extern "C" vtkKdNode * vtkKdNode_new () {return vtkKdNode :: New () ;}
 extern "C" void vtkKdNode_destructor (vtkKdNode * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkKdNode_get_ptr (vtkKdNode * sself) {return sself ;}
 extern "C" void vtk_kd_node_set_dim(vtkKdNode* sself, int _arg) { sself->SetDim(_arg); }
 extern "C" int vtk_kd_node_get_dim(vtkKdNode* sself) { return sself->GetDim(); }
 extern "C" double vtk_kd_node_get_division_position(vtkKdNode* sself) { return sself->GetDivisionPosition(); }
@@ -1249,7 +1163,6 @@ extern "C" void vtk_kd_node_print_node(vtkKdNode* sself, int depth) { sself->Pri
 extern "C" void vtk_kd_node_print_verbose_node(vtkKdNode* sself, int depth) { sself->PrintVerboseNode(depth); }
 extern "C" vtkKdTree * vtkKdTree_new () {return vtkKdTree :: New () ;}
 extern "C" void vtkKdTree_destructor (vtkKdTree * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkKdTree_get_ptr (vtkKdTree * sself) {return sself ;}
 extern "C" void vtk_kd_tree_timing_on(vtkKdTree* sself) { sself->TimingOn(); }
 extern "C" void vtk_kd_tree_timing_off(vtkKdTree* sself) { sself->TimingOff(); }
 extern "C" void vtk_kd_tree_set_timing(vtkKdTree* sself, int _arg) { sself->SetTiming(_arg); }
@@ -1292,39 +1205,30 @@ extern "C" int vtk_kd_tree_new_geometry(vtkKdTree* sself) { return sself->NewGeo
 extern "C" void vtk_kd_tree_invalidate_geometry(vtkKdTree* sself) { sself->InvalidateGeometry(); }
 extern "C" vtkKdTreePointLocator * vtkKdTreePointLocator_new () {return vtkKdTreePointLocator :: New () ;}
 extern "C" void vtkKdTreePointLocator_destructor (vtkKdTreePointLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkKdTreePointLocator_get_ptr (vtkKdTreePointLocator * sself) {return sself ;}
 extern "C" void vtk_kd_tree_point_locator_free_search_structure(vtkKdTreePointLocator* sself) { sself->FreeSearchStructure(); }
 extern "C" void vtk_kd_tree_point_locator_build_locator(vtkKdTreePointLocator* sself) { sself->BuildLocator(); }
 extern "C" vtkLagrangeCurve * vtkLagrangeCurve_new () {return vtkLagrangeCurve :: New () ;}
 extern "C" void vtkLagrangeCurve_destructor (vtkLagrangeCurve * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLagrangeCurve_get_ptr (vtkLagrangeCurve * sself) {return sself ;}
 extern "C" int vtk_lagrange_curve_get_cell_type(vtkLagrangeCurve* sself) { return sself->GetCellType(); }
 extern "C" vtkLagrangeHexahedron * vtkLagrangeHexahedron_new () {return vtkLagrangeHexahedron :: New () ;}
 extern "C" void vtkLagrangeHexahedron_destructor (vtkLagrangeHexahedron * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLagrangeHexahedron_get_ptr (vtkLagrangeHexahedron * sself) {return sself ;}
 extern "C" int vtk_lagrange_hexahedron_get_cell_type(vtkLagrangeHexahedron* sself) { return sself->GetCellType(); }
 extern "C" vtkLagrangeInterpolation * vtkLagrangeInterpolation_new () {return vtkLagrangeInterpolation :: New () ;}
 extern "C" void vtkLagrangeInterpolation_destructor (vtkLagrangeInterpolation * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLagrangeInterpolation_get_ptr (vtkLagrangeInterpolation * sself) {return sself ;}
 extern "C" vtkLagrangeQuadrilateral * vtkLagrangeQuadrilateral_new () {return vtkLagrangeQuadrilateral :: New () ;}
 extern "C" void vtkLagrangeQuadrilateral_destructor (vtkLagrangeQuadrilateral * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLagrangeQuadrilateral_get_ptr (vtkLagrangeQuadrilateral * sself) {return sself ;}
 extern "C" int vtk_lagrange_quadrilateral_get_cell_type(vtkLagrangeQuadrilateral* sself) { return sself->GetCellType(); }
 extern "C" vtkLagrangeTetra * vtkLagrangeTetra_new () {return vtkLagrangeTetra :: New () ;}
 extern "C" void vtkLagrangeTetra_destructor (vtkLagrangeTetra * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLagrangeTetra_get_ptr (vtkLagrangeTetra * sself) {return sself ;}
 extern "C" int vtk_lagrange_tetra_get_cell_type(vtkLagrangeTetra* sself) { return sself->GetCellType(); }
 extern "C" vtkLagrangeTriangle * vtkLagrangeTriangle_new () {return vtkLagrangeTriangle :: New () ;}
 extern "C" void vtkLagrangeTriangle_destructor (vtkLagrangeTriangle * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLagrangeTriangle_get_ptr (vtkLagrangeTriangle * sself) {return sself ;}
 extern "C" int vtk_lagrange_triangle_get_cell_type(vtkLagrangeTriangle* sself) { return sself->GetCellType(); }
 extern "C" vtkLagrangeWedge * vtkLagrangeWedge_new () {return vtkLagrangeWedge :: New () ;}
 extern "C" void vtkLagrangeWedge_destructor (vtkLagrangeWedge * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLagrangeWedge_get_ptr (vtkLagrangeWedge * sself) {return sself ;}
 extern "C" int vtk_lagrange_wedge_get_cell_type(vtkLagrangeWedge* sself) { return sself->GetCellType(); }
 extern "C" vtkLine * vtkLine_new () {return vtkLine :: New () ;}
 extern "C" void vtkLine_destructor (vtkLine * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkLine_get_ptr (vtkLine * sself) {return sself ;}
 extern "C" int vtk_line_get_cell_type(vtkLine* sself) { return sself->GetCellType(); }
 extern "C" int vtk_line_get_cell_dimension(vtkLine* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_line_get_number_of_edges(vtkLine* sself) { return sself->GetNumberOfEdges(); }
@@ -1332,13 +1236,10 @@ extern "C" int vtk_line_get_number_of_faces(vtkLine* sself) { return sself->GetN
 extern "C" int vtk_line_inflate(vtkLine* sself, double dist) { return sself->Inflate(dist); }
 extern "C" vtkMeanValueCoordinatesInterpolator * vtkMeanValueCoordinatesInterpolator_new () {return vtkMeanValueCoordinatesInterpolator :: New () ;}
 extern "C" void vtkMeanValueCoordinatesInterpolator_destructor (vtkMeanValueCoordinatesInterpolator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMeanValueCoordinatesInterpolator_get_ptr (vtkMeanValueCoordinatesInterpolator * sself) {return sself ;}
 extern "C" vtkMergePoints * vtkMergePoints_new () {return vtkMergePoints :: New () ;}
 extern "C" void vtkMergePoints_destructor (vtkMergePoints * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMergePoints_get_ptr (vtkMergePoints * sself) {return sself ;}
 extern "C" vtkMolecule * vtkMolecule_new () {return vtkMolecule :: New () ;}
 extern "C" void vtkMolecule_destructor (vtkMolecule * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMolecule_get_ptr (vtkMolecule * sself) {return sself ;}
 extern "C" long long vtk_molecule_get_number_of_atoms(vtkMolecule* sself) { return sself->GetNumberOfAtoms(); }
 extern "C" long long vtk_molecule_get_number_of_bonds(vtkMolecule* sself) { return sself->GetNumberOfBonds(); }
 extern "C" unsigned short vtk_molecule_get_atom_atomic_number(vtkMolecule* sself, long long atomId) { return sself->GetAtomAtomicNumber(atomId); }
@@ -1355,19 +1256,16 @@ extern "C" void vtk_molecule_set_atomic_number_array_name(vtkMolecule* sself, co
 extern "C" void vtk_molecule_set_bond_orders_array_name(vtkMolecule* sself, const char* _arg) { sself->SetBondOrdersArrayName(_arg); }
 extern "C" vtkMultiBlockDataSet * vtkMultiBlockDataSet_new () {return vtkMultiBlockDataSet :: New () ;}
 extern "C" void vtkMultiBlockDataSet_destructor (vtkMultiBlockDataSet * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMultiBlockDataSet_get_ptr (vtkMultiBlockDataSet * sself) {return sself ;}
 extern "C" void vtk_multi_block_data_set_set_number_of_blocks(vtkMultiBlockDataSet* sself, unsigned int numBlocks) { sself->SetNumberOfBlocks(numBlocks); }
 extern "C" unsigned int vtk_multi_block_data_set_get_number_of_blocks(vtkMultiBlockDataSet* sself) { return sself->GetNumberOfBlocks(); }
 extern "C" void vtk_multi_block_data_set_remove_block(vtkMultiBlockDataSet* sself, unsigned int blockno) { sself->RemoveBlock(blockno); }
 extern "C" int vtk_multi_block_data_set_has_meta_data(vtkMultiBlockDataSet* sself, unsigned int blockno) { return sself->HasMetaData(blockno); }
 extern "C" vtkMultiPieceDataSet * vtkMultiPieceDataSet_new () {return vtkMultiPieceDataSet :: New () ;}
 extern "C" void vtkMultiPieceDataSet_destructor (vtkMultiPieceDataSet * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMultiPieceDataSet_get_ptr (vtkMultiPieceDataSet * sself) {return sself ;}
 extern "C" void vtk_multi_piece_data_set_set_number_of_pieces(vtkMultiPieceDataSet* sself, unsigned int numpieces) { sself->SetNumberOfPieces(numpieces); }
 extern "C" unsigned int vtk_multi_piece_data_set_get_number_of_pieces(vtkMultiPieceDataSet* sself) { return sself->GetNumberOfPieces(); }
 extern "C" vtkMutableDirectedGraph * vtkMutableDirectedGraph_new () {return vtkMutableDirectedGraph :: New () ;}
 extern "C" void vtkMutableDirectedGraph_destructor (vtkMutableDirectedGraph * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMutableDirectedGraph_get_ptr (vtkMutableDirectedGraph * sself) {return sself ;}
 extern "C" long long vtk_mutable_directed_graph_set_number_of_vertices(vtkMutableDirectedGraph* sself, long long numVerts) { return sself->SetNumberOfVertices(numVerts); }
 extern "C" long long vtk_mutable_directed_graph_add_vertex(vtkMutableDirectedGraph* sself) { return sself->AddVertex(); }
 extern "C" void vtk_mutable_directed_graph_lazy_add_vertex(vtkMutableDirectedGraph* sself) { sself->LazyAddVertex(); }
@@ -1375,7 +1273,6 @@ extern "C" void vtk_mutable_directed_graph_remove_vertex(vtkMutableDirectedGraph
 extern "C" void vtk_mutable_directed_graph_remove_edge(vtkMutableDirectedGraph* sself, long long e) { sself->RemoveEdge(e); }
 extern "C" vtkMutableUndirectedGraph * vtkMutableUndirectedGraph_new () {return vtkMutableUndirectedGraph :: New () ;}
 extern "C" void vtkMutableUndirectedGraph_destructor (vtkMutableUndirectedGraph * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkMutableUndirectedGraph_get_ptr (vtkMutableUndirectedGraph * sself) {return sself ;}
 extern "C" long long vtk_mutable_undirected_graph_set_number_of_vertices(vtkMutableUndirectedGraph* sself, long long numVerts) { return sself->SetNumberOfVertices(numVerts); }
 extern "C" long long vtk_mutable_undirected_graph_add_vertex(vtkMutableUndirectedGraph* sself) { return sself->AddVertex(); }
 extern "C" void vtk_mutable_undirected_graph_lazy_add_vertex(vtkMutableUndirectedGraph* sself) { sself->LazyAddVertex(); }
@@ -1384,15 +1281,12 @@ extern "C" void vtk_mutable_undirected_graph_remove_vertex(vtkMutableUndirectedG
 extern "C" void vtk_mutable_undirected_graph_remove_edge(vtkMutableUndirectedGraph* sself, long long e) { sself->RemoveEdge(e); }
 extern "C" vtkNonMergingPointLocator * vtkNonMergingPointLocator_new () {return vtkNonMergingPointLocator :: New () ;}
 extern "C" void vtkNonMergingPointLocator_destructor (vtkNonMergingPointLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkNonMergingPointLocator_get_ptr (vtkNonMergingPointLocator * sself) {return sself ;}
 extern "C" long long vtk_non_merging_point_locator_is_inserted_point(vtkNonMergingPointLocator* sself, double p0, double p1, double p2) { return sself->IsInsertedPoint(p0, p1, p2); }
 extern "C" vtkNonOverlappingAMR * vtkNonOverlappingAMR_new () {return vtkNonOverlappingAMR :: New () ;}
 extern "C" void vtkNonOverlappingAMR_destructor (vtkNonOverlappingAMR * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkNonOverlappingAMR_get_ptr (vtkNonOverlappingAMR * sself) {return sself ;}
 extern "C" int vtk_non_overlapping_amr_get_data_object_type(vtkNonOverlappingAMR* sself) { return sself->GetDataObjectType(); }
 extern "C" vtkOctreePointLocator * vtkOctreePointLocator_new () {return vtkOctreePointLocator :: New () ;}
 extern "C" void vtkOctreePointLocator_destructor (vtkOctreePointLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOctreePointLocator_get_ptr (vtkOctreePointLocator * sself) {return sself ;}
 extern "C" void vtk_octree_point_locator_set_maximum_points_per_region(vtkOctreePointLocator* sself, int _arg) { sself->SetMaximumPointsPerRegion(_arg); }
 extern "C" int vtk_octree_point_locator_get_maximum_points_per_region(vtkOctreePointLocator* sself) { return sself->GetMaximumPointsPerRegion(); }
 extern "C" void vtk_octree_point_locator_set_create_cubic_octants(vtkOctreePointLocator* sself, int _arg) { sself->SetCreateCubicOctants(_arg); }
@@ -1406,7 +1300,6 @@ extern "C" long long vtk_octree_point_locator_find_closest_point(vtkOctreePointL
 extern "C" void vtk_octree_point_locator_free_search_structure(vtkOctreePointLocator* sself) { sself->FreeSearchStructure(); }
 extern "C" vtkOctreePointLocatorNode * vtkOctreePointLocatorNode_new () {return vtkOctreePointLocatorNode :: New () ;}
 extern "C" void vtkOctreePointLocatorNode_destructor (vtkOctreePointLocatorNode * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOctreePointLocatorNode_get_ptr (vtkOctreePointLocatorNode * sself) {return sself ;}
 extern "C" void vtk_octree_point_locator_node_set_number_of_points(vtkOctreePointLocatorNode* sself, int numberOfPoints) { sself->SetNumberOfPoints(numberOfPoints); }
 extern "C" int vtk_octree_point_locator_node_get_number_of_points(vtkOctreePointLocatorNode* sself) { return sself->GetNumberOfPoints(); }
 extern "C" void vtk_octree_point_locator_node_set_bounds(vtkOctreePointLocatorNode* sself, double xMin, double xMax, double yMin, double yMax, double zMin, double zMax) { sself->SetBounds(xMin, xMax, yMin, yMax, zMin, zMax); }
@@ -1418,7 +1311,6 @@ extern "C" void vtk_octree_point_locator_node_delete_child_nodes(vtkOctreePointL
 extern "C" int vtk_octree_point_locator_node_contains_point(vtkOctreePointLocatorNode* sself, double x, double y, double z, int useDataBounds) { return sself->ContainsPoint(x, y, z, useDataBounds); }
 extern "C" vtkOrderedTriangulator * vtkOrderedTriangulator_new () {return vtkOrderedTriangulator :: New () ;}
 extern "C" void vtkOrderedTriangulator_destructor (vtkOrderedTriangulator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOrderedTriangulator_get_ptr (vtkOrderedTriangulator * sself) {return sself ;}
 extern "C" void vtk_ordered_triangulator_init_triangulation(vtkOrderedTriangulator* sself, double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int numPts) { sself->InitTriangulation(xmin, xmax, ymin, ymax, zmin, zmax, numPts); }
 extern "C" void vtk_ordered_triangulator_triangulate(vtkOrderedTriangulator* sself) { sself->Triangulate(); }
 extern "C" void vtk_ordered_triangulator_template_triangulate(vtkOrderedTriangulator* sself, int cellType, int numPts, int numEdges) { sself->TemplateTriangulate(cellType, numPts, numEdges); }
@@ -1440,12 +1332,10 @@ extern "C" void vtk_ordered_triangulator_use_two_sort_ids_off(vtkOrderedTriangul
 extern "C" void vtk_ordered_triangulator_init_tetra_traversal(vtkOrderedTriangulator* sself) { sself->InitTetraTraversal(); }
 extern "C" vtkOutEdgeIterator * vtkOutEdgeIterator_new () {return vtkOutEdgeIterator :: New () ;}
 extern "C" void vtkOutEdgeIterator_destructor (vtkOutEdgeIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOutEdgeIterator_get_ptr (vtkOutEdgeIterator * sself) {return sself ;}
 extern "C" long long vtk_out_edge_iterator_get_vertex(vtkOutEdgeIterator* sself) { return sself->GetVertex(); }
 extern "C" bool vtk_out_edge_iterator_has_next(vtkOutEdgeIterator* sself) { return sself->HasNext(); }
 extern "C" vtkOverlappingAMR * vtkOverlappingAMR_new () {return vtkOverlappingAMR :: New () ;}
 extern "C" void vtkOverlappingAMR_destructor (vtkOverlappingAMR * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkOverlappingAMR_get_ptr (vtkOverlappingAMR * sself) {return sself ;}
 extern "C" void vtk_overlapping_amr_set_refinement_ratio(vtkOverlappingAMR* sself, unsigned int level, int refRatio) { sself->SetRefinementRatio(level, refRatio); }
 extern "C" int vtk_overlapping_amr_get_refinement_ratio(vtkOverlappingAMR* sself, unsigned int level) { return sself->GetRefinementRatio(level); }
 extern "C" void vtk_overlapping_amr_set_amr_block_source_index(vtkOverlappingAMR* sself, unsigned int level, unsigned int id, int sourceId) { sself->SetAMRBlockSourceIndex(level, id, sourceId); }
@@ -1456,14 +1346,12 @@ extern "C" void vtk_overlapping_amr_print_parent_child_info(vtkOverlappingAMR* s
 extern "C" void vtk_overlapping_amr_audit(vtkOverlappingAMR* sself) { sself->Audit(); }
 extern "C" vtkPartitionedDataSet * vtkPartitionedDataSet_new () {return vtkPartitionedDataSet :: New () ;}
 extern "C" void vtkPartitionedDataSet_destructor (vtkPartitionedDataSet * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPartitionedDataSet_get_ptr (vtkPartitionedDataSet * sself) {return sself ;}
 extern "C" void vtk_partitioned_data_set_set_number_of_partitions(vtkPartitionedDataSet* sself, unsigned int numPartitions) { sself->SetNumberOfPartitions(numPartitions); }
 extern "C" unsigned int vtk_partitioned_data_set_get_number_of_partitions(vtkPartitionedDataSet* sself) { return sself->GetNumberOfPartitions(); }
 extern "C" int vtk_partitioned_data_set_has_meta_data(vtkPartitionedDataSet* sself, unsigned int idx) { return sself->HasMetaData(idx); }
 extern "C" void vtk_partitioned_data_set_remove_null_partitions(vtkPartitionedDataSet* sself) { sself->RemoveNullPartitions(); }
 extern "C" vtkPartitionedDataSetCollection * vtkPartitionedDataSetCollection_new () {return vtkPartitionedDataSetCollection :: New () ;}
 extern "C" void vtkPartitionedDataSetCollection_destructor (vtkPartitionedDataSetCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPartitionedDataSetCollection_get_ptr (vtkPartitionedDataSetCollection * sself) {return sself ;}
 extern "C" void vtk_partitioned_data_set_collection_set_number_of_partitioned_data_sets(vtkPartitionedDataSetCollection* sself, unsigned int numDataSets) { sself->SetNumberOfPartitionedDataSets(numDataSets); }
 extern "C" unsigned int vtk_partitioned_data_set_collection_get_number_of_partitioned_data_sets(vtkPartitionedDataSetCollection* sself) { return sself->GetNumberOfPartitionedDataSets(); }
 extern "C" void vtk_partitioned_data_set_collection_remove_partitioned_data_set(vtkPartitionedDataSetCollection* sself, unsigned int idx) { sself->RemovePartitionedDataSet(idx); }
@@ -1474,7 +1362,6 @@ extern "C" unsigned int vtk_partitioned_data_set_collection_get_composite_index(
 extern "C" unsigned long vtk_partitioned_data_set_collection_get_m_time(vtkPartitionedDataSetCollection* sself) { return sself->GetMTime(); }
 extern "C" vtkPath * vtkPath_new () {return vtkPath :: New () ;}
 extern "C" void vtkPath_destructor (vtkPath * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPath_get_ptr (vtkPath * sself) {return sself ;}
 extern "C" int vtk_path_get_data_object_type(vtkPath* sself) { return sself->GetDataObjectType(); }
 extern "C" void vtk_path_insert_next_point(vtkPath* sself, double x, double y, double z, int code) { sself->InsertNextPoint(x, y, z, code); }
 extern "C" long long vtk_path_get_number_of_cells(vtkPath* sself) { return sself->GetNumberOfCells(); }
@@ -1483,20 +1370,17 @@ extern "C" void vtk_path_allocate(vtkPath* sself, long long size, int extSize) {
 extern "C" void vtk_path_reset(vtkPath* sself) { sself->Reset(); }
 extern "C" vtkPentagonalPrism * vtkPentagonalPrism_new () {return vtkPentagonalPrism :: New () ;}
 extern "C" void vtkPentagonalPrism_destructor (vtkPentagonalPrism * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPentagonalPrism_get_ptr (vtkPentagonalPrism * sself) {return sself ;}
 extern "C" int vtk_pentagonal_prism_get_cell_type(vtkPentagonalPrism* sself) { return sself->GetCellType(); }
 extern "C" int vtk_pentagonal_prism_get_number_of_edges(vtkPentagonalPrism* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_pentagonal_prism_get_number_of_faces(vtkPentagonalPrism* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkPerlinNoise * vtkPerlinNoise_new () {return vtkPerlinNoise :: New () ;}
 extern "C" void vtkPerlinNoise_destructor (vtkPerlinNoise * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPerlinNoise_get_ptr (vtkPerlinNoise * sself) {return sself ;}
 extern "C" void vtk_perlin_noise_set_frequency(vtkPerlinNoise* sself, double _arg1, double _arg2, double _arg3) { sself->SetFrequency(_arg1, _arg2, _arg3); }
 extern "C" void vtk_perlin_noise_set_phase(vtkPerlinNoise* sself, double _arg1, double _arg2, double _arg3) { sself->SetPhase(_arg1, _arg2, _arg3); }
 extern "C" void vtk_perlin_noise_set_amplitude(vtkPerlinNoise* sself, double _arg) { sself->SetAmplitude(_arg); }
 extern "C" double vtk_perlin_noise_get_amplitude(vtkPerlinNoise* sself) { return sself->GetAmplitude(); }
 extern "C" vtkPiecewiseFunction * vtkPiecewiseFunction_new () {return vtkPiecewiseFunction :: New () ;}
 extern "C" void vtkPiecewiseFunction_destructor (vtkPiecewiseFunction * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPiecewiseFunction_get_ptr (vtkPiecewiseFunction * sself) {return sself ;}
 extern "C" int vtk_piecewise_function_get_data_object_type(vtkPiecewiseFunction* sself) { return sself->GetDataObjectType(); }
 extern "C" int vtk_piecewise_function_get_size(vtkPiecewiseFunction* sself) { return sself->GetSize(); }
 extern "C" int vtk_piecewise_function_add_point(vtkPiecewiseFunction* sself, double x, double y) { return sself->AddPoint(x, y); }
@@ -1523,7 +1407,6 @@ extern "C" void vtk_piecewise_function_allow_duplicate_scalars_off(vtkPiecewiseF
 extern "C" int vtk_piecewise_function_estimate_min_number_of_samples(vtkPiecewiseFunction* sself, const double& x1, const double& x2) { return sself->EstimateMinNumberOfSamples(x1, x2); }
 extern "C" vtkPixel * vtkPixel_new () {return vtkPixel :: New () ;}
 extern "C" void vtkPixel_destructor (vtkPixel * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPixel_get_ptr (vtkPixel * sself) {return sself ;}
 extern "C" int vtk_pixel_get_cell_type(vtkPixel* sself) { return sself->GetCellType(); }
 extern "C" int vtk_pixel_get_cell_dimension(vtkPixel* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_pixel_get_number_of_edges(vtkPixel* sself) { return sself->GetNumberOfEdges(); }
@@ -1531,31 +1414,25 @@ extern "C" int vtk_pixel_get_number_of_faces(vtkPixel* sself) { return sself->Ge
 extern "C" int vtk_pixel_inflate(vtkPixel* sself, double dist) { return sself->Inflate(dist); }
 extern "C" vtkPlane * vtkPlane_new () {return vtkPlane :: New () ;}
 extern "C" void vtkPlane_destructor (vtkPlane * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPlane_get_ptr (vtkPlane * sself) {return sself ;}
 extern "C" void vtk_plane_set_normal(vtkPlane* sself, double _arg1, double _arg2, double _arg3) { sself->SetNormal(_arg1, _arg2, _arg3); }
 extern "C" void vtk_plane_set_origin(vtkPlane* sself, double _arg1, double _arg2, double _arg3) { sself->SetOrigin(_arg1, _arg2, _arg3); }
 extern "C" void vtk_plane_push(vtkPlane* sself, double distance) { sself->Push(distance); }
 extern "C" vtkPlaneCollection * vtkPlaneCollection_new () {return vtkPlaneCollection :: New () ;}
 extern "C" void vtkPlaneCollection_destructor (vtkPlaneCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPlaneCollection_get_ptr (vtkPlaneCollection * sself) {return sself ;}
 extern "C" int vtk_plane_collection_get_number_of_items(vtkPlaneCollection* sself) { return sself->GetNumberOfItems(); }
 extern "C" vtkPlanes * vtkPlanes_new () {return vtkPlanes :: New () ;}
 extern "C" void vtkPlanes_destructor (vtkPlanes * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPlanes_get_ptr (vtkPlanes * sself) {return sself ;}
 extern "C" void vtk_planes_set_bounds(vtkPlanes* sself, double xmin, double xmax, double ymin, double ymax, double zmin, double zmax) { sself->SetBounds(xmin, xmax, ymin, ymax, zmin, zmax); }
 extern "C" int vtk_planes_get_number_of_planes(vtkPlanes* sself) { return sself->GetNumberOfPlanes(); }
 extern "C" vtkPlanesIntersection * vtkPlanesIntersection_new () {return vtkPlanesIntersection :: New () ;}
 extern "C" void vtkPlanesIntersection_destructor (vtkPlanesIntersection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPlanesIntersection_get_ptr (vtkPlanesIntersection * sself) {return sself ;}
 extern "C" int vtk_planes_intersection_get_number_of_region_vertices(vtkPlanesIntersection* sself) { return sself->GetNumberOfRegionVertices(); }
 extern "C" int vtk_planes_intersection_get_num_region_vertices(vtkPlanesIntersection* sself) { return sself->GetNumRegionVertices(); }
 extern "C" vtkPointData * vtkPointData_new () {return vtkPointData :: New () ;}
 extern "C" void vtkPointData_destructor (vtkPointData * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPointData_get_ptr (vtkPointData * sself) {return sself ;}
 extern "C" void vtk_point_data_null_point(vtkPointData* sself, long long ptId) { sself->NullPoint(ptId); }
 extern "C" vtkPointLocator * vtkPointLocator_new () {return vtkPointLocator :: New () ;}
 extern "C" void vtkPointLocator_destructor (vtkPointLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPointLocator_get_ptr (vtkPointLocator * sself) {return sself ;}
 extern "C" void vtk_point_locator_set_divisions(vtkPointLocator* sself, int _arg1, int _arg2, int _arg3) { sself->SetDivisions(_arg1, _arg2, _arg3); }
 extern "C" void vtk_point_locator_set_number_of_points_per_bucket(vtkPointLocator* sself, int _arg) { sself->SetNumberOfPointsPerBucket(_arg); }
 extern "C" int vtk_point_locator_get_number_of_points_per_bucket_min_value(vtkPointLocator* sself) { return sself->GetNumberOfPointsPerBucketMinValue(); }
@@ -1567,7 +1444,6 @@ extern "C" void vtk_point_locator_free_search_structure(vtkPointLocator* sself) 
 extern "C" void vtk_point_locator_build_locator(vtkPointLocator* sself) { sself->BuildLocator(); }
 extern "C" vtkPointSet * vtkPointSet_new () {return vtkPointSet :: New () ;}
 extern "C" void vtkPointSet_destructor (vtkPointSet * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPointSet_get_ptr (vtkPointSet * sself) {return sself ;}
 extern "C" void vtk_point_set_set_editable(vtkPointSet* sself, bool _arg) { sself->SetEditable(_arg); }
 extern "C" bool vtk_point_set_get_editable(vtkPointSet* sself) { return sself->GetEditable(); }
 extern "C" void vtk_point_set_editable_on(vtkPointSet* sself) { sself->EditableOn(); }
@@ -1585,19 +1461,16 @@ extern "C" void vtk_point_set_compute_bounds(vtkPointSet* sself) { sself->Comput
 extern "C" void vtk_point_set_squeeze(vtkPointSet* sself) { sself->Squeeze(); }
 extern "C" vtkPointSetCellIterator * vtkPointSetCellIterator_new () {return vtkPointSetCellIterator :: New () ;}
 extern "C" void vtkPointSetCellIterator_destructor (vtkPointSetCellIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPointSetCellIterator_get_ptr (vtkPointSetCellIterator * sself) {return sself ;}
 extern "C" bool vtk_point_set_cell_iterator_is_done_with_traversal(vtkPointSetCellIterator* sself) { return sself->IsDoneWithTraversal(); }
 extern "C" long long vtk_point_set_cell_iterator_get_cell_id(vtkPointSetCellIterator* sself) { return sself->GetCellId(); }
 extern "C" vtkPointsProjectedHull * vtkPointsProjectedHull_new () {return vtkPointsProjectedHull :: New () ;}
 extern "C" void vtkPointsProjectedHull_destructor (vtkPointsProjectedHull * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPointsProjectedHull_get_ptr (vtkPointsProjectedHull * sself) {return sself ;}
 extern "C" int vtk_points_projected_hull_get_size_ccw_hull_x(vtkPointsProjectedHull* sself) { return sself->GetSizeCCWHullX(); }
 extern "C" int vtk_points_projected_hull_get_size_ccw_hull_y(vtkPointsProjectedHull* sself) { return sself->GetSizeCCWHullY(); }
 extern "C" int vtk_points_projected_hull_get_size_ccw_hull_z(vtkPointsProjectedHull* sself) { return sself->GetSizeCCWHullZ(); }
 extern "C" void vtk_points_projected_hull_update(vtkPointsProjectedHull* sself) { sself->Update(); }
 extern "C" vtkPolyData * vtkPolyData_new () {return vtkPolyData :: New () ;}
 extern "C" void vtkPolyData_destructor (vtkPolyData * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPolyData_get_ptr (vtkPolyData * sself) {return sself ;}
 extern "C" int vtk_poly_data_get_data_object_type(vtkPolyData* sself) { return sself->GetDataObjectType(); }
 extern "C" long long vtk_poly_data_get_number_of_cells(vtkPolyData* sself) { return sself->GetNumberOfCells(); }
 extern "C" int vtk_poly_data_get_cell_type(vtkPolyData* sself, long long cellId) { return sself->GetCellType(cellId); }
@@ -1641,28 +1514,23 @@ extern "C" unsigned long vtk_poly_data_get_mesh_m_time(vtkPolyData* sself) { ret
 extern "C" unsigned long vtk_poly_data_get_m_time(vtkPolyData* sself) { return sself->GetMTime(); }
 extern "C" vtkPolyDataCollection * vtkPolyDataCollection_new () {return vtkPolyDataCollection :: New () ;}
 extern "C" void vtkPolyDataCollection_destructor (vtkPolyDataCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPolyDataCollection_get_ptr (vtkPolyDataCollection * sself) {return sself ;}
 extern "C" vtkPolyLine * vtkPolyLine_new () {return vtkPolyLine :: New () ;}
 extern "C" void vtkPolyLine_destructor (vtkPolyLine * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPolyLine_get_ptr (vtkPolyLine * sself) {return sself ;}
 extern "C" int vtk_poly_line_get_cell_type(vtkPolyLine* sself) { return sself->GetCellType(); }
 extern "C" int vtk_poly_line_get_cell_dimension(vtkPolyLine* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_poly_line_get_number_of_edges(vtkPolyLine* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_poly_line_get_number_of_faces(vtkPolyLine* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkPolyPlane * vtkPolyPlane_new () {return vtkPolyPlane :: New () ;}
 extern "C" void vtkPolyPlane_destructor (vtkPolyPlane * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPolyPlane_get_ptr (vtkPolyPlane * sself) {return sself ;}
 extern "C" unsigned long vtk_poly_plane_get_m_time(vtkPolyPlane* sself) { return sself->GetMTime(); }
 extern "C" vtkPolyVertex * vtkPolyVertex_new () {return vtkPolyVertex :: New () ;}
 extern "C" void vtkPolyVertex_destructor (vtkPolyVertex * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPolyVertex_get_ptr (vtkPolyVertex * sself) {return sself ;}
 extern "C" int vtk_poly_vertex_get_cell_type(vtkPolyVertex* sself) { return sself->GetCellType(); }
 extern "C" int vtk_poly_vertex_get_cell_dimension(vtkPolyVertex* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_poly_vertex_get_number_of_edges(vtkPolyVertex* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_poly_vertex_get_number_of_faces(vtkPolyVertex* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkPolygon * vtkPolygon_new () {return vtkPolygon :: New () ;}
 extern "C" void vtkPolygon_destructor (vtkPolygon * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPolygon_get_ptr (vtkPolygon * sself) {return sself ;}
 extern "C" int vtk_polygon_get_cell_type(vtkPolygon* sself) { return sself->GetCellType(); }
 extern "C" int vtk_polygon_get_cell_dimension(vtkPolygon* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_polygon_get_number_of_edges(vtkPolygon* sself) { return sself->GetNumberOfEdges(); }
@@ -1679,7 +1547,6 @@ extern "C" int vtk_polygon_ear_cut_triangulation(vtkPolygon* sself, int measure)
 extern "C" int vtk_polygon_unbiased_ear_cut_triangulation(vtkPolygon* sself, int seed, int measure) { return sself->UnbiasedEarCutTriangulation(seed, measure); }
 extern "C" vtkPolyhedron * vtkPolyhedron_new () {return vtkPolyhedron :: New () ;}
 extern "C" void vtkPolyhedron_destructor (vtkPolyhedron * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPolyhedron_get_ptr (vtkPolyhedron * sself) {return sself ;}
 extern "C" int vtk_polyhedron_get_cell_type(vtkPolyhedron* sself) { return sself->GetCellType(); }
 extern "C" int vtk_polyhedron_requires_initialization(vtkPolyhedron* sself) { return sself->RequiresInitialization(); }
 extern "C" int vtk_polyhedron_get_number_of_edges(vtkPolyhedron* sself) { return sself->GetNumberOfEdges(); }
@@ -1689,48 +1556,41 @@ extern "C" int vtk_polyhedron_requires_explicit_face_representation(vtkPolyhedro
 extern "C" bool vtk_polyhedron_is_convex(vtkPolyhedron* sself) { return sself->IsConvex(); }
 extern "C" vtkPyramid * vtkPyramid_new () {return vtkPyramid :: New () ;}
 extern "C" void vtkPyramid_destructor (vtkPyramid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkPyramid_get_ptr (vtkPyramid * sself) {return sself ;}
 extern "C" int vtk_pyramid_get_cell_type(vtkPyramid* sself) { return sself->GetCellType(); }
 extern "C" int vtk_pyramid_get_number_of_edges(vtkPyramid* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_pyramid_get_number_of_faces(vtkPyramid* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuad * vtkQuad_new () {return vtkQuad :: New () ;}
 extern "C" void vtkQuad_destructor (vtkQuad * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuad_get_ptr (vtkQuad * sself) {return sself ;}
 extern "C" int vtk_quad_get_cell_type(vtkQuad* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quad_get_cell_dimension(vtkQuad* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quad_get_number_of_edges(vtkQuad* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quad_get_number_of_faces(vtkQuad* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticEdge * vtkQuadraticEdge_new () {return vtkQuadraticEdge :: New () ;}
 extern "C" void vtkQuadraticEdge_destructor (vtkQuadraticEdge * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticEdge_get_ptr (vtkQuadraticEdge * sself) {return sself ;}
 extern "C" int vtk_quadratic_edge_get_cell_type(vtkQuadraticEdge* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_edge_get_cell_dimension(vtkQuadraticEdge* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_edge_get_number_of_edges(vtkQuadraticEdge* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_edge_get_number_of_faces(vtkQuadraticEdge* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticHexahedron * vtkQuadraticHexahedron_new () {return vtkQuadraticHexahedron :: New () ;}
 extern "C" void vtkQuadraticHexahedron_destructor (vtkQuadraticHexahedron * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticHexahedron_get_ptr (vtkQuadraticHexahedron * sself) {return sself ;}
 extern "C" int vtk_quadratic_hexahedron_get_cell_type(vtkQuadraticHexahedron* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_hexahedron_get_cell_dimension(vtkQuadraticHexahedron* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_hexahedron_get_number_of_edges(vtkQuadraticHexahedron* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_hexahedron_get_number_of_faces(vtkQuadraticHexahedron* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticLinearQuad * vtkQuadraticLinearQuad_new () {return vtkQuadraticLinearQuad :: New () ;}
 extern "C" void vtkQuadraticLinearQuad_destructor (vtkQuadraticLinearQuad * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticLinearQuad_get_ptr (vtkQuadraticLinearQuad * sself) {return sself ;}
 extern "C" int vtk_quadratic_linear_quad_get_cell_type(vtkQuadraticLinearQuad* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_linear_quad_get_cell_dimension(vtkQuadraticLinearQuad* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_linear_quad_get_number_of_edges(vtkQuadraticLinearQuad* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_linear_quad_get_number_of_faces(vtkQuadraticLinearQuad* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticLinearWedge * vtkQuadraticLinearWedge_new () {return vtkQuadraticLinearWedge :: New () ;}
 extern "C" void vtkQuadraticLinearWedge_destructor (vtkQuadraticLinearWedge * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticLinearWedge_get_ptr (vtkQuadraticLinearWedge * sself) {return sself ;}
 extern "C" int vtk_quadratic_linear_wedge_get_cell_type(vtkQuadraticLinearWedge* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_linear_wedge_get_cell_dimension(vtkQuadraticLinearWedge* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_linear_wedge_get_number_of_edges(vtkQuadraticLinearWedge* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_linear_wedge_get_number_of_faces(vtkQuadraticLinearWedge* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticPolygon * vtkQuadraticPolygon_new () {return vtkQuadraticPolygon :: New () ;}
 extern "C" void vtkQuadraticPolygon_destructor (vtkQuadraticPolygon * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticPolygon_get_ptr (vtkQuadraticPolygon * sself) {return sself ;}
 extern "C" int vtk_quadratic_polygon_get_cell_type(vtkQuadraticPolygon* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_polygon_get_cell_dimension(vtkQuadraticPolygon* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_polygon_get_number_of_edges(vtkQuadraticPolygon* sself) { return sself->GetNumberOfEdges(); }
@@ -1739,42 +1599,36 @@ extern "C" bool vtk_quadratic_polygon_get_use_mvc_interpolation(vtkQuadraticPoly
 extern "C" void vtk_quadratic_polygon_set_use_mvc_interpolation(vtkQuadraticPolygon* sself, bool _arg) { sself->SetUseMVCInterpolation(_arg); }
 extern "C" vtkQuadraticPyramid * vtkQuadraticPyramid_new () {return vtkQuadraticPyramid :: New () ;}
 extern "C" void vtkQuadraticPyramid_destructor (vtkQuadraticPyramid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticPyramid_get_ptr (vtkQuadraticPyramid * sself) {return sself ;}
 extern "C" int vtk_quadratic_pyramid_get_cell_type(vtkQuadraticPyramid* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_pyramid_get_cell_dimension(vtkQuadraticPyramid* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_pyramid_get_number_of_edges(vtkQuadraticPyramid* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_pyramid_get_number_of_faces(vtkQuadraticPyramid* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticQuad * vtkQuadraticQuad_new () {return vtkQuadraticQuad :: New () ;}
 extern "C" void vtkQuadraticQuad_destructor (vtkQuadraticQuad * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticQuad_get_ptr (vtkQuadraticQuad * sself) {return sself ;}
 extern "C" int vtk_quadratic_quad_get_cell_type(vtkQuadraticQuad* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_quad_get_cell_dimension(vtkQuadraticQuad* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_quad_get_number_of_edges(vtkQuadraticQuad* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_quad_get_number_of_faces(vtkQuadraticQuad* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticTetra * vtkQuadraticTetra_new () {return vtkQuadraticTetra :: New () ;}
 extern "C" void vtkQuadraticTetra_destructor (vtkQuadraticTetra * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticTetra_get_ptr (vtkQuadraticTetra * sself) {return sself ;}
 extern "C" int vtk_quadratic_tetra_get_cell_type(vtkQuadraticTetra* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_tetra_get_cell_dimension(vtkQuadraticTetra* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_tetra_get_number_of_edges(vtkQuadraticTetra* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_tetra_get_number_of_faces(vtkQuadraticTetra* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticTriangle * vtkQuadraticTriangle_new () {return vtkQuadraticTriangle :: New () ;}
 extern "C" void vtkQuadraticTriangle_destructor (vtkQuadraticTriangle * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticTriangle_get_ptr (vtkQuadraticTriangle * sself) {return sself ;}
 extern "C" int vtk_quadratic_triangle_get_cell_type(vtkQuadraticTriangle* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_triangle_get_cell_dimension(vtkQuadraticTriangle* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_triangle_get_number_of_edges(vtkQuadraticTriangle* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_triangle_get_number_of_faces(vtkQuadraticTriangle* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadraticWedge * vtkQuadraticWedge_new () {return vtkQuadraticWedge :: New () ;}
 extern "C" void vtkQuadraticWedge_destructor (vtkQuadraticWedge * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadraticWedge_get_ptr (vtkQuadraticWedge * sself) {return sself ;}
 extern "C" int vtk_quadratic_wedge_get_cell_type(vtkQuadraticWedge* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadratic_wedge_get_cell_dimension(vtkQuadraticWedge* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_quadratic_wedge_get_number_of_edges(vtkQuadraticWedge* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_quadratic_wedge_get_number_of_faces(vtkQuadraticWedge* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkQuadratureSchemeDefinition * vtkQuadratureSchemeDefinition_new () {return vtkQuadratureSchemeDefinition :: New () ;}
 extern "C" void vtkQuadratureSchemeDefinition_destructor (vtkQuadratureSchemeDefinition * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadratureSchemeDefinition_get_ptr (vtkQuadratureSchemeDefinition * sself) {return sself ;}
 extern "C" void vtk_quadrature_scheme_definition_clear(vtkQuadratureSchemeDefinition* sself) { sself->Clear(); }
 extern "C" int vtk_quadrature_scheme_definition_get_cell_type(vtkQuadratureSchemeDefinition* sself) { return sself->GetCellType(); }
 extern "C" int vtk_quadrature_scheme_definition_get_quadrature_key(vtkQuadratureSchemeDefinition* sself) { return sself->GetQuadratureKey(); }
@@ -1782,11 +1636,9 @@ extern "C" int vtk_quadrature_scheme_definition_get_number_of_nodes(vtkQuadratur
 extern "C" int vtk_quadrature_scheme_definition_get_number_of_quadrature_points(vtkQuadratureSchemeDefinition* sself) { return sself->GetNumberOfQuadraturePoints(); }
 extern "C" vtkQuadric * vtkQuadric_new () {return vtkQuadric :: New () ;}
 extern "C" void vtkQuadric_destructor (vtkQuadric * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkQuadric_get_ptr (vtkQuadric * sself) {return sself ;}
 extern "C" void vtk_quadric_set_coefficients(vtkQuadric* sself, double a0, double a1, double a2, double a3, double a4, double a5, double a6, double a7, double a8, double a9) { sself->SetCoefficients(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9); }
 extern "C" vtkRectilinearGrid * vtkRectilinearGrid_new () {return vtkRectilinearGrid :: New () ;}
 extern "C" void vtkRectilinearGrid_destructor (vtkRectilinearGrid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkRectilinearGrid_get_ptr (vtkRectilinearGrid * sself) {return sself ;}
 extern "C" int vtk_rectilinear_grid_get_data_object_type(vtkRectilinearGrid* sself) { return sself->GetDataObjectType(); }
 extern "C" void vtk_rectilinear_grid_initialize(vtkRectilinearGrid* sself) { sself->Initialize(); }
 extern "C" long long vtk_rectilinear_grid_get_number_of_cells(vtkRectilinearGrid* sself) { return sself->GetNumberOfCells(); }
@@ -1804,20 +1656,17 @@ extern "C" int vtk_rectilinear_grid_get_extent_type(vtkRectilinearGrid* sself) {
 extern "C" const char* vtk_rectilinear_grid_get_scalar_type_as_string(vtkRectilinearGrid* sself) { return sself->GetScalarTypeAsString(); }
 extern "C" vtkReebGraph * vtkReebGraph_new () {return vtkReebGraph :: New () ;}
 extern "C" void vtkReebGraph_destructor (vtkReebGraph * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkReebGraph_get_ptr (vtkReebGraph * sself) {return sself ;}
 extern "C" int vtk_reeb_graph_stream_triangle(vtkReebGraph* sself, long long vertex0Id, double scalar0, long long vertex1Id, double scalar1, long long vertex2Id, double scalar2) { return sself->StreamTriangle(vertex0Id, scalar0, vertex1Id, scalar1, vertex2Id, scalar2); }
 extern "C" int vtk_reeb_graph_stream_tetrahedron(vtkReebGraph* sself, long long vertex0Id, double scalar0, long long vertex1Id, double scalar1, long long vertex2Id, double scalar2, long long vertex3Id, double scalar3) { return sself->StreamTetrahedron(vertex0Id, scalar0, vertex1Id, scalar1, vertex2Id, scalar2, vertex3Id, scalar3); }
 extern "C" void vtk_reeb_graph_close_stream(vtkReebGraph* sself) { sself->CloseStream(); }
 extern "C" vtkReebGraphSimplificationMetric * vtkReebGraphSimplificationMetric_new () {return vtkReebGraphSimplificationMetric :: New () ;}
 extern "C" void vtkReebGraphSimplificationMetric_destructor (vtkReebGraphSimplificationMetric * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkReebGraphSimplificationMetric_get_ptr (vtkReebGraphSimplificationMetric * sself) {return sself ;}
 extern "C" void vtk_reeb_graph_simplification_metric_set_lower_bound(vtkReebGraphSimplificationMetric* sself, double _arg) { sself->SetLowerBound(_arg); }
 extern "C" double vtk_reeb_graph_simplification_metric_get_lower_bound(vtkReebGraphSimplificationMetric* sself) { return sself->GetLowerBound(); }
 extern "C" void vtk_reeb_graph_simplification_metric_set_upper_bound(vtkReebGraphSimplificationMetric* sself, double _arg) { sself->SetUpperBound(_arg); }
 extern "C" double vtk_reeb_graph_simplification_metric_get_upper_bound(vtkReebGraphSimplificationMetric* sself) { return sself->GetUpperBound(); }
 extern "C" vtkSelection * vtkSelection_new () {return vtkSelection :: New () ;}
 extern "C" void vtkSelection_destructor (vtkSelection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSelection_get_ptr (vtkSelection * sself) {return sself ;}
 extern "C" int vtk_selection_get_data_object_type(vtkSelection* sself) { return sself->GetDataObjectType(); }
 extern "C" unsigned int vtk_selection_get_number_of_nodes(vtkSelection* sself) { return sself->GetNumberOfNodes(); }
 extern "C" void vtk_selection_remove_node(vtkSelection* sself, unsigned int idx) { sself->RemoveNode(idx); }
@@ -1827,7 +1676,6 @@ extern "C" unsigned long vtk_selection_get_m_time(vtkSelection* sself) { return 
 extern "C" void vtk_selection_dump(vtkSelection* sself) { sself->Dump(); }
 extern "C" vtkSelectionNode * vtkSelectionNode_new () {return vtkSelectionNode :: New () ;}
 extern "C" void vtkSelectionNode_destructor (vtkSelectionNode * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSelectionNode_get_ptr (vtkSelectionNode * sself) {return sself ;}
 extern "C" void vtk_selection_node_initialize(vtkSelectionNode* sself) { sself->Initialize(); }
 extern "C" unsigned long vtk_selection_node_get_m_time(vtkSelectionNode* sself) { return sself->GetMTime(); }
 extern "C" void vtk_selection_node_set_content_type(vtkSelectionNode* sself, int type) { sself->SetContentType(type); }
@@ -1842,7 +1690,6 @@ extern "C" int vtk_selection_node_convert_attribute_type_to_selection_field(vtkS
 extern "C" void vtk_selection_node_set_query_string(vtkSelectionNode* sself, const char* _arg) { sself->SetQueryString(_arg); }
 extern "C" vtkSimpleCellTessellator * vtkSimpleCellTessellator_new () {return vtkSimpleCellTessellator :: New () ;}
 extern "C" void vtkSimpleCellTessellator_destructor (vtkSimpleCellTessellator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSimpleCellTessellator_get_ptr (vtkSimpleCellTessellator * sself) {return sself ;}
 extern "C" void vtk_simple_cell_tessellator_reset(vtkSimpleCellTessellator* sself) { sself->Reset(); }
 extern "C" int vtk_simple_cell_tessellator_get_fixed_subdivisions(vtkSimpleCellTessellator* sself) { return sself->GetFixedSubdivisions(); }
 extern "C" int vtk_simple_cell_tessellator_get_max_subdivision_level(vtkSimpleCellTessellator* sself) { return sself->GetMaxSubdivisionLevel(); }
@@ -1852,25 +1699,20 @@ extern "C" void vtk_simple_cell_tessellator_set_max_subdivision_level(vtkSimpleC
 extern "C" void vtk_simple_cell_tessellator_set_subdivision_levels(vtkSimpleCellTessellator* sself, int fixed, int maxLevel) { sself->SetSubdivisionLevels(fixed, maxLevel); }
 extern "C" vtkSmoothErrorMetric * vtkSmoothErrorMetric_new () {return vtkSmoothErrorMetric :: New () ;}
 extern "C" void vtkSmoothErrorMetric_destructor (vtkSmoothErrorMetric * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSmoothErrorMetric_get_ptr (vtkSmoothErrorMetric * sself) {return sself ;}
 extern "C" double vtk_smooth_error_metric_get_angle_tolerance(vtkSmoothErrorMetric* sself) { return sself->GetAngleTolerance(); }
 extern "C" void vtk_smooth_error_metric_set_angle_tolerance(vtkSmoothErrorMetric* sself, double value) { sself->SetAngleTolerance(value); }
 extern "C" vtkSortFieldData * vtkSortFieldData_new () {return vtkSortFieldData :: New () ;}
 extern "C" void vtkSortFieldData_destructor (vtkSortFieldData * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSortFieldData_get_ptr (vtkSortFieldData * sself) {return sself ;}
 extern "C" vtkSphere * vtkSphere_new () {return vtkSphere :: New () ;}
 extern "C" void vtkSphere_destructor (vtkSphere * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSphere_get_ptr (vtkSphere * sself) {return sself ;}
 extern "C" void vtk_sphere_set_radius(vtkSphere* sself, double _arg) { sself->SetRadius(_arg); }
 extern "C" double vtk_sphere_get_radius(vtkSphere* sself) { return sself->GetRadius(); }
 extern "C" void vtk_sphere_set_center(vtkSphere* sself, double _arg1, double _arg2, double _arg3) { sself->SetCenter(_arg1, _arg2, _arg3); }
 extern "C" vtkSpheres * vtkSpheres_new () {return vtkSpheres :: New () ;}
 extern "C" void vtkSpheres_destructor (vtkSpheres * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSpheres_get_ptr (vtkSpheres * sself) {return sself ;}
 extern "C" int vtk_spheres_get_number_of_spheres(vtkSpheres* sself) { return sself->GetNumberOfSpheres(); }
 extern "C" vtkStaticCellLinks * vtkStaticCellLinks_new () {return vtkStaticCellLinks :: New () ;}
 extern "C" void vtkStaticCellLinks_destructor (vtkStaticCellLinks * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStaticCellLinks_get_ptr (vtkStaticCellLinks * sself) {return sself ;}
 extern "C" long long vtk_static_cell_links_get_number_of_cells(vtkStaticCellLinks* sself, long long ptId) { return sself->GetNumberOfCells(ptId); }
 extern "C" long long vtk_static_cell_links_get_ncells(vtkStaticCellLinks* sself, long long ptId) { return sself->GetNcells(ptId); }
 extern "C" void vtk_static_cell_links_initialize(vtkStaticCellLinks* sself) { sself->Initialize(); }
@@ -1879,7 +1721,6 @@ extern "C" void vtk_static_cell_links_reset(vtkStaticCellLinks* sself) { sself->
 extern "C" unsigned long vtk_static_cell_links_get_actual_memory_size(vtkStaticCellLinks* sself) { return sself->GetActualMemorySize(); }
 extern "C" vtkStaticCellLocator * vtkStaticCellLocator_new () {return vtkStaticCellLocator :: New () ;}
 extern "C" void vtkStaticCellLocator_destructor (vtkStaticCellLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStaticCellLocator_get_ptr (vtkStaticCellLocator * sself) {return sself ;}
 extern "C" void vtk_static_cell_locator_set_divisions(vtkStaticCellLocator* sself, int _arg1, int _arg2, int _arg3) { sself->SetDivisions(_arg1, _arg2, _arg3); }
 extern "C" void vtk_static_cell_locator_free_search_structure(vtkStaticCellLocator* sself) { sself->FreeSearchStructure(); }
 extern "C" void vtk_static_cell_locator_build_locator(vtkStaticCellLocator* sself) { sself->BuildLocator(); }
@@ -1894,7 +1735,6 @@ extern "C" void vtk_static_cell_locator_use_diagonal_length_tolerance_on(vtkStat
 extern "C" void vtk_static_cell_locator_use_diagonal_length_tolerance_off(vtkStaticCellLocator* sself) { sself->UseDiagonalLengthToleranceOff(); }
 extern "C" vtkStaticPointLocator * vtkStaticPointLocator_new () {return vtkStaticPointLocator :: New () ;}
 extern "C" void vtkStaticPointLocator_destructor (vtkStaticPointLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStaticPointLocator_get_ptr (vtkStaticPointLocator * sself) {return sself ;}
 extern "C" void vtk_static_point_locator_set_number_of_points_per_bucket(vtkStaticPointLocator* sself, int _arg) { sself->SetNumberOfPointsPerBucket(_arg); }
 extern "C" int vtk_static_point_locator_get_number_of_points_per_bucket_min_value(vtkStaticPointLocator* sself) { return sself->GetNumberOfPointsPerBucketMinValue(); }
 extern "C" int vtk_static_point_locator_get_number_of_points_per_bucket_max_value(vtkStaticPointLocator* sself) { return sself->GetNumberOfPointsPerBucketMaxValue(); }
@@ -1911,7 +1751,6 @@ extern "C" long long vtk_static_point_locator_get_max_number_of_buckets(vtkStati
 extern "C" bool vtk_static_point_locator_get_large_ids(vtkStaticPointLocator* sself) { return sself->GetLargeIds(); }
 extern "C" vtkStaticPointLocator2D * vtkStaticPointLocator2D_new () {return vtkStaticPointLocator2D :: New () ;}
 extern "C" void vtkStaticPointLocator2D_destructor (vtkStaticPointLocator2D * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStaticPointLocator2D_get_ptr (vtkStaticPointLocator2D * sself) {return sself ;}
 extern "C" void vtk_static_point_locator_2_d_set_number_of_points_per_bucket(vtkStaticPointLocator2D* sself, int _arg) { sself->SetNumberOfPointsPerBucket(_arg); }
 extern "C" int vtk_static_point_locator_2_d_get_number_of_points_per_bucket_min_value(vtkStaticPointLocator2D* sself) { return sself->GetNumberOfPointsPerBucketMinValue(); }
 extern "C" int vtk_static_point_locator_2_d_get_number_of_points_per_bucket_max_value(vtkStaticPointLocator2D* sself) { return sself->GetNumberOfPointsPerBucketMaxValue(); }
@@ -1928,10 +1767,8 @@ extern "C" long long vtk_static_point_locator_2_d_get_max_number_of_buckets(vtkS
 extern "C" bool vtk_static_point_locator_2_d_get_large_ids(vtkStaticPointLocator2D* sself) { return sself->GetLargeIds(); }
 extern "C" vtkStructuredExtent * vtkStructuredExtent_new () {return vtkStructuredExtent :: New () ;}
 extern "C" void vtkStructuredExtent_destructor (vtkStructuredExtent * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStructuredExtent_get_ptr (vtkStructuredExtent * sself) {return sself ;}
 extern "C" vtkStructuredGrid * vtkStructuredGrid_new () {return vtkStructuredGrid :: New () ;}
 extern "C" void vtkStructuredGrid_destructor (vtkStructuredGrid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStructuredGrid_get_ptr (vtkStructuredGrid * sself) {return sself ;}
 extern "C" int vtk_structured_grid_get_data_object_type(vtkStructuredGrid* sself) { return sself->GetDataObjectType(); }
 extern "C" long long vtk_structured_grid_get_number_of_points(vtkStructuredGrid* sself) { return sself->GetNumberOfPoints(); }
 extern "C" int vtk_structured_grid_get_cell_type(vtkStructuredGrid* sself, long long cellId) { return sself->GetCellType(cellId); }
@@ -1949,14 +1786,11 @@ extern "C" bool vtk_structured_grid_has_any_blank_points(vtkStructuredGrid* ssel
 extern "C" bool vtk_structured_grid_has_any_blank_cells(vtkStructuredGrid* sself) { return sself->HasAnyBlankCells(); }
 extern "C" vtkStructuredPoints * vtkStructuredPoints_new () {return vtkStructuredPoints :: New () ;}
 extern "C" void vtkStructuredPoints_destructor (vtkStructuredPoints * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStructuredPoints_get_ptr (vtkStructuredPoints * sself) {return sself ;}
 extern "C" int vtk_structured_points_get_data_object_type(vtkStructuredPoints* sself) { return sself->GetDataObjectType(); }
 extern "C" vtkStructuredPointsCollection * vtkStructuredPointsCollection_new () {return vtkStructuredPointsCollection :: New () ;}
 extern "C" void vtkStructuredPointsCollection_destructor (vtkStructuredPointsCollection * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkStructuredPointsCollection_get_ptr (vtkStructuredPointsCollection * sself) {return sself ;}
 extern "C" vtkSuperquadric * vtkSuperquadric_new () {return vtkSuperquadric :: New () ;}
 extern "C" void vtkSuperquadric_destructor (vtkSuperquadric * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkSuperquadric_get_ptr (vtkSuperquadric * sself) {return sself ;}
 extern "C" void vtk_superquadric_set_center(vtkSuperquadric* sself, double _arg1, double _arg2, double _arg3) { sself->SetCenter(_arg1, _arg2, _arg3); }
 extern "C" void vtk_superquadric_set_scale(vtkSuperquadric* sself, double _arg1, double _arg2, double _arg3) { sself->SetScale(_arg1, _arg2, _arg3); }
 extern "C" double vtk_superquadric_get_thickness(vtkSuperquadric* sself) { return sself->GetThickness(); }
@@ -1975,7 +1809,6 @@ extern "C" int vtk_superquadric_get_toroidal(vtkSuperquadric* sself) { return ss
 extern "C" void vtk_superquadric_set_toroidal(vtkSuperquadric* sself, int _arg) { sself->SetToroidal(_arg); }
 extern "C" vtkTable * vtkTable_new () {return vtkTable :: New () ;}
 extern "C" void vtkTable_destructor (vtkTable * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTable_get_ptr (vtkTable * sself) {return sself ;}
 extern "C" void vtk_table_dump(vtkTable* sself, unsigned int colWidth, int rowLimit) { sself->Dump(colWidth, rowLimit); }
 extern "C" int vtk_table_get_data_object_type(vtkTable* sself) { return sself->GetDataObjectType(); }
 extern "C" long long vtk_table_get_number_of_rows(vtkTable* sself) { return sself->GetNumberOfRows(); }
@@ -1990,13 +1823,11 @@ extern "C" void vtk_table_initialize(vtkTable* sself) { sself->Initialize(); }
 extern "C" long long vtk_table_get_number_of_elements(vtkTable* sself, int type) { return sself->GetNumberOfElements(type); }
 extern "C" vtkTetra * vtkTetra_new () {return vtkTetra :: New () ;}
 extern "C" void vtkTetra_destructor (vtkTetra * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTetra_get_ptr (vtkTetra * sself) {return sself ;}
 extern "C" int vtk_tetra_get_cell_type(vtkTetra* sself) { return sself->GetCellType(); }
 extern "C" int vtk_tetra_get_number_of_edges(vtkTetra* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_tetra_get_number_of_faces(vtkTetra* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkTree * vtkTree_new () {return vtkTree :: New () ;}
 extern "C" void vtkTree_destructor (vtkTree * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTree_get_ptr (vtkTree * sself) {return sself ;}
 extern "C" long long vtk_tree_get_root(vtkTree* sself) { return sself->GetRoot(); }
 extern "C" long long vtk_tree_get_number_of_children(vtkTree* sself, long long v) { return sself->GetNumberOfChildren(v); }
 extern "C" long long vtk_tree_get_child(vtkTree* sself, long long v, long long i) { return sself->GetChild(v, i); }
@@ -2005,29 +1836,24 @@ extern "C" long long vtk_tree_get_level(vtkTree* sself, long long v) { return ss
 extern "C" bool vtk_tree_is_leaf(vtkTree* sself, long long vertex) { return sself->IsLeaf(vertex); }
 extern "C" vtkTreeBFSIterator * vtkTreeBFSIterator_new () {return vtkTreeBFSIterator :: New () ;}
 extern "C" void vtkTreeBFSIterator_destructor (vtkTreeBFSIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTreeBFSIterator_get_ptr (vtkTreeBFSIterator * sself) {return sself ;}
 extern "C" vtkTreeDFSIterator * vtkTreeDFSIterator_new () {return vtkTreeDFSIterator :: New () ;}
 extern "C" void vtkTreeDFSIterator_destructor (vtkTreeDFSIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTreeDFSIterator_get_ptr (vtkTreeDFSIterator * sself) {return sself ;}
 extern "C" void vtk_tree_dfs_iterator_set_mode(vtkTreeDFSIterator* sself, int mode) { sself->SetMode(mode); }
 extern "C" int vtk_tree_dfs_iterator_get_mode(vtkTreeDFSIterator* sself) { return sself->GetMode(); }
 extern "C" vtkTriQuadraticHexahedron * vtkTriQuadraticHexahedron_new () {return vtkTriQuadraticHexahedron :: New () ;}
 extern "C" void vtkTriQuadraticHexahedron_destructor (vtkTriQuadraticHexahedron * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTriQuadraticHexahedron_get_ptr (vtkTriQuadraticHexahedron * sself) {return sself ;}
 extern "C" int vtk_tri_quadratic_hexahedron_get_cell_type(vtkTriQuadraticHexahedron* sself) { return sself->GetCellType(); }
 extern "C" int vtk_tri_quadratic_hexahedron_get_cell_dimension(vtkTriQuadraticHexahedron* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_tri_quadratic_hexahedron_get_number_of_edges(vtkTriQuadraticHexahedron* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_tri_quadratic_hexahedron_get_number_of_faces(vtkTriQuadraticHexahedron* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkTriQuadraticPyramid * vtkTriQuadraticPyramid_new () {return vtkTriQuadraticPyramid :: New () ;}
 extern "C" void vtkTriQuadraticPyramid_destructor (vtkTriQuadraticPyramid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTriQuadraticPyramid_get_ptr (vtkTriQuadraticPyramid * sself) {return sself ;}
 extern "C" int vtk_tri_quadratic_pyramid_get_cell_type(vtkTriQuadraticPyramid* sself) { return sself->GetCellType(); }
 extern "C" int vtk_tri_quadratic_pyramid_get_cell_dimension(vtkTriQuadraticPyramid* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_tri_quadratic_pyramid_get_number_of_edges(vtkTriQuadraticPyramid* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_tri_quadratic_pyramid_get_number_of_faces(vtkTriQuadraticPyramid* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkTriangle * vtkTriangle_new () {return vtkTriangle :: New () ;}
 extern "C" void vtkTriangle_destructor (vtkTriangle * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTriangle_get_ptr (vtkTriangle * sself) {return sself ;}
 extern "C" int vtk_triangle_get_cell_type(vtkTriangle* sself) { return sself->GetCellType(); }
 extern "C" int vtk_triangle_get_cell_dimension(vtkTriangle* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_triangle_get_number_of_edges(vtkTriangle* sself) { return sself->GetNumberOfEdges(); }
@@ -2035,18 +1861,15 @@ extern "C" int vtk_triangle_get_number_of_faces(vtkTriangle* sself) { return sse
 extern "C" double vtk_triangle_compute_area(vtkTriangle* sself) { return sself->ComputeArea(); }
 extern "C" vtkTriangleStrip * vtkTriangleStrip_new () {return vtkTriangleStrip :: New () ;}
 extern "C" void vtkTriangleStrip_destructor (vtkTriangleStrip * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkTriangleStrip_get_ptr (vtkTriangleStrip * sself) {return sself ;}
 extern "C" int vtk_triangle_strip_get_cell_type(vtkTriangleStrip* sself) { return sself->GetCellType(); }
 extern "C" int vtk_triangle_strip_get_cell_dimension(vtkTriangleStrip* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_triangle_strip_get_number_of_edges(vtkTriangleStrip* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_triangle_strip_get_number_of_faces(vtkTriangleStrip* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkUndirectedGraph * vtkUndirectedGraph_new () {return vtkUndirectedGraph :: New () ;}
 extern "C" void vtkUndirectedGraph_destructor (vtkUndirectedGraph * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUndirectedGraph_get_ptr (vtkUndirectedGraph * sself) {return sself ;}
 extern "C" long long vtk_undirected_graph_get_in_degree(vtkUndirectedGraph* sself, long long v) { return sself->GetInDegree(v); }
 extern "C" vtkUniformGrid * vtkUniformGrid_new () {return vtkUniformGrid :: New () ;}
 extern "C" void vtkUniformGrid_destructor (vtkUniformGrid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUniformGrid_get_ptr (vtkUniformGrid * sself) {return sself ;}
 extern "C" int vtk_uniform_grid_get_grid_description(vtkUniformGrid* sself) { return sself->GetGridDescription(); }
 extern "C" void vtk_uniform_grid_blank_point(vtkUniformGrid* sself, long long ptId) { sself->BlankPoint(ptId); }
 extern "C" void vtk_uniform_grid_un_blank_point(vtkUniformGrid* sself, long long ptId) { sself->UnBlankPoint(ptId); }
@@ -2056,7 +1879,6 @@ extern "C" unsigned char vtk_uniform_grid_is_point_visible(vtkUniformGrid* sself
 extern "C" unsigned char vtk_uniform_grid_is_cell_visible(vtkUniformGrid* sself, long long cellId) { return sself->IsCellVisible(cellId); }
 extern "C" vtkUniformGridAMR * vtkUniformGridAMR_new () {return vtkUniformGridAMR :: New () ;}
 extern "C" void vtkUniformGridAMR_destructor (vtkUniformGridAMR * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUniformGridAMR_get_ptr (vtkUniformGridAMR * sself) {return sself ;}
 extern "C" int vtk_uniform_grid_amr_get_data_object_type(vtkUniformGridAMR* sself) { return sself->GetDataObjectType(); }
 extern "C" void vtk_uniform_grid_amr_initialize(vtkUniformGridAMR* sself) { sself->Initialize(); }
 extern "C" void vtk_uniform_grid_amr_set_grid_description(vtkUniformGridAMR* sself, int gridDescription) { sself->SetGridDescription(gridDescription); }
@@ -2068,7 +1890,6 @@ extern "C" int vtk_uniform_grid_amr_get_composite_index(vtkUniformGridAMR* sself
 extern "C" void vtk_uniform_grid_amr_get_level_and_index(vtkUniformGridAMR* sself, const unsigned int compositeIdx, unsigned int& level, unsigned int& idx) { sself->GetLevelAndIndex(compositeIdx, level, idx); }
 extern "C" vtkUniformGridAMRDataIterator * vtkUniformGridAMRDataIterator_new () {return vtkUniformGridAMRDataIterator :: New () ;}
 extern "C" void vtkUniformGridAMRDataIterator_destructor (vtkUniformGridAMRDataIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUniformGridAMRDataIterator_get_ptr (vtkUniformGridAMRDataIterator * sself) {return sself ;}
 extern "C" int vtk_uniform_grid_amr_data_iterator_has_current_meta_data(vtkUniformGridAMRDataIterator* sself) { return sself->HasCurrentMetaData(); }
 extern "C" unsigned int vtk_uniform_grid_amr_data_iterator_get_current_flat_index(vtkUniformGridAMRDataIterator* sself) { return sself->GetCurrentFlatIndex(); }
 extern "C" unsigned int vtk_uniform_grid_amr_data_iterator_get_current_level(vtkUniformGridAMRDataIterator* sself) { return sself->GetCurrentLevel(); }
@@ -2078,13 +1899,11 @@ extern "C" void vtk_uniform_grid_amr_data_iterator_go_to_next_item(vtkUniformGri
 extern "C" int vtk_uniform_grid_amr_data_iterator_is_done_with_traversal(vtkUniformGridAMRDataIterator* sself) { return sself->IsDoneWithTraversal(); }
 extern "C" vtkUniformHyperTreeGrid * vtkUniformHyperTreeGrid_new () {return vtkUniformHyperTreeGrid :: New () ;}
 extern "C" void vtkUniformHyperTreeGrid_destructor (vtkUniformHyperTreeGrid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUniformHyperTreeGrid_get_ptr (vtkUniformHyperTreeGrid * sself) {return sself ;}
 extern "C" void vtk_uniform_hyper_tree_grid_set_origin(vtkUniformHyperTreeGrid* sself, double _arg1, double _arg2, double _arg3) { sself->SetOrigin(_arg1, _arg2, _arg3); }
 extern "C" void vtk_uniform_hyper_tree_grid_set_grid_scale(vtkUniformHyperTreeGrid* sself, double p0, double p1, double p2) { sself->SetGridScale(p0, p1, p2); }
 extern "C" unsigned long vtk_uniform_hyper_tree_grid_get_actual_memory_size_bytes(vtkUniformHyperTreeGrid* sself) { return sself->GetActualMemorySizeBytes(); }
 extern "C" vtkUnstructuredGrid * vtkUnstructuredGrid_new () {return vtkUnstructuredGrid :: New () ;}
 extern "C" void vtkUnstructuredGrid_destructor (vtkUnstructuredGrid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnstructuredGrid_get_ptr (vtkUnstructuredGrid * sself) {return sself ;}
 extern "C" int vtk_unstructured_grid_get_data_object_type(vtkUnstructuredGrid* sself) { return sself->GetDataObjectType(); }
 extern "C" bool vtk_unstructured_grid_allocate_estimate(vtkUnstructuredGrid* sself, long long numCells, long long maxCellSize) { return sself->AllocateEstimate(numCells, maxCellSize); }
 extern "C" bool vtk_unstructured_grid_allocate_exact(vtkUnstructuredGrid* sself, long long numCells, long long connectivitySize) { return sself->AllocateExact(numCells, connectivitySize); }
@@ -2107,13 +1926,11 @@ extern "C" int vtk_unstructured_grid_initialize_faces_representation(vtkUnstruct
 extern "C" unsigned long vtk_unstructured_grid_get_mesh_m_time(vtkUnstructuredGrid* sself) { return sself->GetMeshMTime(); }
 extern "C" vtkUnstructuredGridCellIterator * vtkUnstructuredGridCellIterator_new () {return vtkUnstructuredGridCellIterator :: New () ;}
 extern "C" void vtkUnstructuredGridCellIterator_destructor (vtkUnstructuredGridCellIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkUnstructuredGridCellIterator_get_ptr (vtkUnstructuredGridCellIterator * sself) {return sself ;}
 extern "C" bool vtk_unstructured_grid_cell_iterator_is_done_with_traversal(vtkUnstructuredGridCellIterator* sself) { return sself->IsDoneWithTraversal(); }
 extern "C" long long vtk_unstructured_grid_cell_iterator_get_cell_id(vtkUnstructuredGridCellIterator* sself) { return sself->GetCellId(); }
 extern "C" void vtk_unstructured_grid_cell_iterator_go_to_cell(vtkUnstructuredGridCellIterator* sself, long long cellId) { sself->GoToCell(cellId); }
 extern "C" vtkVertex * vtkVertex_new () {return vtkVertex :: New () ;}
 extern "C" void vtkVertex_destructor (vtkVertex * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkVertex_get_ptr (vtkVertex * sself) {return sself ;}
 extern "C" int vtk_vertex_get_cell_type(vtkVertex* sself) { return sself->GetCellType(); }
 extern "C" int vtk_vertex_get_cell_dimension(vtkVertex* sself) { return sself->GetCellDimension(); }
 extern "C" int vtk_vertex_get_number_of_edges(vtkVertex* sself) { return sself->GetNumberOfEdges(); }
@@ -2121,25 +1938,21 @@ extern "C" int vtk_vertex_get_number_of_faces(vtkVertex* sself) { return sself->
 extern "C" int vtk_vertex_inflate(vtkVertex* sself, double p0) { return sself->Inflate(p0); }
 extern "C" vtkVertexListIterator * vtkVertexListIterator_new () {return vtkVertexListIterator :: New () ;}
 extern "C" void vtkVertexListIterator_destructor (vtkVertexListIterator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkVertexListIterator_get_ptr (vtkVertexListIterator * sself) {return sself ;}
 extern "C" long long vtk_vertex_list_iterator_next(vtkVertexListIterator* sself) { return sself->Next(); }
 extern "C" bool vtk_vertex_list_iterator_has_next(vtkVertexListIterator* sself) { return sself->HasNext(); }
 extern "C" vtkVoxel * vtkVoxel_new () {return vtkVoxel :: New () ;}
 extern "C" void vtkVoxel_destructor (vtkVoxel * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkVoxel_get_ptr (vtkVoxel * sself) {return sself ;}
 extern "C" int vtk_voxel_get_cell_type(vtkVoxel* sself) { return sself->GetCellType(); }
 extern "C" int vtk_voxel_get_number_of_edges(vtkVoxel* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_voxel_get_number_of_faces(vtkVoxel* sself) { return sself->GetNumberOfFaces(); }
 extern "C" int vtk_voxel_inflate(vtkVoxel* sself, double dist) { return sself->Inflate(dist); }
 extern "C" vtkWedge * vtkWedge_new () {return vtkWedge :: New () ;}
 extern "C" void vtkWedge_destructor (vtkWedge * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkWedge_get_ptr (vtkWedge * sself) {return sself ;}
 extern "C" int vtk_wedge_get_cell_type(vtkWedge* sself) { return sself->GetCellType(); }
 extern "C" int vtk_wedge_get_number_of_edges(vtkWedge* sself) { return sself->GetNumberOfEdges(); }
 extern "C" int vtk_wedge_get_number_of_faces(vtkWedge* sself) { return sself->GetNumberOfFaces(); }
 extern "C" vtkXMLDataElement * vtkXMLDataElement_new () {return vtkXMLDataElement :: New () ;}
 extern "C" void vtkXMLDataElement_destructor (vtkXMLDataElement * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkXMLDataElement_get_ptr (vtkXMLDataElement * sself) {return sself ;}
 extern "C" void vtk_xml_data_element_set_name(vtkXMLDataElement* sself, const char* _arg) { sself->SetName(_arg); }
 extern "C" void vtk_xml_data_element_set_id(vtkXMLDataElement* sself, const char* _arg) { sself->SetId(_arg); }
 extern "C" const char* vtk_xml_data_element_get_attribute(vtkXMLDataElement* sself, const char* name) { return sself->GetAttribute(name); }

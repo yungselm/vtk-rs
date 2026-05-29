@@ -17,7 +17,6 @@
 // Implement declared functions
 extern "C" vtkContourValues * vtkContourValues_new () {return vtkContourValues :: New () ;}
 extern "C" void vtkContourValues_destructor (vtkContourValues * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkContourValues_get_ptr (vtkContourValues * sself) {return sself ;}
 extern "C" void vtk_contour_values_set_value(vtkContourValues* sself, int i, double value) { sself->SetValue(i, value); }
 extern "C" double vtk_contour_values_get_value(vtkContourValues* sself, int i) { return sself->GetValue(i); }
 extern "C" void vtk_contour_values_set_number_of_contours(vtkContourValues* sself, const int number) { sself->SetNumberOfContours(number); }
@@ -25,7 +24,6 @@ extern "C" int vtk_contour_values_get_number_of_contours(vtkContourValues* sself
 extern "C" void vtk_contour_values_generate_values(vtkContourValues* sself, int numContours, double rangeStart, double rangeEnd) { sself->GenerateValues(numContours, rangeStart, rangeEnd); }
 extern "C" vtkExprTkFunctionParser * vtkExprTkFunctionParser_new () {return vtkExprTkFunctionParser :: New () ;}
 extern "C" void vtkExprTkFunctionParser_destructor (vtkExprTkFunctionParser * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkExprTkFunctionParser_get_ptr (vtkExprTkFunctionParser * sself) {return sself ;}
 extern "C" unsigned long vtk_expr_tk_function_parser_get_m_time(vtkExprTkFunctionParser* sself) { return sself->GetMTime(); }
 extern "C" void vtk_expr_tk_function_parser_set_function(vtkExprTkFunctionParser* sself, const char* function) { sself->SetFunction(function); }
 extern "C" const char* vtk_expr_tk_function_parser_get_function(vtkExprTkFunctionParser* sself) { return sself->GetFunction(); }
@@ -53,7 +51,6 @@ extern "C" double vtk_expr_tk_function_parser_get_replacement_value(vtkExprTkFun
 extern "C" void vtk_expr_tk_function_parser_invalidate_function(vtkExprTkFunctionParser* sself) { sself->InvalidateFunction(); }
 extern "C" vtkFunctionParser * vtkFunctionParser_new () {return vtkFunctionParser :: New () ;}
 extern "C" void vtkFunctionParser_destructor (vtkFunctionParser * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkFunctionParser_get_ptr (vtkFunctionParser * sself) {return sself ;}
 extern "C" unsigned long vtk_function_parser_get_m_time(vtkFunctionParser* sself) { return sself->GetMTime(); }
 extern "C" void vtk_function_parser_set_function(vtkFunctionParser* sself, const char* function) { sself->SetFunction(function); }
 extern "C" int vtk_function_parser_is_scalar_result(vtkFunctionParser* sself) { return sself->IsScalarResult(); }
@@ -82,7 +79,6 @@ extern "C" double vtk_function_parser_get_replacement_value(vtkFunctionParser* s
 extern "C" void vtk_function_parser_invalidate_function(vtkFunctionParser* sself) { sself->InvalidateFunction(); }
 extern "C" vtkHeap * vtkHeap_new () {return vtkHeap :: New () ;}
 extern "C" void vtkHeap_destructor (vtkHeap * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkHeap_get_ptr (vtkHeap * sself) {return sself ;}
 extern "C" void* vtk_heap_allocate_memory(vtkHeap* sself, size_t n) { return sself->AllocateMemory(n); }
 extern "C" void vtk_heap_set_block_size(vtkHeap* sself, size_t p0) { sself->SetBlockSize(p0); }
 extern "C" size_t vtk_heap_get_block_size(vtkHeap* sself) { return sself->GetBlockSize(); }
@@ -91,7 +87,6 @@ extern "C" int vtk_heap_get_number_of_allocations(vtkHeap* sself) { return sself
 extern "C" void vtk_heap_reset(vtkHeap* sself) { sself->Reset(); }
 extern "C" vtkResourceFileLocator * vtkResourceFileLocator_new () {return vtkResourceFileLocator :: New () ;}
 extern "C" void vtkResourceFileLocator_destructor (vtkResourceFileLocator * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkResourceFileLocator_get_ptr (vtkResourceFileLocator * sself) {return sself ;}
 extern "C" void vtk_resource_file_locator_set_print_debug_information(vtkResourceFileLocator* sself, bool p0) { sself->SetPrintDebugInformation(p0); }
 extern "C" bool vtk_resource_file_locator_get_print_debug_information(vtkResourceFileLocator* sself) { return sself->GetPrintDebugInformation(); }
 extern "C" void vtk_resource_file_locator_print_debug_information_on(vtkResourceFileLocator* sself) { sself->PrintDebugInformationOn(); }

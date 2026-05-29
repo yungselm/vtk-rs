@@ -36,12 +36,10 @@
 // Implement declared functions
 extern "C" vtkCardinalSpline * vtkCardinalSpline_new () {return vtkCardinalSpline :: New () ;}
 extern "C" void vtkCardinalSpline_destructor (vtkCardinalSpline * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkCardinalSpline_get_ptr (vtkCardinalSpline * sself) {return sself ;}
 extern "C" void vtk_cardinal_spline_compute(vtkCardinalSpline* sself) { sself->Compute(); }
 extern "C" double vtk_cardinal_spline_evaluate(vtkCardinalSpline* sself, double t) { return sself->Evaluate(t); }
 extern "C" vtkKochanekSpline * vtkKochanekSpline_new () {return vtkKochanekSpline :: New () ;}
 extern "C" void vtkKochanekSpline_destructor (vtkKochanekSpline * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkKochanekSpline_get_ptr (vtkKochanekSpline * sself) {return sself ;}
 extern "C" void vtk_kochanek_spline_compute(vtkKochanekSpline* sself) { sself->Compute(); }
 extern "C" double vtk_kochanek_spline_evaluate(vtkKochanekSpline* sself, double t) { return sself->Evaluate(t); }
 extern "C" void vtk_kochanek_spline_set_default_bias(vtkKochanekSpline* sself, double _arg) { sself->SetDefaultBias(_arg); }
@@ -52,7 +50,6 @@ extern "C" void vtk_kochanek_spline_set_default_continuity(vtkKochanekSpline* ss
 extern "C" double vtk_kochanek_spline_get_default_continuity(vtkKochanekSpline* sself) { return sself->GetDefaultContinuity(); }
 extern "C" vtkParametricBohemianDome * vtkParametricBohemianDome_new () {return vtkParametricBohemianDome :: New () ;}
 extern "C" void vtkParametricBohemianDome_destructor (vtkParametricBohemianDome * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricBohemianDome_get_ptr (vtkParametricBohemianDome * sself) {return sself ;}
 extern "C" double vtk_parametric_bohemian_dome_get_a(vtkParametricBohemianDome* sself) { return sself->GetA(); }
 extern "C" void vtk_parametric_bohemian_dome_set_a(vtkParametricBohemianDome* sself, double _arg) { sself->SetA(_arg); }
 extern "C" double vtk_parametric_bohemian_dome_get_b(vtkParametricBohemianDome* sself) { return sself->GetB(); }
@@ -62,21 +59,17 @@ extern "C" void vtk_parametric_bohemian_dome_set_c(vtkParametricBohemianDome* ss
 extern "C" int vtk_parametric_bohemian_dome_get_dimension(vtkParametricBohemianDome* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricBour * vtkParametricBour_new () {return vtkParametricBour :: New () ;}
 extern "C" void vtkParametricBour_destructor (vtkParametricBour * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricBour_get_ptr (vtkParametricBour * sself) {return sself ;}
 extern "C" int vtk_parametric_bour_get_dimension(vtkParametricBour* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricBoy * vtkParametricBoy_new () {return vtkParametricBoy :: New () ;}
 extern "C" void vtkParametricBoy_destructor (vtkParametricBoy * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricBoy_get_ptr (vtkParametricBoy * sself) {return sself ;}
 extern "C" int vtk_parametric_boy_get_dimension(vtkParametricBoy* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_boy_set_z_scale(vtkParametricBoy* sself, double _arg) { sself->SetZScale(_arg); }
 extern "C" double vtk_parametric_boy_get_z_scale(vtkParametricBoy* sself) { return sself->GetZScale(); }
 extern "C" vtkParametricCatalanMinimal * vtkParametricCatalanMinimal_new () {return vtkParametricCatalanMinimal :: New () ;}
 extern "C" void vtkParametricCatalanMinimal_destructor (vtkParametricCatalanMinimal * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricCatalanMinimal_get_ptr (vtkParametricCatalanMinimal * sself) {return sself ;}
 extern "C" int vtk_parametric_catalan_minimal_get_dimension(vtkParametricCatalanMinimal* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricConicSpiral * vtkParametricConicSpiral_new () {return vtkParametricConicSpiral :: New () ;}
 extern "C" void vtkParametricConicSpiral_destructor (vtkParametricConicSpiral * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricConicSpiral_get_ptr (vtkParametricConicSpiral * sself) {return sself ;}
 extern "C" int vtk_parametric_conic_spiral_get_dimension(vtkParametricConicSpiral* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_conic_spiral_set_a(vtkParametricConicSpiral* sself, double _arg) { sself->SetA(_arg); }
 extern "C" double vtk_parametric_conic_spiral_get_a(vtkParametricConicSpiral* sself) { return sself->GetA(); }
@@ -88,11 +81,9 @@ extern "C" void vtk_parametric_conic_spiral_set_n(vtkParametricConicSpiral* ssel
 extern "C" double vtk_parametric_conic_spiral_get_n(vtkParametricConicSpiral* sself) { return sself->GetN(); }
 extern "C" vtkParametricCrossCap * vtkParametricCrossCap_new () {return vtkParametricCrossCap :: New () ;}
 extern "C" void vtkParametricCrossCap_destructor (vtkParametricCrossCap * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricCrossCap_get_ptr (vtkParametricCrossCap * sself) {return sself ;}
 extern "C" int vtk_parametric_cross_cap_get_dimension(vtkParametricCrossCap* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricDini * vtkParametricDini_new () {return vtkParametricDini :: New () ;}
 extern "C" void vtkParametricDini_destructor (vtkParametricDini * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricDini_get_ptr (vtkParametricDini * sself) {return sself ;}
 extern "C" int vtk_parametric_dini_get_dimension(vtkParametricDini* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_dini_set_a(vtkParametricDini* sself, double _arg) { sself->SetA(_arg); }
 extern "C" double vtk_parametric_dini_get_a(vtkParametricDini* sself) { return sself->GetA(); }
@@ -100,7 +91,6 @@ extern "C" void vtk_parametric_dini_set_b(vtkParametricDini* sself, double _arg)
 extern "C" double vtk_parametric_dini_get_b(vtkParametricDini* sself) { return sself->GetB(); }
 extern "C" vtkParametricEllipsoid * vtkParametricEllipsoid_new () {return vtkParametricEllipsoid :: New () ;}
 extern "C" void vtkParametricEllipsoid_destructor (vtkParametricEllipsoid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricEllipsoid_get_ptr (vtkParametricEllipsoid * sself) {return sself ;}
 extern "C" int vtk_parametric_ellipsoid_get_dimension(vtkParametricEllipsoid* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_ellipsoid_set_x_radius(vtkParametricEllipsoid* sself, double _arg) { sself->SetXRadius(_arg); }
 extern "C" double vtk_parametric_ellipsoid_get_x_radius(vtkParametricEllipsoid* sself) { return sself->GetXRadius(); }
@@ -110,47 +100,38 @@ extern "C" void vtk_parametric_ellipsoid_set_z_radius(vtkParametricEllipsoid* ss
 extern "C" double vtk_parametric_ellipsoid_get_z_radius(vtkParametricEllipsoid* sself) { return sself->GetZRadius(); }
 extern "C" vtkParametricEnneper * vtkParametricEnneper_new () {return vtkParametricEnneper :: New () ;}
 extern "C" void vtkParametricEnneper_destructor (vtkParametricEnneper * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricEnneper_get_ptr (vtkParametricEnneper * sself) {return sself ;}
 extern "C" int vtk_parametric_enneper_get_dimension(vtkParametricEnneper* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricFigure8Klein * vtkParametricFigure8Klein_new () {return vtkParametricFigure8Klein :: New () ;}
 extern "C" void vtkParametricFigure8Klein_destructor (vtkParametricFigure8Klein * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricFigure8Klein_get_ptr (vtkParametricFigure8Klein * sself) {return sself ;}
 extern "C" void vtk_parametric_figure_8_klein_set_radius(vtkParametricFigure8Klein* sself, double _arg) { sself->SetRadius(_arg); }
 extern "C" double vtk_parametric_figure_8_klein_get_radius(vtkParametricFigure8Klein* sself) { return sself->GetRadius(); }
 extern "C" int vtk_parametric_figure_8_klein_get_dimension(vtkParametricFigure8Klein* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricHenneberg * vtkParametricHenneberg_new () {return vtkParametricHenneberg :: New () ;}
 extern "C" void vtkParametricHenneberg_destructor (vtkParametricHenneberg * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricHenneberg_get_ptr (vtkParametricHenneberg * sself) {return sself ;}
 extern "C" int vtk_parametric_henneberg_get_dimension(vtkParametricHenneberg* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricKlein * vtkParametricKlein_new () {return vtkParametricKlein :: New () ;}
 extern "C" void vtkParametricKlein_destructor (vtkParametricKlein * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricKlein_get_ptr (vtkParametricKlein * sself) {return sself ;}
 extern "C" int vtk_parametric_klein_get_dimension(vtkParametricKlein* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricKuen * vtkParametricKuen_new () {return vtkParametricKuen :: New () ;}
 extern "C" void vtkParametricKuen_destructor (vtkParametricKuen * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricKuen_get_ptr (vtkParametricKuen * sself) {return sself ;}
 extern "C" int vtk_parametric_kuen_get_dimension(vtkParametricKuen* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_kuen_set_delta_v_0(vtkParametricKuen* sself, double _arg) { sself->SetDeltaV0(_arg); }
 extern "C" double vtk_parametric_kuen_get_delta_v_0(vtkParametricKuen* sself) { return sself->GetDeltaV0(); }
 extern "C" vtkParametricMobius * vtkParametricMobius_new () {return vtkParametricMobius :: New () ;}
 extern "C" void vtkParametricMobius_destructor (vtkParametricMobius * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricMobius_get_ptr (vtkParametricMobius * sself) {return sself ;}
 extern "C" void vtk_parametric_mobius_set_radius(vtkParametricMobius* sself, double _arg) { sself->SetRadius(_arg); }
 extern "C" double vtk_parametric_mobius_get_radius(vtkParametricMobius* sself) { return sself->GetRadius(); }
 extern "C" int vtk_parametric_mobius_get_dimension(vtkParametricMobius* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricPluckerConoid * vtkParametricPluckerConoid_new () {return vtkParametricPluckerConoid :: New () ;}
 extern "C" void vtkParametricPluckerConoid_destructor (vtkParametricPluckerConoid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricPluckerConoid_get_ptr (vtkParametricPluckerConoid * sself) {return sself ;}
 extern "C" int vtk_parametric_plucker_conoid_get_n(vtkParametricPluckerConoid* sself) { return sself->GetN(); }
 extern "C" void vtk_parametric_plucker_conoid_set_n(vtkParametricPluckerConoid* sself, int _arg) { sself->SetN(_arg); }
 extern "C" int vtk_parametric_plucker_conoid_get_dimension(vtkParametricPluckerConoid* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricPseudosphere * vtkParametricPseudosphere_new () {return vtkParametricPseudosphere :: New () ;}
 extern "C" void vtkParametricPseudosphere_destructor (vtkParametricPseudosphere * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricPseudosphere_get_ptr (vtkParametricPseudosphere * sself) {return sself ;}
 extern "C" int vtk_parametric_pseudosphere_get_dimension(vtkParametricPseudosphere* sself) { return sself->GetDimension(); }
 extern "C" vtkParametricRandomHills * vtkParametricRandomHills_new () {return vtkParametricRandomHills :: New () ;}
 extern "C" void vtkParametricRandomHills_destructor (vtkParametricRandomHills * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricRandomHills_get_ptr (vtkParametricRandomHills * sself) {return sself ;}
 extern "C" int vtk_parametric_random_hills_get_dimension(vtkParametricRandomHills* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_random_hills_set_number_of_hills(vtkParametricRandomHills* sself, int _arg) { sself->SetNumberOfHills(_arg); }
 extern "C" int vtk_parametric_random_hills_get_number_of_hills(vtkParametricRandomHills* sself) { return sself->GetNumberOfHills(); }
@@ -176,13 +157,11 @@ extern "C" void vtk_parametric_random_hills_set_amplitude_scale_factor(vtkParame
 extern "C" double vtk_parametric_random_hills_get_amplitude_scale_factor(vtkParametricRandomHills* sself) { return sself->GetAmplitudeScaleFactor(); }
 extern "C" vtkParametricRoman * vtkParametricRoman_new () {return vtkParametricRoman :: New () ;}
 extern "C" void vtkParametricRoman_destructor (vtkParametricRoman * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricRoman_get_ptr (vtkParametricRoman * sself) {return sself ;}
 extern "C" int vtk_parametric_roman_get_dimension(vtkParametricRoman* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_roman_set_radius(vtkParametricRoman* sself, double _arg) { sself->SetRadius(_arg); }
 extern "C" double vtk_parametric_roman_get_radius(vtkParametricRoman* sself) { return sself->GetRadius(); }
 extern "C" vtkParametricSpline * vtkParametricSpline_new () {return vtkParametricSpline :: New () ;}
 extern "C" void vtkParametricSpline_destructor (vtkParametricSpline * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricSpline_get_ptr (vtkParametricSpline * sself) {return sself ;}
 extern "C" int vtk_parametric_spline_get_dimension(vtkParametricSpline* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_spline_set_number_of_points(vtkParametricSpline* sself, long long numPts) { sself->SetNumberOfPoints(numPts); }
 extern "C" void vtk_parametric_spline_set_point(vtkParametricSpline* sself, long long index, double x, double y, double z) { sself->SetPoint(index, x, y, z); }
@@ -208,7 +187,6 @@ extern "C" void vtk_parametric_spline_set_right_value(vtkParametricSpline* sself
 extern "C" double vtk_parametric_spline_get_right_value(vtkParametricSpline* sself) { return sself->GetRightValue(); }
 extern "C" vtkParametricSuperEllipsoid * vtkParametricSuperEllipsoid_new () {return vtkParametricSuperEllipsoid :: New () ;}
 extern "C" void vtkParametricSuperEllipsoid_destructor (vtkParametricSuperEllipsoid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricSuperEllipsoid_get_ptr (vtkParametricSuperEllipsoid * sself) {return sself ;}
 extern "C" int vtk_parametric_super_ellipsoid_get_dimension(vtkParametricSuperEllipsoid* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_super_ellipsoid_set_x_radius(vtkParametricSuperEllipsoid* sself, double _arg) { sself->SetXRadius(_arg); }
 extern "C" double vtk_parametric_super_ellipsoid_get_x_radius(vtkParametricSuperEllipsoid* sself) { return sself->GetXRadius(); }
@@ -222,7 +200,6 @@ extern "C" void vtk_parametric_super_ellipsoid_set_n_2(vtkParametricSuperEllipso
 extern "C" double vtk_parametric_super_ellipsoid_get_n_2(vtkParametricSuperEllipsoid* sself) { return sself->GetN2(); }
 extern "C" vtkParametricSuperToroid * vtkParametricSuperToroid_new () {return vtkParametricSuperToroid :: New () ;}
 extern "C" void vtkParametricSuperToroid_destructor (vtkParametricSuperToroid * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricSuperToroid_get_ptr (vtkParametricSuperToroid * sself) {return sself ;}
 extern "C" int vtk_parametric_super_toroid_get_dimension(vtkParametricSuperToroid* sself) { return sself->GetDimension(); }
 extern "C" void vtk_parametric_super_toroid_set_ring_radius(vtkParametricSuperToroid* sself, double _arg) { sself->SetRingRadius(_arg); }
 extern "C" double vtk_parametric_super_toroid_get_ring_radius(vtkParametricSuperToroid* sself) { return sself->GetRingRadius(); }
@@ -240,7 +217,6 @@ extern "C" void vtk_parametric_super_toroid_set_n_2(vtkParametricSuperToroid* ss
 extern "C" double vtk_parametric_super_toroid_get_n_2(vtkParametricSuperToroid* sself) { return sself->GetN2(); }
 extern "C" vtkParametricTorus * vtkParametricTorus_new () {return vtkParametricTorus :: New () ;}
 extern "C" void vtkParametricTorus_destructor (vtkParametricTorus * sself) {sself -> Delete () ; return ;}
-extern "C" void * vtkParametricTorus_get_ptr (vtkParametricTorus * sself) {return sself ;}
 extern "C" void vtk_parametric_torus_set_ring_radius(vtkParametricTorus* sself, double _arg) { sself->SetRingRadius(_arg); }
 extern "C" double vtk_parametric_torus_get_ring_radius(vtkParametricTorus* sself) { return sself->GetRingRadius(); }
 extern "C" void vtk_parametric_torus_set_cross_section_radius(vtkParametricTorus* sself, double _arg) { sself->SetCrossSectionRadius(_arg); }
