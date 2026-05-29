@@ -468,43 +468,14 @@ impl crate::IRModule {
 
 impl quote::ToTokens for crate::IRModule {
     fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
-        let modname = syn::Ident::new(&self.name, proc_macro2::Span::call_site());
-
-        // Identify traits as exposable methods of parent classes and provide default
-        // implementations.
         let traits = self.identify_traits();
         tokens.extend(quote::quote!(#traits));
 
-        // Implement traits for classes exposed in this module.
         let implement_self = self.implement_own_traits();
         tokens.extend(quote::quote!(#implement_self));
 
-        // Implement existing traits from other modules for classes exposed in this module
-
         let bindings = self.create_bindings();
-
-        let mut output = quote::quote!();
-        for class in self.classes.values() {
-            if class.is_constructable() {
-                let mut methods = quote::quote!();
-                for method in class.exposable_methods.iter().take(2) {
-                    methods.extend(quote::quote!(#method));
-                }
-                let class_name = syn::Ident::new(&class.name, proc_macro2::Span::call_site());
-                output.extend(quote::quote!(
-                    impl #class_name {
-                        #methods
-                    }
-                ));
-            }
-        }
-        tokens.extend(quote::quote!(
-            // #[allow(non_camel_case_types)]
-            // pub mod #modname {
-            //     #output
-            // }
-            #bindings
-        ));
+        tokens.extend(bindings);
     }
 }
 
