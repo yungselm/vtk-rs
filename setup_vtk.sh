@@ -76,14 +76,34 @@ echo ""
 echo "[2/4] Building VTK (this takes 15-30 minutes) ..."
 
 mkdir -p "${VTK_BUILD}"
+
+# Module disable notes:
+#   - VTK_WRAP_PYTHON=ON is required for the wrapping tools (vtkWrapHierarchy etc.)
+#     that WrapVTK depends on to generate XML, but it also enables Python wrapper
+#     compilation for every built module — so we disable all module groups we don't
+#     need to avoid compiling broken or unnecessary code.
+#   - IOImage and IOImage are in the StandAlone group alongside Common modules,
+#     so they cannot be excluded via group flags. DONT_WANT is overridden by the
+#     group DEFAULT, so NO is required — it is unconditional and ignores group
+#     membership. vtkSEPReader.cxx in IOImage fails to compile on GCC with
+#     VTK <= 9.1 (out-of-sync header/impl: missing EndiannessType, DataFormat
+#     members and std::int32_t). Safe to hard-disable: vtk-gen only reads
+#     vtkCommon* XML.
 cmake -S "${VTK_SRC}" -B "${VTK_BUILD}" \
     -DVTK_WRAP_PYTHON=ON \
     -DVTK_WRAP_JAVA=OFF \
     -DBUILD_TESTING=OFF \
     -DBUILD_SHARED_LIBS=OFF \
     -DCMAKE_BUILD_TYPE=Release \
-    -DVTK_MODULE_ENABLE_VTK_CommonArchive=YES \
-    -DVTK_MODULE_ENABLE_VTK_CommonPython=YES
+    -DVTK_MODULE_ENABLE_VTK_CommonArchive=DONT_WANT \
+    -DVTK_MODULE_ENABLE_VTK_CommonPython=DONT_WANT \
+    -DVTK_MODULE_ENABLE_VTK_IOImage=NO \
+    -DVTK_GROUP_ENABLE_Rendering=DONT_WANT \
+    -DVTK_GROUP_ENABLE_Qt=DONT_WANT \
+    -DVTK_GROUP_ENABLE_Web=DONT_WANT \
+    -DVTK_GROUP_ENABLE_Views=DONT_WANT \
+    -DVTK_GROUP_ENABLE_MPI=DONT_WANT \
+    -DVTK_GROUP_ENABLE_Imaging=DONT_WANT
 
 cmake --build "${VTK_BUILD}" -j"${JOBS}"
 
@@ -103,11 +123,10 @@ fi
 echo ""
 echo "[3/4] Building WrapVTK ..."
 
-# Ensure the submodule is initialised
+# Initialise the submodule if it hasn't been cloned yet
 if [ ! -f "${WRAP_VTK_DIR}/CMakeLists.txt" ]; then
-    echo "  WrapVTK source not found at ${WRAP_VTK_DIR}."
-    echo "  Run: git submodule update --init --recursive"
-    exit 1
+    echo "  WrapVTK submodule not initialised — running git submodule update ..."
+    git -C "${SCRIPT_DIR}" submodule update --init --recursive
 fi
 
 mkdir -p "${WRAP_BUILD}"

@@ -66,19 +66,39 @@ To implement the desired class methods, we use Rust
 This section is for contributors who want to regenerate bindings for a new VTK version.
 If you only want to *use* the existing `vtk-rs-9.1` bindings, skip this section — a system VTK install and `cargo build` is sufficient.
 
-### 1. Initialize the WrapVTK submodule
+### Prerequisites
 
-`WrapVTK` (by [David Gobbi](https://github.com/dgobbi/WrapVTK)) is included as a git submodule.
-It appears as an empty (blue) folder in IDEs until initialized:
+Before following the steps below, ensure you have the following tools installed:
 
+| Tool | Required | Purpose |
+| --- | --- | --- |
+| `cmake` (≥ 3.12) | Yes | Build VTK from source and build WrapVTK |
+| `git` | Yes | Clone the VTK source repository |
+| C++ compiler (`gcc` or `clang`) | Yes | Compile VTK and WrapVTK |
+| Python dev headers | Yes | Required by VTK's Python wrapping layer, which WrapVTK depends on to generate XML |
+| `libarchive` dev headers | Optional | Enables the `vtkCommonArchive` module; skipped gracefully if absent |
+| ~10 GB free disk space | Yes | VTK source clone + build artifacts |
+
+Install on Ubuntu 22 / 24:
 ```bash
-git submodule update --init --recursive
+# Required
+sudo apt install cmake build-essential python3-dev
+# Optional (for vtkCommonArchive)
+sudo apt install libarchive-dev
+```
+Install on Arch Linux:
+```bash
+sudo pacman -S cmake gcc python libarchive
+```
+Install on macOS:
+```bash
+brew install cmake python libarchive
 ```
 
-### 2. Run the setup script
+### 1. Run the setup script
 
 `libvtk9-dev` (the system package) does **not** install the internal wrapping tool headers (e.g. `vtkParseAttributes.h`) that WrapVTK needs.
-Use the provided `setup_vtk.sh` script to clone VTK from source, build it, build WrapVTK against it, and verify the XML output — all in one step:
+Use the provided `setup_vtk.sh` script to clone VTK from source, build it, initialise the `WrapVTK` submodule if needed, build WrapVTK against it, and verify the XML output — all in one step:
 
 ```bash
 ./setup_vtk.sh 9.2.0
@@ -89,11 +109,12 @@ The version argument is optional and defaults to `9.2.0`. This takes roughly 15�
 The script will:
 1. Wipe any existing `~/VTK` clone and `WrapVTK/build` directory
 2. Clone VTK at the exact tag (e.g. `v9.2.0`) into `~/VTK`
-3. Build VTK with static libs and the required modules (`CommonArchive`, `CommonPython`)
-4. Build WrapVTK against the fresh VTK build
-5. Verify that XML files were generated under `WrapVTK/build/xml/`
+3. Build VTK with static libs, Python wrapping enabled (required by WrapVTK), and the non-Common groups disabled (Rendering, Imaging, Qt, Web, Views, MPI — not needed for XML generation, and some contain version-specific compile bugs)
+4. Initialise the `WrapVTK` git submodule automatically if not already done
+5. Build WrapVTK against the fresh VTK build
+6. Verify that XML files were generated under `WrapVTK/build/xml/`
 
-### 3. Regenerate bindings with vtk-gen
+### 2. Regenerate bindings with vtk-gen
 
 ```bash
 cargo run -p vtk-gen -- \
