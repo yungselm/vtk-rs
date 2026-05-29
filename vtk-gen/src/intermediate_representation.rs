@@ -130,16 +130,7 @@ impl IRMethod {
                 Some(crate::Pointer::Ref) => CppType::Ref(Box::new(inner_ty)),
                 Some(crate::Pointer::Star) => CppType::Pointer(Box::new(inner_ty)),
                 Some(crate::Pointer::StarStar) => {
-                    // WrapVTK encodes `const char*` VTK_FILEPATH return types as
-                    // type="const char" pointer="**". Recover the intended single pointer.
-                    match &inner_ty {
-                        CppType::Const(inner)
-                            if matches!(inner.as_ref(), CppType::SignedChar) =>
-                        {
-                            CppType::Pointer(Box::new(inner_ty))
-                        }
-                        _ => anyhow::bail!("double pointer not bridgeable"),
-                    }
+                    anyhow::bail!("double pointer not bridgeable")
                 }
                 Some(crate::Pointer::StarStarConst) => {
                     anyhow::bail!("const double pointer not bridgeable")
@@ -172,17 +163,7 @@ impl IRMethod {
                     Some(crate::Pointer::Ref) => CppType::Ref(Box::new(inner_ty)),
                     Some(crate::Pointer::Star) => CppType::Pointer(Box::new(inner_ty)),
                     Some(crate::Pointer::StarStar) => {
-                        // WrapVTK encodes `const char*` VTK_FILEPATH params as
-                        // type="const char" pointer="**". Recover the intended single pointer.
-                        // Any other ** (including mutable char** output params) is not bridgeable.
-                        match &inner_ty {
-                            CppType::Const(inner)
-                                if matches!(inner.as_ref(), CppType::SignedChar) =>
-                            {
-                                CppType::Pointer(Box::new(inner_ty))
-                            }
-                            _ => anyhow::bail!("double pointer not bridgeable"),
-                        }
+                        anyhow::bail!("double pointer not bridgeable")
                     }
                     Some(crate::Pointer::StarStarConst) => {
                         anyhow::bail!("const double pointer not bridgeable")
